@@ -1060,3 +1060,203 @@ const PUMPKING_HYDREIGON_ROADMAP={
     "Cookie Fantôme (selon sommeil)"
   ]
 };
+
+/* Séparation explicite des deux difficultés : guide facile adapté de Rumel 2023, distinct du guide difficile Trioxhydre. */
+const PUMPKING_EASY_ROADMAP={
+  "id": "turtle-wide-guard",
+  "title": "Ptéra / Crocorible · contrôle et Séisme",
+  "status": "Mode facile : adaptation d'une stratégie difficile historique 2023 (Turtle / Rumel). NON validée en combat Halloween 2025 ; version facile dédiée disponible en vidéo 2024.",
+  "source": "https://www.youtube.com/watch?v=2d8yXkMHjXQ",
+  "sourceSupplement": "https://www.youtube.com/watch?v=RtwrvQB4HYo",
+  "year": "2023-2024 (référence historique, non validation 2025)",
+  "intro": "Équipe proposée pour le mode facile : Ptéra, Crocorible et Sidérella au départ ; Tyranocif en réserve. Les quatre Pokémon forment le noyau de la rotation historique Turtle, conçue à l'origine pour le mode difficile ; cette adaptation en mode facile reste à vérifier pour l'édition 2025.",
+  "roster": [
+    {
+      "name": "Ptéra",
+      "slot": "Actif au départ (Garde Large / soutien)",
+      "item": "Non précisé par la transcription",
+      "ability": "À vérifier",
+      "nature": "À définir selon la Vitesse",
+      "ev": "À valider",
+      "iv": "Vitesse conseillée, seuil non communiqué",
+      "moves": "Garde Large / Provoc / Vent Arrière",
+      "note": "Garde Large et Provoc sont les actions de soutien de la source historique. Vérifier les moves et l'ordre de position dans le jeu."
+    },
+    {
+      "name": "Crocorible",
+      "slot": "Actif au départ (attaquant central)",
+      "item": "Non précisé par la transcription",
+      "ability": "À vérifier",
+      "nature": "Rigide ou Jovial (proposition)",
+      "ev": "252 Att / 252 Vit (proposition, non seuil confirmé)",
+      "iv": "31 Att / 31 Vit (objectif proposé)",
+      "moves": "Séisme / Assurance / Mâchouille",
+      "note": "Le plan historique repose sur Séisme de Crocorible. Les dégâts sur les alliés et les renforts doivent être anticipés."
+    },
+    {
+      "name": "Sidérella",
+      "slot": "Actif au départ (contrôle)",
+      "item": "Non précisé par la transcription",
+      "ability": "À vérifier",
+      "nature": "À déterminer",
+      "ev": "À valider",
+      "iv": "À valider",
+      "moves": "Provoc / Anti-Soin",
+      "note": "L'ordre des changements de Sidérella/Tyranocif du guide historique doit être vérifié visuellement."
+    },
+    {
+      "name": "Tyranocif",
+      "slot": "Banc (Assurance / Mâchouille)",
+      "item": "Non précisé par la transcription",
+      "ability": "Sable Volant (possible ; vérifier la variante)",
+      "nature": "Rigide (proposition)",
+      "ev": "252 Att / 252 Vit (proposition)",
+      "iv": "31 Att / 31 Vit (objectif)",
+      "moves": "Assurance / Mâchouille",
+      "note": "Entre sur le terrain pour les séquences à Assurance ; boosts Attaque + en fin de combat."
+    }
+  ],
+  "additional": [
+    {
+      "name": "Guide facile 2024 en vidéo",
+      "role": "OfficialDarku détaille 4 tours de phase 1, 3 de phase 2 et 3 de phase 3 ; ces actions n'ont pas été transcrites de façon vérifiable."
+    },
+    {
+      "name": "Équipe difficile de substitution",
+      "role": "La source communautaire indique qu'une équipe réussissant le mode difficile peut aussi battre le mode facile, sans assurer les mêmes timings."
+    }
+  ],
+  "phases": [
+    {
+      "name": "Phase 1 · installer le contrôle",
+      "intro": "Source Turtle / Rumel : protection de zone avec Garde Large, Séisme de Crocorible et Provoc. C'est une transposition vers le mode facile, pas une rotation validée spécifiquement pour 2025.",
+      "steps": [
+        {
+          "title": "T1 · protection",
+          "slots": [
+            "Garde Large",
+            "Séisme",
+            "Provoc"
+          ],
+          "tip": "Protéger des attaques de zone, limiter les actions adverses, puis attaquer. Les trois commandes suivent l'ordre de la vidéo historique."
+        },
+        {
+          "title": "T2 · pivot",
+          "slots": [
+            "Déplacer Sidérella selon le placement",
+            "Séisme",
+            "Remplacer Sidérella par Tyranocif"
+          ],
+          "tip": "Le guide ancien demande un déplacement de Sidérella puis un remplacement. Réévaluer les positions avant de cliquer : aucune localisation de remplacement n'est garantie sur l'édition 2025."
+        },
+        {
+          "title": "T3 · pression",
+          "slots": [
+            "Assurance",
+            "Séisme",
+            "Provoc"
+          ],
+          "tip": "Assurance bénéficie de l'ordre des attaques ; ne pas reproduire le tour si des renforts ont modifié le placement."
+        },
+        {
+          "title": "T4 · transition",
+          "slots": [
+            "Soigner les Pokémon touchés",
+            "Terminer la phase avec l'attaque disponible",
+            "Conserver les Pokémon nécessaires ensuite"
+          ],
+          "tip": "La source demande de soigner les blessés avant de terminer ; les trois actions de ce tour sont des intentions, pas une combinaison fixe."
+        }
+      ]
+    },
+    {
+      "name": "Phase 2 · bloquer les soins",
+      "intro": "Dans la rotation Turtle, Anti-Soin devient prioritaire au début de la deuxième phase. La difficulté facile n'est pas identique à la difficile : surveiller la survie et éviter de surconsommer les objets.",
+      "steps": [
+        {
+          "title": "T1 · Anti-Soin",
+          "slots": [
+            "Attaque +",
+            "Séisme",
+            "Anti-Soin"
+          ],
+          "tip": "Anti-Soin empêche les soins adverses. Attention : l'action 1 est un objet X Attaque utilisé sur le bon attaquant."
+        },
+        {
+          "title": "T2 · verrouiller le boss",
+          "slots": [
+            "Provoc",
+            "Séisme",
+            "Assurance"
+          ],
+          "tip": "Provoc, attaque de zone et Assurance forment le tour de contrôle du guide."
+        },
+        {
+          "title": "T3 · récupérer",
+          "slots": [
+            "Cookie Citrouille",
+            "Séisme",
+            "Rappel sur Sidérella"
+          ],
+          "tip": "La source prévoit le rappel de Sidérella et les soins de groupe ; s'adapter à la présence des renforts."
+        },
+        {
+          "title": "T4 · soigner avant la finale",
+          "slots": [
+            "Soigner Tyranocif, Crocorible ou Ptéra",
+            "Séisme",
+            "Ajuster le soin selon l'état de l'équipe"
+          ],
+          "tip": "Ne pas entrer en phase 3 avec les Pokémon essentiels trop affaiblis."
+        }
+      ]
+    },
+    {
+      "name": "Phase 3 · préparer le finisseur",
+      "intro": "Le dernier segment exige l'utilisation d'objets X, un bonus de Vitesse et Tyranocif comme finisseur, selon une rotation ancienne dont la compatibilité 2025 n'est pas attestée.",
+      "steps": [
+        {
+          "title": "T1 · boosts",
+          "slots": [
+            "Attaque + sur Crocorible",
+            "Séisme",
+            "Cookie Balai ou Cookie Chauve-Souris sur Sidérella"
+          ],
+          "tip": "Les cookies et les boosts sont propres à cette dernière phase : ne pas recopier les instructions de la phase 1."
+        },
+        {
+          "title": "T2 · vitesse",
+          "slots": [
+            "Vent Arrière",
+            "Séisme",
+            "Assurance"
+          ],
+          "tip": "Vent Arrière modifie la Vitesse ; prendre en compte la possibilité de renforts rapides."
+        },
+        {
+          "title": "T3 · renforcer Tyranocif",
+          "slots": [
+            "Attaque + sur Tyranocif",
+            "Séisme",
+            "Assurance"
+          ],
+          "tip": "Renforcer le finisseur. Si des K.O. perturbent les positions, adapter plutôt que forcer la rotation."
+        },
+        {
+          "title": "T4 · terminer",
+          "slots": [
+            "Attaque + sur Tyranocif",
+            "Mâchouille / attaque finale selon le placement",
+            "Surveiller les renforts et les PV"
+          ],
+          "tip": "L'ancienne source décrit un finisseur Mâchouille. La fin réelle dépend des dégâts et des Pokémon encore présents."
+        }
+      ]
+    }
+  ],
+  "alerts": [
+    "Cette adaptation du mode facile provient d'une stratégie difficile historique (Turtle/Rumel 2023), distincte de la feuille de route Trioxhydre proposée en mode difficile sur le site. Le guide dédié facile 2024 est disponible en vidéo.",
+    "Les attaques, positions, objets et EV ne sont pas des valeurs 2025 certifiées. Tester et ajuster avant de dépenser un Bonbon Spécial.",
+    "Une équipe capable de battre le mode difficile peut aussi être utilisée en facile, mais les PV, les attaques adverses et les objets consommés ne suivent pas forcément le même calendrier."
+  ]
+};
