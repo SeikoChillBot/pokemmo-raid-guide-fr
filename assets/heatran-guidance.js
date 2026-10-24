@@ -1,7 +1,17 @@
 
 const raidPreflight={
-core:{source:"Crimson Core · guide Octillery",position:"Chartor à gauche · Heatran au centre · Maganon à droite",warning:"Si Chartor n’est pas à gauche ou Maganon n’est pas à droite : reset.",detail:"Vérifier l'ordre des six Pokémon, Dimoret P3 sans objet pour Larcin, Xatu P3 et Bekipan P4 pour les deux Anti-Brume."},
-video:{source:"Beorns / JinxedBoon · vidéo",position:"Chartor à gauche · Heatran au centre · Maganon à droite",warning:"Si Chartor n’est pas à gauche ou Maganon n’est pas à droite : reset.",detail:"Prévoir deux Xatu (P3 et P4) pour Anti-Brume au tour 3."}
+ core:{
+  source:"Crimson Core",
+  position:"Maganon à droite de Heatran",
+  warning:"Si Maganon n’est pas à droite : reset.",
+  detail:"Crimson Core ne demande pas explicitement que Chartor soit à gauche."
+ },
+ video:{
+  source:"Beorns / JinxedBoon · vidéo",
+  position:"Placement montré : Chartor à gauche · Heatran au centre · Maganon à droite",
+  warning:"",
+  detail:"Ce placement apparaît dans la vidéo. Le PDF ne confirme pas que les deux positions soient une condition de reset."
+ }
 };
 const turnGuidance={
 core:[
