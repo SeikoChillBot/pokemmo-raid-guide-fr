@@ -668,3 +668,58 @@ const HALLOWEEN_2025=[
   }
 ];
 const HALLOWEEN_2025_SOURCE="https://forums.pokemmo.com/index.php?/topic/192700-halloween-2025-the-ultimate-halloween-event-guide/";
+
+/* Document : "2025 Halloween Raid Info", caav, archive d'Halloween 2025.
+   Tableau détaillé Darkrai 5★ : pages 8-11 du PDF source fourni.
+   Rôles recommandés, pas des builds complets ni des rosters obligatoires. */
+const DARKRAI_2025_FIVE={
+  sourceTitle:"2025 Halloween Raid Info — caav (pages 8 à 11)",
+  label:"Proposition caav · Darkrai 5★",
+  turns:[
+    ["Baie Maron / Esprit Vital : Close Combat, Lame Sainte ou Pied Voltige","Baie Maron / Esprit Vital : Close Combat, Lame Sainte ou Pied Voltige","Baie Maron / Esprit Vital : Close Combat, Lame Sainte ou Pied Voltige","Vent Arrière"],
+    ["Close Combat ou Lame Sainte","Close Combat ou Lame Sainte","Close Combat ou Lame Sainte","Close Combat ou Lame Sainte"],
+    ["Close Combat ou Lame Sainte","Close Combat ou Lame Sainte","Close Combat ou Lame Sainte","Close Combat ou Lame Sainte"],
+    ["Tengalice : Coup Bas","Tengalice : Assurance","Tengalice : Assurance","Tengalice plus lent avec Baie Prine : Assurance"],
+    ["Vent Arrière","Close Combat ou Lame Sainte (rapide)","Close Combat ou Lame Sainte (rapide)","Close Combat côté spécial (selon la mécanique du boss)"],
+    ["Charmina : Psyko","Charmina : Psyko","Charmina : Psyko","Charmina : Psyko"]
+  ],
+  candidates:[
+    {title:"Types normaux · Tours 1 à 3 et 5",pokemon:[
+      ["Colossinge","Esprit Vital en tête (contre Trou Noir)"],
+      ["Charmina","Close Combat"],
+      ["Gallame","Lame Sainte"],
+      ["Shaofouine","Close Combat"],
+      ["Braségali","Close Combat"],
+      ["Chapignon","Close Combat"]
+    ]},
+    {title:"Types inversés · Tour 4",pokemon:[
+      ["Tengalice","Coup Bas ou Assurance ; un Tengalice plus lent avec Baie Prine"],
+      ["Gallame","Coupe Psycho"],
+      ["Lugulabre","Ball’Ombre"],
+      ["Tyranocif","Assurance"],
+      ["Zoroark","Assurance"]
+    ]},
+    {title:"Types inversés · Tour 6",pokemon:[
+      ["Charmina","Psyko"],
+      ["Trioxhydre","Mâchouille ou Assurance, selon l'inversion Physique/Spécial"],
+      ["Zoroark","Assurance"]
+    ]}
+  ],
+  mechanics:[
+    ["Fin du tour 4","Table des types inversée"],
+    ["Fin du tour 5","Retour à la table des types normale"],
+    ["Fin du tour 6","Table des types inversée de nouveau"],
+    ["Tour 7 éventuel","Retour à la table des types normale si le combat se poursuit"],
+    ["Vers 25 % des PV","Inversion Physique/Spécial indépendante des inversions de types"],
+    ["Après la victoire","La source évoque un temps de recharge de six heures pour la version 5★"]
+  ],
+  notes:[
+    "Le document conseille trois utilisateurs de Close Combat ou Lame Sainte au départ, avec un quatrième joueur chargé de Vent Arrière.",
+    "Tour 4 : l'un des Tengalice utilise Coup Bas, trois utilisent Assurance. Prévoir un Tengalice plus lent avec Baie Prine pour absorber Trou Noir avant de frapper.",
+    "Tour 5 : l'ordre d'action et l'inversion Physique/Spécial rendent le timing important ; la source distingue les attaquants rapides du quatrième joueur.",
+    "Tour 6 : la source propose quatre Charmina utilisant Psyko. Attention : le résultat dépend du calendrier des inversions.",
+    "Les candidats Pokémon ci-dessus ne constituent PAS quatre rosters de six slots validés. Les EV, IV, natures et objets non explicités restent à vérifier."
+  ]
+};
+HALLOWEEN_2025.find(x=>x.id==="darkrai").darkraiFive=DARKRAI_2025_FIVE;
+HALLOWEEN_2025.forEach(x=>{if(x.id!=="pumpking")x.sourceDocument="2025 Halloween Raid Info — caav, PDF 12 pages fourni au projet";});
