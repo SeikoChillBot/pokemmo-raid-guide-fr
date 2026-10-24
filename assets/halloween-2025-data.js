@@ -821,3 +821,242 @@ HALLOWEEN_2025.forEach(x=>{if(HALLOWEEN_2025_BOSS_DETAILS[x.id])Object.assign(x,
 
 // Vidéo contemporaine explicitement consacrée aux breeds de Pumpking 2025.
 HALLOWEEN_2025.find(x=>x.id==="pumpking").video2025="https://www.youtube.com/watch?v=htTdOEO1Y1k";
+
+/* Feuille de route historique à trois phases — provenance explicitement datée, jamais présentée comme vérifiée pour 2025. */
+const PUMPKING_HYDREIGON_ROADMAP={
+  "id": "tyranitar-hydreigon-weezing",
+  "title": "Trioxhydre boosté · stratégie historique détaillée",
+  "status": "Ancienne rotation (2023) archivée dans le compendium ; adaptation à Halloween 2025 non démontrée",
+  "source": "https://www.scribd.com/document/951571951/Pumpking-Hard-Mode-Strategy-Compendium",
+  "sourceSupplement": "https://www.reddit.com/r/pokemmo/comments/1f9s3yv",
+  "year": "2023 / 2024 — repère stratégique, NON validé 2025",
+  "intro": "Solo : trois Pokémon sur le terrain. L’ordre initial du guide est Tyranocif à gauche, Trioxhydre au centre, Smogogo à droite, avec Crocorible sur le banc.",
+  "roster": [
+    {
+      "name": "Tyranocif",
+      "slot": "Gauche · départ",
+      "item": "Bandeau Choix",
+      "ability": "Sable Volant",
+      "nature": "Rigide",
+      "ev": "252 Att / 240 Vit / 16 Déf (repère 2024)",
+      "iv": "31 Att / 31 Vit conseillés",
+      "moves": "Assurance / Mâchouille / Provoc",
+      "note": "Boosts via objets X sur Trioxhydre et Assurance. L’ordre de Vitesse avec Smogogo compte."
+    },
+    {
+      "name": "Trioxhydre",
+      "slot": "Centre · départ",
+      "item": "Lunettes Choix",
+      "ability": "Lévitation",
+      "nature": "Modeste",
+      "ev": "252 Att. Spé. / 76 Vit / 180 Déf (variante historique ; autre proposition 252 AS / 252 Vit)",
+      "iv": "31 Att. Spé. / 31 Vit, bulk élevé conseillé",
+      "moves": "Aboiement / Vibrobscur",
+      "note": "Attaquant principal. La répartition 76 Vit dépend du 31 IV Vitesse et de la variante : ne pas changer sans revérifier les seuils."
+    },
+    {
+      "name": "Smogogo",
+      "slot": "Droite · départ",
+      "item": "Restes",
+      "ability": "Gaz Inhibiteur",
+      "nature": "Assuré",
+      "ev": "252 PV / 252 Vit (repère 2024)",
+      "iv": "PV / Vit / Déf à privilégier",
+      "moves": "Provoc / Vague Psy",
+      "note": "Soutien et contrôle du sommeil ; le guide ancien repose sur un comportement de talent pouvant évoluer avec les mises à jour."
+    },
+    {
+      "name": "Crocorible",
+      "slot": "Banc · premier remplaçant",
+      "item": "Sable Doux",
+      "ability": "Impudence",
+      "nature": "Rigide (proposition)",
+      "ev": "252 Att / 252 Vit (proposition de préparation)",
+      "iv": "31 Att / 31 Vit conseillés",
+      "moves": "Mâchouille / Assurance / Séisme",
+      "note": "Finisseur conditionnel après les changements forcés ; ne pas lancer Séisme sans vérifier les alliés."
+    }
+  ],
+  "additional": [
+    {
+      "name": "Corboss",
+      "role": "Option de réserve historique : Coup Bas / Assurance ; pas inclus dans la rotation de base"
+    },
+    {
+      "name": "Lugulabre",
+      "role": "Option de réserve historique : Ball’Ombre / Châtiment ; pas inclus dans la rotation de base"
+    }
+  ],
+  "phases": [
+    {
+      "name": "Phase 1",
+      "intro": "Contrôler les renforts avec Aboiement et garder Trioxhydre en état d’attaquer.",
+      "steps": [
+        {
+          "title": "Ouverture",
+          "slots": [
+            "Tyranocif · Spécial + sur Trioxhydre",
+            "Trioxhydre · Aboiement",
+            "Smogogo · Provoc"
+          ],
+          "tip": "Attirer le boss vers Tyranocif et empêcher certains effets des renforts. Surveiller les attaques prioritaires de Pumpreaper et Lil’ Pump."
+        },
+        {
+          "title": "Deuxième tour",
+          "slots": [
+            "Tyranocif · Assurance",
+            "Trioxhydre · Aboiement",
+            "Smogogo · Vague Psy ou soin"
+          ],
+          "tip": "Si Trioxhydre a perdu les Lunettes Choix, son STAB ou un niveau d'Att. Spé., renforcer à nouveau son Attaque Spéciale au lieu de suivre aveuglément la ligne."
+        },
+        {
+          "title": "Tours suivants · adaptation",
+          "slots": [
+            "Tyranocif · Assurance / Spécial + selon l’état",
+            "Trioxhydre · Aboiement sur les renforts",
+            "Smogogo · Vague Psy, Provoc ou soin"
+          ],
+          "tip": "Ne pas arrêter de contrôler les renforts trop tôt ; une fois les PV du boss suffisamment bas, ils peuvent privilégier Vibra Soin. Préparer les PV pour la phase suivante."
+        }
+      ]
+    },
+    {
+      "name": "Phase 2",
+      "intro": "Faire attention au sommeil. Les objets de réveil et Provoc priment sur les dégâts si plusieurs Pokémon sont endormis.",
+      "steps": [
+        {
+          "title": "Ouverture",
+          "slots": [
+            "Tyranocif · Spécial + sur Trioxhydre",
+            "Trioxhydre · Aboiement",
+            "Smogogo · Précision +"
+          ],
+          "tip": "Préparer les boosts avant le tour de sommeil. La source historique prévoit cet objet même si les seuils exacts dépendent du combat."
+        },
+        {
+          "title": "Tour 2 · 0 ou 1 Pokémon endormi",
+          "slots": [
+            "Tyranocif · Assurance",
+            "Trioxhydre · Aboiement",
+            "Smogogo · Vague Psy / soin"
+          ],
+          "tip": "Branche possible seulement si l’équipe peut effectivement agir ; guérir tout Pokémon clé immobilisé avant le prochain risque de changement forcé."
+        },
+        {
+          "title": "Tour 2 · 2 ou 3 Pokémon endormis",
+          "slots": [
+            "Tyranocif · Réveil / Guérison totale sur Trioxhydre",
+            "Trioxhydre · Réveil / Guérison totale sur Smogogo",
+            "Smogogo · Provoc"
+          ],
+          "tip": "Priorité au réveil. La source signale une forte probabilité de permutation forcée lorsque plusieurs Pokémon dorment."
+        },
+        {
+          "title": "Tours suivants · surveiller les renforts",
+          "slots": [
+            "Tyranocif · Assurance ou soin",
+            "Trioxhydre · Aboiement ; traiter les renforts",
+            "Smogogo · Provoc / Vague Psy / soin"
+          ],
+          "tip": "Utiliser les soins ordinaires avant les cookies lorsqu’ils suffisent. Le cookie Fantôme n’est indiqué que dans certains cas de double sommeil. Garder assez de PV pour la troisième phase."
+        }
+      ]
+    },
+    {
+      "name": "Phase 3",
+      "intro": "Les objets X et les cookies sont déterminants. Après l'attaque Faux de Pumpking, les remplacements rendent la rotation conditionnelle.",
+      "steps": [
+        {
+          "title": "Ouverture",
+          "slots": [
+            "Tyranocif · Spécial + sur Trioxhydre",
+            "Trioxhydre · Aboiement",
+            "Smogogo · Spécial + sur Trioxhydre"
+          ],
+          "tip": "Double augmentation de l’Attaque Spéciale de Trioxhydre ; Pumpking charge ses visions."
+        },
+        {
+          "title": "Deuxième tour",
+          "slots": [
+            "Tyranocif · Assurance",
+            "Trioxhydre · Aboiement",
+            "Smogogo · Cookie Balai"
+          ],
+          "tip": "Le Cookie Balai protège selon la mécanique de Visions Fantomatiques. Vérifier les effets actifs."
+        },
+        {
+          "title": "Troisième tour · attaque Faux",
+          "slots": [
+            "Tyranocif · Cookie Chat",
+            "Trioxhydre · Aboiement",
+            "Smogogo · Potion Max sur Trioxhydre"
+          ],
+          "tip": "Smogogo peut être mis K.O., Tyranocif peut survivre selon le renfort. Après les changements forcés, sélectionner la branche correspondante."
+        },
+        {
+          "title": "Suite A · Crocorible / Tyranocif / Trioxhydre",
+          "slots": [
+            "Crocorible · Mâchouille / Assurance / Attaque +",
+            "Tyranocif · Assurance",
+            "Trioxhydre · Vibrobscur"
+          ],
+          "tip": "Meilleur cas décrit par le compendium. Le choix de Crocorible dépend de sa Vitesse et des PV du boss."
+        },
+        {
+          "title": "Suite B · Remplaçant / Tyranocif / Trioxhydre",
+          "slots": [
+            "Remplaçant · Attaque + sur Tyranocif",
+            "Tyranocif · Assurance",
+            "Trioxhydre · Vibrobscur"
+          ],
+          "tip": "Si Tyranocif est mis K.O. avant la fin, faire entrer Crocorible et réévaluer Séisme en présence de renforts."
+        },
+        {
+          "title": "Suite C · Remplaçant / Crocorible / Trioxhydre",
+          "slots": [
+            "Remplaçant · Spécial + sur Trioxhydre",
+            "Crocorible · Mâchouille / Assurance",
+            "Trioxhydre · Vibrobscur"
+          ],
+          "tip": "Le boss peut utiliser Faux et retirer des boosts. Au tour suivant, envisager Cookie Balai / Séisme / Attaque +."
+        },
+        {
+          "title": "Suite D · Crocorible latéral / Remplaçant / Trioxhydre",
+          "slots": [
+            "Crocorible · Mâchouille / autre action",
+            "Remplaçant · soutien ou Cookie Balai",
+            "Trioxhydre · Vibrobscur"
+          ],
+          "tip": "Séisme de Crocorible ne touche pas forcément les deux renforts depuis le côté ; cibler celui qui subsiste si Pumpking ne peut pas être terminé."
+        },
+        {
+          "title": "Suite E · deux remplaçants / Crocorible",
+          "slots": [
+            "Remplaçant · Attaque + sur Crocorible",
+            "Remplaçant · Attaque + / changement",
+            "Crocorible · Mâchouille"
+          ],
+          "tip": "Exception : faire entrer Crocorible plutôt que Trioxhydre quand les autres positions sont des remplaçants. Si une place se libère, tenter de faire revenir Trioxhydre ; sinon réévaluer Séisme."
+        }
+      ]
+    }
+  ],
+  "alerts": [
+    "Cette feuille de route provient d’une version historique, pas d’un run 2025 vérifié. L’édition 2025 et les changements en cours d’événement peuvent modifier les timings.",
+    "Les branches des phases 2 et 3 sont conditionnelles : utiliser le tableau comme aide-mémoire, pas comme suite automatique.",
+    "Certains renforts affectent les objets et les caractéristiques, et les coups critiques peuvent imposer des soins supplémentaires.",
+    "Pour le mode facile, le compendium indique que les équipes du difficile peuvent aussi fonctionner, sans preuve que chaque séquence ci-dessous reste identique."
+  ],
+  "consumables": [
+    "Bonbon Spécial",
+    "Spécial +",
+    "Précision +",
+    "Attaque +",
+    "Réveil / Guérison totale",
+    "Potion Max",
+    "Cookie Balai",
+    "Cookie Chat",
+    "Cookie Fantôme (selon sommeil)"
+  ]
+};
