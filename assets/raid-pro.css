@@ -1,0 +1,55 @@
+
+/* Raid Guide FR — interface nette, cohérente et responsive. */
+:root{--pro-line:#283e55;--pro-ink:#f4f7fc;--pro-muted:#a6b8cc;--pro-bg:#070f1c}
+body{background:radial-gradient(ellipse 68% 380px at 50% -150px,#20426160,transparent),#070f1c;color:var(--pro-ink)}
+.site-wrap{max-width:1190px;padding:0 26px 80px}
+.topbar{margin-bottom:26px;padding:21px 0 18px;border-bottom:1px solid #284159}
+.brand{letter-spacing:.025em;font-size:18px}.brand small{font-size:10px;letter-spacing:.22em}
+.toplinks{gap:22px}.toplinks a{font-weight:650;color:#b8cce0}.toplinks a:hover{color:white}
+.scene-banner{height:145px;border-radius:12px;border-color:#2f475c;box-shadow:none;background:#122b40}
+.scene-banner>img{object-fit:cover;object-position:center 48%;opacity:.80}
+.scene-banner:after{background:linear-gradient(0deg,#07111bdd,transparent 55%),linear-gradient(90deg,#07142188,transparent 60%)}
+.hero-kicker{font-size:11px;color:#79c8e3;letter-spacing:.17em}
+h1{font-size:clamp(2.2rem,5vw,3.8rem);letter-spacing:-.048em;line-height:1.08}
+h2{letter-spacing:-.018em}
+.intro{color:#b4c3d4;line-height:1.58;font-size:1.02rem}
+.page-title{margin-bottom:30px}
+.breadcrumb{color:#adc1d4;font-size:13px;margin-bottom:20px}
+.back-link{border-radius:8px;background:#112238;border:1px solid #354f6c;box-shadow:none;font-weight:650}
+.event-grid,.raid-grid{gap:17px}
+.illustrated-card{background:#0b1828;border:1px solid #30475f;border-radius:13px;box-shadow:0 5px 20px #02050a4c;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+.illustrated-card:hover{transform:translateY(-3px);border-color:#6d95b8;box-shadow:0 12px 27px #02050a99}
+.illustrated-card.featured,.illustrated-card.featured:hover{border:1px solid #e78955;box-shadow:0 0 0 1px #e7895530,0 10px 30px #0009}
+.illustrated-card.featured:after{border:0;border-radius:0;inset:auto 0 0;height:3px;background:#ef8856}
+.art-slice.art-pro,.event-grid .art-slice.art-pro,.raid-grid .art-slice.art-pro{position:relative;aspect-ratio:1.25;min-height:0;width:100%;isolation:isolate;overflow:hidden;background:radial-gradient(circle at 62% 45%,var(--glow,#7a5263),transparent 57%),linear-gradient(155deg,var(--shade-a,#222d49),var(--shade-b,#0b1528))}
+.raid-grid .art-slice.art-pro{aspect-ratio:1.64}
+.art-slice.art-pro:before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 82% 13%,#ffffff12 0 1px,transparent 2px) 0 0 / 26px 26px,linear-gradient(165deg,transparent 40%,#06111f55 100%);pointer-events:none}
+.art-slice.art-pro:after{content:"";position:absolute;inset:0;box-shadow:none;background:linear-gradient(0deg,#0b1723b5,transparent 33%);pointer-events:none;z-index:1}
+.art-slice .scene-motif{position:absolute;inset:auto -10% -50% -10%;height:70%;border:1px solid #ffffff0c;border-radius:50% 50% 0 0;background:linear-gradient(0deg,#080f1db3,#ffffff0a);transform:rotate(-6deg)}
+.art-slice img.art-pokemon{position:absolute;z-index:1;display:block;left:15%;top:0;width:70%;height:96%;max-width:100%;object-fit:contain;image-rendering:auto;transform:none;filter:drop-shadow(0 12px 13px #000b);transition:transform .25s ease}
+.illustrated-card:hover .art-slice img.art-pokemon{transform:translateY(-4px) scale(1.025)}
+.theme-lava{--shade-a:#402333;--shade-b:#1f2436;--glow:#b75737aa}
+.theme-ghost{--shade-a:#28234c;--shade-b:#121933;--glow:#7542c4a0}
+.theme-frost{--shade-a:#15354d;--shade-b:#0b2540;--glow:#67afdb82}
+.theme-lunar{--shade-a:#52273e;--shade-b:#2d1b34;--glow:#c65e478a}
+.theme-dream{--shade-a:#27344e;--shade-b:#171e39;--glow:#b7a1e082}
+.theme-melody{--shade-a:#34254a;--shade-b:#1c2340;--glow:#d685b583}
+.theme-steel{--shade-a:#233f50;--shade-b:#152433;--glow:#729ebf8f}
+.theme-stone{--shade-a:#4a3337;--shade-b:#262337;--glow:#ba826e8f}
+.theme-forest{--shade-a:#1b493c;--shade-b:#152d30;--glow:#5ba76b85}
+.card-body{min-height:148px;padding:16px 16px 17px;gap:0}
+.card-body h2{font-size:clamp(1.06rem,1.7vw,1.29rem);letter-spacing:-.02em;margin:0 0 8px;font-weight:780;line-height:1.24}
+.card-body p{font-size:12px;color:#a9bbcf;line-height:1.55}
+.card-status{background:#182a3f;border:1px solid #354e6c;color:#bfd1e5;border-radius:7px;font-weight:720;font-size:11px;padding:7px 11px}
+.card-status.live{background:#753827;border-color:#cf7048;color:#fff}
+.round-arrow{background:#132339;border-color:#3a536b;width:31px;height:31px;font-size:19px}
+.featured .round-arrow{background:#e8f1ff;border-color:#e8f1ff}
+.raid-grid .card-body{min-height:110px;padding:14px}
+.raid-grid .card-body h2{font-size:1.15rem}
+.raid-grid .card-body p{font-size:12px}
+.soon-card,.title-scene{border-radius:13px;box-shadow:none;border-color:#375570}
+.site-footer{border-color:#2a4058;color:#859db5}
+@media(max-width:1030px){.event-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.raid-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.event-grid .art-slice.art-pro{aspect-ratio:1.5}}
+@media(max-width:620px){.site-wrap{padding:0 15px 64px}.scene-banner{height:118px}.topbar{gap:8px}.brand{font-size:13px}.toplinks{gap:9px;font-size:11px}h1{font-size:2.3rem}.event-grid,.raid-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.event-grid .art-slice.art-pro,.raid-grid .art-slice.art-pro{aspect-ratio:1.16}.card-body{min-height:150px;padding:12px}.card-body h2{font-size:14px}.card-body p,.raid-grid .card-body p{font-size:11px}.raid-grid .card-body{min-height:139px;padding:12px}.card-status{font-size:10px;padding:5px 7px}.art-slice img.art-pokemon{width:84%;left:8%}}
+@media(max-width:390px){.event-grid,.raid-grid{grid-template-columns:1fr}.event-grid .art-slice.art-pro,.raid-grid .art-slice.art-pro{aspect-ratio:1.7}.card-body,.raid-grid .card-body{min-height:105px}}
+@media(prefers-reduced-motion:reduce){.illustrated-card,.art-slice img.art-pokemon{transition:none!important}}
