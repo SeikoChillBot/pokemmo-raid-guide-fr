@@ -32,9 +32,11 @@ Mise à jour : 24 octobre 2026. Après téléchargement de la dernière version 
 
 ## Mécaniques et copie
 - [ ] Mécaniques explique les seuils 100 %, 80 %, 67 %, 50 %, 40 % et 25 %, ainsi que soleil, pluie, Hurlement, Anti-Brume, Croco Larme et Saumure.
-- [ ] Mécaniques n’affiche plus de section « Consignes propres à la stratégie » : uniquement six seuils de PV et six règles communes. Les consignes spécifiques restent dans Combat.
+- [ ] L’onglet Mécaniques affiche bien la section « Mécaniques communes et seuils de PV » avec 12 fiches complètes (6 seuils de PV et 6 règles générales), sans section de consignes spécifiques.
 - [ ] « Copier ce tour » et « Copier le build » placent le bon contenu dans le presse-papiers.
 - [ ] Confirmation « ✓ Copié ! » apparaît, puis le libellé initial revient.
 - [ ] Aucun débordement, texte masqué ou bouton inaccessible sur téléphone.
 
 Les vérifications de syntaxe et de structure réalisées sur GitHub ne remplacent pas une validation visuelle et interactive dans un navigateur réel.
+
+- [ ] Après déploiement : le tour 1 ne contient plus « Le document demande de relancer sans Maganon ». L’avertissement affiche uniquement « Si cette disposition n’est pas respectée : reset. » et les 12 mécaniques restent visibles.
