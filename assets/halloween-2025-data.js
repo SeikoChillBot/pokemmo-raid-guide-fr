@@ -735,3 +735,86 @@ HALLOWEEN_2025.forEach(b=>b.enrichment=HALLOWEEN_2025_EXTRAS[b.id]||null);
 const HALLOWEEN_2025_TURN_HINTS={"galvantula":["Zénith et Vent Arrière sont posés avant les attaques Feu. Mygavolt peut infliger une paralysie globale dès le seuil de 100 %.","Mur Lumière entre en jeu vers 75 % : ce tour est prévu en attaques Feu physiques.","Deux Anti-Brume doivent dissiper Mur Lumière et Toile Gluante ; ne pas remplacer cet effet par une attaque brute.","Reprise des attaques Feu après les dissipations.","Renouveler Vent Arrière avec le joueur 1 pour conserver la priorité d'attaque.","Dernière vague d'attaques Feu ; vérifier les résistances restantes du boss."],"banette":["Zénith / Calcination au joueur 1 pour consommer la Baie Sitrus adverse, puis trois Lance-Flammes.","Quatre utilisateurs de Lance-Flammes ; la stratégie ne précise pas les Pokémon de chaque slot.","Poursuite des attaques Feu spéciales : Cotogarde du boss renforce sa Défense physique.","Quatre Lance-Flammes prévus malgré Plénitude vers 50 %.","Quatre Lance-Flammes ; surveiller la capacité du boss à verrouiller les attaques vers 20 %.","Derniers Lance-Flammes ; objet détenu/espèce distincts pour chaque membre de l'équipe."],"hypno":["J1 met Zénith et Rune Protect ; J2 Anti-Brume enlève Protection ; J3/J4 Boutefeu.","J1-J3 Coup Bas ; J4 lance Distorsion pour annuler celle de l’adversaire.","Les quatre joueurs utilisent Coup Bas ; la source recommande un reset si l’add est Tyranocif.","Quatre Boutefeu après la phase de coups prioritaires.","La table des types a été inversée autour de 33 % : attaques Combat selon la rotation source.","Les quatre joueurs poursuivent avec des attaques Combat."],"golurk":["Pluie et Vent Arrière J1, Anti-Brume J2 pour supprimer Pièges de Roc ; J3/J4 attaquent Eau.","Quatre attaques Eau sous la pluie ; éviter de déclencher Vampipoing via des cibles Roche / Acier / Ténèbres.","Attaques Eau, tout en vérifiant la météo et le soin de Vampipoing.","Attaques Eau. Le boss peut augmenter toutes ses statistiques vers 60 %.","Vent Arrière remis par J3 ; les autres poursuivent leurs attaques Eau.","Dernière séquence d’attaques Eau."],"scolipede":["J1 pose le soleil et Calcination sur la Baie Sitrus ; J2 pose Vent Arrière ; J3/J4 Feu.","Priorité aux attaques Feu spéciales contre les bonus de Défense (+2 à 75 %).","Buée Noire J1 pour enlever les boosts du boss, Feu chez les autres.","Quatre attaques Feu après la remise à zéro.","J3 Vent Arrière et J4 Buée Noire ; J1/J2 Feu.","Quatre attaques Feu ; Turbo peut rendre les timings déterminants."],"mandibuzz":["Pluie et Vent Arrière J1, Fatal-Foudre J2/J3/J4. Vent violent peut provoquer des échanges forcés.","Quatre Fatal-Foudre : sous la pluie, l’attaque est plus fiable que sous une autre météo.","J2 Buée Noire sans Farceur pour annuler Machination, les trois autres Fatal-Foudre.","Tous Fatal-Foudre ; surveiller les changements imposés par Vent violent.","J3 Vent Arrière et J4 Buée Noire sans Farceur ; J1/J2 Fatal-Foudre.","Quatre Fatal-Foudre, adaptation si le boss remplace un Pokémon."],"absol":["Vent Arrière J1, attaques Combat chez les trois autres joueurs.","Tous attaquent de type Combat ; événements aléatoires « malchance » possibles.","Toujours des attaques Combat, attention à Cage-Éclair et Danse Lames.","J1 Anti-Soin avant que le Vœu du boss ne soigne ; autres joueurs Combat.","J2 réactive Vent Arrière, trois attaques Combat.","Final tout Combat, sous réserve des effets aléatoires."],"darkrai":["Baie Maron ou Esprit Vital sur les ouvreurs contre Trou Noir. Le quatrième joueur met Vent Arrière.","Quatre Close Combat ; conserver le rythme avant les inversions.","Close Combat ou Lame Sainte selon la version de la rotation caav.","Quatre Close Combat en gardant une réserve de Pokémon pour le changement de type.","J1 Vent Arrière ; J2/J3 Close Combat rapides ; J4 Coupe Psycho avec une Vitesse adaptée.","Après inversion des types, les quatre joueurs passent à Coupe Psycho."]};
 for(const b of HALLOWEEN_2025){b.turnHints=HALLOWEEN_2025_TURN_HINTS[b.id]||[];}
 DARKRAI_2025_FIVE.turnHints=["Trois attaquants Combat avec Baie Maron ou Esprit Vital au départ ; le quatrième met Vent Arrière.","Close Combat ou Lame Sainte chez tous ; cette séquence constitue la phase la plus simple de la source.","Attaques Combat avant le changement de table de types à la fin du tour suivant.","Table des types inversée : un Tengalice fait Coup Bas ; les autres font Assurance, dont un plus lent avec Baie Prine.","Retour aux types normaux à la fin du tour 5 : Vent Arrière et attaquants Combat rapides. Attention à l’inversion Physique/Spécial indépendante.","Table des types de nouveau inversée ; quatre Charmina utilisent Psyko selon la variante de caav."];
+
+/* Références boss : caav PDF 2025 + MMOBreeder, séparées des builds proposés. */
+const HALLOWEEN_2025_BOSS_DETAILS={
+  "galvantula": {
+    "bossMoves": [
+      "Coup d’Jus",
+      "Bourdon",
+      "Giga-Sangsue",
+      "Fatal-Foudre"
+    ],
+    "bossItem": "Lunettes Sages",
+    "bossAbility": "Non précisé dans la synthèse",
+    "teamRule": "Niveau 60, un Pokémon OT, espèces et objets distincts dans chaque équipe."
+  },
+  "banette": {
+    "bossMoves": [
+      "Poinglace",
+      "Vibrobscur",
+      "Tonnerre",
+      "Griffe Ombre"
+    ],
+    "bossItem": "Baie Sitrus",
+    "bossAbility": "Corps Maudit",
+    "teamRule": "Niveau 60, un Pokémon OT, espèces et objets distincts dans chaque équipe."
+  },
+  "hypno": {
+    "bossMoves": [
+      "Psyko",
+      "Tricherie",
+      "Exploforce",
+      "Nœud Herbe"
+    ],
+    "teamRule": "Niveau 60, un Pokémon OT, espèces et objets distincts dans chaque équipe."
+  },
+  "golurk": {
+    "bossMoves": [
+      "Vampipoing",
+      "Séisme",
+      "Poinglace",
+      "Poing Ombre"
+    ],
+    "teamRule": "Niveau 60, un Pokémon OT, espèces et objets distincts dans chaque équipe."
+  },
+  "scolipede": {
+    "bossMoves": [
+      "Éboulement",
+      "Séisme",
+      "Mégacorne",
+      "Hydroqueue"
+    ],
+    "bossItem": "Baie Sitrus",
+    "bossAbility": "Turbo",
+    "teamRule": "Niveau 80, un Pokémon OT, espèces et objets distincts dans chaque équipe."
+  },
+  "mandibuzz": {
+    "bossMoves": [
+      "Tranch’Air",
+      "Vibrobscur",
+      "Canicule",
+      "Aboiement"
+    ],
+    "teamRule": "Niveau 80, un Pokémon OT, espèces et objets distincts dans chaque équipe."
+  },
+  "absol": {
+    "bossMoves": [
+      "Coupe Psycho",
+      "Close Combat",
+      "Tranche-Nuit",
+      "Éboulement"
+    ],
+    "teamRule": "Niveau 80, un Pokémon OT, espèces et objets distincts dans chaque équipe."
+  },
+  "darkrai": {
+    "bossMoves": [
+      "Exploforce",
+      "Vibrobscur",
+      "Choc Psy",
+      "Aboiement"
+    ],
+    "teamRule": "4★ : niveau 95, après les 7 prérequis. 5★ : niveau 100 après la première victoire, avec attente entre combats."
+  }
+};
+HALLOWEEN_2025.forEach(x=>{if(HALLOWEEN_2025_BOSS_DETAILS[x.id])Object.assign(x,HALLOWEEN_2025_BOSS_DETAILS[x.id])});
