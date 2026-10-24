@@ -16,8 +16,8 @@ Mise à jour : 24 octobre 2026. Après téléchargement de la dernière version 
 
 ## Combat et deux stratégies
 - [ ] Le changement Crimson Core ↔ Beorns / JinxedBoon met à jour les actions, les conseils et les mécaniques.
-- [ ] Avant le tour 1, contrôle « Chartor à gauche / Maganon à droite » et condition de réinitialisation visibles.
-- [ ] Chacun des six tours a ses trois à quatre consignes détaillées et son avertissement (soit douze ensembles de conseils).
+- [ ] Dans le tour 1 uniquement : contrôle « Chartor à gauche / Maganon à droite », puis « sinon : reset » pour les deux stratégies.
+- [ ] Les 12 ensembles de commentaires propres aux stratégies (6 Crimson Core, 6 Beorns) apparaissent sous leur tour respectif, sans devoir ouvrir Mécaniques.
 - [ ] Dans Beorns vidéo, tour 2 : Bekipan/Scorvol à gauche, deux Nidoking à droite ; tour 3 : deux Octillery et deux Xatu.
 - [ ] Les variantes Beorns vidéo et Beorns PDF actualisé (Xatu + Bekipan) ne sont pas mélangées.
 - [ ] Après les tours fixes, les conditions de K.O., de pluie et de Hurlement sont explicites.
@@ -32,7 +32,7 @@ Mise à jour : 24 octobre 2026. Après téléchargement de la dernière version 
 
 ## Mécaniques et copie
 - [ ] Mécaniques explique les seuils 100 %, 80 %, 67 %, 50 %, 40 % et 25 %, ainsi que soleil, pluie, Hurlement, Anti-Brume, Croco Larme et Saumure.
-- [ ] Mécaniques affiche aussi les différences propres à Crimson Core et à Beorns.
+- [ ] Mécaniques n’affiche plus de section « Consignes propres à la stratégie » : uniquement six seuils de PV et six règles communes. Les consignes spécifiques restent dans Combat.
 - [ ] « Copier ce tour » et « Copier le build » placent le bon contenu dans le presse-papiers.
 - [ ] Confirmation « ✓ Copié ! » apparaît, puis le libellé initial revient.
 - [ ] Aucun débordement, texte masqué ou bouton inaccessible sur téléphone.
