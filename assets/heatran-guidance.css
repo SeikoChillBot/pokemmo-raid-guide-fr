@@ -1,0 +1,21 @@
+
+.raid-preflight{background:linear-gradient(130deg,#2b1e29,#132237);border:1px solid #bc7565;border-left:4px solid #fa9674;border-radius:9px;margin:13px 0 18px;padding:17px 20px;box-shadow:0 8px 20px #0004}
+.raid-preflight header{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:0 0 12px}
+.raid-preflight h3{font-size:.96rem;letter-spacing:.02em;color:#ffdbcf;margin:0}
+.raid-preflight .preflight-source{font-size:11px;color:#d0b2a4;background:#342734;padding:5px 9px;border-radius:5px}
+.raid-preflight .position{font-size:clamp(.92rem,2vw,1.15rem);font-weight:800;color:#fff;line-height:1.5;margin:0 0 10px}
+.raid-preflight .reset{font-weight:780;color:#ffd1b9;padding:10px 13px;background:#a94a3630;border:1px solid #da866960;border-radius:6px;margin:8px 0}
+.raid-preflight .detail{font-size:12px;line-height:1.55;color:#c8d8e9;margin:12px 0 0}
+.raid-tips{border:1px solid #304e6c;border-radius:9px;background:linear-gradient(135deg,#112439,#0e1b2e);margin:14px 0 4px;padding:15px 17px}
+.raid-tips h3{font-size:1.04rem;letter-spacing:0;color:#eaf5ff;margin:0 0 10px}
+.raid-tips ul{padding:0 0 0 22px;margin:6px 0 13px}
+.raid-tips li{margin:8px 0;color:#c2d4e5;font-size:.89rem;line-height:1.57}
+.raid-tips .raid-alert{border-left:3px solid #f39168;background:#4e302936;padding:9px 11px;margin:12px 0 0;color:#ffcfb3;font-size:.85rem;line-height:1.5}
+.mechanics-intro{margin:8px 0 14px}.mechanics-intro h2{font-size:1.7rem;margin:0 0 8px}.mechanics-intro p{color:#b2c7dc;font-size:.91rem;line-height:1.55}
+.mechanic-section-title{color:#8de0fa!important;font-size:1rem!important;letter-spacing:.02em!important;margin:27px 0 12px!important}
+.mechanic-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.raid-mechanic-note{background:#0e2032;border:1px solid #31506a;border-radius:9px;padding:17px}
+.raid-mechanic-note h3{font-size:1rem;color:#f3f8ff;margin:0 0 8px}
+.raid-mechanic-note p{font-size:.85rem;line-height:1.6;color:#b8cce0;margin:0}
+.raid-source-note{margin-top:24px;font-size:.77rem;color:#97acc1;line-height:1.6}
+@media(max-width:730px){.mechanic-grid{grid-template-columns:1fr}.raid-preflight{padding:13px}.raid-tips{padding:13px}.raid-tips li{font-size:.84rem}.raid-mechanic-note{padding:14px}}
