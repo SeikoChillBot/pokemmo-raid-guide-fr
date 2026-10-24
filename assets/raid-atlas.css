@@ -218,3 +218,15 @@ a{color:inherit;text-decoration:none}button{font:inherit}button,a{outline-offset
 .atlas-soon-foot p{font-size:11px}
 .hero.atlas-hero .hero-left{padding:28px 22px 0}
 }
+
+/* La grille asymétrique du desktop doit redevenir verticale sur mobile. */
+@media(max-width:760px){
+ .section .event-grid{grid-template-columns:1fr;grid-template-rows:auto}
+ .section .event-card.main{grid-row:auto}
+}
+@media(max-width:480px){
+ .section .event-grid{grid-template-columns:1fr;gap:11px}
+ .topbar .identity-text{font-size:20px}
+ .topbar .identity-text small{font-size:8px}
+ .topbar .mark{width:37px;height:37px}
+}
