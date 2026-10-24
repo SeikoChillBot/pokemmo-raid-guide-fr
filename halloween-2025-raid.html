@@ -18,7 +18,7 @@
 <div id="guide-content"></div>
 <div class="h25-next" id="next-raids"></div>
 </main><footer class="atlas-footer"><b>POKÉMMO RAID ATLAS</b><span>Source communautaire 2025 · Les stratégies et leurs détails peuvent varier d'une année à l'autre.</span></footer>
-</div><script src="assets/halloween-2025-data.js?v=20261025-research1"></script><script>
+</div><script src="assets/halloween-2025-data.js?v=20261025-research1"></script><script src="assets/halloween-2025-rosters.js?v=20261025-r2"></script><script>
 const params=new URLSearchParams(location.search);let boss=HALLOWEEN_2025.find(b=>b.id===params.get('boss'))||HALLOWEEN_2025[0];let tab='combat',player=0,turn=0,showAll=false,mode=0;const $=id=>document.getElementById(id);
 $('crumb').textContent=boss.name;$('boss-name').textContent=boss.name;$('boss-summary').textContent=boss.description;$('boss-category').textContent='HALLOWEEN 2025 / '+boss.stars;
 $('boss-art').src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/'+boss.art+'.png';document.title=boss.name+' · Halloween 2025 — Raid Atlas';
