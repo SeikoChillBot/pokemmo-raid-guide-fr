@@ -1,6 +1,16 @@
 # Checklist de validation — site français PokeMMO Raid Guides
 
-Mise à jour : 24 octobre 2026, audit final des builds et rotations des deux stratégies. Après téléchargement de la dernière version GitHub, déployer ensemble les quatre fichiers HTML et le répertoire `assets/` dans Cloudflare Pages. Un commit GitHub seul ne prouve pas que la production a été redéployée.
+Mise à jour : 24 octobre 2026, audit des stratégies puis intégration de la direction RAID ATLAS validée. Après téléchargement de la dernière version GitHub, déployer ensemble les quatre fichiers HTML et le répertoire `assets/` dans Cloudflare Pages. Un commit GitHub seul ne prouve pas que la production a été redéployée.
+
+## Design RAID ATLAS — hiérarchie préservée
+- [ ] Le site français utilise la même direction noir/blanc/rouge que `design-lab.html`, sans recopier la navigation « tout-en-un » de la démonstration.
+- [ ] Accueil `index.html` : grand visuel Heatran et exactement 4 catégories ; aucun des six dossiers permanents n'est déplacé sur l'accueil.
+- [ ] Catégorie `permanent.html` : 6 dossiers Pokémon sur cette page séparée ; liens inchangés vers Heatran ou les pages « À venir ».
+- [ ] `coming-soon.html` : le titre, l'illustration et le lien de retour correspondent au paramètre `event` pour Halloween, Noël, Nouvel An lunaire et les cinq légendaires.
+- [ ] Guide `heatran.html` : en-tête RAID ATLAS et fil d'Ariane, mais onglets Combat/Pokémon/Préparation/Mécaniques, joueur choisi et boutons de copie inchangés.
+- [ ] Vérifier à 390 px, 760 px et sur grand écran : cartes événement asymétriques sur bureau, une colonne sur téléphone, aucune superposition d'artworks sur le texte.
+- [ ] Les nouvelles feuilles `assets/raid-atlas.css` et `assets/heatran-atlas.css` chargent correctement après les feuilles historiques ; pas de retour à l'ancien fond bleu.
+- [ ] La page `design-lab.html` reste un prototype de référence et non l'accueil public du site.
 
 ## Accueil et présentation
 - [ ] Accueil : quatre cartes cliquables « Raids permanents », « Halloween Event », « Christmas Event », « Lunar New Year Event ».
