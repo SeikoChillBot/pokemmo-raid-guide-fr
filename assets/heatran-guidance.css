@@ -41,3 +41,12 @@
 .raid-preflight .detail{font-size:.78rem;line-height:1.55;color:#c5d8e7}
 @media(max-width:930px){.raid-strategy-compare-grid{grid-template-columns:1fr}.compare-point{grid-template-columns:minmax(105px,27%) 1fr}}
 @media(max-width:620px){.raid-strategy-overview{padding:14px 12px;border-radius:9px}.raid-strategy-overview>h2{font-size:1.3rem}.raid-strategy-compare-card{padding:13px}.compare-point{gap:9px}.compare-point dt{font-size:.71rem}.compare-point dd{font-size:.79rem}}
+
+
+/* Tour conditionnel : note sous le Pokémon concerné, sans modifier sa capacité source. */
+.raid-when{display:block;margin-top:8px;padding:8px 9px;font-size:.72rem!important;line-height:1.5;color:#c7e9f7!important;background:#14334b;border-left:3px solid #6ac7df;border-radius:5px;letter-spacing:normal;font-weight:500!important}
+.raid-conditional-banner{margin:8px 0 14px;padding:10px 13px;background:#1a3448;border:1px solid #37718b;border-radius:7px;color:#bfeafd;font-size:.83rem;line-height:1.55}
+.raid-hm{margin:18px 0;padding:14px 17px;border-radius:9px;border:1px solid #33546d;background:#0c2032}
+.raid-hm summary{cursor:pointer;font-weight:750;color:#bdeaff;line-height:1.5}
+.raid-hm p{color:#b7cbdc;font-size:.85rem;line-height:1.6;margin:10px 0 0}
+@media(max-width:620px){.raid-when{font-size:.7rem!important;padding:7px}.raid-conditional-banner{font-size:.76rem}.raid-hm{padding:12px}}
