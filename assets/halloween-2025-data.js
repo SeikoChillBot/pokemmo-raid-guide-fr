@@ -706,9 +706,9 @@ const DARKRAI_2025_FIVE={
     ]}
   ],
   mechanics:[
-    ["Fin du tour 4","Table des types inversée"],
-    ["Fin du tour 5","Retour à la table des types normale"],
-    ["Fin du tour 6","Table des types inversée de nouveau"],
+    ["Tour 4","Table des types inversée"],
+    ["Tour 5","Retour à la table des types normale"],
+    ["Tour 6","Table des types inversée de nouveau"],
     ["Tour 7 éventuel","Retour à la table des types normale si le combat se poursuit"],
     ["Vers 25 % des PV","Inversion Physique/Spécial indépendante des inversions de types"],
     ["Après la victoire","La source évoque un temps de recharge de six heures pour la version 5★"]
@@ -718,6 +718,7 @@ const DARKRAI_2025_FIVE={
     "Tour 4 : l'un des Tengalice utilise Coup Bas, trois utilisent Assurance. Prévoir un Tengalice plus lent avec Baie Prine pour absorber Trou Noir avant de frapper.",
     "Tour 5 : l'ordre d'action et l'inversion Physique/Spécial rendent le timing important ; la source distingue les attaquants rapides du quatrième joueur.",
     "Tour 6 : la source propose quatre Charmina utilisant Psyko. Attention : le résultat dépend du calendrier des inversions.",
+    "En cas de tour 7, le document indique le retour des types à la normale : ne pas prolonger mécaniquement la rotation sans adapter les attaques.",
     "Les candidats Pokémon ci-dessus ne constituent PAS quatre rosters de six slots validés. Les EV, IV, natures et objets non explicités restent à vérifier."
   ]
 };
