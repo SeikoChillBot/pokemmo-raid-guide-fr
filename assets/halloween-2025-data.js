@@ -818,3 +818,6 @@ const HALLOWEEN_2025_BOSS_DETAILS={
   }
 };
 HALLOWEEN_2025.forEach(x=>{if(HALLOWEEN_2025_BOSS_DETAILS[x.id])Object.assign(x,HALLOWEEN_2025_BOSS_DETAILS[x.id])});
+
+// Vidéo contemporaine explicitement consacrée aux breeds de Pumpking 2025.
+HALLOWEEN_2025.find(x=>x.id==="pumpking").video2025="https://www.youtube.com/watch?v=htTdOEO1Y1k";
