@@ -3596,3 +3596,7 @@ const HALLOWEEN_2025_ROSTERS={
     }
   }
 };
+
+/* Cas sensible : le document Darkrai 5★ mentionne une inversion Physique/Spécial.
+Ne pas prescrire naïvement un Charmina Modeste 252 Att Spé : les calculs dépendent de la mécanique. */
+HALLOWEEN_2025_ROSTERS.darkrai.hard.teams.forEach(team=>{const p=team[5];if(p.name==="Charmina"){p.nature="À calculer (inversion Physique/Spécial)";p.ev="À calculer selon l'inversion du boss";p.iv="Att / Att Spé : seuil à vérifier avant élevage";p.note="Le document caav indique Psyko avec Charmina au tour 6 après inversion. Ce n'est PAS une validation du build Modeste ou 252 Att Spé : tester quelle statistique détermine les dégâts dans cette phase."}});
