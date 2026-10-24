@@ -16,7 +16,7 @@ Mise à jour : 24 octobre 2026. Après téléchargement de la dernière version 
 
 ## Combat et deux stratégies
 - [ ] Le changement Crimson Core ↔ Beorns / JinxedBoon met à jour les actions, les conseils et les mécaniques.
-- [ ] Dans le tour 1 uniquement : contrôle « Chartor à gauche / Maganon à droite », puis « sinon : reset » pour les deux stratégies.
+- [ ] Tour 1 Crimson Core : Maganon à droite obligatoire, sinon reset ; Chartor à gauche n'est pas présenté comme obligatoire. Tour 1 Beorns : placement de la vidéo affiché comme repère, sans reset inventé.
 - [ ] Les 12 ensembles de commentaires propres aux stratégies (6 Crimson Core, 6 Beorns) apparaissent sous leur tour respectif, sans devoir ouvrir Mécaniques.
 - [ ] Dans Beorns vidéo, tour 2 : Bekipan/Scorvol à gauche, deux Nidoking à droite ; tour 3 : deux Octillery et deux Xatu.
 - [ ] Les variantes Beorns vidéo et Beorns PDF actualisé (Xatu + Bekipan) ne sont pas mélangées.
@@ -32,11 +32,12 @@ Mise à jour : 24 octobre 2026. Après téléchargement de la dernière version 
 
 ## Mécaniques et copie
 - [ ] Mécaniques explique les seuils 100 %, 80 %, 67 %, 50 %, 40 % et 25 %, ainsi que soleil, pluie, Hurlement, Anti-Brume, Croco Larme et Saumure.
-- [ ] L’onglet Mécaniques affiche bien la section « Mécaniques communes et seuils de PV » avec 12 fiches complètes (6 seuils de PV et 6 règles générales), sans section de consignes spécifiques.
+- [ ] Mécaniques commence par une comparaison lisible des deux stratégies (avant combat, tour 2, tour 3, fin), avec la stratégie sélectionnée mise en évidence ; aucune procédure détaillée n'y fait doublon avec Combat.
+- [ ] La section « Mécaniques communes et seuils de PV » conserve 12 fiches complètes (6 seuils de PV et 6 règles générales).
 - [ ] « Copier ce tour » et « Copier le build » placent le bon contenu dans le presse-papiers.
 - [ ] Confirmation « ✓ Copié ! » apparaît, puis le libellé initial revient.
 - [ ] Aucun débordement, texte masqué ou bouton inaccessible sur téléphone.
 
 Les vérifications de syntaxe et de structure réalisées sur GitHub ne remplacent pas une validation visuelle et interactive dans un navigateur réel.
 
-- [ ] Après déploiement : le tour 1 ne contient plus « Le document demande de relancer sans Maganon ». L’avertissement affiche uniquement « Si cette disposition n’est pas respectée : reset. » et les 12 mécaniques restent visibles.
+- [ ] Après déploiement : le tour 1 ne contient plus « Le document demande de relancer sans Maganon ». Crimson Core affiche « Si Maganon n’est pas à droite : reset. » ; Beorns ne transforme pas le placement illustré en obligation non démontrée.
