@@ -558,8 +558,8 @@ const CRESSELIA_DATA={
   ],
   "sources": [
     [
-      "The Three Musketeers v2.1 (source communautaire)",
-      "https://forums.pokemmo.com/index.php?/topic/",
+      "Auteur du guide v2.1 — profil Cadoiz",
+      "https://forums.pokemmo.com/index.php?/profile/541645-cadoiz/",
       "Version 2.1 de Cadoiz, RogueMaster (Phoebe), Th3Fastest et OhKaibaBoy, commentaires de correction des EV de Pingoléon."
     ],
     [
