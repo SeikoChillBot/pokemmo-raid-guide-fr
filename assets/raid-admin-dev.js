@@ -70,6 +70,7 @@
    const meta = document.createElement("div");
    meta.className = "raid-admin-item-meta";
    meta.append(textNode("span",item.category||"Autre","raid-admin-item-category"));
+   meta.append(textNode("span",(item.locale === "en" ? "EN" : "FR") + " · " + (item.locale === "en" ? "Site anglais" : "Site français")));
    if (item.nickname) meta.append(textNode("span","Pseudo : "+item.nickname));
    const date = new Date(item.createdAt);
    meta.append(textNode("time",
