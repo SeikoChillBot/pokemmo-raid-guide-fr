@@ -5,6 +5,7 @@
  */
 (()=>{
 "use strict";
+function initPreview(){
 if(!document.body?.classList?.contains("raid-template-ready"))return;
 if(typeof window.matchMedia==="function"&&window.matchMedia("(hover:none), (pointer:coarse)").matches)return;
 const selectors=[
@@ -137,4 +138,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")hide();});
 document.addEventListener("click",e=>{if(!current?.contains(e.target))hide();});
 window.addEventListener("scroll",hide,{passive:true,capture:true});
 window.addEventListener("resize",hide,{passive:true});
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initPreview,{once:true});
+else initPreview();
 })();
