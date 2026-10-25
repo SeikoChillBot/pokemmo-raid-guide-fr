@@ -56,3 +56,15 @@ Mise à jour : 24 octobre 2026, audit des stratégies puis intégration de la di
 Les vérifications de syntaxe et de structure réalisées sur GitHub ne remplacent pas une validation visuelle et interactive dans un navigateur réel.
 
 - [ ] Après déploiement : le tour 1 ne contient plus « Le document demande de relancer sans Maganon ». Crimson Core affiche « Si Maganon n’est pas à droite : reset. » ; Beorns demande Maganon présent et présente le placement de la vidéo sans en faire une règle de côté non écrite dans le PDF.
+
+
+## V13 — acceptation provisoire par l'utilisateur (25 octobre 2026)
+
+- [x] Les 8 pages VF chargent `assets/raid-polish-v13.css` après V12.
+- [x] La bannière de `permanent.html` conserve le GIF in-game communiqué et affiche l'autel avec un cadrage moins zoomé (fond `auto 130%`, centré).
+- [x] La carte « Raids permanents » sur l'accueil conserve son GIF de fond déjà apprécié ; pas de carré surimposé.
+- [x] Les cartes d'action de combat utilisent une transparence/masque radial pour supprimer l'impression de carré noir, au niveau CSS partagé sur toutes les fiches.
+- [x] Signature exclusivement dans le footer d'`index.html` : « Créé par Seiko (Seikolito en jeu) ».
+- [x] `assets/raid-components.js` fournit la navigation « Tour précédent / Tour suivant » immédiatement après les actions. Même règle pour les futures fiches ; absence de lien redondant « Voir les 6 Pokémon ».
+- [x] L'ensemble du style et des fonctionnalités communes a été reporté sur le dépôt EN, avec localisation des composants.
+- [ ] Rendu visuel GIF et transparence, test de l'animation, clavier/souris/mobile et publication GitHub Pages non observés dans un navigateur réel.
