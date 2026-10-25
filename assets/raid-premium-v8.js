@@ -44,6 +44,19 @@ let scanQueued=false;
 function scan(root=document){
  if(root instanceof HTMLImageElement)upgradeImage(root);
  if(root.querySelectorAll)root.querySelectorAll('img[src*="/sprites/master/sprites/pokemon/"]').forEach(upgradeImage);
+ // Also cover Halloween / future raid-specific renderers that do not use
+ // RaidAtlasComponents.actionGrid. This fixes opaque thumbnail squares at DOM source.
+ const selector=".battle-grid .card img, .raid-template-action-grid img, .cres-grid .cres-action img, .h25-battle-grid img, .pump-route-grid img, .h25-player-card img";
+ const items=root.querySelectorAll?root.querySelectorAll(selector):[];
+ for(const img of items){
+   if(!(img instanceof HTMLImageElement))continue;
+   upgradeImage(img);
+   img.classList.add("raid-action-art");
+   for(const prop of ["background","background-color","background-image","border","outline","box-shadow"]){
+     img.style.setProperty(prop,prop==="background"||prop==="background-color"?"transparent":"none","important");
+   }
+   img.style.setProperty("mix-blend-mode","normal","important");
+ }
 }
 function scheduleScan(){
  if(scanQueued)return;scanQueued=true;
