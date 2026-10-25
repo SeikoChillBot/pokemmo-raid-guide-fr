@@ -29,7 +29,7 @@ function assemble(preset,cfg){
    const hero=select(cfg,"hero"),content=select(cfg,"content");
    if(!hero||!content)return null;
    layout=node("div","raid-template-layout");
-   hero.insertAdjacentElement("afterend",layout);
+   (preset==="halloween"?(one(".h25-alert")||hero):hero).insertAdjacentElement("afterend",layout);
    aside=node("aside","raid-template-sidebar");
    stage=node("main","raid-template-main");
    layout.append(aside,stage);
