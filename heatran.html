@@ -156,12 +156,12 @@ function cloudRender(){let app=$('app');app.replaceChildren();buttons($('tabs'),
    actions:cloudTurns[n].map(([poke,move])=>({name:fr(poke),move:fr(move),sprite:poke==='—'?null:sprite(poke)})),
    selected:player,advice:notes,
    preflight:n===0?(()=>{const panel=document.createElement('section');panel.className='raid-preflight';panel.textContent=cloudCaution;return panel})():null,
-   onPokemon:()=>{tab='pokemon';render()},
+   onTurnChange:fullView?null:i=>{turn=i;render()},
    copyText:'Cloud Five Heatran T'+(n+1)+' : '+cloudTurns[n].map(([p,m],i)=>'P'+(i+1)+' '+fr(p)+' > '+fr(m)).join(' ; '),
    copy:(button,value)=>copyWithFeedback(button,value)});
   wrap.append(phase);
  }
- if(!fullView)app.append(RaidAtlasComponents.phaseNav({current:turn,total:cloudTurns.length,onChange:i=>{turn=i;render()}}));
+
 }else if(tab==='pokemon'){
  app.append(RaidAtlasComponents.feature({player,boss:'Heatran',artwork:'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/224.png'}));
  app.append(RaidAtlasComponents.pokemonIntroNote(cloudCaution));
@@ -207,10 +207,10 @@ const warning=strat==='video'&&phase>=4?'Phase indicative : adapter les actions 
 RaidAtlasComponents.battleTurn({
  target,index:phase,total:r.length,title:fr(phaseNames[strat][phase]),actions:acts,selected:player,
  preflight:phase===0?raidPreflightBlock(strat):null,banner:warning,advice:raidTurnAdvice(turnGuidance[strat][phase]),
- onPokemon:()=>{tab='pokemon';render()},
+ onTurnChange:fullView?null:i=>{turn=i;render()},
  copyText:'Heatran T'+(phase+1)+' : '+r[phase].map(([poke,move],i)=>'P'+(i+1)+' '+fr(poke)+' > '+fr(move)).join(' ; '),
  copy:(button,value)=>copyWithFeedback(button,value)
-})};if(fullView){r.forEach((_,i)=>{let section=document.createElement('section');section.className='turn-section';renderTurn(i,section);allWrap.append(section)})}else{renderTurn(turn,allWrap)}let pn=document.createElement('div');pn.className='phase-nav';let prev=document.createElement('button');prev.textContent='← Précédent';prev.disabled=turn===0;prev.onclick=()=>{turn--;render()};let next=document.createElement('button');next.textContent='Phase suivante →';next.disabled=turn===5;next.onclick=()=>{turn++;render()};pn.append(prev,next);if(!fullView)app.append(pn);}else if(tab==='pokemon'){let feature=document.createElement('section');feature.className='pokemon-feature-banner';feature.innerHTML='<div><span class="eyebrow">FICHES POKÉMON</span><h2>Préparez votre équipe</h2><p>Objets, talents, EV, IV prioritaires et attaques pour le joueur '+(player+1)+'. Ouvrez une fiche pour consulter le build complet.</p></div><img class="feature-octillery" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/224.png" alt="" loading="lazy">';app.append(feature);let sourcing=document.createElement('p');sourcing.className='build-source-note';sourcing.textContent=strat==='core'?'Crimson Core : natures, EV, attaques et objets selon le guide d’origine. Les IV notés « référence complémentaire Beorns » sont des seuils proposés par l’autre source et ne sont pas imposés par Crimson Core.':'Beorns / JinxedBoon : variante vidéo. Les éléments absents du PDF pour Bekipan J1 sont indiqués comme propositions ; les EV ou attaques expérimentaux sont signalés séparément.';app.append(sourcing);app.append(viewCheckbox('Tout déplier · afficher les 6 fiches',expandAll,v=>{expandAll=v;localStorage.setItem('pokemmo-fr-expand-all',v?'1':'0');render()}));team[player].forEach((p,i)=>{
+})};if(fullView){r.forEach((_,i)=>{let section=document.createElement('section');section.className='turn-section';renderTurn(i,section);allWrap.append(section)})}else{renderTurn(turn,allWrap)}}else if(tab==='pokemon'){let feature=document.createElement('section');feature.className='pokemon-feature-banner';feature.innerHTML='<div><span class="eyebrow">FICHES POKÉMON</span><h2>Préparez votre équipe</h2><p>Objets, talents, EV, IV prioritaires et attaques pour le joueur '+(player+1)+'. Ouvrez une fiche pour consulter le build complet.</p></div><img class="feature-octillery" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/224.png" alt="" loading="lazy">';app.append(feature);let sourcing=document.createElement('p');sourcing.className='build-source-note';sourcing.textContent=strat==='core'?'Crimson Core : natures, EV, attaques et objets selon le guide d’origine. Les IV notés « référence complémentaire Beorns » sont des seuils proposés par l’autre source et ne sont pas imposés par Crimson Core.':'Beorns / JinxedBoon : variante vidéo. Les éléments absents du PDF pour Bekipan J1 sont indiqués comme propositions ; les EV ou attaques expérimentaux sont signalés séparément.';app.append(sourcing);app.append(viewCheckbox('Tout déplier · afficher les 6 fiches',expandAll,v=>{expandAll=v;localStorage.setItem('pokemmo-fr-expand-all',v?'1':'0');render()}));team[player].forEach((p,i)=>{
  const pokemon={
   name:fr(p[0]),item:fr(p[1]),nature:fr(p[2]),
   ability:fr((strat==='core'?abilities:videoAbilities)[player][i]),
