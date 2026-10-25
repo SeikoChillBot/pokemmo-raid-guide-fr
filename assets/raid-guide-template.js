@@ -78,13 +78,13 @@ function decorateCards(scope){
  if(!scope)return;
  // Only add semantic classes to existing cards; all design tokens live in shared CSS.
  for(const el of scope.querySelectorAll(".card,.cres-mon,.h25-card,.h25-build,.h25-team-build,.h25-player-card,.cres-action,.h25-stat")){
-  el.classList.add("raid-template-card");
+  if(!el.classList.contains("raid-template-card"))el.classList.add("raid-template-card");
  }
  for(const el of scope.querySelectorAll(".battle-grid,.cres-grid,.h25-battle-grid,.pump-route-grid")){
-  el.classList.add("raid-template-action-grid");
+  if(!el.classList.contains("raid-template-action-grid"))el.classList.add("raid-template-action-grid");
  }
  for(const el of scope.querySelectorAll(".build-showcase,.cres-mon-body,.h25-build-body")){
-  el.classList.add("raid-template-build-body");
+  if(!el.classList.contains("raid-template-build-body"))el.classList.add("raid-template-build-body");
  }
 }
 function boot(){
