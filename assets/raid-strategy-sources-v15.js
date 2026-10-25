@@ -1,0 +1,127 @@
+/* RAID ATLAS — Attribution unifiée : une stratégie / un boss = ses sources vérifiables.
+ * Aucun changement aux équipes, tours ou statistiques. Compatible FR et EN.
+ */
+(function(){
+ "use strict";
+ const en = document.documentElement.lang.toLowerCase().startsWith("en");
+ const tr = (fr,english) => en ? english : fr;
+ const path = location.pathname.split("/").pop() || "index.html";
+ const make = (tag,cls,value) => {
+   const el=document.createElement(tag);
+   if(cls) el.className=cls;
+   if(value!==undefined) el.textContent=value;
+   return el;
+ };
+ const u = (label,href,note) => ({label,href,note});
+ const heatran = {
+   core: {
+     name:"Crimson Core",
+     by:"Crimson Core",
+     note:tr("Guide original Crimson Core. Les recommandations IV citées à titre complémentaire depuis Beorns ne sont pas des exigences de Crimson Core.","Original Crimson Core guide. Supplemental Beorns IV recommendations are not Crimson Core requirements."),
+     links:[u(tr("Guide de raid Crimson Core","Crimson Core raid guide"),"https://www.crimsoncoremmo.co.uk/guides/crimson-core-guides-heatran-raid-octillery-strat")]
+   },
+   video: {
+     name:"Beorns / JinxedBoon",
+     by:"Beorns / JinxedBoon",
+     note:tr("La rotation affichée correspond à la variante vidéo. Le document contient aussi une variante mise à jour, distincte : ne pas mélanger les deux.","The displayed rotation follows the video variant. The source document also contains a separate updated version; do not mix their rotations."),
+     links:[u(tr("Document de stratégie Beorns / JinxedBoon","Beorns / JinxedBoon source document"),"https://docs.google.com/document/d/1iZ0YhbEQntdbdRrBzSGR3PLiYkZSc0P962_3N_dnc_E/mobilebasic")]
+   },
+   cloud:{
+     name:"Cloud Five v0.74",
+     by:"The Council / Cadoiz",
+     note:tr("Version de travail v0.74 : les remplacements, tours et conditions variables peuvent être encore expérimentaux. Aucun lien original direct vérifié n'est disponible ; l'attribution est conservée sans inventer d'URL.","Working version v0.74: replacements, turn timings and situational decisions may still be experimental. No independently verified direct original URL is available; contributor credit is retained without fabricating a link."),
+     links:[]
+   }
+ };
+ const cresselia = {
+   musketeers:{
+     name:"The Three Musketeers v2.1",
+     by:"Cadoiz, RogueMaster (Phoebe), Th3Fastest, OhKaibaBoy",
+     note:tr("Version collaborative v2.1 (crédits aux auteurs d'origine). La page Crimson Core est une transcription de référence, pas l'auteur de cette stratégie.","Collaborative v2.1; credit belongs to the original authors. The Crimson Core article is a reference transcription, not the strategy's creator."),
+     links:[
+       u(tr("Profil de l'auteur Cadoiz (forum PokeMMO)","Original author Cadoiz (PokeMMO forum)"),"https://forums.pokemmo.com/index.php?/profile/541645-cadoiz/"),
+       u(tr("Transcription détaillée Crimson Core","Detailed Crimson Core transcription"),"https://www.crimsoncoremmo.co.uk/guides/cresselia-the-three-musketeers-strat")
+     ]
+   },
+   sensei:{
+     name:"Sensei / DoubleDude — New Strategy",
+     by:"CALLMESENSEIX / Sensei / DoubleDude",
+     note:tr("Guide de forum : certaines colonnes de la version « New Strategy » sont ambiguës ; vérifier les équipes et les tours dans la source.","Community forum guide: some columns in the New Strategy section are ambiguous; confirm builds and turns against the source."),
+     links:[u(tr("Stratégie originale Sensei / DoubleDude","Original Sensei / DoubleDude strategy"),"https://forums.pokemmo.com/index.php?/topic/193398-cresselia-raid-guide/")]
+   },
+   latin:{
+     name:"Latin Combo V2",
+     by:"PAXPO avec kriptonito, kalffff et RockeritoGamer",
+     note:tr("Vidéo de 12 tours. Les builds complets et la liste des actions n'ont pas été vérifiés et ne sont pas reconstitués artificiellement.","12-turn video reference. Full builds and turn-by-turn actions have not been verified and are not reconstructed."),
+     links:[u(tr("Vidéo originale Latin Combo V2","Original Latin Combo V2 video"),"https://www.youtube.com/watch?v=AvmnNLs-CWw")]
+   }
+ };
+ const validLink = href => {
+   try { const parsed = new URL(href); return /^https?:$/.test(parsed.protocol) ? parsed.href : null; } catch (_) {return null;}
+ };
+ function eventSource(){
+   const list=typeof HALLOWEEN_2025!=="undefined" ? HALLOWEEN_2025 : [];
+   const id=new URLSearchParams(location.search).get("boss");
+   const boss=list.find(x=>x.id===id)||list[0];
+   if(!boss) return null;
+   const links=[];
+   if(boss.source)links.push(u(tr("Guide d'événement PokeMMO 2025 (forum)","PokeMMO 2025 event guide (forum)"),boss.source));
+   if(boss.guide)links.push(u(tr("Fiche complémentaire du boss","Supplemental boss reference"),boss.guide));
+   if(boss.video2025)links.push(u(tr("Vidéo 2025 de cette rencontre","2025 encounter video"),boss.video2025));
+   for(const [i,href] of (boss.enrichment?.sources||[]).entries())
+     links.push(u(tr("Référence de mécanique ou de préparation "+(i+1),"Mechanics or preparation reference "+(i+1)),href));
+   for(const item of (boss.enrichment?.guideVideos||[]))
+     if(item.url)links.push(u(item.name,item.url,item.description||""));
+   const unique=links.filter((x,i)=>validLink(x.href)&&links.findIndex(y=>y.href===x.href)===i);
+   const mode = boss.id==="darkrai" ? tr(" (4★ / 5★ : variantes distinctes)"," (4★ / 5★: distinct variants)") :
+     boss.id==="pumpking" ? tr(" (facile / difficile)"," (easy / hard)") : "";
+   return {
+     name:boss.name+mode,
+     by:tr("Sources communautaires 2025 ; document de rotation caav lorsqu'indiqué","2025 community sources; caav rotation document where specified"),
+     note:tr("Archives 2025 potentiellement obsolètes pour 2026. Les rosters proposés ou les détails non vérifiés ne sont pas présentés comme officiels.","2025 archives may be outdated for 2026. Proposed rosters or unverified details are not presented as official."),
+     links:unique
+   };
+ }
+ let selector=null,data=null,shown=null;
+ if(path==="heatran.html"){selector=document.querySelector("#strategy");data=heatran;shown=()=>selector?.value||"core";}
+ else if(path==="cresselia.html"){selector=document.querySelector("#cres-strategy");data=cresselia;shown=()=>selector?.value||"musketeers";}
+ else if(path==="halloween-2025-raid.html"){data=null;shown=()=>eventSource();}
+ else if(path==="halloween-2025.html"||path==="halloween.html"){
+   shown=()=>({
+     name:tr("Archive Halloween 2025","Halloween 2025 archive"),
+     by:tr("Guides communautaires PokeMMO et document de rotation caav","PokeMMO community guides and caav rotation document"),
+     note:tr("Les crédits et les liens propres à chaque boss se trouvent en bas de sa fiche. Archives susceptibles d'être obsolètes.","Boss-specific credits and links appear at the bottom of each raid guide. Archived mechanics may be outdated."),
+     links:[u(tr("Guide événement Halloween 2025 (forum)","Halloween 2025 event guide (forum)"),"https://forums.pokemmo.com/index.php?/topic/192700-halloween-2025-the-ultimate-halloween-event-guide/")]
+   });
+ } else return;
+ const footer=document.querySelector("footer");if(!footer)return;
+ const details=make("details","raid-extra-references raid-source-drawer");
+ details.id="raid-strategy-sources";
+ const summary=make("summary","raid-source-heading");
+ summary.append(make("span","raid-source-title",tr("Sources et crédits de la stratégie","Strategy sources and credits")));
+ const active=make("span","raid-source-active");
+ summary.append(active);
+ details.append(summary);
+ const content=make("div","raid-source-body");
+ details.append(content);
+ footer.parentNode.insertBefore(details,footer);
+ function render(){
+   const src=typeof shown()==="string"?data[shown()]:shown();
+   if(!src)return;
+   active.textContent=src.name;
+   content.replaceChildren();
+   content.append(make("p","raid-source-by",tr("Auteurs / contributeurs : ","Authors / contributors: ")+src.by));
+   const links=make("div","raid-source-links");
+   for(const item of src.links||[]){
+     const url=validLink(item.href);if(!url)continue;
+     const a=make("a","raid-source-link",item.label+" ↗");
+     a.href=url;a.target="_blank";a.rel="noopener noreferrer";
+     links.append(a);
+     if(item.note)links.append(make("span","raid-source-link-note",item.note));
+   }
+   if(links.children.length)content.append(links);
+   content.append(make("p","raid-source-note",src.note||""));
+ }
+ if(selector)selector.addEventListener("change",render);
+ render();
+})();
