@@ -83,6 +83,7 @@
     }
     function apply(){
       center.classList.toggle("is-reduced",reduced);
+      content.hidden=reduced;
       commands.hidden=reduced;
       wrap.hidden=reduced;
       collapse.textContent=reduced?"Déployer":"Réduire";
