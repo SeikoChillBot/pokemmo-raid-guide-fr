@@ -229,3 +229,8 @@ body.raid-admin-page{
   transition:none!important;transform:none!important
  }
 }
+
+/* Destructive action is confined to treated suggestions. */
+.raid-admin-item-actions{flex-wrap:wrap}
+.raid-admin-btn.danger{background:#401d21;border-color:#a95a61;box-shadow:none}
+.raid-admin-btn.danger:hover{background:#69252b;border-color:#ff8a8a}
