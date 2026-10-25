@@ -66,3 +66,11 @@ Ouvrir directement `https://pokemmo-raids-fr.pages.dev/api/suggestions` dans un 
 Depuis l'accueil : code **400** = validation, **429** = limite 60 secondes par IP, **503** = configuration ou stockage indisponible. Le JavaScript affiche désormais le code HTTP et distingue les réponses HTML d'une API JSON, version cache `20261025-sug2`. Le traitement anti-spam n'est enregistré qu'après la sauvegarde réussie de la suggestion (commits `3300e02`, `86c596d`, `389ef55`).
 
 Ces modifications GitHub ne remplacent ni la configuration Cloudflare ni un test réel en production. Ne jamais partager la clé secrète dans le chat ou une capture.
+
+## Extension bilingue / suppression — 25/10/2026
+
+- Le site anglais a reçu une implémentation complète de Suggestions et de `/adminDev/` (formulaire, CSS, scripts, Pages Functions, `_routes.json`), avec messages anglais naturels et noms Pokémon officiels.
+- Le projet Cloudflare anglais `pokemmo-raids` doit recevoir un binding **`SUGGESTIONS_KV` relié au namespace existant `pokemmo-raid-suggestions-fr`** (ne pas créer un second KV homonyme), ainsi que son propre secret chiffré `ADMIN_SUGGESTIONS_KEY` de 24+ caractères, dans Production. Ce secret peut différer entre les deux projets.
+- Les nouveaux enregistrements contiennent `locale: "fr"` ou `locale: "en"`. Les enregistrements historiques sans ce champ sont identifiés FR. Les deux panneaux consultent les mêmes clés `suggestion:<id>` du KV partagé.
+- Bouton « Supprimer » ajouté aux seules suggestions **traitées** : confirmation côté navigateur et contrôle de statut côté serveur `DELETE /api/suggestions/:id`, authentification requise, HTTP 409 pour une suggestion non traitée ; suppression définitive, à utiliser avec prudence.
+- Tests API simulés : création FR+EN, lecture croisée dans un KV commun, refus 409 des suppressions en attente, passage en traité, rejet 401 sans clé valide, effacement croisé une fois traité. **Production Cloudflare non testée** après ces changements.
