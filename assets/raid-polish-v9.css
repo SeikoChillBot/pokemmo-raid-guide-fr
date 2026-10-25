@@ -188,3 +188,59 @@ body.raid-template-ready .raid-template-content :is(.phase-nav,.h25-actions).rai
  .site-wrap .identity-text small,body.raid-template-ready .identity-text small,body.raid-template-ready .atlas-guide-brand-copy small{font-size:8px!important}
  body.raid-template-ready .raid-template-content .phase-nav.raid-v9-placed button{font-size:11px!important}
 }
+
+/* V9b — navigation : état actif explicite, visible immédiatement.
+   Rouge franc, marqueur latéral et trait inférieur, sans modifier la grille.
+*/
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button{
+ position:relative!important;
+ isolation:isolate!important;
+ overflow:hidden!important;
+ padding-left:12px!important;
+ border:1px solid #514247!important;
+ background:#232124!important;
+ color:#d9d1d3!important;
+ box-shadow:inset 0 0 0 1px #ffffff05!important;
+}
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button.raid-v9-tab-current,
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button.raid-dock-active,
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button.active,
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button[aria-current="page"]{
+ background:linear-gradient(108deg,#cd2a25,#791d1d)!important;
+ border:1px solid #ff6b60!important;
+ color:#fff!important;
+ box-shadow:inset 0 -3px 0 #ffb7ac,0 0 17px #df31282b!important;
+ font-weight:850!important;
+}
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button.raid-v9-tab-current:before,
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button.raid-dock-active:before{
+ content:""!important;
+ position:absolute!important;
+ left:8px!important;
+ top:50%!important;
+ transform:translateY(-50%)!important;
+ width:5px!important;height:5px!important;
+ border-radius:50%!important;
+ background:#fff!important;
+ box-shadow:0 0 8px #fff9!important;
+}
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button:not(.raid-v9-tab-current):not(.raid-dock-active):not(.active):not([aria-current="page"]):hover{
+ background:#392526!important;
+ border-color:#b64640!important;
+ color:#fff!important;
+}
+body.raid-template-ready .raid-command-center .raid-dock-marker{
+ border-color:#e24b42!important;
+ background:#4b1c1b!important;
+ color:#fff!important;
+ box-shadow:inset 3px 0 0 #ff4a3f!important;
+}
+@media(max-width:640px){
+ body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button{
+   font-size:10px!important;
+   padding-left:9px!important;
+ }
+ body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button.raid-v9-tab-current:before{
+   width:4px!important;height:4px!important;left:4px!important;
+ }
+}
