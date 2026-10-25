@@ -91,7 +91,7 @@ export async function onRequestDelete({ request, env, params }) {
   for (let i = 0; i < left.length; i++) diff |= left[i] ^ right[i];
   if (diff !== 0) return response(request, { error: "Accès administrateur refusé." }, 401);
   const id = params.id;
-  if (typeof id !== "string" || !/^\\d{13}-[a-f0-9-]{36}$/.test(id))
+  if (typeof id !== "string" || !/^\d{13}-[a-f0-9-]{36}$/.test(id))
     return response(request, { error: "Identifiant invalide." }, 400);
   const key = "suggestion:" + id;
   try {
