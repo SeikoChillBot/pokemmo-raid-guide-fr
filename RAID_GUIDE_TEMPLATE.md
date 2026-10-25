@@ -69,3 +69,17 @@ Dans `cresselia.html`, `#cres-strategy` reprend le modèle de sélecteur de Heat
 Les nouveaux jeux de données se trouvent dans `assets/cresselia-alternatives.js`. Le moteur `assets/cresselia.js` choisit les données en fonction de `#cres-strategy`, remet l'état du tour à zéro au changement, puis utilise les composants communs `RaidAtlasComponents` pour Combat, Pokémon et Préparation. Les checklists sont enregistrées séparément par stratégie. Le bandeau affiche le nombre de tours et le statut de disponibilité des builds correspondant au choix actif. L'onglet Mécaniques conserve les mécaniques communes du boss.
 
 La version précédente The Three Musketeers reste la valeur par défaut et son objet `CRESSELIA_DATA` demeure immuable. Ne jamais transformer Latin Combo en tutoriel build complet sans accès aux compositions/rotations authentiques.
+
+
+## Panneau compact unifié — V7, 25 octobre 2026
+
+Décision utilisateur : fusionner les trois contrôles **Stratégie + Votre rôle + Navigation du raid** dans **un seul panneau sticky**, sans conserver le dock de navigation comme deuxième panneau autonome. Les anciens gros pavés et boutons doivent être beaucoup moins hauts. Palette noire, rouge, blanche et grise conservée.
+
+- Script commun : `assets/raid-guide-template.js` (version `data-raid-template-version="7"`) crée un seul `.raid-command-center` après la bannière/les avertissements, avec l'en-tête `.raid-center-header`, puis `.raid-center-content` contenant `.raid-template-commandbar` (stratégie + rôle) et `.raid-guide-dock` (quatre rubriques), tous **dans le même élément sticky**. Les nœuds de commandes et d'onglets d'origine sont **déplacés**, non clonés : interactions, état de sélection, événements et raccourcis métier ne doivent pas changer.
+- Style central unique : `assets/raid-command-center-v7.css`, chargé en **dernier** sur `heatran.html`, `cresselia.html`, `halloween-2025-raid.html` après le thème V6. Un seul cadre, espacement réduit (boutons joueurs 36 px, onglets 34 px, sélecteur 36 px), compact sur ordinateur, stratégie et rôle en deux colonnes au-delà de 920 px, sous l'un et l'autre en dessous. Navigation à quatre boutons, deux colonnes uniquement aux très petites largeurs.
+- L'en-tête affiche « PANNEAU DE RAID », le contexte stratégie/joueur choisi, l'indicateur « SECTION ACTIVE · … » et le bouton **Réduire**. Celui-ci replie l'ensemble du panneau en une barre fine **Déployer**, pas seulement les quatre onglets. Le mode réduit supprime aussi les contrôles du parcours de tabulation, et conserve le contexte actif dans l'en-tête. Ouvert au chargement par défaut.
+- Un seul `position:sticky` sur le panneau parent ; le dock imbriqué est `position:static`. Éviter de réintroduire la version V6 avec stratégie/role fixes en haut et deuxième panneau autonome.
+- Effet commun sur les guides permanents Heatran et Cresselia (toutes stratégies) ainsi que sur les guides Halloween 2025. Les données et logiques du boss restent isolées.
+- Tests : simulation DOM sur les 3 familles de guides, onglets originaux conservés, quatre boutons d'onglet, rôles/stratégies dans le même conteneur, indicateur d'onglet actif, réduction puis réouverture fonctionnelles. JS valide, CSS équilibré, HTML original intégralement préservé à part les nouvelles références d'assets. Aucun test graphique réel en navigateur à ce stade.
+
+Pour les prochaines évolutions esthétiques du panneau, modifier **uniquement** le script commun et `assets/raid-command-center-v7.css` ; ne pas copier des blocs HTML individuels d'une fiche à l'autre.
