@@ -159,7 +159,7 @@ function raidCloudBuild(owner,raw){
  const pk=(cloudTeams[owner]||[]).find(p=>p[0]===label);
  if(!pk)return null;
  return {name:fr(pk[0]),item:fr(pk[1]),nature:fr(pk[2]),iv:fr(pk[3]),
-  ev:"Statistiques finales : "+fr(pk[4]),ability:fr(pk[6]),
+  ev:"EV non précisés dans la source · Statistiques finales : "+fr(pk[4]),ability:fr(pk[6]),
   moves:pk[5].split(" / ").map(fr),source:"Cloud Five v0.74"};
 }
 function cloudRender(){let app=$('app');app.replaceChildren();buttons($('tabs'),[['⚔ Combat','battle'],['◉ Pokémon','pokemon'],['✓ Préparation','checklist'],['ⓘ Mécaniques','mechanics']],tab,v=>{tab=v;render()});$('players').hidden=tab==='mechanics';buttons($('players'),[0,1,2,3].map(i=>['P'+(i+1),i]),player,v=>{player=v;render()});$('focus').textContent='Cloud Five v0.74 · Joueur '+(player+1);const cloudCaution='Stratégie Cloud Five v0.74 · The Council / Cadoiz. Guide source encore en cours de finalisation : attention aux RNG, au timing des K.O. et aux remplacements en test.';if(tab==='battle'){
