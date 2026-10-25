@@ -606,7 +606,7 @@ D.team[ST.player].forEach((m,i)=>{const d=document.createElement("details");d.cl
 const showcase=document.createElement("div");showcase.className="build-showcase";
 const stats=[["Objet",m.item],["Nature",m.nature],["Talent",m.talent],["EV",m.ev],["IV prioritaires",m.iv]];
 const statsHtml=stats.map(([label,value])=>'<div class="build-fact"><small>'+esc(label)+'</small><strong>'+esc(value)+'</strong></div>').join("");
-const movesHtml=m.attacks.split(/\\s*·\\s*/).map((move,j)=>'<div class="move-pill"><span class="move-symbol">'+["◆","✦","✧","⬡"][j%4]+'</span><span>'+esc(move)+'</span></div>').join("");
+const movesHtml=m.attacks.split(/\s*·\s*/).map((move,j)=>'<div class="move-pill"><span class="move-symbol">'+["◆","✦","✧","⬡"][j%4]+'</span><span>'+esc(move)+'</span></div>').join("");
 showcase.innerHTML='<section class="build-specs"><h3>Répartition du Pokémon</h3><div class="build-summary"><div class="build-portrait"><img class="sprite large" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/'+m.id+'.png" alt="'+esc(m.n)+'" loading="lazy"></div><div class="build-facts">'+statsHtml+'</div></div></section><section class="build-moves"><h3>Attaques</h3>'+movesHtml+'</section>';
 const body=d.querySelector(".cres-mon-body");body.insertBefore(showcase,body.querySelector("table"));
 body.append(button("Copier le build",e=>copy(monCopy(m),e.currentTarget),"cres-copy"));a.append(d);});
