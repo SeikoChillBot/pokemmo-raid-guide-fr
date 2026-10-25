@@ -141,7 +141,7 @@ function renderMechanics(app,strat){
  }
  app.append(grid)
 }
-function cloudRender(){let app=$('app');app.replaceChildren();buttons($('tabs'),[['⚔ Combat','battle'],['◉ Pokémon','pokemon'],['✓ Préparation','checklist'],['ⓘ Mécaniques','mechanics']],tab,v=>{tab=v;render()});$('players').hidden=tab==='mechanics';buttons($('players'),[0,1,2,3].map(i=>['P'+(i+1),i]),player,v=>{player=v;render()});$('focus').textContent='Cloud Five v0.74 · Joueur '+(player+1);let p=document.createElement('p');p.className='muted';p.textContent='Stratégie Cloud Five v0.74 · The Council / Cadoiz. Guide source encore en cours de finalisation : attention aux RNG, au timing des K.O. et aux remplacements en test.';app.append(p);if(tab==='battle'){
+function cloudRender(){let app=$('app');app.replaceChildren();buttons($('tabs'),[['⚔ Combat','battle'],['◉ Pokémon','pokemon'],['✓ Préparation','checklist'],['ⓘ Mécaniques','mechanics']],tab,v=>{tab=v;render()});$('players').hidden=tab==='mechanics';buttons($('players'),[0,1,2,3].map(i=>['P'+(i+1),i]),player,v=>{player=v;render()});$('focus').textContent='Cloud Five v0.74 · Joueur '+(player+1);const cloudCaution='Stratégie Cloud Five v0.74 · The Council / Cadoiz. Guide source encore en cours de finalisation : attention aux RNG, au timing des K.O. et aux remplacements en test.';if(tab==='battle'){
  app.append(RaidAtlasComponents.battleIntro('Heatran'));
  app.append(viewCheckbox('Vue complète · afficher les 11 tours',fullView,v=>{fullView=v;localStorage.setItem('pokemmo-fr-full-view',v?'1':'0');render()}));
  if(!fullView)app.append(RaidAtlasComponents.phaseSelect({labels:cloudTurns.map((_,i)=>'Tour '+(i+1)),current:turn,onChange:i=>{turn=i;render()}}));
@@ -154,7 +154,9 @@ function cloudRender(){let app=$('app');app.replaceChildren();buttons($('tabs'),
   const phase=document.createElement('section');if(fullView)phase.className='turn-section';
   RaidAtlasComponents.battleTurn({target:phase,index:n,total:cloudTurns.length,title:'Heatran : '+cloudRemaining[n]+' PV restants estimés',
    actions:cloudTurns[n].map(([poke,move])=>({name:fr(poke),move:fr(move),sprite:poke==='—'?null:sprite(poke)})),
-   selected:player,advice:notes,onPokemon:()=>{tab='pokemon';render()},
+   selected:player,advice:notes,
+   preflight:n===0?(()=>{const panel=document.createElement('section');panel.className='raid-preflight';panel.textContent=cloudCaution;return panel})():null,
+   onPokemon:()=>{tab='pokemon';render()},
    copyText:'Cloud Five Heatran T'+(n+1)+' : '+cloudTurns[n].map(([p,m],i)=>'P'+(i+1)+' '+fr(p)+' > '+fr(m)).join(' ; '),
    copy:(button,value)=>copyWithFeedback(button,value)});
   wrap.append(phase);
@@ -162,6 +164,7 @@ function cloudRender(){let app=$('app');app.replaceChildren();buttons($('tabs'),
  if(!fullView)app.append(RaidAtlasComponents.phaseNav({current:turn,total:cloudTurns.length,onChange:i=>{turn=i;render()}}));
 }else if(tab==='pokemon'){
  app.append(RaidAtlasComponents.feature({player,boss:'Heatran',artwork:'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/224.png'}));
+ app.append(RaidAtlasComponents.pokemonIntroNote(cloudCaution));
  app.append(viewCheckbox('Tout déplier · afficher les 6 fiches',expandAll,v=>{expandAll=v;localStorage.setItem('pokemmo-fr-expand-all',v?'1':'0');render()}));
  cloudTeams[player].forEach((pk,i)=>{
   const pokemon={name:fr(pk[0]),item:fr(pk[1]),nature:fr(pk[2]),iv:fr(pk[3]),
@@ -176,15 +179,16 @@ function cloudRender(){let app=$('app');app.replaceChildren();buttons($('tabs'),
  cloudTeams[player].forEach((pk,i)=>{
   const checks=['Pokémon prêt','Objet équipé','IV et stats contrôlés'].map((label,j)=>{
    const key='heatran-cloud-'+player+'-'+i+'-'+j;
-   return {label,checked:localStorage.getItem(key)==='1',onChange:checked=>localStorage.setItem(key,checked?'1':'0')};
+   return {label,checked:localStorage.getItem(key)==='1',onChange:checked=>{localStorage.setItem(key,checked?'1':'0');updateProgress()}};
   });
   grid.append(RaidAtlasComponents.prepCard({name:fr(pk[0]),item:fr(pk[1]),sprite:sprite(pk[0]),checks}));
  });
- app.append(grid);
+ app.append(RaidAtlasComponents.progressCard('progress','PRÉPARATION'),grid);
+ updateProgress();
 }else{
  const intro=document.createElement('section');intro.className='mechanics-intro';
  const h=document.createElement('h2');h.textContent='Mécaniques de Cloud Five';
- const sub=document.createElement('p');sub.textContent='Repères de PV et changements majeurs du boss. Ces seuils sont des guides, pas des garanties de RNG.';
+ const sub=document.createElement('p');sub.textContent='Repères de PV et changements majeurs du boss. Ces seuils sont des guides, pas des garanties de RNG. '+cloudCaution;
  intro.append(h,sub);app.append(intro);
  const grid=document.createElement('div');grid.className='mechanic-grid';
  [['100 %','Champ de magma, Tourniquet et brûlures'],['80,9 %','Pièges de Roc, Anti-Brume'],['67,9 %','Hurlement et remplacement forcé'],['50,9 %','Défense de Fer'],['40,9 %','Adaptation'],['25,9 %','Barrière à quatre charges']].forEach(([pct,desc])=>{
