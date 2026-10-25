@@ -1,0 +1,120 @@
+/* RAID ATLAS | polish global v3.
+   Habillage des pages d'accueil, d'archives, de liste et des guides sans réécrire
+   leurs données, liens, illustrations ou scripts. Chargé après les anciens thèmes. */
+:root{
+ --atlas-ink:#0d0e12;--atlas-panel:#1b1c22;--atlas-panel-hi:#272630;
+ --atlas-edge:#41414b;--atlas-soft:#b8b5bf;--atlas-highlight:#f27a83;
+ --atlas-shadow:0 18px 42px #0005;--atlas-radius:15px;
+}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{background:radial-gradient(ellipse at 82% 3%,#63313c27,transparent 38%),#0d0e12!important;color:#f6f4f5}
+body:before{opacity:.035!important}
+.site-wrap{max-width:1480px!important;margin-inline:auto}
+.site-wrap .mini-bar{font-size:10px!important;letter-spacing:.11em!important;min-height:35px}
+.site-wrap .navbar{min-height:82px;height:auto!important;border-bottom:1px solid #ffffff10;flex-wrap:wrap}
+.site-wrap .identity-text,.atlas-guide-brand-copy{letter-spacing:.028em}
+.site-wrap .navlinks{gap:clamp(13px,2.2vw,32px)!important;flex-wrap:wrap}
+.site-wrap .navlinks a{position:relative;transition:color .2s}
+.site-wrap .navlinks a[aria-current="page"]{color:#fff!important}
+.site-wrap .navlinks a[aria-current="page"]:after{position:absolute;content:"";height:2px;bottom:-10px;left:0;right:0;background:#f0747c}
+.site-wrap .navlinks a:hover{color:#fff!important}
+.site-wrap .atlas-secondary{border:1px solid #5e535f!important;background:#ffffff07!important;border-radius:9px!important;transition:background .2s,border-color .2s,transform .2s}
+.site-wrap .atlas-secondary:hover{background:#ec626b19!important;border-color:#eb8b91!important;transform:translateY(-2px)}
+.site-wrap .atlas-breadcrumb{font:600 11px "IBM Plex Mono",monospace!important;color:#aaa9b4}
+.site-wrap .atlas-breadcrumb a:hover,.site-wrap .atlas-back:hover{color:#fff!important}
+.site-wrap .atlas-back{display:inline-flex;align-items:center;gap:8px;transition:color .18s}
+.site-wrap .atlas-footer{margin-top:65px!important;border-top:1px solid #46424d!important;color:#a5a5ad!important;gap:15px}
+/* Accueil — ampleur, profondeur et photographies Pokémon nettes. */
+.site-wrap .issue{margin:6px 0 13px!important;border-top:0!important;border-bottom:0!important;color:#aca8af!important}
+.site-wrap .hero{border-radius:18px!important;overflow:hidden!important;border:1px solid #62515d!important;box-shadow:0 24px 68px #0008!important}
+.site-wrap .hero:before{background:radial-gradient(circle at 79% 35%,#b3484e42,transparent 37%),linear-gradient(115deg,#27232c,#191a20 59%,#45242e)!important}
+.site-wrap .hero:after{opacity:.65!important}
+.site-wrap .hero .overline{color:#f6b9bc!important}
+.site-wrap .hero .primary-button{border-radius:10px!important;box-shadow:0 10px 30px #9a343747!important}
+.site-wrap .primary-button{border-radius:10px!important;transition:transform .2s,background .2s,box-shadow .2s}
+.site-wrap .primary-button:hover{transform:translateY(-3px);box-shadow:0 12px 35px #90343f5c}
+.site-wrap .hero-bottom{backdrop-filter:blur(10px)}
+.site-wrap .hero-bottom>div{border-color:#ffffff16}
+.site-wrap .hero-bottom strong{color:#fff!important}
+.site-wrap .hero-bottom span{font-size:10px!important;color:#bab5bc!important}
+.site-wrap .section{margin-top:86px!important}
+.site-wrap .section h2{letter-spacing:-.01em!important}
+.site-wrap .section-no{color:#ed7a83!important}
+.site-wrap .event-grid{gap:16px!important}
+.site-wrap .event-card{border:1px solid #54515a!important;border-radius:15px!important;box-shadow:0 12px 30px #0005!important;transition:transform .24s,border-color .24s,box-shadow .24s!important}
+.site-wrap .event-card.main{border-color:#ad5a62!important}
+.site-wrap .event-card:after{background:linear-gradient(100deg,#13151add 0%,#15151ab0 50%,transparent 100%)!important}
+.site-wrap .event-card.main:after{background:linear-gradient(0deg,#111217ef 0%,#1314198f 44%,transparent 79%)!important}
+.site-wrap .event-card:hover{transform:translateY(-5px)!important;border-color:#d19199!important;box-shadow:0 20px 48px #0009!important}
+.site-wrap .event-card .event-art{transition:transform .35s,filter .35s!important;filter:drop-shadow(0 16px 22px #0008)!important}
+.site-wrap .event-card:hover .event-art{transform:scale(1.06) translateY(-5px)!important}
+.site-wrap .event-info h3{color:#fff;letter-spacing:.005em}
+.site-wrap .card-micro{color:#e3bfc6}
+.site-wrap .event-state{background:#17181dc9;border:1px solid #5e4b53;border-radius:7px;padding:7px 10px;margin-top:8px!important}
+.site-wrap .event-state.live{color:#f0d6da}
+.site-wrap .event-foot{border-radius:9px!important;background:#352830c9!important;border-color:#d07882!important}
+.site-wrap .event-card.main .event-foot{background:#a94c58!important}
+/* Index des raids permanents et page à venir. */
+.site-wrap .atlas-list-hero,.site-wrap .atlas-soon{
+ border-radius:17px!important;border:1px solid #5d505c!important;
+ box-shadow:var(--atlas-shadow)!important;overflow:hidden!important
+}
+.site-wrap .atlas-list-hero{background:radial-gradient(circle at 82% 38%,#9e4b4b45,transparent 43%),linear-gradient(115deg,#24222b,#191b23 60%,#34252d)!important}
+.site-wrap .atlas-section-row{margin-bottom:17px!important;border-color:#4b444d}
+.site-wrap .raid-list{gap:15px!important}
+.site-wrap .raid-tile{
+ border:1px solid #4d4a53!important;border-radius:15px!important;
+ background:linear-gradient(126deg,#23242b,#191b21)!important;
+ box-shadow:0 10px 26px #0004!important;transition:transform .22s,border-color .22s,box-shadow .22s!important
+}
+.site-wrap .raid-tile.selected{border-color:#ad656b!important;background:linear-gradient(126deg,#302329,#1c2028)!important}
+.site-wrap .raid-tile:hover{transform:translateY(-5px)!important;border-color:#d48591!important;box-shadow:0 18px 42px #0008!important}
+.site-wrap .raid-tile .raid-art{filter:drop-shadow(0 12px 21px #000a)!important;transition:transform .28s,opacity .28s!important}
+.site-wrap .raid-tile:hover .raid-art{transform:scale(1.09);opacity:1!important}
+.site-wrap .raid-tile .available{border-radius:7px!important;background:#282a31!important;padding:8px 10px!important}
+.site-wrap .raid-tile.selected .available{background:#94404b!important;border-color:#b86069!important}
+.site-wrap .atlas-soon-foot{border-radius:13px!important;transition:transform .2s,border-color .2s}
+.site-wrap .atlas-soon-foot:hover{transform:translateY(-3px);border-color:#ce8390!important}
+/* Halloween — index, archive et avertissements, cohérents avec l'accueil. */
+.site-wrap .hx-lead{border-radius:17px!important;background:radial-gradient(circle at 86% 24%,#99465655,transparent 34%),linear-gradient(120deg,#26232b,#1a1d25 67%,#32232d)!important;border:1px solid #68515c!important;box-shadow:0 16px 45px #0006!important}
+.site-wrap .hx-kicker{color:#f0a4af!important}
+.site-wrap .hx-year,.site-wrap .hx-chip,.site-wrap .hx-raid{
+ background:linear-gradient(125deg,#25232b,#191c24)!important;border-color:#4c4853!important;
+ border-radius:14px!important;box-shadow:0 9px 25px #0003!important
+}
+.site-wrap .hx-year,.site-wrap .hx-raid{transition:transform .2s,border-color .2s,box-shadow .2s!important}
+.site-wrap .hx-year:hover,.site-wrap .hx-raid:hover{
+ transform:translateY(-4px)!important;border-color:#cf8994!important;box-shadow:0 17px 39px #0007!important
+}
+.site-wrap .hx-flag{color:#ffaab3!important}
+.site-wrap .hx-link{border-radius:9px!important;background:#9a424e!important;border-color:#c46a77!important}
+.site-wrap .hx-raid img{filter:drop-shadow(0 8px 10px #0009)}
+.site-wrap .hx-note-box{border-radius:14px!important;border-left:3px solid #e87b86!important;background:#29232c!important;color:#e0cdd6!important}
+.site-wrap .hx-chip strong{font-family:"Barlow Condensed",Impact,sans-serif!important;font-size:36px!important;color:#fff!important}
+.site-wrap .hx-chip span{color:#c4bdc6!important}
+.site-wrap .h25-alert{border-left:3px solid #e47f8a!important;background:#30242c!important;color:#ead0d4!important}
+.site-wrap .h25-next a{border-radius:9px!important;transition:border-color .2s,background .2s}
+.site-wrap .h25-next a:hover{border-color:#ee919d!important;background:#ffffff0b!important}
+/* Liens interactifs et accessibilité. */
+.site-wrap a:focus-visible,.site-wrap button:focus-visible,
+body.raid-template-ready button:focus-visible,body.raid-template-ready a:focus-visible{outline:2px solid #ffb7be!important;outline-offset:3px!important}
+@media(max-width:840px){
+ .site-wrap .section{margin-top:56px!important}
+ .site-wrap .event-grid{gap:11px!important}
+ .site-wrap .raid-list{gap:11px!important}
+ .site-wrap .navbar{padding:13px 0}
+}
+@media(max-width:580px){
+ .site-wrap .mini-bar{font-size:8px!important;letter-spacing:.05em!important}
+ .site-wrap .mini-bar span:last-child{white-space:nowrap}
+ .site-wrap .hero{border-radius:12px!important}
+ .site-wrap .event-card,.site-wrap .raid-tile{border-radius:12px!important}
+ .site-wrap .event-card.main .event-info{padding:27px!important}
+ .site-wrap .hx-lead{padding:22px 18px!important}
+ .site-wrap .hx-year{padding:19px!important}
+ .site-wrap .hx-raid{padding:12px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ .site-wrap *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
