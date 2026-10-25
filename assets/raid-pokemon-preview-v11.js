@@ -70,6 +70,8 @@ function init(){
  }
  function getData(card){
   const wrapper=card.closest("details.card,details.h25-build")||card.closest(".h25-team-build")||card;
+  // Ne jamais présenter un nom d’attaque comme une fiche Pokémon Halloween.
+  if(card.closest(".h25-battle-grid")&&!parseData(card))return null;
   const build=parseData(card)||parseData(wrapper)||domFallback(wrapper);
   let name=normalize(build.name||build.n||"");
   if(!name)name=normalize(wrapper.querySelector(".poke-name,.h25-mon-name,.h25-poke-name,.h25-name,.h25-build-title b,.h25-build-title strong")?.textContent);
