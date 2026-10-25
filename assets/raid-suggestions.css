@@ -1,0 +1,231 @@
+/* RAID ATLAS FR — Suggestions communautaires / panneau administrateur.
+   Complément V14, sans modifier le design ou les modules de raid existants. */
+.raid-suggestions{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  margin:44px 0 28px;
+  padding:clamp(22px,3.4vw,38px);
+  border:1px solid #83413d;
+  border-radius:20px;
+  background:
+    radial-gradient(circle at 85% 10%,#ae222624,transparent 44%),
+    linear-gradient(120deg,#282123 0%,#151417 67%,#201819 100%);
+  box-shadow:0 22px 55px #0009,0 0 0 1px #ffffff09 inset;
+  color:#f7f5f5
+}
+.raid-suggestions:before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:repeating-linear-gradient(90deg,transparent 0 104px,#ffffff05 105px 106px);
+  opacity:.55
+}
+.raid-suggestions-head{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:20px
+}
+.raid-suggestions-kicker{
+  display:block;margin-bottom:10px;color:#ff756b;
+  font:800 10px/1.4 "IBM Plex Mono",monospace;
+  letter-spacing:.14em
+}
+.raid-suggestions h2{
+  margin:0 0 10px;
+  color:#fff;
+  font:900 clamp(30px,5vw,51px)/.98 "Barlow Condensed",Impact,sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.016em;
+}
+.raid-suggestions p{
+  max-width:620px;
+  color:#c7bfc1;
+  font:500 14px/1.65 "DM Sans",system-ui,sans-serif;
+  margin:0
+}
+.raid-suggestions-btn,
+.raid-suggestions-submit,
+.raid-admin-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  border:1px solid #f0766d;
+  border-radius:10px;
+  background:linear-gradient(120deg,#df322b,#a51d1d);
+  color:white;
+  font:800 12px/1.25 "DM Sans",system-ui,sans-serif;
+  text-transform:none;
+  padding:13px 19px;
+  min-height:44px;
+  cursor:pointer;
+  box-shadow:0 10px 27px #a620204a;
+  transition:transform .16s ease,background .16s ease,border-color .16s ease
+}
+.raid-suggestions-btn:hover,
+.raid-suggestions-submit:hover,
+.raid-admin-btn:hover{
+  background:linear-gradient(120deg,#f24940,#b92822);
+  transform:translateY(-2px);
+  border-color:#ffa69e
+}
+.raid-suggestions-btn:focus-visible,
+.raid-suggestions :is(input,textarea,select,button):focus-visible,
+.raid-admin :is(input,button,select):focus-visible{
+ outline:2px solid #ff8c82!important;outline-offset:3px!important
+}
+.raid-suggestions-form{
+  margin-top:24px;
+  padding-top:24px;
+  border-top:1px solid #583b3c
+}
+.raid-suggestions-form[hidden],
+.raid-admin [hidden]{display:none!important}
+.raid-suggestions-fields{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:13px 17px
+}
+.raid-suggestions-label{
+  display:block;margin:0 0 7px;
+  color:#f4dedf;font:750 11px "DM Sans",system-ui,sans-serif
+}
+.raid-suggestions .full{grid-column:1/-1}
+.raid-suggestions input,
+.raid-suggestions select,
+.raid-suggestions textarea,
+.raid-admin input{
+  display:block;box-sizing:border-box;
+  width:100%;min-width:0;
+  background:#181719;
+  color:#fff;border:1px solid #684548;border-radius:9px;
+  padding:11px 13px;
+  font:550 13px/1.5 "DM Sans",system-ui,sans-serif
+}
+.raid-suggestions textarea{resize:vertical;min-height:100px}
+.raid-suggestions input::placeholder,
+.raid-suggestions textarea::placeholder,
+.raid-admin input::placeholder{color:#938488}
+.raid-suggestions-help{
+  display:flex;gap:14px;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;margin-top:16px
+}
+.raid-suggestions-help p{font-size:11px;max-width:510px}
+.raid-suggestions-feedback{
+  margin-top:15px!important;min-height:0;color:#d7c5c7!important;
+  font:650 13px/1.5 "DM Sans",system-ui,sans-serif!important
+}
+.raid-suggestions-feedback[data-kind="success"]{color:#b9e8cb!important}
+.raid-suggestions-feedback[data-kind="error"]{color:#ffb3a9!important}
+.raid-suggestions-honeypot{
+  position:absolute!important;left:-9999px!important;opacity:0!important;
+  height:1px!important;width:1px!important;pointer-events:none!important
+}
+/* Espace administrateur non référencé dans la navigation publique.
+   L'accès aux DONNÉES requiert la clé secrète côté Cloudflare. */
+body.raid-admin-page{
+  background:
+  radial-gradient(circle at 74% 5%,#8b22251c,transparent 42%),
+  linear-gradient(155deg,#0b0b0d,#181518)!important;
+  color:#fff;
+  min-height:100vh
+}
+.raid-admin{
+  width:min(1080px,calc(100% - 36px));
+  margin:35px auto 70px
+}
+.raid-admin-top{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:15px;flex-wrap:wrap;margin-bottom:26px
+}
+.raid-admin-eyebrow{
+  color:#f05e55;font:750 10px "IBM Plex Mono",monospace;
+  letter-spacing:.14em
+}
+.raid-admin-title{
+ margin:7px 0 10px;font:900 clamp(36px,5vw,60px)/1 "Barlow Condensed",Impact,sans-serif
+}
+.raid-admin-desc{
+ font:500 14px/1.55 "DM Sans",system-ui;color:#cbbfc3;max-width:720px
+}
+.raid-admin-panel{
+  padding:clamp(20px,3vw,30px);
+  border:1px solid #6a4446;
+  border-radius:15px;
+  background:linear-gradient(125deg,#252024,#161518);
+  box-shadow:0 20px 45px #0008
+}
+.raid-admin-panel h2{
+ margin:0 0 12px;font:900 27px "Barlow Condensed",Impact,sans-serif
+}
+.raid-admin-login{max-width:520px}
+.raid-admin-login label{
+ display:block;color:#e7d9dc;font:700 12px "DM Sans",sans-serif;margin-bottom:8px
+}
+.raid-admin-login input{margin-bottom:13px}
+.raid-admin-feedback{
+ min-height:18px;margin:12px 0;color:#ffc1b9;font-size:12px
+}
+.raid-admin-toolbar{
+ display:flex;justify-content:space-between;align-items:center;gap:11px;
+ flex-wrap:wrap;margin:0 0 20px
+}
+.raid-admin-tools{display:flex;gap:8px;flex-wrap:wrap}
+.raid-admin-btn{padding:10px 14px;min-height:39px}
+.raid-admin-btn.secondary{
+ background:#292326;border-color:#80575a;box-shadow:none
+}
+.raid-admin-btn.secondary:hover{background:#472728}
+.raid-admin-btn:disabled{opacity:.48;cursor:default;transform:none}
+.raid-admin-counter{color:#c4b8bc;font:650 12px "IBM Plex Mono",monospace}
+.raid-admin-subhead{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:10px;margin:18px 0 11px
+}
+.raid-admin-subhead h2{
+ margin:0;color:#fff;
+ font:900 26px "Barlow Condensed",Impact,sans-serif
+}
+.raid-admin-list{display:grid;gap:11px}
+.raid-admin-item{
+ border:1px solid #5e484c;border-radius:12px;
+ padding:16px;background:#252124
+}
+.raid-admin-item.treated{opacity:.88;background:#201f21}
+.raid-admin-item-meta{
+ display:flex;flex-wrap:wrap;gap:8px 13px;
+ align-items:center;color:#bfb3b7;
+ font:650 11px/1.35 "IBM Plex Mono",monospace
+}
+.raid-admin-item-category{
+ padding:4px 8px;
+ color:#ffc6c0;background:#542a2c;border-radius:5px
+}
+.raid-admin-item-message{
+ white-space:pre-wrap;overflow-wrap:anywhere;
+ font:520 14px/1.7 "DM Sans",system-ui;
+ margin:13px 0;color:#f5eeef
+}
+.raid-admin-item-actions{display:flex;gap:9px}
+.raid-admin-completed{
+ margin-top:24px;padding-top:17px;
+ border-top:1px solid #644245
+}
+.raid-admin-completed summary{
+ color:#edcdcf;font:800 14px "DM Sans",system-ui;
+ cursor:pointer;padding:7px 0
+}
+.raid-admin-completed .raid-admin-list{margin-top:14px}
+.raid-admin-empty{
+ border:1px dashed #56494c;border-radius:9px;
+ padding:21px;text-align:center;
+ color:#a99c9f;font-size:13px
+}
+@media(max-width:730px){
+ .raid-suggestions-head{align-items:flex-start}
+ .raid-suggestions-btn{width:100%}
+ .raid-suggestions-fields{grid-template-columns:1fr}
+ .raid-suggestions-help{align-items:stretch}
+ .raid-suggestions-submit{width:100%}
+ .raid-admin{width:min(100% - 24px,1080px)}
+}
+@media(prefers-reduced-motion:reduce){
+ .raid-suggestions :is(button,.raid-suggestions-btn),
+ .raid-admin :is(button,.raid-admin-btn){
+  transition:none!important;transform:none!important
+ }
+}
