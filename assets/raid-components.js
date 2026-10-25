@@ -35,7 +35,7 @@ function decoratePreview(node,p){
    ability:p.ability||p.talent||"",
    ev:p.ev||"",
    iv:p.iv||"",
-   moves:Array.isArray(p.moves)?p.moves:(p.attacks||p.moves||"").split(/\\s*[\/·]\\s*/).filter(Boolean),
+   moves:Array.isArray(p.moves)?p.moves:(p.attacks||p.moves||"").split(/\s*[\/·]\s*/).filter(Boolean),
    source:p.source||"",
    note:p.note||""
  };
