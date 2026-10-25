@@ -146,3 +146,73 @@ body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs b
     transition:none!important;
   }
 }
+
+/* Fiche flottante V12 : six informations toujours visibles et identifiables.
+   Sources non vérifiées : affichage "Non précisé", pas de statistiques inventées. */
+body .raid-v11-pokemon-preview.raid-v12-rich-preview{
+ width:min(385px,calc(100vw - 24px))!important;
+ max-height:calc(100vh - 18px)!important;
+ overflow-y:auto!important;
+ padding:15px!important;
+ border:1px solid #e64e42!important;
+ border-radius:15px!important;
+ background:linear-gradient(145deg,#332223fc,#191719fd 64%,#281819fc)!important;
+ box-shadow:0 22px 62px #000e,0 0 0 1px #ffffff12 inset,0 0 34px #d52e2925!important;
+ scrollbar-width:thin;
+}
+body .raid-v12-rich-preview .raid-v11-preview-head{
+ gap:12px!important;
+ padding-bottom:11px!important;
+ margin-bottom:10px!important;
+ border-bottom:1px solid #74403d!important;
+}
+body .raid-v12-rich-preview .raid-v11-preview-photo{
+ width:82px!important;height:82px!important;
+ flex:0 0 82px!important;
+ background:radial-gradient(circle,#742c2b3e,transparent 74%)!important;
+}
+body .raid-v12-rich-preview .raid-v11-preview-photo img{
+ width:100%!important;height:100%!important;
+ object-fit:contain!important;
+ background:transparent!important;
+ filter:drop-shadow(0 8px 10px #000a)!important;
+}
+body .raid-v12-rich-preview .raid-v11-preview-details{
+ display:grid!important;gap:5px!important;
+ background:transparent!important;
+}
+body .raid-v12-rich-preview .raid-v11-preview-line{
+ display:grid!important;grid-template-columns:minmax(80px,29%) 1fr!important;
+ gap:12px!important;
+ align-items:start!important;
+ padding:7px 9px!important;
+ border:1px solid #493435!important;border-radius:8px!important;
+ background:linear-gradient(112deg,#352728,#251f21)!important;
+}
+body .raid-v12-rich-preview .raid-v11-preview-line>span{
+ font:750 10px/1.45 "IBM Plex Mono",monospace!important;
+ color:#ffa59b!important;
+ text-transform:uppercase!important;
+ letter-spacing:.045em!important;
+}
+body .raid-v12-rich-preview .raid-v11-preview-line>strong{
+ color:#fff!important;
+ font:650 12px/1.5 "DM Sans",system-ui!important;
+ overflow-wrap:anywhere!important;
+}
+body .raid-v12-rich-preview .raid-v12-preview-moves{
+ border-color:#9c463e!important;
+ background:linear-gradient(120deg,#432928,#282022)!important;
+}
+body .raid-v12-rich-preview .raid-v11-preview-note{
+ margin-top:10px!important;
+ padding:9px 11px!important;
+ border-left:2px solid #db4f45!important;
+ background:#2e2121!important;
+ font-size:11px!important;
+ line-height:1.45!important;
+}
+@media(max-width:650px){
+ body .raid-v11-pokemon-preview.raid-v12-rich-preview{width:min(345px,calc(100vw - 18px))!important;padding:11px!important}
+ body .raid-v12-rich-preview .raid-v11-preview-line{grid-template-columns:75px 1fr!important;gap:8px!important}
+}
