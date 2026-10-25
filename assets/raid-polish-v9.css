@@ -244,3 +244,93 @@ body.raid-template-ready .raid-command-center .raid-dock-marker{
    width:4px!important;height:4px!important;left:4px!important;
  }
 }
+
+/* V9c — bannière « Préparez votre équipe » :
+   Octillery (et les autres artworks de bannière) restent parfaitement centrés
+   dans la partie droite, sans empiéter sur les textes ou sortir du panneau. */
+body.raid-template-ready .raid-template-content .pokemon-feature-banner{
+ position:relative!important;
+ isolation:isolate!important;
+ align-items:center!important;
+ min-width:0!important;
+ padding-right:clamp(158px,28%,240px)!important;
+}
+body.raid-template-ready .raid-template-content .pokemon-feature-banner:before{
+ content:""!important;
+ position:absolute!important;
+ z-index:0!important;
+ right:1.8%!important;
+ top:50%!important;
+ transform:translateY(-50%)!important;
+ width:clamp(145px,27%,215px)!important;
+ aspect-ratio:1!important;
+ border:1px solid #a738342f!important;
+ border-radius:50%!important;
+ background:radial-gradient(circle,#9426233d 0%,#401e1d1c 58%,transparent 72%)!important;
+ pointer-events:none!important;
+}
+body.raid-template-ready .raid-template-content .pokemon-feature-banner>div{
+ position:relative!important;
+ z-index:2!important;
+ flex:1 1 auto!important;
+ width:100%!important;
+ min-width:0!important;
+ max-width:100%!important;
+}
+body.raid-template-ready .raid-template-content .pokemon-feature-banner>img.feature-octillery,
+body.raid-template-ready .raid-template-content .pokemon-feature-banner>img.raid-artwork-hd{
+ position:absolute!important;
+ z-index:1!important;
+ top:50%!important;
+ right:clamp(8px,3%,26px)!important;
+ left:auto!important;
+ bottom:auto!important;
+ transform:translateY(-50%)!important;
+ align-self:center!important;
+ display:block!important;
+ box-sizing:border-box!important;
+ width:clamp(128px,23%,190px)!important;
+ height:clamp(125px,16vw,171px)!important;
+ max-width:190px!important;
+ max-height:171px!important;
+ padding:0!important;
+ margin:0!important;
+ object-fit:contain!important;
+ object-position:center center!important;
+ opacity:1!important;
+ filter:drop-shadow(0 16px 14px #000b)!important;
+ pointer-events:none!important;
+}
+@media(max-width:700px){
+ body.raid-template-ready .raid-template-content .pokemon-feature-banner{
+   padding:17px 14px!important;
+   padding-right:clamp(103px,30%,160px)!important;
+   min-height:165px!important;
+ }
+ body.raid-template-ready .raid-template-content .pokemon-feature-banner>div{max-width:100%!important;}
+ body.raid-template-ready .raid-template-content .pokemon-feature-banner h2{
+   font-size:clamp(24px,7vw,34px)!important;
+   overflow-wrap:normal!important;
+ }
+ body.raid-template-ready .raid-template-content .pokemon-feature-banner p{
+   font-size:11px!important;line-height:1.5!important;
+ }
+ body.raid-template-ready .raid-template-content .pokemon-feature-banner>img.feature-octillery,
+ body.raid-template-ready .raid-template-content .pokemon-feature-banner>img.raid-artwork-hd{
+   right:6px!important;
+   width:clamp(93px,29%,139px)!important;
+   height:clamp(102px,30vw,140px)!important;
+ }
+ body.raid-template-ready .raid-template-content .pokemon-feature-banner:before{
+   right:1px!important;width:clamp(110px,32%,150px)!important;
+ }
+}
+@media(max-width:380px){
+ body.raid-template-ready .raid-template-content .pokemon-feature-banner{
+   padding-right:105px!important;min-height:180px!important;
+ }
+ body.raid-template-ready .raid-template-content .pokemon-feature-banner>img.feature-octillery,
+ body.raid-template-ready .raid-template-content .pokemon-feature-banner>img.raid-artwork-hd{
+   width:98px!important;height:112px!important;
+ }
+}
