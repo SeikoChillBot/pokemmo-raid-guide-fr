@@ -49,7 +49,7 @@ app.append(opening);
 let team=card('Position des trois Pokémon au départ');
 let row=el('div',undefined,'pump-route-grid');
 route.roster.slice(0,3).forEach((pk,i)=>{let item=el('div',undefined,'h25-player-card');let inner=el('div');appendText(inner,'small',(mode===0?['ACTIF 1','ACTIF 2','ACTIF 3']:['GAUCHE','CENTRE','DROITE'])[i]);appendText(inner,'strong',pk.name);appendText(inner,'p',pk.item+' · '+pk.moves,'h25-muted');item.append(inner);row.append(item)});team.append(row);
-const toPokemon=el('button','Voir les Pokémon et les objets','h25-copy');toPokemon.onclick=()=>{tab='pokemon';render()};team.append(toPokemon);app.append(team);
+app.append(team);
 let selector=card('Choisir la phase et le tour');
 let phases=el('div',undefined,'h25-mode');route.phases.forEach((phase,i)=>{let btn=el('button',phase.name);btn.setAttribute('aria-pressed',String(pumpPhase===i));btn.onclick=()=>{pumpPhase=i;pumpStep=0;render()};phases.append(btn)});selector.append(phases);
 let check=el('label',undefined,'h25-check');let all=el('input');all.type='checkbox';all.checked=showAll;all.onchange=()=>{showAll=all.checked;render()};check.append(all,document.createTextNode('Vue complète · afficher les trois phases'));selector.append(check);
@@ -61,14 +61,24 @@ if(stepIndex===0)appendText(c,'p',phase.intro,'h25-muted');
 const grid=el('div',undefined,'pump-route-grid');s.slots.forEach((command,i)=>{let item=el('div',undefined,'h25-player-card');let inner=el('div');appendText(inner,'small',mode===0?'ACTION '+(i+1):['POSITION GAUCHE','POSITION CENTRE','POSITION DROITE'][i]);appendText(inner,'strong',command);item.append(inner);grid.append(item)});c.append(grid);
 note(c,s.tip);
 let copyButton=el('button','Copier cette étape','h25-copy');copyButton.onclick=()=>copy(copyButton,phase.name+' · '+s.title+' : '+s.slots.join(' ; ')+' | '+s.tip);
-const actions=el('div',undefined,'h25-actions');actions.append(copyButton);c.append(actions);return c
+const actions=el('div',undefined,'h25-actions');actions.append(copyButton);c.append(actions);
+if(!showAll){
+ const nav=el('div',undefined,'h25-actions raid-inline-turn-nav');
+ let prev=el('button','← Tour précédent');
+ prev.disabled=phaseIndex===0&&stepIndex===0;
+ prev.onclick=()=>{if(pumpStep>0)pumpStep--;else if(pumpPhase>0){pumpPhase--;pumpStep=route.phases[pumpPhase].steps.length-1}render()};
+ let following=el('button','Tour suivant →');
+ following.disabled=phaseIndex===route.phases.length-1&&stepIndex===route.phases[phaseIndex].steps.length-1;
+ following.onclick=()=>{if(pumpStep<route.phases[pumpPhase].steps.length-1)pumpStep++;else if(pumpPhase<route.phases.length-1){pumpPhase++;pumpStep=0}render()};
+ nav.append(prev,following);c.append(nav);
+}
+return c
 }
 if(showAll)route.phases.forEach((phase,i)=>{appendText(app,'h2',phase.name);phase.steps.forEach((_,j)=>app.append(drawStep(i,j)))});
 else{
 let phase=route.phases[pumpPhase];let select=el('select',undefined,'h25-select');select.setAttribute('aria-label','Choisir le tour ou scénario');phase.steps.forEach((s,i)=>{let opt=el('option',s.title);opt.value=i;opt.selected=i===pumpStep;select.append(opt)});select.onchange=()=>{pumpStep=Number(select.value);render()};
 app.append(select,drawStep(pumpPhase,pumpStep));
-let nav=el('div',undefined,'h25-actions');let back=el('button','← Étape précédente');back.disabled=pumpPhase===0&&pumpStep===0;back.onclick=()=>{if(pumpStep>0)pumpStep--;else if(pumpPhase>0){pumpPhase--;pumpStep=route.phases[pumpPhase].steps.length-1}render()};
-let next=el('button','Étape suivante →');next.disabled=pumpPhase===route.phases.length-1&&pumpStep===route.phases[pumpPhase].steps.length-1;next.onclick=()=>{if(pumpStep<route.phases[pumpPhase].steps.length-1)pumpStep++;else if(pumpPhase<route.phases.length-1){pumpPhase++;pumpStep=0}render()};nav.append(back,next);app.append(nav)}
+}
 let cautions=card('Avertissements avant le run');route.alerts.forEach(t=>note(cautions,t));app.append(cautions);
 let sourceCard=card('Références pour l’édition 2025');appendText(sourceCard,'p','Le guide d’époque 2025 existe en vidéo. Les ajustements d’EV et de talents ne sont pas tous récupérables à partir des descriptions, d’où la distinction entre ces versions.');sources(sourceCard);app.append(sourceCard);videoSources(app)
 }
@@ -88,8 +98,15 @@ if(hard){let c=card('Darkrai · 5 étoiles · stratégie caav 2025');appendText(
 if(boss.id==='darkrai'&&boss.variants&&!hard){let c=card('Darkrai · 4 étoiles');appendText(c,'p',boss.variants[0].summary);app.append(c)}
 const activeTurns=hard?boss.darkraiFive.turns:boss.turns;const cand=proposedRoster();
 let head=el('div',undefined,'h25-card');appendText(head,'h2','Rotation · '+activeTurns.length+' tours');appendText(head,'p','Actions par joueur, adaptées de la synthèse de stratégie caav (2025). Les lignes indiquant un type d’attaque désignent un rôle, pas une espèce de Pokémon ou un build unique.');let label=el('label',undefined,'h25-check');let checkbox=el('input');checkbox.type='checkbox';checkbox.checked=showAll;checkbox.onchange=()=>{showAll=checkbox.checked;render()};label.append(checkbox,document.createTextNode('Vue complète · afficher tous les tours'));head.append(label);noteRoster(head);app.append(head);
-function draw(t){let block=card('Tour '+(t+1)+' / '+activeTurns.length);const copyButton=el('button','Copier ce tour','h25-copy');copyButton.onclick=()=>copy(copyButton,boss.name+' T'+(t+1)+' : '+activeTurns[t].map((x,i)=>'P'+(i+1)+' '+x).join(' ; '));let controls=el('div',undefined,'h25-actions');controls.append(copyButton);block.append(controls);const grid=el('div',undefined,'h25-battle-grid');activeTurns[t].forEach((action,i)=>{let c=el('div',undefined,'h25-player-card'+(i===player?' chosen':''));c.append(el('span','P'+(i+1),'h25-number'));let inner=el('div');appendText(inner,'small','JOUEUR '+(i+1));appendText(inner,'strong',action);const pokemon=cand?.teams?.[i]?.[t];if(pokemon){const preview=el('div',undefined,'h25-preview');const portrait=pokeArt(pokemon);portrait.className='h25-thumb';preview.append(portrait);let copy=el('div');appendText(copy,'div','Pokémon suggéré : '+pokemon.name,'h25-candidate-label');appendText(copy,'div',pokemon.moves,'h25-candidate');preview.append(copy);inner.append(preview)}c.append(inner);grid.append(c)});block.append(grid);const turnHint=(hard?boss.darkraiFive.turnHints:boss.turnHints)?.[t];if(turnHint)note(block,turnHint);return block}
-if(showAll)activeTurns.forEach((_,i)=>app.append(draw(i)));else{const selector=el('select',undefined,'h25-select');selector.setAttribute('aria-label','Choisir le tour');activeTurns.forEach((_,i)=>{let o=el('option','Tour '+(i+1));o.value=i;o.selected=i===turn;selector.append(o)});selector.onchange=()=>{turn=Number(selector.value);render()};app.append(selector,draw(turn));let n=el('div',undefined,'h25-actions');const prev=el('button','← Précédent');prev.disabled=turn===0;prev.onclick=()=>{turn--;render()};const next=el('button','Tour suivant →');next.disabled=turn===activeTurns.length-1;next.onclick=()=>{turn++;render()};n.append(prev,next);app.append(n)}const currentNotes=hard?boss.darkraiFive.notes:boss.notes;if(currentNotes?.length){let c=card('Consignes importantes');for(let n of currentNotes)note(c,n);app.append(c)}}
+function draw(t){let block=card('Tour '+(t+1)+' / '+activeTurns.length);const copyButton=el('button','Copier ce tour','h25-copy');copyButton.onclick=()=>copy(copyButton,boss.name+' T'+(t+1)+' : '+activeTurns[t].map((x,i)=>'P'+(i+1)+' '+x).join(' ; '));let controls=el('div',undefined,'h25-actions');controls.append(copyButton);block.append(controls);const grid=el('div',undefined,'h25-battle-grid');activeTurns[t].forEach((action,i)=>{let c=el('div',undefined,'h25-player-card'+(i===player?' chosen':''));c.append(el('span','P'+(i+1),'h25-number'));let inner=el('div');appendText(inner,'small','JOUEUR '+(i+1));appendText(inner,'strong',action);const pokemon=cand?.teams?.[i]?.[t];if(pokemon){const preview=el('div',undefined,'h25-preview');const portrait=pokeArt(pokemon);portrait.className='h25-thumb';preview.append(portrait);let copy=el('div');appendText(copy,'div','Pokémon suggéré : '+pokemon.name,'h25-candidate-label');appendText(copy,'div',pokemon.moves,'h25-candidate');preview.append(copy);inner.append(preview)}c.append(inner);grid.append(c)});block.append(grid);
+if(!showAll){
+ const nav=el('div',undefined,'h25-actions raid-inline-turn-nav');
+ const prev=el('button','← Tour précédent');prev.disabled=t===0;prev.onclick=()=>{turn=t-1;render()};
+ const next=el('button','Tour suivant →');next.disabled=t===activeTurns.length-1;next.onclick=()=>{turn=t+1;render()};
+ nav.append(prev,next);block.append(nav);
+}
+const turnHint=(hard?boss.darkraiFive.turnHints:boss.turnHints)?.[t];if(turnHint)note(block,turnHint);return block}
+if(showAll)activeTurns.forEach((_,i)=>app.append(draw(i)));else{const selector=el('select',undefined,'h25-select');selector.setAttribute('aria-label','Choisir le tour');activeTurns.forEach((_,i)=>{let o=el('option','Tour '+(i+1));o.value=i;o.selected=i===turn;selector.append(o)});selector.onchange=()=>{turn=Number(selector.value);render()};app.append(selector,draw(turn));}const currentNotes=hard?boss.darkraiFive.notes:boss.notes;if(currentNotes?.length){let c=card('Consignes importantes');for(let n of currentNotes)note(c,n);app.append(c)}}
 function renderHistoricBuilds(app){appendText(app,'h2','Builds historiques de préparation — non confirmés pour 2025');const wrapper=el('div',undefined,'h25-team-list');for(const b of HISTORICAL_PUMPKING_BUILDS){let section=el('article',undefined,'h25-team-build');let header=el('header');let mon=el('div');appendText(mon,'h3',b.name);appendText(mon,'small','RÉFÉRENCE HISTORIQUE','h25-history-label');header.append(mon);section.append(header);let dl=el('dl');for(const [k,v] of [['Talent',b.ability],['Objet',b.item],['Nature',b.nature],['EV',b.ev],['IV',b.iv],['Attaques',b.moves]]){let line=el('div');line.append(el('dt',k),el('dd',v));dl.append(line)}section.append(dl);appendText(section,'p',b.comment,'h25-muted');const copyButton=el('button','Copier ce build','h25-copy');copyButton.onclick=()=>copy(copyButton,b.name+' ['+b.item+'] · '+b.ability+' · '+b.nature+' · EV '+b.ev+' · IV '+b.iv+' · '+b.moves);section.append(copyButton);wrapper.append(section)}app.append(wrapper)}
 function pokemon(app){if(boss.id==='pumpking'){renderPumpkingRoster(app);return}const candidate=proposedRoster();if(!candidate){warning(app,'Rosters indisponibles. Consulte le document source.');return}
 const overview=card('Rosters suggérés · '+(boss.id==='pumpking'?'Combat solo':'Joueur '+(player+1)));appendText(overview,'p','Niveau de référence : '+candidate.level+' · '+candidate.description);noteRoster(overview);app.append(overview);
