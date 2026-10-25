@@ -1,0 +1,416 @@
+/* RAID ATLAS — Identité visuelle V5 / refonte perceptible et responsive.
+   Couche unique prioritaire : anciens CSS gardés pour les fonctionnalités.
+   Tous les guides utilisent la même barre de commandes et le même dock STICKY.
+*/
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+:root{
+ --v5-bg:#080b13;--v5-canvas:#0e1320;--v5-panel:#181f2d;--v5-panel2:#202b3b;
+ --v5-border:#34455c;--v5-soft:#aebdd0;--v5-text:#f5f8fc;
+ --v5-coral:#fc626c;--v5-coral2:#ff9b9e;--v5-ice:#58d5e6;
+ --v5-radius:17px;--v5-shadow:0 22px 60px #02060e88;
+ --v5-heading:"Barlow Condensed",Impact,"Arial Narrow",sans-serif;
+ --v5-body:"DM Sans",Inter,system-ui,sans-serif;
+ --v5-mono:"IBM Plex Mono",ui-monospace,monospace
+}
+html{background:var(--v5-bg)!important;scroll-padding-top:116px}
+body{
+ color:var(--v5-text)!important;font-family:var(--v5-body)!important;
+ background:
+ radial-gradient(ellipse 46% 32% at 95% 2%,#14495d42 0%,transparent 95%),
+ radial-gradient(ellipse 50% 29% at 4% 33%,#612c4342 0%,transparent 95%),
+ linear-gradient(180deg,#0d1421 0%,#080b13 65%,#090d16 100%)!important;
+}
+body:before{opacity:0!important}
+body::selection{background:#fc626c66}
+.site-wrap{max-width:1500px!important}
+.site-wrap .mini-bar,body.raid-template-ready .raid-template-topline{
+ background:#0b121ef2!important;border-bottom:1px solid #30445d!important;
+ padding:11px 18px!important;margin:0 -10px 12px!important;
+ border-radius:0 0 10px 10px;color:#89a4bb!important
+}
+.site-wrap .mini-bar .rec{box-shadow:0 0 12px #fc626c90}
+.site-wrap .navbar,body.raid-template-ready .raid-template-navbar{
+ min-height:88px!important;background:linear-gradient(90deg,#111a2abf,#0d1421dd)!important;
+ border:1px solid #2b4159!important;border-radius:15px!important;
+ padding:12px 21px!important;margin:14px 0 20px!important;
+ box-shadow:0 13px 30px #0004!important;
+}
+.site-wrap .identity-text,body.raid-template-ready .atlas-guide-brand-copy{
+ font:900 26px/1 var(--v5-heading)!important;letter-spacing:.04em!important;color:#fff!important
+}
+.site-wrap .identity-text b,body.raid-template-ready .atlas-guide-brand-copy b{color:var(--v5-coral)!important}
+.site-wrap .identity-text small,body.raid-template-ready .atlas-guide-brand-copy small{font:600 9px var(--v5-mono)!important;letter-spacing:.09em!important;color:#91adbf!important}
+.site-wrap .mark,body.raid-template-ready .atlas-guide-mark{
+ background:linear-gradient(135deg,#fc656e,#ac3749)!important;
+ box-shadow:0 9px 24px #c6394859!important;border-radius:12px!important
+}
+.site-wrap .navlinks a,body.raid-template-ready .raid-template-navbar nav a{
+ font:700 12px var(--v5-body)!important;color:#bacadb!important
+}
+.site-wrap .navlinks a[aria-current="page"],body.raid-template-ready .raid-template-navbar a[aria-current="page"]{color:#fff!important}
+.site-wrap .navlinks a:hover,body.raid-template-ready .raid-template-navbar nav a:hover{color:var(--v5-coral2)!important}
+.site-wrap .atlas-secondary{color:#fff!important;background:#e2536040!important;border-color:#e2536070!important}
+.site-wrap .atlas-breadcrumb,body.raid-template-ready .raid-template-crumb{color:#9baec2!important}
+.site-wrap .atlas-breadcrumb a,body.raid-template-ready .raid-template-crumb a{color:#e7eefa!important}
+.site-wrap .atlas-back{color:#ff9b9e!important}
+/* Accueil totalement rehiérarchisé : une grande entrée lumineuse et des opérations lisibles. */
+body:not(.raid-template-ready) .site-wrap main > .issue{
+ border:0!important;background:transparent!important;color:#67c8d5!important;
+ font:700 11px var(--v5-mono)!important;letter-spacing:.1em!important;margin:14px 0!important
+}
+body:not(.raid-template-ready) .site-wrap main > .hero{
+ min-height:565px!important;border:1px solid #416784!important;border-radius:22px!important;
+ box-shadow:var(--v5-shadow),0 0 0 1px #ffffff0a inset!important;
+ background:#0d1725!important
+}
+body:not(.raid-template-ready) .site-wrap main > .hero:before{
+ background:
+ radial-gradient(ellipse at 75% 45%,#2bb8d232 0,transparent 42%),
+ radial-gradient(ellipse at 55% 97%,#fb5d713a 0,transparent 48%),
+ linear-gradient(115deg,#1b2838 0%,#0c1323 56%,#0a2534 100%)!important;
+}
+body:not(.raid-template-ready) .site-wrap main > .hero:after{
+ background:repeating-linear-gradient(90deg,transparent 0 86px,#77c5d00b 86px 87px),
+ linear-gradient(180deg,transparent 52%,#08121ecc)!important
+}
+.site-wrap main > .hero .hero-right:before{
+ width:460px;height:460px;border:1px solid #7addf74b!important;
+ background:radial-gradient(circle,#1fb1cd37 0,#10b0ca12 44%,transparent 68%)!important;
+ box-shadow:inset 0 0 0 60px #8efaff04,0 0 110px #2fb3c41a!important
+}
+.site-wrap main > .hero .hero-right:after{border-color:#67d1df48!important}
+.site-wrap main > .hero .hero-pokemon{filter:drop-shadow(0 30px 32px #000c)!important}
+.site-wrap main > .hero .overline{color:#79dfed!important}
+.site-wrap main > .hero h1 span{color:#fff!important;text-shadow:0 8px 26px #0006}
+.site-wrap main > .hero h1 em{-webkit-text-stroke:2px #8ee4ef!important;color:transparent!important}
+.site-wrap main > .hero .hero-left p{color:#cedfed!important;font-size:15px!important;line-height:1.75!important}
+.site-wrap .primary-button{
+ background:linear-gradient(125deg,#f15d68,#ad3c58)!important;
+ border:1px solid #ff8795!important;color:#fff!important;border-radius:12px!important;
+ box-shadow:0 10px 28px #dd405351!important;
+}
+.site-wrap .primary-button:hover{background:linear-gradient(125deg,#ff7d84,#cc4a62)!important}
+.site-wrap main > .hero .hero-bottom{
+ background:#091522c9!important;border-top:1px solid #31617a!important
+}
+.site-wrap main > .hero .hero-bottom strong{font:900 37px var(--v5-heading)!important;color:#8fe4ec!important}
+.site-wrap main > .hero .hero-bottom span{color:#c3d7e6!important}
+/* Nouvelle section d'entrée fonctionnelle (ajout, ne remplace rien) */
+.raid-quick-access{margin:27px 0 55px!important;padding:23px!important;border:1px solid #36556b!important;
+ border-radius:19px!important;background:linear-gradient(120deg,#172639,#101c2a)!important;
+ box-shadow:0 16px 39px #0004!important}
+.raid-quick-access-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:15px;margin-bottom:18px}
+.raid-quick-access-head span{font:700 11px var(--v5-mono);color:#73dbe6;letter-spacing:.1em}
+.raid-quick-access-head h2{font:900 clamp(32px,4vw,48px)/1 var(--v5-heading);margin:9px 0 0;color:#fff}
+.raid-quick-access-head p{margin:0;max-width:330px;font:500 13px/1.6 var(--v5-body);color:#acbfd2}
+.raid-quick-access-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.raid-quick-access-card{display:flex;gap:13px;align-items:center;min-width:0;padding:14px 16px;border:1px solid #35546d;
+ border-radius:14px;background:linear-gradient(125deg,#223247,#151f2f);text-decoration:none!important;color:#fff!important;
+ transition:transform .18s,border-color .18s,background .18s}
+.raid-quick-access-card:hover{transform:translateY(-4px);border-color:#80dcea;background:#2b3c52}
+.raid-quick-access-card img{height:76px;width:76px;object-fit:contain;flex:none;filter:drop-shadow(0 8px 10px #0006)}
+.raid-quick-access-card span{display:block;font:700 9px var(--v5-mono);color:#79d6e3;letter-spacing:.08em}
+.raid-quick-access-card strong{display:block;font:900 28px var(--v5-heading);margin:5px 0;color:#fff}
+.raid-quick-access-card small{display:block;font:500 11px var(--v5-body);color:#aabbd0}
+.raid-quick-access-card.raid-quick-special{border-color:#c35a70;background:linear-gradient(125deg,#382737,#172335)}
+.raid-quick-access-card.raid-quick-special span{color:#ff9caa}
+/* Index: cartes illustrées, typographie, séparations lumineuses. */
+.site-wrap .section{margin-top:61px!important}
+.site-wrap .section-head{margin-bottom:23px!important}
+.site-wrap .section-head h2{color:#fff!important}
+.site-wrap .section-no,.site-wrap .atlas-kicker{color:#64cfe1!important}
+.site-wrap .section-head p{color:#b2c2d0!important;font-size:13px!important}
+.site-wrap .event-grid{gap:17px!important}
+.site-wrap .event-card{
+ border:1px solid #385369!important;border-radius:19px!important;box-shadow:0 14px 35px #0007!important;
+ background:linear-gradient(135deg,#1d2c3c,#111b2a)!important
+}
+.site-wrap .event-card:before{
+ background:radial-gradient(circle at 84% 40%,#32b1cc43 0,transparent 54%),linear-gradient(125deg,#26384b,#0e1827)!important
+}
+.site-wrap .event-card.main{border-color:#b35570!important}
+.site-wrap .event-card.main:before{background:radial-gradient(circle at 76% 36%,#fe6b8155,transparent 56%),linear-gradient(135deg,#3b2635,#0d1b2d)!important}
+.site-wrap .event-card:after{background:linear-gradient(90deg,#101927df,#10192799 54%,transparent)!important}
+.site-wrap .event-card.main:after{background:linear-gradient(0deg,#0b121bee 0,#0f1b2d99 43%,transparent 77%)!important}
+.site-wrap .event-card:hover{border-color:#67deec!important;box-shadow:0 21px 48px #0009,0 0 0 1px #67deec35 inset!important;transform:translateY(-6px)!important}
+.site-wrap .event-card .event-info h3{color:#fff!important}
+.site-wrap .event-state{border-color:#46647b!important;color:#cfe6ed!important}
+.site-wrap .event-foot{border:1px solid #74cbdc!important;background:#1a667c70!important}
+.site-wrap .atlas-list-hero,.site-wrap .atlas-soon{
+ border:1px solid #47637b!important;border-radius:20px!important;
+ background:radial-gradient(circle at 77% 55%,#1faad043,transparent 48%),linear-gradient(110deg,#223247,#111b2a 65%,#17324a)!important;
+ box-shadow:var(--v5-shadow)!important
+}
+.site-wrap .atlas-list-hero:before{background:radial-gradient(circle at 83% 45%,#46c9db22,transparent 39%),repeating-linear-gradient(90deg,transparent 0 87px,#ffffff08 87px 88px)!important}
+.site-wrap .raid-list{gap:17px!important}
+.site-wrap .raid-tile{
+ background:linear-gradient(135deg,#192839,#111926)!important;border:1px solid #395066!important;
+ border-radius:17px!important;box-shadow:0 12px 33px #0006!important;
+ transition:border-color .2s,transform .2s,box-shadow .2s!important
+}
+.site-wrap .raid-tile.selected{
+ background:radial-gradient(circle at 75% 60%,#dc62733d,transparent 52%),linear-gradient(135deg,#263447,#131e2e)!important;
+ border-color:#b35a70!important
+}
+.site-wrap .raid-tile:hover{border-color:#6cddeb!important;transform:translateY(-5px)!important;box-shadow:0 22px 48px #0008!important}
+.site-wrap .raid-tile .num{color:#80cada!important}
+.site-wrap .raid-tile h3{color:#fff!important}
+.site-wrap .raid-tile p{color:#b6c7d5!important}
+.site-wrap .raid-tile .available{background:#22374b!important;border:1px solid #4b7e91!important;color:#bde7ee!important}
+/* Halloween : une déclinaison violet/fuchsia plutôt que des tuiles identiques. */
+.site-wrap .hx-lead{border-radius:19px!important;border-color:#6d4b79!important;
+ background:radial-gradient(circle at 82% 27%,#ae4aa05c,transparent 49%),linear-gradient(110deg,#30253d,#141a2c)!important}
+.site-wrap .hx-year,.site-wrap .hx-raid,.site-wrap .hx-chip{
+ background:linear-gradient(120deg,#272839,#171e30)!important;border-color:#4b536c!important;border-radius:16px!important
+}
+.site-wrap .hx-year:hover,.site-wrap .hx-raid:hover{border-color:#e89cd4!important}
+.site-wrap .hx-kicker,.site-wrap .hx-flag{color:#ea9dd1!important}
+.site-wrap .hx-link{background:#a7458a!important;border-color:#cc6fad!important}
+.site-wrap .h25-alert{background:#292638!important;border:1px solid #7e597d!important;border-left:4px solid #e68bc7!important;color:#f0ddea!important}
+.site-wrap .atlas-footer{margin-top:63px!important;border-top:1px solid #3d576f!important;color:#9db5cb!important}
+/* Identité commune des fiches. */
+body.raid-template-ready.atlas-heatran,body.raid-template-ready.cres-page{
+ width:100%!important;max-width:1380px!important;padding:0 clamp(14px,3.8vw,56px) 100px!important
+}
+body.raid-template-ready .raid-template-hero{
+ border:1px solid #51677e!important;border-radius:19px!important;
+ background:radial-gradient(circle at 84% 48%,#ed677438,transparent 44%),linear-gradient(112deg,#242a39,#121b2c 58%,#2a283b)!important;
+ box-shadow:var(--v5-shadow)!important;min-height:295px!important
+}
+body.raid-template-ready[data-raid-template="cresselia"] .raid-template-hero{
+ background:radial-gradient(circle at 83% 48%,#80a9e458,transparent 42%),linear-gradient(112deg,#262d42,#121b2c 58%,#282b42)!important
+}
+body.raid-template-ready[data-raid-template="halloween"] .raid-template-hero{
+ background:radial-gradient(circle at 83% 48%,#ba65bf49,transparent 42%),linear-gradient(112deg,#27283f,#141b2b 58%,#34253c)!important
+}
+body.raid-template-ready .raid-template-hero .raid-template-hero-title{font:900 clamp(65px,9vw,105px)/.95 var(--v5-heading)!important;color:#fff!important}
+body.raid-template-ready .raid-template-hero .raid-template-kicker{color:#7bdbe8!important}
+body.raid-template-ready .raid-template-hero .raid-template-hero-copy p{color:#ccdae7!important}
+body.raid-template-ready .raid-template-hero .raid-template-hero-art{filter:drop-shadow(0 19px 23px #0009)!important}
+body.raid-template-ready .hero-stats span,body.raid-template-ready .cres-facts span{
+ background:#213047be!important;border:1px solid #536980!important;color:#e0f0f7!important;border-radius:7px!important
+}
+/* Stratégie et sélection du rôle — UNE SEULE disposition partagée Heatran/Cresselia. */
+body.raid-template-ready .raid-template-commandbar{
+ position:relative!important;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr)!important;
+ align-items:stretch!important;gap:14px!important;width:100%!important;min-width:0!important;
+ padding:0!important;margin:19px 0 16px!important;border:0!important;background:transparent!important;box-shadow:none!important
+}
+body.raid-template-ready .raid-template-commandbar:has(> :only-child){grid-template-columns:minmax(0,1fr)!important}
+body.raid-template-ready .raid-template-commandbar>.raid-template-strategy,
+body.raid-template-ready .raid-template-commandbar>.raid-template-rolebar{
+ min-width:0!important;width:100%!important;max-width:100%!important;
+ padding:19px 21px!important;margin:0!important;display:flex!important;flex-direction:column!important;
+ align-items:stretch!important;justify-content:center!important;gap:10px!important;
+ background:linear-gradient(125deg,#1d2a3d,#151f30)!important;border:1px solid #45617d!important;
+ border-radius:15px!important;box-shadow:0 12px 32px #0004!important
+}
+body.raid-template-ready .raid-template-commandbar .control label,
+body.raid-template-ready .raid-template-commandbar .section-heading,
+body.raid-template-ready .raid-template-commandbar .cres-panel-label{
+ margin:0!important;padding:0!important;border:0!important;
+ font:700 10px var(--v5-mono)!important;letter-spacing:.14em!important;color:#80dbe8!important
+}
+body.raid-template-ready .raid-template-commandbar .section-heading .heading-hint{font:500 11px var(--v5-body)!important;color:#a6b8c7!important;letter-spacing:0!important}
+body.raid-template-ready .raid-template-commandbar .control select,
+body.raid-template-ready .raid-strategy-readonly{
+ display:block!important;min-width:0!important;width:100%!important;max-width:100%!important;
+ background:#25354a!important;border:1px solid #52708d!important;border-radius:9px!important;
+ color:#f6faff!important;padding:12px 14px!important;min-height:47px!important;font:700 13px var(--v5-body)!important;
+ box-sizing:border-box!important
+}
+body.raid-template-ready .raid-strategy-readonly small{display:block;color:#91adbf;font:500 11px var(--v5-body);padding-top:4px}
+body.raid-template-ready .raid-template-old-nav-heading{display:none!important}
+body.raid-template-ready .raid-template-commandbar #focus{color:#b3c1ce!important;font:500 11px var(--v5-body)!important;margin:0!important}
+body.raid-template-ready .raid-template-commandbar :is(#players,#cres-players,.h25-player){
+ display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ gap:8px!important;width:100%!important;max-width:100%!important;min-width:0!important;
+ margin:0!important;padding:0!important;border:0!important;background:transparent!important
+}
+body.raid-template-ready .raid-template-commandbar :is(#players,#cres-players,.h25-player) button{
+ display:block!important;box-sizing:border-box!important;
+ min-width:0!important;width:100%!important;max-width:100%!important;min-height:48px!important;
+ padding:10px 4px!important;margin:0!important;white-space:normal!important;overflow-wrap:anywhere!important;
+ border:1px solid #54708c!important;border-radius:9px!important;color:#d1dfed!important;background:#26384c!important;
+ box-shadow:none!important;font:700 12px var(--v5-body)!important;text-align:center!important
+}
+body.raid-template-ready .raid-template-commandbar :is(#players,#cres-players,.h25-player) button.active,
+body.raid-template-ready .raid-template-commandbar :is(#players,#cres-players,.h25-player) button[aria-pressed="true"]{
+ color:#fff!important;background:linear-gradient(130deg,#ed6872,#943d57)!important;
+ border-color:#ff9aa0!important;box-shadow:0 4px 18px #ed687233!important
+}
+body.raid-template-ready .raid-template-commandbar .h25-mode{display:flex!important;gap:8px!important;margin:8px 0!important;flex-wrap:wrap}
+body.raid-template-ready .raid-template-commandbar .h25-mode button{flex:1!important;min-width:110px!important}
+body.raid-template-ready .raid-template-commandbar :is(#mode-container,#players-container):empty{display:none!important}
+body.raid-template-ready .raid-template-commandbar .section-heading.sections-heading{display:none!important}
+body.raid-template-ready .raid-template-commandbar .raid-controls:has(#players[hidden])>.section-heading:first-child{display:none!important}
+body.raid-template-ready .raid-template-commandbar #players[hidden]{display:none!important}
+body.raid-template-ready .raid-template-commandbar .raid-controls{height:auto!important}
+body.raid-template-ready .cres-content{width:100%!important;max-width:100%!important;min-width:0!important;display:block!important;margin:0!important;padding:0!important}
+body.raid-template-ready .cres-warning{margin:16px 0!important;border-radius:11px!important;
+ background:#263145!important;border:1px solid #a96776!important;border-left:4px solid var(--v5-coral)!important;color:#ecdee2!important}
+body.raid-template-ready .raid-extra-references{margin:20px 0!important;padding:17px 20px;background:#19273a;
+ border:1px solid #425a72;border-radius:12px!important}
+body.raid-template-ready .raid-extra-references summary{cursor:pointer;font:700 13px var(--v5-body);color:#96e7f1}
+body.raid-template-ready .raid-extra-references .raid-reference-links{padding-top:13px;display:grid;gap:9px}
+body.raid-template-ready .raid-extra-references a{color:#ffb3b7!important}
+body.raid-template-ready .raid-extra-references p{margin:0;color:#becbd9;font-size:12px}
+/* Dock STICKY à l'intérieur du flux : impossible de masquer les fiches comme l'ancien dock fixed en bas. */
+body.raid-template-ready .raid-guide-dock{
+ box-sizing:border-box!important;position:sticky!important;top:10px!important;bottom:auto!important;
+ display:block!important;width:min(100%,980px)!important;max-width:100%!important;min-width:0!important;
+ margin:20px auto 26px!important;padding:11px 13px!important;z-index:150!important;
+ background:linear-gradient(115deg,#23364cfa,#111d2bfc)!important;border:1px solid #65b3c8!important;
+ border-radius:16px!important;box-shadow:0 15px 44px #000b,0 0 0 1px #74d9ed18 inset!important;
+ backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+}
+body.raid-template-ready .raid-dock-header{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;
+ padding:0 4px 9px!important;min-width:0
+}
+body.raid-template-ready .raid-dock-title{
+ color:#fff!important;font:800 12px var(--v5-mono)!important;letter-spacing:.14em!important;white-space:nowrap!important
+}
+body.raid-template-ready .raid-dock-title:before{
+ display:inline-block;content:"";width:9px;height:9px;background:#60d8e9;border-radius:50%;margin-right:10px;box-shadow:0 0 15px #60d8e9
+}
+body.raid-template-ready .raid-dock-marker{margin-left:auto;color:#7edbea;font:700 9px var(--v5-mono);white-space:nowrap;letter-spacing:.05em}
+body.raid-template-ready .raid-dock-collapse{
+ color:#e2f1f7!important;background:#284359!important;border:1px solid #5e95ab!important;border-radius:8px!important;
+ font:700 10px var(--v5-body)!important;min-width:0!important;padding:7px 12px!important;
+ margin:0!important;white-space:nowrap!important;cursor:pointer
+}
+body.raid-template-ready .raid-dock-collapse:hover{background:#335772!important}
+body.raid-template-ready .raid-dock-content{display:block!important;min-width:0}
+body.raid-template-ready .raid-dock-content[hidden]{display:none!important}
+body.raid-template-ready .raid-guide-dock .raid-dock-tabs,
+body.raid-template-ready .raid-guide-dock #tabs,
+body.raid-template-ready .raid-guide-dock #cres-tabs,
+body.raid-template-ready .raid-guide-dock .h25-nav{
+ position:static!important;inset:auto!important;transform:none!important;box-sizing:border-box!important;
+ display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ gap:9px!important;margin:0!important;padding:0!important;width:100%!important;
+ min-width:0!important;max-width:100%!important;border:0!important;background:transparent!important;
+ border-radius:0!important;box-shadow:none!important;backdrop-filter:none!important
+}
+body.raid-template-ready .raid-guide-dock .raid-dock-tabs button,
+body.raid-template-ready .raid-guide-dock #tabs button,
+body.raid-template-ready .raid-guide-dock #cres-tabs button,
+body.raid-template-ready .raid-guide-dock .h25-nav button{
+ display:flex!important;justify-content:center!important;align-items:center!important;box-sizing:border-box!important;
+ min-height:49px!important;min-width:0!important;max-width:100%!important;width:100%!important;
+ margin:0!important;padding:11px 8px!important;text-align:center!important;
+ border:1px solid #476783!important;border-radius:10px!important;background:#1a293c!important;
+ font:800 12px/1.15 var(--v5-body)!important;letter-spacing:0!important;white-space:normal!important;
+ color:#dae7f4!important;box-shadow:none!important;transition:background .18s,border-color .18s
+}
+body.raid-template-ready .raid-guide-dock .raid-dock-tabs button.active,
+body.raid-template-ready .raid-guide-dock .raid-dock-tabs button[aria-selected="true"]{
+ background:linear-gradient(120deg,#fa6975,#b33b59)!important;color:#fff!important;
+ border-color:#ffb0b4!important;box-shadow:0 6px 23px #d6485c4f!important
+}
+body.raid-template-ready .raid-guide-dock .raid-dock-tabs button:hover{border-color:#77deee!important}
+body.raid-template-ready .raid-guide-dock.is-reduced{width:max-content!important;max-width:100%!important;margin-left:auto!important;margin-right:auto!important}
+body.raid-template-ready .raid-guide-dock.is-reduced .raid-dock-header{padding:0!important}
+body.raid-template-ready .raid-guide-dock.is-reduced .raid-dock-marker{display:none!important}
+/* Contenu combat et fiches Pokémon : véritable profondeur et rythme. */
+body.raid-template-ready .raid-template-content{min-width:0!important;max-width:100%!important;width:100%!important}
+body.raid-template-ready .raid-template-content :is(.battle-intro,.cres-toolbar,.progress-card,.phase-control,.cres-turnhead){
+ background:linear-gradient(125deg,#263449,#182638)!important;border:1px solid #425c74!important;
+ border-radius:13px!important;box-shadow:0 9px 20px #0003!important
+}
+body.raid-template-ready .raid-template-content .raid-template-action-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+body.raid-template-ready .raid-template-content .raid-template-card,
+body.raid-template-ready .raid-template-content .cres-action,
+body.raid-template-ready .raid-template-content .battle-grid .card{
+ min-width:0!important;border:1px solid #405a73!important;border-radius:13px!important;
+ background:linear-gradient(125deg,#202b3d,#171f2e)!important;box-shadow:0 9px 25px #0003!important
+}
+body.raid-template-ready .raid-template-content .raid-template-card.selected,
+body.raid-template-ready .raid-template-content .raid-template-card.chosen,
+body.raid-template-ready .raid-template-content .raid-template-card.focus,
+body.raid-template-ready .raid-template-content .battle-grid .card.selected{
+ background:linear-gradient(125deg,#3c2b40,#26253a)!important;
+ border:1px solid #f17a91!important;box-shadow:inset 4px 0 0 #ff6c7b,0 10px 26px #0004!important
+}
+body.raid-template-ready .raid-template-content .cres-turn,
+body.raid-template-ready .raid-template-content .turn-panel{
+ border-color:#40566c!important;border-radius:13px!important;overflow:hidden!important;
+ background:#151e2c!important
+}
+body.raid-template-ready .raid-template-content details.card,
+body.raid-template-ready .raid-template-content details.cres-mon,
+body.raid-template-ready .raid-template-content details.h25-build{
+ border-radius:14px!important;border:1px solid #405a73!important;background:#192536!important;overflow:hidden!important
+}
+body.raid-template-ready .raid-template-content details:is(.card,.cres-mon,.h25-build)[open]{border-color:#a77a91!important}
+body.raid-template-ready .raid-template-content details:is(.card,.cres-mon,.h25-build) summary{
+ background:#243349!important;border-bottom:1px solid #42566d!important;border-radius:0!important
+}
+body.raid-template-ready .raid-template-content .build-showcase{display:grid!important;
+ grid-template-columns:minmax(0,1.18fr) minmax(210px,.82fr)!important;gap:14px!important}
+body.raid-template-ready .raid-template-content .build-specs,
+body.raid-template-ready .raid-template-content .build-moves{
+ background:#1d2b3e!important;border:1px solid #415b74!important;border-radius:12px!important
+}
+body.raid-template-ready .raid-template-content .build-portrait{background:#121d2e!important;border:1px solid #3d5b73!important;border-radius:11px!important}
+body.raid-template-ready .raid-template-content .build-fact{background:#293951!important;border:1px solid #466078!important;border-radius:9px!important}
+body.raid-template-ready .raid-template-content .move-pill{
+ background:#293a52!important;border:1px solid #4d6079!important;border-radius:9px!important;color:#edf6fc!important
+}
+body.raid-template-ready .raid-template-content .move-symbol{background:#23475b!important;color:#7ee0ec!important}
+body.raid-template-ready .raid-template-content :is(.cres-note,.raid-tips,.raid-preflight,.cres-explain,.h25-callout){
+ border-radius:11px!important
+}
+body.raid-template-ready .raid-template-content :is(button,.cres-copy){border-radius:8px!important}
+body.raid-template-ready .raid-template-content .h25-player-card{min-width:0!important}
+/* Rapports et panneaux sources disponibles à toutes les résolutions. */
+body.raid-template-ready .raid-template-footer{border-top:1px solid #3d607b!important;color:#a7c0d3!important}
+@media(max-width:1090px){
+ body.raid-template-ready .raid-template-content .build-showcase{grid-template-columns:1fr!important}
+}
+@media(max-width:880px){
+ body.raid-template-ready .raid-template-commandbar{grid-template-columns:1fr!important}
+ body.raid-template-ready .raid-template-hero .raid-template-hero-title{font-size:clamp(53px,10vw,92px)!important}
+ body.raid-template-ready .raid-template-commandbar>.raid-template-rolebar{padding:17px!important}
+ .raid-quick-access-list{gap:8px}
+ .raid-quick-access-card{padding:11px}
+ .raid-quick-access-card img{height:62px;width:62px}
+ .raid-quick-access-card strong{font-size:23px}
+}
+@media(max-width:700px){
+ .raid-quick-access-list{grid-template-columns:1fr!important}
+ .raid-quick-access-card img{height:65px;width:65px}
+ .site-wrap .navbar,body.raid-template-ready .raid-template-navbar{padding:12px!important}
+ body.raid-template-ready .raid-guide-dock{margin:15px auto 23px!important;padding:9px!important;top:8px!important}
+ body.raid-template-ready .raid-dock-header{padding:2px 2px 8px!important}
+ body.raid-template-ready .raid-dock-marker{display:none}
+ body.raid-template-ready .raid-dock-title{font-size:10px!important}
+ body.raid-template-ready .raid-guide-dock .raid-dock-tabs button{font-size:11px!important;padding:10px 4px!important;min-height:46px!important}
+ body.raid-template-ready .raid-template-hero{min-height:245px!important}
+ body.raid-template-ready .raid-template-hero .raid-template-hero-copy{max-width:82%!important}
+ body.raid-template-ready .raid-template-hero .raid-template-hero-art{width:44%!important;right:-25px!important;opacity:.68!important}
+}
+@media(max-width:530px){
+ body.raid-template-ready.atlas-heatran,body.raid-template-ready.cres-page{padding:0 12px 76px!important}
+ body.raid-template-ready .raid-template-commandbar>.raid-template-strategy,
+ body.raid-template-ready .raid-template-commandbar>.raid-template-rolebar{padding:13px!important}
+ body.raid-template-ready .raid-template-commandbar :is(#players,#cres-players,.h25-player){gap:5px!important}
+ body.raid-template-ready .raid-template-commandbar :is(#players,#cres-players,.h25-player) button{font-size:11px!important;padding:10px 3px!important}
+ body.raid-template-ready .raid-template-hero .raid-template-hero-title{font-size:clamp(43px,11vw,68px)!important}
+ body.raid-template-ready .raid-template-hero .raid-template-hero-copy{max-width:89%!important}
+ body.raid-template-ready .raid-template-hero .raid-template-hero-art{width:55%!important;right:-34px!important;opacity:.35!important}
+ body.raid-template-ready .raid-guide-dock .raid-dock-tabs{gap:4px!important}
+ body.raid-template-ready .raid-guide-dock .raid-dock-tabs button{font-size:10px!important;min-height:44px!important;padding:8px 3px!important}
+ body.raid-template-ready .raid-dock-collapse{padding:7px!important;font-size:9px!important}
+ body.raid-template-ready .raid-template-content .raid-template-action-grid{gap:8px!important}
+ .raid-quick-access{padding:14px!important}
+}
+@media(max-width:365px){
+ body.raid-template-ready .raid-template-commandbar :is(#players,#cres-players,.h25-player){grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ body.raid-template-ready .raid-guide-dock .raid-dock-tabs{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ body.raid-template-ready .raid-guide-dock .raid-dock-tabs button{min-height:34px!important}
+ body.raid-template-ready .raid-template-content .raid-template-action-grid{grid-template-columns:1fr!important}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
+@media print{body.raid-template-ready .raid-guide-dock{position:static!important;box-shadow:none!important}}
