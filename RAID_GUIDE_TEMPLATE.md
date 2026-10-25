@@ -83,3 +83,14 @@ Décision utilisateur : fusionner les trois contrôles **Stratégie + Votre rôl
 - Tests : simulation DOM sur les 3 familles de guides, onglets originaux conservés, quatre boutons d'onglet, rôles/stratégies dans le même conteneur, indicateur d'onglet actif, réduction puis réouverture fonctionnelles. JS valide, CSS équilibré, HTML original intégralement préservé à part les nouvelles références d'assets. Aucun test graphique réel en navigateur à ce stade.
 
 Pour les prochaines évolutions esthétiques du panneau, modifier **uniquement** le script commun et `assets/raid-command-center-v7.css` ; ne pas copier des blocs HTML individuels d'une fiche à l'autre.
+
+## Habillage V9d et UX — VF seulement, 25/10/2026
+
+- `assets/raid-polish-v9.css` et `assets/raid-polish-v9.js` sont chargés après le style premium V8 sur **les huit pages françaises**, version de cache `20261025-v9d`. Ne pas remplacer ni recopier la structure canonique Heatran : ces ressources ajoutent une couche visuelle et de navigation non destructive.
+- Logo : **Poké Ball SVG vectorielle noire et blanche seule** (sans fond blanc, texte intégré ou dépendance externe). Mot « PokeMMO » sans accent à sa droite. Réutilisation du même code sur les entêtes des pages.
+- Accueil : titre « EXPLORER LES RAIDS », suppression du numéro décoratif « 01 / » devant ce titre et suppression de la bande inutile « 06 raids / 04 catégories / 04 joueurs ». Les cartes « REPRENDRE UN RAID » gardent l'historique des trois dernières visites V8.
+- `permanent.html` : suppression du « INDEX / 001 », remplacement de la bannière Heatran par une capture d'un antre de raid en jeu, crédit avec lien forum ; libellé retour simplifié. Captures/ressources à vérifier en navigateur après déploiement.
+- Guides : une seule bordure rouge sur carte joueur actif, état actif plus marqué pour Combat / Pokémon / Préparation / Mécaniques et indicateur « SECTION ACTIVE » synchronisé. Les boutons Précédent / Suivant d'origine sont déplacés juste sous le sélecteur de tour/phase grâce au DOM (pas de remplacement des listeners tactiques).
+- Bannière « Préparez votre équipe » : Octillery (illustration officielle HD) doit rester bien centré à droite et ne pas chevaucher le texte, y compris sous 700 px et 380 px ; spécifique au style V9d, sans toucher à la fiche.
+- Contrôle statique V9d : 8/8 pages correctement liées, JS et inline valides, CSS équilibré, art Octillery et marque de l'onglet actif vérifiés dans le source. Le rendu réel des pages et les tests du combat sur mobile restent à effectuer.
+- Ne **pas** appliquer ces changements au dépôt anglais avant approbation utilisateur de la VF.
