@@ -101,6 +101,12 @@
      note:tr("Les crédits et les liens propres à chaque boss se trouvent en bas de sa fiche. Archives susceptibles d'être obsolètes.","Boss-specific credits and links appear at the bottom of each raid guide. Archived mechanics may be outdated."),
      links:[u(tr("Guide événement Halloween 2025 (forum)","Halloween 2025 event guide (forum)"),"https://forums.pokemmo.com/index.php?/topic/192700-halloween-2025-the-ultimate-halloween-event-guide/")]
    });
+ } else if(window.RAID_ATLAS_SOURCE_CONFIG){
+   // Extension point for future raids and events: provide {selector, strategies}.
+   const config=window.RAID_ATLAS_SOURCE_CONFIG;
+   selector=document.querySelector(config.selector);
+   data=config.strategies||{};
+   shown=()=>selector?.value||Object.keys(data)[0];
  } else return;
  const footer=document.querySelector("footer");if(!footer)return;
  const details=make("details","raid-extra-references raid-source-drawer");
