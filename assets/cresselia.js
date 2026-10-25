@@ -611,8 +611,8 @@ for(const [t,i] of list){
  const note=document.createElement("p");note.textContent=t.info;
  const hp=document.createElement("p");hp.className="raid-alert";hp.textContent="PV du boss visés en fin de tour : "+t.hp+" (valeur indicative).";
  info.append(heading,note,hp);
- const actionText="TOUR "+(i+1)+" / CRESSELIA 6★ — THE THREE MUSKETEERS v2.1\\n"+
- t.actions.map(([slot,move],j)=>"J"+(j+1)+" · "+D.team[j][slot].n+" → "+move).join("\\n")+"\\nPV cible : "+t.hp;
+ const actionText="TOUR "+(i+1)+" / CRESSELIA 6★ — THE THREE MUSKETEERS v2.1\n"+
+ t.actions.map(([slot,move],j)=>"J"+(j+1)+" · "+D.team[j][slot].n+" → "+move).join("\n")+"\nPV cible : "+t.hp;
  RaidAtlasComponents.battleTurn({
   target:panel,index:i,total:D.turns.length,title:t.label,actions,selected:ST.player,
   onPokemon:()=>{ST.tab="pokemon";render()},advice:info,copyText:actionText,
@@ -635,7 +635,7 @@ D.team[ST.player].forEach((m,i)=>{
  const sprite="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+m.id+".png";
  const art="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"+m.id+".png";
  const pokemon={name:m.n,item:m.item,nature:m.nature,ability:m.talent,ev:m.ev,iv:m.iv,
-  moves:m.attacks.split(/\\s*[\\/·]\\s*/).filter(Boolean),note:m.note,
+  moves:m.attacks.split(/\s*[\/·]\s*/).filter(Boolean),note:m.note,
   variant:"Non précisé",spriteUrl:sprite,artworkUrl:art};
  const card=RaidAtlasComponents.buildCard({
   pokemon,index:i,expanded:ST.expand||i===0,
@@ -645,8 +645,8 @@ D.team[ST.player].forEach((m,i)=>{
  app.append(card);
 });
 app.append(button("Copier l'équipe complète (6 builds)",e=>copy(
- "CRESSELIA 6★ / THE THREE MUSKETEERS v2.1 / JOUEUR "+(ST.player+1)+"\\n\\n"+
- D.team[ST.player].map(monCopy).join("\\n\\n"),e.currentTarget),"cres-copy"));
+ "CRESSELIA 6★ / THE THREE MUSKETEERS v2.1 / JOUEUR "+(ST.player+1)+"\n\n"+
+ D.team[ST.player].map(monCopy).join("\n\n"),e.currentTarget),"cres-copy"));
 }
 function renderPrep(){const a=$("cres-app");a.replaceChildren();const intro=document.createElement("div");intro.className="cres-note";intro.textContent="Cresselia se trouve sur l'Île Pleine Lune (Sinnoh), accessible par bateau depuis Joliberges. Raid permanent 6★ à quatre joueurs. Une stratégie adaptée à chaque joueur ; ne pas fusionner avec une ancienne version.";a.append(intro);
 const tasks=["Pokédex OT rempli ; au moins 4 Pokémon OT dans l’équipe","Les 6 Pokémon du joueur "+(ST.player+1)+" sont disponibles et placés dans l’ordre prévu","Aucun objet ou lignée d’évolution dupliqué dans mon équipe","Natures, talents et capacités vérifiés un par un","IV, EV et ordres de Vitesse vérifiés entre les quatre joueurs","Réglages de Déf. Spé. et ciblage IA contrôlés (Gueriaigle / Sidérella)","Lance-Boue, Air Veinard, Rune Protect et Séduction présents où indiqués","Quatre joueurs synchronisés sur les 10 tours et les paliers de PV","Vérifier les dernières corrections du guide source avant de breeder"];
