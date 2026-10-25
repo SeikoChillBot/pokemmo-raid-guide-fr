@@ -654,7 +654,21 @@ const wrap=document.createElement("div");wrap.className="cres-source";wrap.inner
 tasks.forEach((t,i)=>{const line=document.createElement("label");line.className="cres-check";const c=document.createElement("input");c.type="checkbox";c.checked=!!saved[ST.player+"-"+i];c.addEventListener("change",()=>{saved[ST.player+"-"+i]=c.checked;try{localStorage.setItem("raid-atlas-cresselia-check",JSON.stringify(saved));}catch(e){}count();});const span=document.createElement("span");span.textContent=t;line.append(c,span);checks.append(line);});wrap.append(checks);a.append(wrap);count();
 const links=document.createElement("section");links.className="cres-source";links.innerHTML='<h3>Sources et versions</h3><p>Guide conseillé pour cette page : The Three Musketeers v2.1, par Cadoiz, RogueMaster (Phoebe), Th3Fastest et OhKaibaBoy. Rotation publiée en mars 2026 et retranscrite en septembre 2026. Les statistiques de popularité par équipe ne sont pas publiées : le qualificatif « le plus utilisé » ne peut pas être garanti.</p>'+D.sources.map(s=>'<p><a href="'+esc(s[1])+'" target="_blank" rel="noopener noreferrer">'+esc(s[0])+'</a><br><small>'+esc(s[2])+'</small></p>').join("")+'<p>Les stratégies Sensei/DoubleDude et Latin Combo sont citées comme alternatives, mais leurs compositions ne sont pas intégrées ici sans audit complet des versions exactes.</p>';a.append(links);
 }
-function renderMechanics(){const a=$("cres-app");a.innerHTML='<div class="cres-note">Cresselia : type Psy · PV 120 / Att. 70 / Déf. 110 / Att. Spé. 75 / Déf. Spé. 120 / Vit. 85 (statistiques de base, différentes de celles du boss de raid). Faiblesses : Insecte, Spectre et Ténèbres ×2. Les règles ci-dessous concernent le raid 6★.</div><div class="cres-ability">'+D.mechanics.map(([name,desc])=>'<article><h3>'+esc(name)+'</h3><p>'+esc(desc)+'</p></article>').join("")+'</div>';}
+function renderMechanics(){
+const app=$("cres-app");app.replaceChildren();
+const intro=document.createElement("section");intro.className="mechanics-intro";
+const heading=document.createElement("h2");heading.textContent="Mécaniques communes et seuils de PV";
+const p=document.createElement("p");
+p.textContent="Cresselia : type Psy · PV 120 / Att. 70 / Déf. 110 / Att. Spé. 75 / Déf. Spé. 120 / Vit. 85 (statistiques de base, différentes du boss de raid). Faiblesses : Insecte, Spectre et Ténèbres ×2. Les règles ci-dessous concernent le raid 6★.";
+intro.append(heading,p);app.append(intro);
+const grid=document.createElement("div");grid.className="mechanic-grid";
+D.mechanics.forEach(([name,detail])=>{
+ const card=document.createElement("article");card.className="raid-mechanic-note";
+ const h=document.createElement("h3");h.textContent=name;
+ const desc=document.createElement("p");desc.textContent=detail;
+ card.append(h,desc);grid.append(card);
+});app.append(grid);
+}
 function render(){head();if(ST.tab==="combat")renderCombat();else if(ST.tab==="pokemon")renderPokemon();else if(ST.tab==="preparation")renderPrep();else renderMechanics();}
 
 render();
