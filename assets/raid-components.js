@@ -27,7 +27,7 @@ function actionGrid(actions,selected){
  const grid=el("div","battle-grid");
  actions.forEach((a,i)=>{
   const card=el("div","card"+(i===selected?" selected":""));
-  card.append(el("small",null,"JOUEUR "+(i+1)+(i===selected?" · VOTRE ACTION":"")));
+  card.append(el("small",null,"P"+(i+1)+(i===selected?" · VOTRE ACTION":"")));
   const line=el("div","poke-row"),info=el("div","poke-text"),name=el("div","poke-name",a.name),move=el("div","move",a.move);
   info.append(name,move);
   if(a.note)info.append(el("small","raid-when",a.note));
@@ -51,7 +51,7 @@ function battleTurn({target,index,total,title,actions,selected,preflight,banner,
  const copyEl=copyButton("Copier ce tour",copyText,copy);
  panel.append(copyEl,actionGrid(actions,selected));
  if(onPokemon){
-  const jump=el("button","team-link","Voir les 6 Pokémon du joueur "+(selected+1)+" →");
+  const jump=el("button","team-link","Voir les 6 Pokémon du P"+(selected+1)+" →");
   jump.type="button";jump.addEventListener("click",onPokemon);panel.append(jump);
  }
  if(notes)panel.append(notes);
