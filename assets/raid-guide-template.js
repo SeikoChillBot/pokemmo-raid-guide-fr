@@ -32,11 +32,29 @@
     wrap.setAttribute("aria-label","Navigation rapide dans la fiche de raid");
     const mast=element("div","raid-dock-header");
     const title=element("span","raid-dock-title");title.textContent="NAVIGATION DU RAID";
-    const marker=element("span","raid-dock-marker");marker.textContent="● GUIDE INTERACTIF";
+    const marker=element("span","raid-dock-marker");marker.setAttribute("aria-live","polite");marker.textContent="SECTION ACTIVE · COMBAT";
     mast.append(title,marker);
     const inner=element("div","raid-dock-content");
     tabs.classList.add("raid-dock-tabs","raid-template-tabs");
     inner.append(tabs); // réutilise les vrais onglets, avec leurs listeners
+    function syncActiveTab(){
+      const buttons=Array.from(tabs.querySelectorAll("button"));
+      const current=buttons.find(b=>b.classList.contains("active")||b.getAttribute("aria-selected")==="true"||b.getAttribute("aria-pressed")==="true")||buttons[0];
+      for(const button of buttons){
+        const chosen=button===current;
+        button.setAttribute("aria-current",chosen?"page":"false");
+        button.classList.toggle("raid-dock-active",chosen);
+      }
+      if(current){
+        const section=current.textContent.replace(/[⚔◉✓ⓘ]/g,"").trim().toUpperCase();
+        marker.textContent="SECTION ACTIVE · "+section;
+      }
+    }
+    tabs.addEventListener("click",()=>queueMicrotask(syncActiveTab));
+    if(typeof MutationObserver!=="undefined"){
+      new MutationObserver(syncActiveTab).observe(tabs,{childList:true,subtree:true});
+    }
+    syncActiveTab();
     const collapse=element("button","raid-dock-collapse");collapse.type="button";
     let reduced=false; // ouvert par défaut : le dock ne doit pas passer inaperçu
     function apply(){
