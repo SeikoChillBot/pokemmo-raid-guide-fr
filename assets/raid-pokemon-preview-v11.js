@@ -1,144 +1,151 @@
-/* RAID ATLAS FR V11 · aperçus Pokémon au survol.
- * Non destructif : lit uniquement le contenu déjà affiché dans les cartes.
- * Aucune valeur de build, d'EV, d'IV ni de mécanique inventée.
- * Sans requêtes réseau supplémentaires : réutilise l'illustration existante.
+/* RAID ATLAS FR — aperçu riche des Pokémon, V12.
+ * Fonctionne avec les données source des composants partagés, sans
+ * mélanger les stratégies ni inventer les EV/IV, attaques ou objets.
+ * Compatible avec toutes les futures fiches utilisant RaidAtlasComponents.
  */
 (()=>{
 "use strict";
-function initPreview(){
-if(!document.body?.classList?.contains("raid-template-ready"))return;
-if(typeof window.matchMedia==="function"&&window.matchMedia("(hover:none), (pointer:coarse)").matches)return;
-const selectors=[
- ".raid-template-content .battle-grid .card",
- ".raid-template-content details.card > summary",
- ".raid-template-content .prep-card > .poke-row",
- ".raid-template-content .h25-battle-grid .h25-card",
- ".raid-template-content .h25-player-card"
-].join(",");
-const preview=document.createElement("aside");
-preview.className="raid-v11-pokemon-preview";
-preview.id="raid-v11-pokemon-preview";
-preview.hidden=true;
-preview.setAttribute("role","tooltip");
-preview.setAttribute("aria-live","off");
-document.body.append(preview);
-let current=null;
-const el=(tag,cls,txt)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=String(txt);return e;};
-const normalize=s=>String(s||"").replace(/^\s*\d+\.\s*/,"").replace(/\s+/g," ").trim();
-function detailFrom(card){
- const details=card.closest("details.card")||card;
- const rows=[];
- const seen=new Set();
- function push(k,v){
-   k=normalize(k);v=normalize(v);
-   if(!k||!v||seen.has(k.toLowerCase())||rows.length>=5)return;
-   seen.add(k.toLowerCase());rows.push([k,v]);
+function init(){
+ if(!document.body?.classList?.contains("raid-template-ready"))return;
+ if(typeof window.matchMedia==="function"&&window.matchMedia("(hover:none), (pointer:coarse)").matches)return;
+ const selectors=[
+  ".raid-template-content .battle-grid .card",
+  ".raid-template-content details.card > summary",
+  ".raid-template-content .prep-card",
+  ".raid-template-content .h25-battle-grid .h25-player-card",
+  ".raid-template-content .h25-build > summary",
+  ".raid-template-content .h25-team-build",
+  ".raid-template-content .h25-player-card:has(img)"
+ ].join(",");
+ const tooltip=document.createElement("aside");
+ tooltip.id="raid-v11-pokemon-preview";
+ tooltip.className="raid-v11-pokemon-preview raid-v12-rich-preview";
+ tooltip.hidden=true;tooltip.setAttribute("role","tooltip");
+ tooltip.setAttribute("aria-live","off");document.body.append(tooltip);
+ let active=null;
+ const el=(tag,cls,label)=>{
+  const node=document.createElement(tag);
+  if(cls)node.className=cls;
+  if(label!=null)node.textContent=String(label);
+  return node;
+ };
+ const normalize=x=>String(x??"").replace(/^\s*\d+\.\s*/,"").replace(/\s+/g," ").trim();
+ const missing="Non précisé dans la source";
+ const fields=[["Objet tenu","item"],["Nature","nature"],["Talent","ability"],
+  ["EV","ev"],["IV","iv"],["Attaques","moves"]];
+ function parseData(root){
+  const raw=root?.dataset?.raidBuild;
+  if(!raw)return null;
+  try{
+   const value=JSON.parse(raw);
+   return value&&typeof value==="object"?value:null;
+  }catch(_){return null;}
  }
- const stats=details.querySelectorAll(".build-fact");
- for(const stat of stats){push(stat.querySelector("small")?.textContent,stat.querySelector("strong")?.textContent);}
- if(!rows.length&&details.matches("details")){
-   for(const tr of details.querySelectorAll("table tr")){
-     const cells=tr.querySelectorAll("td");
-     if(cells.length>=2)push(cells[0].textContent,cells[1].textContent);
-   }
+ function valueFor(build,key){
+  let v=build?.[key];
+  if(key==="ability"&&!v)v=build?.talent;
+  if(key==="moves"&&!v)v=build?.attacks;
+  if(Array.isArray(v))return v.map(normalize).filter(Boolean).join(" · ");
+  return normalize(v)||missing;
  }
- if(rows.length<1){
-   const note=card.querySelector(".muted")?.textContent;
-   if(note){const [item,move]=note.split(" · ");if(item)push("Objet",item);if(move)push("Attaque",move)}
-   const move=card.querySelector(".move, .h25-move")?.textContent;
-   if(move)push("Action",move);
- }
- return rows;
-}
-function getData(card){
- const detail=card.closest("details.card");
- const owner=detail||card;
- let name=owner.querySelector(".poke-name,.h25-mon-name,.h25-poke-name,.h25-name")?.textContent;
- if(!name){
-   const text=owner.querySelector("strong,h3,h4")?.textContent;
-   if(text&&text.length<=45)name=text;
- }
- name=normalize(name);
- if(!name)return null;
- const image=owner.querySelector("img.raid-artwork-hd, img.sprite, img.h25-thumb, img");
- const role=owner.querySelector("small")?.textContent||"FICHE POKÉMON";
- const note=card.querySelector(".raid-when")?.textContent||
-   (detail?detail.querySelector(".build-source-note")?.textContent:"")||
-   "";
- const items=detailFrom(card);
- const moves=detail?.querySelectorAll(".move-pill");
- if(moves?.length&&items.length<5)items.push(["Attaques",[...moves].map(m=>normalize(m.textContent).replace(/^[◆✦✧⬡]\s*/,"")).filter(Boolean).join(" · ")]);
- return {name,image,role,note,items,isAction:!!card.closest(".battle-grid")};
-}
-function paint(data){
- preview.replaceChildren();
- const header=el("div","raid-v11-preview-head");
- const media=el("div","raid-v11-preview-photo");
- if(data.image){
-  const img=el("img");
-  img.src=data.image.currentSrc||data.image.src;
-  img.alt="";
-  img.addEventListener("error",()=>img.hidden=true,{once:true});
-  media.append(img);
- }
- const title=el("div");
- title.append(el("span","raid-v11-preview-eyebrow",data.role),
-              el("strong","raid-v11-preview-name",data.name));
- header.append(media,title);
- preview.append(header);
- if(data.items.length){
-  const info=el("div","raid-v11-preview-details");
-  for(const [key,value] of data.items.slice(0,6)){
-   const row=el("div","raid-v11-preview-line");
-   row.append(el("span",null,key),el("strong",null,value));
-   info.append(row);
+ function domFallback(root){
+  const info={};
+  const normalizeKey=str=>normalize(str).toLocaleLowerCase("fr");
+  for(const row of root.querySelectorAll(".build-fact, .h25-stat")){
+   const key=normalizeKey(row.querySelector("small")?.textContent);
+   const val=normalize(row.querySelector("strong")?.textContent);
+   if(!val)continue;
+   if(key.startsWith("objet"))info.item=val;
+   else if(key==="nature")info.nature=val;
+   else if(key==="talent")info.ability=val;
+   else if(key==="ev")info.ev=val;
+   else if(key.startsWith("iv"))info.iv=val;
+   else if(key.includes("attaqu")||key.includes("fonction"))info.moves=val;
   }
-  preview.append(info);
+  if(!info.moves){
+   const moves=[...root.querySelectorAll(".move-pill")].map(x=>normalize(x.textContent).replace(/^[◆✦✧⬡]\s*/,"")).filter(Boolean);
+   if(moves.length)info.moves=moves;
+  }
+  return info;
  }
- if(data.note)preview.append(el("p","raid-v11-preview-note",data.note));
- if(data.isAction)preview.append(el("div","raid-v11-preview-footer","Build complet : onglet Pokémon du panneau de raid"));
+ function getData(card){
+  const wrapper=card.closest("details.card,details.h25-build")||card.closest(".h25-team-build")||card;
+  const build=parseData(card)||parseData(wrapper)||domFallback(wrapper);
+  let name=normalize(build.name||build.n||"");
+  if(!name)name=normalize(wrapper.querySelector(".poke-name,.h25-mon-name,.h25-poke-name,.h25-name,.h25-build-title b,.h25-build-title strong")?.textContent);
+  if(!name){
+   const text=wrapper.querySelector(".poke-text .poke-name,strong,h3,h4")?.textContent;
+   if(text&&text.length<56)name=normalize(text);
+  }
+  if(!name)return null;
+  const image=wrapper.querySelector("img.raid-artwork-hd,img.sprite,img.h25-thumb,img");
+  const role=normalize(wrapper.querySelector("small")?.textContent||"FICHE POKÉMON");
+  const note=normalize(build.source||build.note||"");
+  const isAction=!!card.closest(".battle-grid,.h25-battle-grid");
+  return {name,image,role,note,build,isAction};
+ }
+ function paint(data){
+  tooltip.replaceChildren();
+  const head=el("div","raid-v11-preview-head");
+  const photo=el("div","raid-v11-preview-photo");
+  if(data.image){
+   const image=el("img");image.src=data.image.currentSrc||data.image.src;image.alt="";
+   image.addEventListener("error",()=>image.hidden=true,{once:true});
+   photo.append(image);
+  }
+  const header=el("div");
+  header.append(el("span","raid-v11-preview-eyebrow",data.role||"FICHE POKÉMON"),
+   el("strong","raid-v11-preview-name",data.name));
+  head.append(photo,header);tooltip.append(head);
+  const rows=el("div","raid-v11-preview-details raid-v12-preview-details");
+  for(const [label,key] of fields){
+   const row=el("div","raid-v11-preview-line");
+   row.append(el("span",null,label),el("strong",null,valueFor(data.build,key)));
+   if(key==="moves")row.classList.add("raid-v12-preview-moves");
+   rows.append(row);
+  }
+  tooltip.append(rows);
+  if(data.note)tooltip.append(el("p","raid-v11-preview-note",data.note));
+  if(data.isAction&&!data.build?.item)tooltip.append(el("div","raid-v11-preview-footer",
+   "Build non documenté pour ce Pokémon ou ce remplacement. Aucune statistique inventée."));
+ }
+ function position(card){
+  const bounds=card.getBoundingClientRect();
+  const w=tooltip.offsetWidth||385,h=tooltip.offsetHeight||350;
+  const vw=window.innerWidth,vh=window.innerHeight;
+  let left=bounds.right+12;
+  if(left+w>vw-14)left=bounds.left-w-12;
+  left=Math.max(9,Math.min(left,vw-w-9));
+  const top=Math.max(8,Math.min(bounds.top+(bounds.height-h)/2,vh-h-8));
+  tooltip.style.left=Math.round(left)+"px";
+  tooltip.style.top=Math.round(top)+"px";
+ }
+ function show(card){
+  if(!card||active===card)return;
+  const data=getData(card);if(!data)return;
+  hide();active=card;paint(data);tooltip.hidden=false;position(card);
+  card.setAttribute("aria-describedby",tooltip.id);
+ }
+ function hide(){
+  if(active?.getAttribute("aria-describedby")===tooltip.id)active.removeAttribute("aria-describedby");
+  active=null;tooltip.hidden=true;
+ }
+ const find=e=>e.target?.closest?.(selectors);
+ document.addEventListener("mouseover",e=>{const target=find(e);if(target)show(target);});
+ document.addEventListener("mouseout",e=>{
+  if(!active||!active.contains(e.target))return;
+  if(e.relatedTarget&&active.contains(e.relatedTarget))return;
+  hide();
+ });
+ document.addEventListener("focusin",e=>{const target=find(e);if(target)show(target);});
+ document.addEventListener("focusout",e=>{
+  if(active&&active.contains(e.target)&&!(e.relatedTarget&&active.contains(e.relatedTarget)))hide();
+ });
+ document.addEventListener("keydown",e=>{if(e.key==="Escape")hide();});
+ document.addEventListener("click",e=>{if(active&&!active.contains(e.target))hide();});
+ window.addEventListener("scroll",hide,{capture:true,passive:true});
+ window.addEventListener("resize",hide,{passive:true});
 }
-function locate(card){
- const a=card.getBoundingClientRect();
- const width=preview.offsetWidth||315,height=preview.offsetHeight||180;
- const vw=window.innerWidth,vh=window.innerHeight;
- let left=a.right+14;
- if(left+width>vw-12)left=a.left-width-14;
- left=Math.max(12,Math.min(left,vw-width-12));
- const top=Math.max(10,Math.min(a.top+(a.height-height)/2,vh-height-12));
- preview.style.left=Math.round(left)+"px";
- preview.style.top=Math.round(top)+"px";
-}
-function show(card){
- if(!card||current===card)return;
- const data=getData(card);
- if(!data)return;
- current=card;
- paint(data);
- preview.hidden=false;
- locate(card);
- card.setAttribute("aria-describedby",preview.id);
-}
-function hide(){
- if(current?.getAttribute("aria-describedby")===preview.id)current.removeAttribute("aria-describedby");
- current=null;preview.hidden=true;
-}
-const fromEvent=e=>e.target?.closest?.(selectors);
-document.addEventListener("mouseover",e=>{const target=fromEvent(e);if(target)show(target);});
-document.addEventListener("mouseout",e=>{
- if(!current||!current.contains(e.target))return;
- if(e.relatedTarget&&current.contains(e.relatedTarget))return;
- hide();
-});
-document.addEventListener("focusin",e=>{const target=fromEvent(e);if(target)show(target);});
-document.addEventListener("focusout",e=>{
- if(current&&current.contains(e.target)&&!(e.relatedTarget&&current.contains(e.relatedTarget)))hide();
-});
-document.addEventListener("keydown",e=>{if(e.key==="Escape")hide();});
-document.addEventListener("click",e=>{if(!current?.contains(e.target))hide();});
-window.addEventListener("scroll",hide,{passive:true,capture:true});
-window.addEventListener("resize",hide,{passive:true});
-}
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initPreview,{once:true});
-else initPreview();
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});
+else init();
 })();
