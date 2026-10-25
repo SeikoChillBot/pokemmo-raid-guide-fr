@@ -1,0 +1,207 @@
+/* RAID ATLAS — V10 FR
+   GIF animé de l'antre de raid (source PokeMMO choisie par l'utilisateur).
+   Navigation juste sous les actions ; transparence/fondu des Pokémon.
+   Pas d'intervention sur les données ni sur les onglets.
+*/
+:root { --raid-den-gif: url("https://forums.pokemmo.com/uploads/monthly_2024_10/image.gif.648305b1dffc92bffc880d8dc40ef109.gif"); }
+/* Un carré serré sur l'antre actif — le GIF reste animé. */
+.site-wrap .atlas-list-art.raid-v9-den-art {
+  align-items:center!important;
+  justify-content:center!important;
+}
+.site-wrap .raid-v9-den-photo.raid-v10-den-gif {
+  display:block!important;
+  box-sizing:border-box!important;
+  aspect-ratio:1 / 1!important;
+  width:min(100%,300px)!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:300px!important;
+  overflow:hidden!important;
+  border:1px solid #b1463d!important;
+  border-radius:18px!important;
+  background-color:#191515!important;
+  background-image:linear-gradient(0deg,#100d1068 0%,transparent 24%),var(--raid-den-gif)!important;
+  background-size:100% 100%,185% auto!important;
+  background-position:center,50% 48%!important;
+  background-repeat:no-repeat!important;
+  image-rendering:pixelated!important;
+  box-shadow:0 19px 39px #000a,0 0 0 4px #a834291c!important;
+  transform:none!important;
+}
+.site-wrap .raid-v9-den-art .raid-v9-den-caption {
+  margin-top:12px!important;
+  background:#231b1bec!important;
+  border-color:#a33b33!important;
+}
+.site-wrap .raid-v9-den-art .raid-v9-den-source {
+  text-align:center!important;
+  margin-top:8px!important;
+}
+/* Accueil : ce même carré animé remplace l'illustration de Heatran
+   uniquement dans la carte permanente. Texte et lien existants inchangés. */
+.site-wrap .event-card.main.raid-v10-den-event {
+  position:relative!important;
+  isolation:isolate;
+  overflow:hidden!important;
+  background:linear-gradient(115deg,#231c1d,#121214 69%)!important;
+}
+.site-wrap .event-card.main.raid-v10-den-event .raid-v10-den-home {
+  position:absolute!important;
+  display:block!important;
+  box-sizing:border-box!important;
+  top:50%!important;
+  left:auto!important;
+  right:clamp(12px,4%,30px)!important;
+  width:clamp(140px,46%,280px)!important;
+  height:auto!important;
+  aspect-ratio:1 / 1!important;
+  max-height:none!important;
+  margin:0!important;
+  padding:0!important;
+  border:1px solid #9e413b!important;
+  border-radius:16px!important;
+  background-color:#1a1615!important;
+  background-image:linear-gradient(0deg,#100d105e,transparent 38%),var(--raid-den-gif)!important;
+  background-size:100% 100%,185% auto!important;
+  background-position:center,50% 48%!important;
+  background-repeat:no-repeat!important;
+  image-rendering:pixelated!important;
+  filter:drop-shadow(0 15px 25px #000b)!important;
+  transform:translateY(-50%)!important;
+  opacity:.97!important;
+  z-index:1!important;
+  pointer-events:none!important;
+}
+.site-wrap .event-card.main.raid-v10-den-event:hover .raid-v10-den-home {
+  transform:translateY(-50%) scale(1.045)!important;
+  filter:drop-shadow(0 18px 24px #000c)!important;
+}
+.site-wrap .event-card.main.raid-v10-den-event .event-info {
+  position:relative!important;
+  z-index:3!important;
+  max-width:71%!important;
+  text-shadow:0 2px 11px #000e!important;
+}
+.site-wrap .event-card.main.raid-v10-den-event::after {
+  z-index:2!important;
+  pointer-events:none!important;
+  background:linear-gradient(90deg,#171315c4 0%,#171315b0 41%,transparent 78%)!important;
+}
+.site-wrap .event-card.main.raid-v10-den-event .event-foot {
+  position:relative!important;
+  z-index:4!important;
+}
+/* Aucun carré noir sous les Pokémon pendant le combat :
+   background non opaque + teintes fondues dans la carte. */
+body.raid-template-ready .raid-template-content .battle-grid .card .poke-row {
+  position:relative!important;
+  isolation:isolate!important;
+}
+body.raid-template-ready .raid-template-content .battle-grid .card .poke-row::before {
+  content:""!important;
+  position:absolute!important;
+  top:50%!important;
+  left:0!important;
+  width:clamp(80px,20%,125px)!important;
+  height:105%!important;
+  transform:translateY(-50%)!important;
+  background:radial-gradient(ellipse,#a12a2c20 0%,#68252510 47%,transparent 73%)!important;
+  pointer-events:none!important;
+  z-index:0!important;
+}
+body.raid-template-ready .raid-template-content .battle-grid .card .poke-row img.sprite,
+body.raid-template-ready .raid-template-content .battle-grid .card img.sprite,
+body.raid-template-ready .raid-template-content .battle-grid .sprite,
+body.raid-template-ready .raid-template-content .battle-grid img.raid-artwork-hd {
+  position:relative!important;
+  z-index:1!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  border-radius:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  mix-blend-mode:lighten!important;
+  image-rendering:auto!important;
+  object-fit:contain!important;
+  filter:drop-shadow(0 11px 12px #0009)!important;
+}
+body.raid-template-ready .raid-template-content .battle-grid .card .poke-text{
+  position:relative!important;z-index:1!important
+}
+/* Navigation à la place de « Voir les 6 Pokémon du Px »,
+   immédiatement APRÈS la grille des quatre actions, avant les notes du tour. */
+body.raid-template-ready .raid-template-content .turn-panel>.phase-nav.raid-inline-turn-nav,
+body.raid-template-ready .raid-template-content .h25-card>.h25-actions.raid-inline-turn-nav,
+body.raid-template-ready .raid-template-content .phase-nav.raid-inline-turn-nav {
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  align-items:stretch!important;
+  gap:10px!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  padding:8px!important;
+  margin:12px 0 10px!important;
+  border:1px solid #813b37!important;
+  border-radius:11px!important;
+  background:linear-gradient(120deg,#292020,#171517)!important;
+  box-shadow:0 11px 26px #0006,inset 0 1px #ffffff09!important;
+}
+body.raid-template-ready .raid-template-content .phase-nav.raid-inline-turn-nav button,
+body.raid-template-ready .raid-template-content .h25-actions.raid-inline-turn-nav button {
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  box-sizing:border-box!important;
+  min-width:0!important;
+  min-height:42px!important;
+  height:42px!important;
+  margin:0!important;
+  padding:7px 10px!important;
+  font:800 12px/1.2 "DM Sans",system-ui,sans-serif!important;
+  color:#fff!important;
+  border:1px solid #a5463d!important;
+  border-radius:8px!important;
+  background:linear-gradient(110deg,#482727,#301e20)!important;
+  cursor:pointer!important;
+}
+body.raid-template-ready .raid-template-content .phase-nav.raid-inline-turn-nav button:not(:disabled):hover,
+body.raid-template-ready .raid-template-content .h25-actions.raid-inline-turn-nav button:not(:disabled):hover {
+  border-color:#ff675b!important;background:linear-gradient(110deg,#c7332b,#8e201e)!important
+}
+body.raid-template-ready .raid-template-content .phase-nav.raid-inline-turn-nav button:disabled,
+body.raid-template-ready .raid-template-content .h25-actions.raid-inline-turn-nav button:disabled{
+  opacity:.34!important;cursor:not-allowed!important
+}
+body.raid-template-ready .raid-template-content .team-link{display:none!important}
+@media(max-width:760px){
+  .site-wrap .event-card.main.raid-v10-den-event .raid-v10-den-home {
+    width:clamp(130px,48%,215px)!important;
+    right:8px!important;
+  }
+  .site-wrap .event-card.main.raid-v10-den-event .event-info {
+    max-width:78%!important
+  }
+  .site-wrap .raid-v9-den-photo.raid-v10-den-gif {
+    width:min(100%,245px)!important
+  }
+}
+@media(max-width:470px){
+  .site-wrap .event-card.main.raid-v10-den-event .raid-v10-den-home{
+    width:55%!important;
+    right:-4%!important;
+    opacity:.75!important
+  }
+  .site-wrap .event-card.main.raid-v10-den-event .event-info{max-width:95%!important}
+  body.raid-template-ready .raid-template-content .phase-nav.raid-inline-turn-nav button,
+  body.raid-template-ready .raid-template-content .h25-actions.raid-inline-turn-nav button{
+    font-size:11px!important;
+    padding:7px 5px!important
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .site-wrap .event-card.main.raid-v10-den-event .raid-v10-den-home{transition:none!important}
+}
