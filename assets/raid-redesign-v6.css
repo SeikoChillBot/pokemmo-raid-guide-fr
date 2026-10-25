@@ -644,3 +644,41 @@ body.raid-template-ready .raid-guide-dock .raid-dock-tabs button.raid-dock-activ
 @media(prefers-reduced-motion:reduce){
  .site-wrap .hero-right .hero-pokemon.hero-cycle-enter{animation:none!important}
 }
+
+
+/* Neutralisation ciblée des anciens bleus sur les archives Halloween 2025. */
+body.raid-template-ready .h25-card,
+body.raid-template-ready .h25-team-build,
+body.raid-template-ready .h25-build,
+body.raid-template-ready .h25-region,
+body.raid-template-ready .h25-resource,
+body.raid-template-ready .h25-source,
+body.raid-template-ready .h25-preview{
+ background:linear-gradient(140deg,#282229,#19171c)!important;
+ border-color:#58454e!important;color:#f2edf0!important
+}
+body.raid-template-ready .h25-player-card,
+body.raid-template-ready .h25-stat,
+body.raid-template-ready .h25-candidate{
+ background:#282329!important;border-color:#58464e!important;color:#f1edef!important
+}
+body.raid-template-ready .h25-player-card.chosen{
+ border-color:#fa7480!important;background:#3a252e!important;box-shadow:inset 3px 0 #f66a77!important
+}
+body.raid-template-ready .h25-callout,
+body.raid-template-ready .h25-build-note{
+ background:#30222b!important;border-left-color:#f37683!important;color:#e8d5dd!important
+}
+body.raid-template-ready .h25-actions button,
+body.raid-template-ready .h25-mode button,
+body.raid-template-ready .h25-player button,
+body.raid-template-ready .h25-select{
+ background:#30272e!important;border-color:#805460!important;color:#faf4f6!important
+}
+body.raid-template-ready .h25-mode button[aria-pressed="true"],
+body.raid-template-ready .h25-player button[aria-pressed="true"]{
+ background:#994052!important;border-color:#f3828f!important
+}
+body.raid-template-ready .h25-card p,
+body.raid-template-ready .h25-muted,
+body.raid-template-ready .h25-source p{color:#c9bfc5!important}
