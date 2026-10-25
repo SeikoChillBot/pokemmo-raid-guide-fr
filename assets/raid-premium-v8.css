@@ -1,0 +1,480 @@
+/* RAID ATLAS FR — STUDIO FINISH / V8
+ * Habillage uniquement : aucun changement de placement, de rôles ou de rotations.
+ * Direction : noir carbone · gris acier · blanc · rouge franc.
+ */
+:root{
+ --raid-v8-red:#d72525;
+ --raid-v8-red-hot:#f0443c;
+ --raid-v8-red-deep:#87191b;
+ --raid-v8-red-wash:#b91c1c33;
+ --raid-v8-ink:#f7f5f5;
+ --raid-v8-muted:#bdb9b9;
+ --raid-v8-panel:#171719;
+ --raid-v8-surface:#232225;
+ --raid-v8-stroke:#494044;
+ --raid-v8-stroke-hot:#a83a38;
+ --v6-accent:#e3342f;
+ --v5-accent:#e3342f;
+ --v5-red:#e3342f;
+ --raid-accent:#e3342f;
+ accent-color:#d72525
+}
+html{scroll-behavior:smooth}
+body{
+ color:var(--raid-v8-ink)!important;
+ background:
+ radial-gradient(ellipse at 86% 2%,#851a1a20 0,transparent 38%),
+ radial-gradient(ellipse at 12% 58%,#77202017 0,transparent 35%),
+ linear-gradient(165deg,#09090a 0%,#151415 45%,#09090b 100%)!important
+}
+body :is(button,select,a,input){-webkit-tap-highlight-color:transparent}
+body :is(a,button,select,input):focus-visible{
+ outline:2px solid #ff675d!important;
+ outline-offset:3px!important
+}
+::selection{background:#c52727;color:#fff}
+:is(.site-wrap,body.raid-template-ready) .atlas-guide-mark,
+:is(.site-wrap,body.raid-template-ready) .mark{
+ background:linear-gradient(145deg,#fd4338,#971818)!important;
+ box-shadow:0 9px 26px #dc252543!important
+}
+/* Identité, en-têtes et héros : rouge plus vif, aucun aplat rose-violet. */
+.site-wrap .navbar,
+body.raid-template-ready .raid-template-navbar{
+ border-color:#4d3a3c!important;
+ background:linear-gradient(110deg,#232021,#121113)!important;
+ box-shadow:0 16px 40px #0008!important
+}
+.site-wrap .navlinks a:hover{color:#ff756c!important}
+.site-wrap .hero,
+.site-wrap .atlas-list-hero,
+.site-wrap .hx-lead,
+.site-wrap .atlas-soon,
+body.raid-template-ready .raid-template-hero{
+ border:1px solid #654045!important;
+ background:
+ radial-gradient(circle at 78% 34%,#c02c2933,transparent 43%),
+ linear-gradient(125deg,#292122 0%,#121214 61%,#241818 100%)!important;
+ box-shadow:0 25px 55px #0009,0 0 0 1px #ffffff08 inset!important
+}
+.site-wrap .hero:before,
+.site-wrap .event-card:before{
+ background:
+ radial-gradient(circle at 82% 46%,#dc312b33,transparent 42%),
+ linear-gradient(122deg,#2c2223,#121214 70%,#261b1a)!important
+}
+.site-wrap .hero .overline,
+.site-wrap .hero h1 em,
+.site-wrap .atlas-kicker,
+.site-wrap .section-no,
+.site-wrap .atlas-back,
+.site-wrap .section-head .section-no{
+ color:#ff5149!important
+}
+.site-wrap .hero-right:before{
+ border-color:#db33294d!important;
+ background:radial-gradient(circle,#b824242b 0%,transparent 67%)!important
+}
+.site-wrap .hero .hero-pokemon{
+ filter:drop-shadow(0 36px 27px #000c)!important
+}
+.site-wrap .hero-right .hero-corner{
+ background:#221819de!important;
+ border-color:#ac3834!important;
+ color:#ffd4d1!important
+}
+.site-wrap .hero-right .hero-boss-info{
+ background:#171415e8!important;
+ border-color:#ae3937!important;
+ box-shadow:0 13px 40px #000b,0 0 20px #a828281c!important
+}
+.site-wrap .hero-right .hero-boss-info.is-available small{color:#ff6e64!important}
+.site-wrap .hero-right .hero-boss-controls{
+ background:#161415ed!important;
+ border-color:#97433d!important
+}
+.site-wrap .hero-boss-controls button{
+ background:#44211f!important;
+ border-color:#a6423c!important
+}
+.site-wrap .hero-boss-controls button:hover{background:#bc2926!important}
+.site-wrap .hero-bottom{
+ background:linear-gradient(90deg,#110f11d9,#1f1718d9)!important;
+ border-top:1px solid #672e2c!important
+}
+.site-wrap .section-head{border-color:#483536!important}
+.site-wrap .section-head:after{
+ background:linear-gradient(90deg,#ff5549,#a21b1b)!important;
+ box-shadow:0 0 16px #e329294f!important
+}
+/* Cartes d'accueil et choix de boss : profondeur sans pavés plus grands. */
+.site-wrap .raid-quick-access{
+ border-color:#5a3b3b!important;
+ background:
+ linear-gradient(130deg,#262020,#151516 64%,#211819)!important;
+ box-shadow:0 22px 48px #0008,0 1px #ffffff09 inset!important
+}
+.site-wrap .raid-quick-access-head span{
+ color:#f04942!important
+}
+.site-wrap .raid-quick-access-head h2,
+.site-wrap .section-head h2{
+ color:#f8f6f6!important;
+ text-shadow:0 2px 16px #0008!important
+}
+.site-wrap .raid-quick-access-card{
+ position:relative!important;
+ isolation:isolate;
+ overflow:hidden;
+ border:1px solid #534042!important;
+ border-radius:13px!important;
+ background:linear-gradient(125deg,#282325,#181718)!important;
+ box-shadow:0 10px 26px #0006,0 1px #ffffff09 inset!important;
+ transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease!important
+}
+.site-wrap .raid-quick-access-card:before{
+ content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+ background:radial-gradient(circle at 11% 46%,#d52c2c30,transparent 55%),
+ linear-gradient(100deg,#ffffff03,transparent 70%)
+}
+.site-wrap .raid-quick-access-card:first-child{
+ border-color:#a22a29!important;
+ box-shadow:inset 3px 0 0 #e33830,0 10px 29px #0008!important
+}
+.site-wrap .raid-quick-access-card:hover{
+ border-color:#f44841!important;
+ background:linear-gradient(125deg,#302222,#1b191a)!important;
+ box-shadow:0 16px 40px #0009,0 0 22px #cb282829!important;
+ transform:translateY(-3px)!important
+}
+.site-wrap .raid-quick-access-card img{
+ object-fit:contain!important;
+ image-rendering:auto!important;
+ filter:drop-shadow(0 10px 14px #000a)!important;
+ transition:transform .28s ease!important
+}
+.site-wrap .raid-quick-access-card:hover img{transform:scale(1.065)}
+.site-wrap .raid-quick-access-card span{color:#f36b64!important}
+.site-wrap .raid-quick-access-card strong{color:#fff!important}
+.site-wrap .event-card{
+ border-color:#4e3b3c!important;
+ background:linear-gradient(132deg,#252022,#131314)!important;
+ box-shadow:0 17px 43px #0008!important
+}
+.site-wrap .event-card.main{
+ border-color:#a62b2a!important;
+ box-shadow:0 17px 43px #0009,inset 0 0 0 1px #a7242412!important
+}
+.site-wrap .event-card:hover{
+ border-color:#fa5046!important;
+ box-shadow:0 23px 51px #000a,0 0 22px #c7292928!important
+}
+.site-wrap .event-card.main:before{
+ background:radial-gradient(circle at 75% 42%,#bd312b47,transparent 52%),
+ linear-gradient(130deg,#342021,#151316)!important
+}
+.site-wrap .event-card .event-foot{
+ background:#541e20!important;border-color:#b43532!important
+}
+.site-wrap .event-card:hover .event-foot{background:#b62a28!important}
+.site-wrap .event-state.live,
+.site-wrap .raid-tile .available{
+ color:#ffb5b1!important;
+ background:#401e1d!important;
+ border-color:#a34340!important
+}
+.site-wrap .raid-tile,
+.site-wrap .hx-year,
+.site-wrap .hx-raid,
+.site-wrap .hx-chip{
+ background:linear-gradient(135deg,#262124,#151416)!important;
+ border-color:#514043!important;
+ box-shadow:0 12px 31px #0006!important
+}
+.site-wrap .raid-tile.selected{
+ background:radial-gradient(circle at 79% 43%,#cc282b2d,transparent 53%),
+ linear-gradient(135deg,#2c2021,#171516)!important;
+ border-color:#a83e36!important
+}
+.site-wrap .raid-tile:hover,
+.site-wrap .hx-year:hover,
+.site-wrap .hx-raid:hover{
+ border-color:#ed493e!important;
+ box-shadow:0 18px 35px #0009,0 0 19px #c22c291d!important
+}
+.site-wrap .halloween-legacy-note{color:#ff7770!important}
+/* Panneau flottant V7 : on ne change ni sa place ni ses dimensions. */
+body.raid-template-ready .raid-command-center{
+ --center-edge:#713b3b;
+ --center-bg:#181617;
+ --center-panel:#201c1e;
+ --center-muted:#c2b7b7;
+ background:linear-gradient(111deg,#242021f7 0%,#111112fa 52%,#221719f9)!important;
+ border-color:#7a3837!important;
+ box-shadow:0 18px 45px #000c,0 1px #ffffff11 inset,0 0 26px #bf22221a!important
+}
+body.raid-template-ready .raid-command-center .raid-center-header{
+ border-bottom-color:#573331!important
+}
+body.raid-template-ready .raid-command-center .raid-center-title:before{
+ background:#ff3933!important;
+ box-shadow:0 0 12px #fe312f92!important
+}
+body.raid-template-ready .raid-command-center .raid-dock-marker{
+ background:linear-gradient(110deg,#531d1e,#30191b)!important;
+ border-color:#ad3934!important;
+ color:#ffceca!important
+}
+body.raid-template-ready .raid-command-center .raid-dock-collapse{
+ background:#2a2021!important;
+ border-color:#91413b!important
+}
+body.raid-template-ready .raid-command-center .raid-dock-collapse:hover{
+ background:#a72524!important;
+ border-color:#fa5951!important
+}
+body.raid-template-ready .raid-command-center .raid-template-commandbar>.raid-template-strategy,
+body.raid-template-ready .raid-command-center .raid-template-commandbar>.raid-template-rolebar{
+ background:linear-gradient(125deg,#292224,#1b191a)!important;
+ border-color:#554043!important
+}
+body.raid-template-ready .raid-command-center .raid-template-commandbar :is(.control label,.section-heading,.cres-panel-label){
+ color:#ff6a63!important
+}
+body.raid-template-ready .raid-command-center .raid-template-commandbar :is(select,.raid-strategy-readonly){
+ background:#252124!important;
+ border-color:#724447!important
+}
+body.raid-template-ready .raid-command-center .raid-template-commandbar :is(#players,#cres-players,.h25-player) button,
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button{
+ background:#292628!important;
+ border-color:#524044!important;
+ color:#e8e1e1!important;
+ transition:background .15s,border-color .15s,box-shadow .15s!important
+}
+body.raid-template-ready .raid-command-center .raid-template-commandbar :is(#players,#cres-players,.h25-player) button:hover,
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button:hover{
+ border-color:#d84139!important;background:#452322!important
+}
+body.raid-template-ready .raid-command-center .raid-template-commandbar :is(#players,#cres-players,.h25-player) button.active,
+body.raid-template-ready .raid-command-center .raid-template-commandbar :is(#players,#cres-players,.h25-player) button[aria-pressed="true"],
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button.active,
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button.raid-dock-active,
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button[aria-current="page"],
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button[aria-selected="true"]{
+ background:linear-gradient(120deg,#e3322b,#931b1b)!important;
+ border-color:#ff685c!important;
+ box-shadow:inset 0 -2px 0 #ffffff35,0 0 16px #db272735!important;
+ color:#fff!important
+}
+/* Artworks : même qualité que les boss, même cadrage dans toutes les cartes. */
+body.raid-template-ready .raid-template-content img.raid-artwork-hd,
+body.raid-template-ready .raid-template-content img.sprite{
+ image-rendering:auto!important;
+ object-fit:contain!important;
+ object-position:center!important;
+ filter:drop-shadow(0 8px 9px #0009)!important;
+ background:transparent!important;
+ border:0!important;
+ opacity:1!important;
+ transition:transform .2s ease,filter .2s ease!important
+}
+body.raid-template-ready .raid-template-content .battle-grid .sprite{
+ width:81px!important;height:81px!important;flex:0 0 81px!important;
+ padding:2px!important;border:0!important;
+ filter:drop-shadow(0 11px 13px #000a)!important
+}
+body.raid-template-ready .raid-template-content .battle-grid .card{
+ position:relative!important;isolation:isolate;overflow:hidden!important;
+ border-color:#554043!important;
+ background:linear-gradient(125deg,#282224,#181719)!important;
+ box-shadow:0 10px 26px #0008,0 1px #ffffff07 inset!important;
+ transition:border-color .17s,transform .17s,box-shadow .17s!important
+}
+body.raid-template-ready .raid-template-content .battle-grid .card:before{
+ content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+ background:radial-gradient(circle at 13% 33%,#b8272528,transparent 53%)
+}
+body.raid-template-ready .raid-template-content .battle-grid .card.selected{
+ border-color:#f1473c!important;
+ background:linear-gradient(135deg,#342022,#1a1718)!important;
+ box-shadow:inset 3px 0 0 #fa3e35,0 10px 32px #0009!important
+}
+body.raid-template-ready .raid-template-content .battle-grid .card:hover{
+ border-color:#bc463e!important;
+ transform:translateY(-2px)!important;
+ box-shadow:0 15px 31px #0009!important
+}
+body.raid-template-ready .raid-template-content .battle-grid .card:hover img.raid-artwork-hd,
+body.raid-template-ready .raid-template-content details.card>summary:hover img.raid-artwork-hd,
+body.raid-template-ready .raid-template-content .prep-card:hover img.raid-artwork-hd{
+ transform:scale(1.085)!important;
+ filter:drop-shadow(0 12px 11px #000c)!important
+}
+body.raid-template-ready .raid-template-content .battle-grid .card>small{
+ color:#ff9a92!important
+}
+body.raid-template-ready .raid-template-content .battle-grid .move{
+ color:#ff746b!important
+}
+body.raid-template-ready .raid-template-content .battle-grid .raid-when{
+ border-left-color:#ea3b34!important;
+ background:#361f20!important
+}
+body.raid-template-ready .raid-template-content .battle-intro{
+ background:linear-gradient(110deg,#282122,#171617)!important;
+ border-color:#614342!important
+}
+body.raid-template-ready .raid-template-content .battle-intro h2:before{
+ color:#ff4f46!important
+}
+body.raid-template-ready .raid-template-content>.view-option,
+body.raid-template-ready .raid-template-content .phase-control{
+ background:linear-gradient(120deg,#252122,#191819)!important;
+ border-color:#584040!important
+}
+body.raid-template-ready .raid-template-content .phase-control label{
+ color:#ff6158!important
+}
+body.raid-template-ready .raid-template-content .phase-control select{
+ background:#2a2425!important;border-color:#784242!important
+}
+body.raid-template-ready .raid-template-content .turn-panel{
+ background:linear-gradient(145deg,#241d1e,#121214)!important;
+ border-color:#633b3b!important;
+ box-shadow:0 18px 40px #0008!important
+}
+body.raid-template-ready .raid-template-content .turn-panel>.section-kicker{
+ color:#ff5f55!important
+}
+body.raid-template-ready .raid-template-content .turn-panel>.copy-turn-action,
+body.raid-template-ready .raid-template-content .turn-panel>.team-link,
+body.raid-template-ready .raid-template-content .phase-nav button{
+ background:#382223!important;
+ border-color:#974340!important
+}
+body.raid-template-ready .raid-template-content .turn-panel>.copy-turn-action:hover,
+body.raid-template-ready .raid-template-content .turn-panel>.team-link:hover,
+body.raid-template-ready .raid-template-content .phase-nav button:not(:disabled):hover{
+ background:#ae2825!important;
+ border-color:#f3655b!important
+}
+/* Fiches complètes : header lumineux, arts officiels, données bien séparées. */
+body.raid-template-ready .raid-template-content details.card,
+body.raid-template-ready .raid-template-content details.h25-build,
+body.raid-template-ready .raid-template-content details.cres-mon{
+ background:linear-gradient(155deg,#232021,#161617)!important;
+ border-color:#554042!important;
+ box-shadow:0 11px 26px #0007!important
+}
+body.raid-template-ready .raid-template-content details.card[open],
+body.raid-template-ready .raid-template-content details.h25-build[open]{
+ border-color:#a23e3a!important
+}
+body.raid-template-ready .raid-template-content details.card>summary{
+ background:linear-gradient(110deg,#2b2224,#1e1c1e)!important;
+ border-bottom-color:#69403f!important
+}
+body.raid-template-ready .raid-template-content details.card>summary .sprite{
+ width:76px!important;height:76px!important;flex:0 0 76px!important;
+ padding:1px!important;
+ filter:drop-shadow(0 11px 12px #000b)!important
+}
+body.raid-template-ready .raid-template-content details.card>summary:after{
+ color:#ff554c!important
+}
+body.raid-template-ready .raid-template-content details.card .build-portrait{
+ background:radial-gradient(circle at 50% 65%,#892b292a,transparent 70%),#121214!important;
+ border:1px solid #66403e!important;
+ box-shadow:inset 0 0 24px #0007!important
+}
+body.raid-template-ready .raid-template-content details.card .build-portrait img{
+ filter:drop-shadow(0 11px 12px #000a)!important
+}
+body.raid-template-ready .raid-template-content details.card :is(.build-specs,.build-moves){
+ background:#231f20!important;border-color:#533b3e!important
+}
+body.raid-template-ready .raid-template-content details.card .build-fact{
+ background:#2b2527!important;
+ border-color:#5b3b3c!important
+}
+body.raid-template-ready .raid-template-content details.card .move-pill{
+ background:#302425!important;
+ border-color:#69413f!important
+}
+body.raid-template-ready .raid-template-content details.card .move-symbol{
+ background:#571f21!important;color:#ff796e!important
+}
+body.raid-template-ready .raid-template-content details.card>button:hover{
+ background:#bb2825!important
+}
+body.raid-template-ready .raid-template-content .pokemon-feature-banner{
+ background:radial-gradient(circle at 85% 45%,#c92f2c30,transparent 50%),
+ linear-gradient(110deg,#2b2022,#161517)!important;
+ border-color:#793e3e!important
+}
+body.raid-template-ready .raid-template-content .pokemon-feature-banner .eyebrow{
+ color:#ff6660!important
+}
+body.raid-template-ready .raid-template-content .prep-card,
+body.raid-template-ready .raid-template-content .progress-card,
+body.raid-template-ready .raid-template-content .raid-mechanic-note{
+ background:linear-gradient(125deg,#272122,#191819)!important;
+ border-color:#573f40!important;
+ box-shadow:0 10px 26px #0005!important
+}
+body.raid-template-ready .raid-template-content .prep-card img.sprite{
+ width:70px!important;height:70px!important;object-fit:contain!important
+}
+body.raid-template-ready .raid-template-content .prep-card:hover,
+body.raid-template-ready .raid-template-content .raid-mechanic-note:hover{
+ border-color:#ae4a43!important
+}
+body.raid-template-ready .raid-template-content .raid-mechanic-note h3{
+ color:#ff5e55!important
+}
+body.raid-template-ready .raid-template-content :is(.raid-tips,.mechanics-intro,.raid-source-notice,.raid-latin-unverified){
+ background:linear-gradient(115deg,#292122,#181719)!important;
+ border-color:#69403e!important
+}
+body.raid-template-ready .raid-template-content :is(.raid-alert,.raid-preflight,.raid-source-notice,.raid-latin-unverified){
+ border-left-color:#ec372e!important
+}
+/* Archives Halloween : roster et panneaux conservent leur agencement existant. */
+body.raid-template-ready .raid-template-content :is(.h25-card,.h25-team-build,.h25-build,.h25-player-card,.h25-candidate,.h25-resource){
+ border-color:#593f3f!important;
+ background:linear-gradient(125deg,#282223,#171719)!important
+}
+body.raid-template-ready .raid-template-content :is(.h25-team-build,.h25-build,.h25-card) img{
+ image-rendering:auto!important;filter:drop-shadow(0 9px 13px #0009)!important
+}
+body.raid-template-ready .raid-template-content .h25-player-card.chosen{
+ border-color:#ef5146!important;background:#371f20!important
+}
+body.raid-template-ready .raid-template-content .h25-callout{
+ border-left-color:#db2b29!important;background:#321d1d!important
+}
+body.raid-template-ready .raid-template-content .h25-alert{
+ border-color:#933f3b!important;background:#321f20!important
+}
+body.raid-template-ready .raid-template-content .h25-actions button:hover{
+ background:#b42b28!important
+}
+@media(max-width:640px){
+ body.raid-template-ready .raid-template-content .battle-grid .sprite{
+   width:66px!important;height:66px!important;flex:0 0 66px!important
+ }
+ body.raid-template-ready .raid-template-content details.card>summary .sprite{
+   width:65px!important;height:65px!important;flex:0 0 65px!important
+ }
+ body.raid-template-ready .raid-template-content .prep-card img.sprite{
+   width:58px!important;height:58px!important
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ .site-wrap .raid-quick-access-card img,
+ body.raid-template-ready .raid-template-content img.raid-artwork-hd,
+ body.raid-template-ready .raid-template-content .battle-grid .card{
+   transition:none!important;transform:none!important
+ }
+}
