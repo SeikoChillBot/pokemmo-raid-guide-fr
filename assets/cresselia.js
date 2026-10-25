@@ -612,7 +612,10 @@ for(const [t,i] of list){
  const panel=document.createElement("section");if(ST.all)panel.className="turn-section";
  const actions=t.actions.map(([slot,move],j)=>({
   name:D.team[j][slot].n,move,
-  spriteUrl:img(D.team[j][slot].id)
+  spriteUrl:img(D.team[j][slot].id),
+  build:{name:D.team[j][slot].n,item:D.team[j][slot].item,nature:D.team[j][slot].nature,
+   ability:D.team[j][slot].talent,ev:D.team[j][slot].ev,iv:D.team[j][slot].iv,
+   moves:(D.team[j][slot].attacks||"").split(/\s*[\/·]\s*/).filter(Boolean),source:current().title}
  }));
  const info=document.createElement("section");info.className="raid-tips";
  const heading=document.createElement("h3");heading.textContent="À retenir — "+t.label;
