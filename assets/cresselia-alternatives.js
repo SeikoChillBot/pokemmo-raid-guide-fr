@@ -1,6 +1,6 @@
 /* RAID ATLAS / Cresselia — variantes de la source primaire.
  * Source Sensei/DoubleDude: guide du forum PokeMMO (section "New Strategy").
- * Latin Combo V2: vidéo kriptonitogamer (09/11/2025); EV/IV et actions
+ * Latin Combo V2: référencé chez MMOBreeder ; vidéo Latin Combo par PAXPO (09/11/2025); EV/IV et actions
  * absents d'une source vérifiable dans cet audit: jamais de valeurs inventées.
  */
 (function(global){
@@ -76,12 +76,12 @@ const T=[
  t("Conclusion · dégâts coordonnés",[[5,"Brine"],[5,"Brine"],[5,"Assurance"],[5,"Assurance"]],"","Source du forum : vérifier la version la plus récente et les ajustements de Vitesse avant reproduction.")
 ];
 const sourceSensei="https://forums.pokemmo.com/index.php?/topic/193398-cresselia-raid-guide/";
-const sourceLatin="https://www.youtube.com/watch?v=yBd1KmFZjPE";
+const sourceLatin="https://www.youtube.com/watch?v=AvmnNLs-CWw";
 const Latin={
- id:"latin",title:"Latin Combo V2 · vidéo 12 tours",brief:"Vidéo communautaire de Kriptonito Gamer (9 novembre 2025). Le tableau des builds et les 48 actions n'ont pas pu être vérifiés indépendamment.",
+ id:"latin",title:"Latin Combo V2 · vidéo 12 tours",brief:"Vidéo collaborative Latin Combo publiée par PAXPO le 9 novembre 2025. La variante V2 (12 tours) est listée par MMOBreeder ; les builds et les 48 actions ne sont pas vérifiés indépendamment.",
  complete:false,tours:12,
  source:sourceLatin,
- videoCredits:"kriptonitogamer avec kalffff, PAXPO et RockeritoGamer",
+ videoCredits:"PAXPO avec kriptonito, kalffff et RockeritoGamer",
  warning:"Guide vidéo uniquement : aucune composition complète, attaque de tour, valeur EV ou IV n'a été inventée. Visionner et relever les séquences depuis la vidéo d'origine avant de reproduire la stratégie.",
  team:[[],[],[],[]],turns:[]
 };
