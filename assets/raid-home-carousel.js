@@ -18,7 +18,7 @@ function shuffle(items){for(let i=items.length-1;i>0;i--){const j=Math.floor(Mat
 let order=shuffle([...bosses]),index=0,timer=null,paused=false;
 const label=section.querySelector(".hero-corner");
 const number=section.querySelector(".hero-outline");
-const badge=document.createElement("div");badge.className="hero-boss-info";badge.setAttribute("aria-live","polite");
+const badge=document.createElement("a");badge.className="hero-boss-info";badge.setAttribute("aria-label","Ouvrir la fiche du boss en vedette");badge.setAttribute("aria-live","polite");
 const name=document.createElement("strong");const status=document.createElement("small");badge.append(name,status);
 const controls=document.createElement("div");controls.className="hero-boss-controls";
 const back=document.createElement("button"),forward=document.createElement("button");
@@ -32,11 +32,11 @@ if(label){label.textContent="BOSS EN VEDETTE";}
 function show(){
  const boss=order[index];
  const url="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"+boss.id+".png";
- image.src=url;image.alt="Illustration de "+boss.name;
+ image.src=url;image.alt="Illustration de "+boss.name;image.classList.remove("hero-cycle-enter");void image.offsetWidth;image.classList.add("hero-cycle-enter");
  image.decoding="async";name.textContent=boss.name;
  status.textContent=boss.state;
  badge.classList.toggle("is-available",boss.state==="Guide disponible");
- badge.setAttribute("data-href",boss.href);
+ badge.href=boss.href;badge.title=boss.state==="Guide disponible"?"Ouvrir le guide "+boss.name:"Découvrir les raids permanents";
  if(number){number.textContent="RAID";number.setAttribute("aria-hidden","true");}
  count.textContent=(index+1)+" / "+order.length;
 }
