@@ -31,7 +31,7 @@ function assemble(preset,cfg){
    layout=node("div","raid-template-layout");
    (preset==="halloween"?(one(".h25-alert")||hero):hero).insertAdjacentElement("afterend",layout);
    aside=node("aside","raid-template-sidebar");
-   stage=node("main","raid-template-main");
+   stage=node("div","raid-template-main");
    layout.append(aside,stage);
    // Reposition existing nodes, not copies: preserves event listeners and state.
    const strategy=select(cfg,"strategy"),controls=select(cfg,"controls");
