@@ -103,6 +103,28 @@
      }
    });
    controls.append(action);
+   if (item.status === "treated") {
+     const remove = textNode("button", "Supprimer", "raid-admin-btn danger");
+     remove.type = "button";
+     remove.setAttribute("aria-label", "Supprimer définitivement la suggestion traitée");
+     remove.addEventListener("click", async () => {
+       if (!window.confirm("Supprimer définitivement cette suggestion traitée ? Cette action est irréversible.")) return;
+       remove.disabled = true;
+       action.disabled = true;
+       say(feedback, "Suppression en cours…");
+       try {
+         await api(endpoint + "/" + encodeURIComponent(item.id), { method: "DELETE" });
+         items = items.filter(row => row.id !== item.id);
+         render();
+         say(feedback, "Suggestion supprimée définitivement.");
+       } catch (error) {
+         say(feedback, error.message);
+         remove.disabled = false;
+         action.disabled = false;
+       }
+     });
+     controls.append(remove);
+   }
    article.append(controls);
    return article;
  }
