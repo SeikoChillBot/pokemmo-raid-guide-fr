@@ -1,0 +1,148 @@
+/* RAID ATLAS FR — V12 · passe de correction demandée.
+ * Chargée après V11. Préserve la structure, les moteurs et les données.
+ * À conserver dans le template pour toutes les prochaines fiches.
+ */
+:root{--raid-den-focus:50% 50%}
+
+/* Le GIF original possède des bandes haut/bas. On recadre autour de l'antre
+   sans le grossissement excessif introduit par V11 (232 % / 265 %).
+   Une hauteur de ~180 % retire l'essentiel des bandes tout en gardant
+   le cercle, le palier et les escaliers dans le cadre. */
+.site-wrap .raid-v9-den-photo.raid-v10-den-gif{
+  width:min(100%,310px)!important;
+  height:auto!important;
+  aspect-ratio:1/1!important;
+  max-height:310px!important;
+  min-height:0!important;
+  background-color:#302720!important;
+  background-image:linear-gradient(180deg,#150f100a 45%,#120e1066),var(--raid-den-gif)!important;
+  background-size:100% 100%,auto 178%!important;
+  background-position:center,50% 50%!important;
+  background-repeat:no-repeat!important;
+  image-rendering:auto!important;
+  box-shadow:0 14px 34px #0009,0 0 0 1px #f5573c3d!important;
+}
+.site-wrap .raid-v9-den-art .raid-v9-den-caption,
+.site-wrap .raid-v9-den-art .raid-v9-den-source{display:none!important}
+
+/* L'accueil n'a PAS de vignette : le GIF est le fond entier de la tuile,
+   avec un fondu sous les textes et l'antre central visible. */
+.site-wrap .event-card.main.raid-v10-den-event .raid-v10-den-home{
+  position:absolute!important;inset:0!important;
+  display:block!important;
+  width:100%!important;height:100%!important;
+  background-color:#27201c!important;
+  background-image:var(--raid-den-gif)!important;
+  background-size:auto 172%!important;
+  background-position:50% 50%!important;
+  background-repeat:no-repeat!important;
+  image-rendering:auto!important;
+  border:0!important;outline:0!important;border-radius:0!important;
+  box-shadow:none!important;filter:none!important;
+  transform:none!important;opacity:.85!important;
+}
+.site-wrap .event-card.main.raid-v10-den-event::before{
+  background:radial-gradient(ellipse at 56% 46%,transparent 20%,#17111259 80%,#161012ad 100%)!important;
+}
+.site-wrap .event-card.main.raid-v10-den-event::after{
+  background:linear-gradient(90deg,#0e0c0eef 0%,#140d10d4 28%,#1b101273 55%,#19101225 85%)!important;
+}
+.site-wrap .event-card.main.raid-v10-den-event:hover .raid-v10-den-home{
+  transform:scale(1.018)!important;opacity:.94!important
+}
+/* Ne pas réintroduire le zoom mobile de V11. */
+@media(max-width:650px){
+  .site-wrap .event-card.main.raid-v10-den-event .raid-v10-den-home{
+    background-size:auto 178%!important;
+    background-position:50% 50%!important
+  }
+  .site-wrap .raid-v9-den-photo.raid-v10-den-gif{
+    width:min(79vw,295px)!important;
+    height:auto!important;
+    background-size:100% 100%,auto 178%!important
+  }
+}
+
+/* Pokémon des actions : la transparence / le fondu s'appliquent à l'IMAGE
+   elle-même, pas seulement à la carte ou son arrière-plan. Les images
+   anciennes sur fond noir sont ainsi intégrées comme les Pokémon des builds. */
+body.raid-template-ready .raid-template-content .battle-grid .card img,
+body.raid-template-ready .raid-template-content .battle-grid .card img.sprite,
+body.raid-template-ready .raid-template-content .battle-grid .card img.raid-artwork-hd,
+body.raid-template-ready .raid-template-content .h25-battle-grid .h25-card img,
+body.raid-template-ready .raid-template-content .h25-player-card img{
+  display:block!important;
+  background:none!important;background-color:transparent!important;
+  border:0!important;border-radius:0!important;outline:0!important;
+  box-shadow:none!important;
+  image-rendering:auto!important;object-fit:contain!important;
+  mix-blend-mode:screen!important;
+  -webkit-mask-image:radial-gradient(ellipse 72% 74% at 50% 50%,#000 48%,#000c 73%,transparent 100%)!important;
+  mask-image:radial-gradient(ellipse 72% 74% at 50% 50%,#000 48%,#000c 73%,transparent 100%)!important;
+  filter:drop-shadow(0 10px 10px #0007)!important;
+}
+body.raid-template-ready .raid-template-content .battle-grid .card .poke-row,
+body.raid-template-ready .raid-template-content .h25-battle-grid .h25-preview{
+  background:none!important;
+  background-color:transparent!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+}
+body.raid-template-ready .raid-template-content .battle-grid .card .poke-row::before{
+  background:radial-gradient(circle at 48% 50%,#b62d2a28 0%,#8d24240d 48%,transparent 79%)!important;
+}
+body.raid-template-ready .raid-template-content .battle-grid .card{
+  isolation:isolate!important;
+}
+body.raid-template-ready .raid-template-content .battle-grid .card .sprite{
+  background:none!important;
+  border:0!important;
+}
+
+/* Actions & navigation : les deux vrais boutons de phase hérités du
+   composant canonique arrivent tout de suite après les quatre actions. */
+body.raid-template-ready .raid-template-content .turn-panel>.phase-nav.raid-inline-turn-nav,
+body.raid-template-ready .raid-template-content .h25-card>.h25-actions.raid-inline-turn-nav,
+body.raid-template-ready .raid-template-content .phase-nav.raid-inline-turn-nav{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  width:100%!important;
+  margin:8px 0 12px!important;
+  padding:7px!important;
+  gap:8px!important;
+  border-color:#82413a!important;
+  background:linear-gradient(110deg,#251b1c,#151416)!important;
+}
+body.raid-template-ready .raid-template-content .phase-nav.raid-inline-turn-nav button,
+body.raid-template-ready .raid-template-content .h25-actions.raid-inline-turn-nav button{
+  min-height:42px!important;
+  height:42px!important;
+  background:linear-gradient(120deg,#542621,#301b1c)!important;
+  border:1px solid #ac4a40!important;
+  color:#fff!important;
+}
+body.raid-template-ready .raid-template-content :is(.team-link,.raid-pokemon-jump){
+  display:none!important
+}
+
+/* Onglet actif : le bouton entier, et pas un point discret, se distingue. */
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button.active,
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button.raid-dock-active,
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button.raid-v9-tab-current,
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button[aria-current="page"]{
+  background:linear-gradient(110deg,#f14336,#a91e1d)!important;
+  border:1px solid #ffb5a0!important;
+  box-shadow:inset 0 -4px 0 #ffe3d7,0 0 19px #f044365a!important;
+  color:#fff!important;
+  font-weight:900!important;
+}
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button:not(.active):not(.raid-dock-active):not(.raid-v9-tab-current):not([aria-current="page"]){
+  background:linear-gradient(120deg,#292628,#1e1c1f)!important;
+  color:#d5d0d1!important;
+  box-shadow:none!important;
+}
+@media(prefers-reduced-motion:reduce){
+  .site-wrap .event-card.main.raid-v10-den-event .raid-v10-den-home{
+    transition:none!important;
+  }
+}
