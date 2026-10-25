@@ -27,49 +27,78 @@
       for(const node of root.querySelectorAll(selectors))mark(node,name);
     }
   }
-  function createDock(tabs,anchor){
+  function createDock(tabs,commands,center,players,strategy){
+    // A single sticky panel owns strategy, player selection and navigation.
+    // Move the real elements (never clone buttons): existing game listeners survive.
+    const header=element("div","raid-center-header");
+    const identity=element("div","raid-center-identity");
+    const title=element("span","raid-center-title");title.textContent="PANNEAU DE RAID";
+    const context=element("span","raid-center-context");context.textContent="STRATÉGIE · JOUEURS · NAVIGATION";
+    identity.append(title,context);
+    const status=element("span","raid-dock-marker");
+    status.setAttribute("aria-live","polite");
+    status.textContent="SECTION ACTIVE · COMBAT";
+    const collapse=element("button","raid-dock-collapse");
+    collapse.type="button";
+    let reduced=false;
     const wrap=element("nav","raid-guide-dock");
-    wrap.setAttribute("aria-label","Navigation rapide dans la fiche de raid");
-    const mast=element("div","raid-dock-header");
-    const title=element("span","raid-dock-title");title.textContent="NAVIGATION DU RAID";
-    const marker=element("span","raid-dock-marker");marker.setAttribute("aria-live","polite");marker.textContent="SECTION ACTIVE · COMBAT";
-    mast.append(title,marker);
+    wrap.setAttribute("aria-label","Rubriques du guide de raid");
     const inner=element("div","raid-dock-content");
     tabs.classList.add("raid-dock-tabs","raid-template-tabs");
-    inner.append(tabs); // réutilise les vrais onglets, avec leurs listeners
+    inner.append(tabs);
+    wrap.append(inner);
+
     function syncActiveTab(){
       const buttons=Array.from(tabs.querySelectorAll("button"));
-      const current=buttons.find(b=>b.classList.contains("active")||b.getAttribute("aria-selected")==="true"||b.getAttribute("aria-pressed")==="true")||buttons[0];
+      const current=buttons.find(b=>b.classList.contains("active")||
+        b.getAttribute("aria-selected")==="true"||b.getAttribute("aria-pressed")==="true")||buttons[0];
       for(const button of buttons){
-        const chosen=button===current;
-        button.setAttribute("aria-current",chosen?"page":"false");
-        button.classList.toggle("raid-dock-active",chosen);
+        const selected=button===current;
+        button.setAttribute("aria-current",selected?"page":"false");
+        button.classList.toggle("raid-dock-active",selected);
       }
       if(current){
-        const section=current.textContent.replace(/[⚔◉✓ⓘ]/g,"").trim().toUpperCase();
-        marker.textContent="SECTION ACTIVE · "+section;
+        const section=current.textContent.replace(/[⚔◉✓ⓘ●]/g,"").trim().toUpperCase();
+        status.textContent="SECTION ACTIVE · "+section;
       }
     }
+    function syncContext(){
+      const select=strategy?.querySelector("select");
+      const option=select?.selectedOptions?.[0];
+      const strategyText=option?.textContent?.trim()||
+        strategy?.querySelector(".raid-strategy-readonly")?.textContent?.trim()||
+        strategy?.querySelector("label")?.textContent?.trim()||"STRATÉGIE";
+      const player=players&&Array.from(players.querySelectorAll("button")).find(b=>
+        b.classList.contains("active")||b.getAttribute("aria-pressed")==="true");
+      const role=player?.textContent?.trim()||"P1";
+      context.textContent=strategyText+" · "+role;
+      context.title=context.textContent;
+    }
     tabs.addEventListener("click",()=>queueMicrotask(syncActiveTab));
+    commands.addEventListener("click",()=>queueMicrotask(syncContext));
+    commands.addEventListener("change",()=>queueMicrotask(syncContext));
     if(typeof MutationObserver!=="undefined"){
       new MutationObserver(syncActiveTab).observe(tabs,{childList:true,subtree:true});
+      new MutationObserver(syncContext).observe(commands,{childList:true,subtree:true});
     }
-    syncActiveTab();
-    const collapse=element("button","raid-dock-collapse");collapse.type="button";
-    let reduced=false; // ouvert par défaut : le dock ne doit pas passer inaperçu
     function apply(){
-      wrap.classList.toggle("is-reduced",reduced);
-      inner.hidden=reduced;
+      center.classList.toggle("is-reduced",reduced);
+      commands.hidden=reduced;
+      wrap.hidden=reduced;
+      collapse.textContent=reduced?"Déployer":"Réduire";
       collapse.setAttribute("aria-expanded",String(!reduced));
-      collapse.setAttribute("aria-label",reduced?"Afficher les rubriques du guide":"Réduire la navigation");
-      collapse.textContent=reduced?"Ouvrir la navigation":"Réduire";
+      collapse.setAttribute("aria-controls","raid-center-content");
+      collapse.setAttribute("aria-label",reduced?"Déployer les commandes du raid":"Réduire les commandes du raid");
+      center.setAttribute("data-collapsed",String(reduced));
     }
+    const content=element("div","raid-center-content");
+    content.id="raid-center-content";
+    content.append(commands,wrap);
     collapse.addEventListener("click",()=>{reduced=!reduced;apply();});
-    mast.append(collapse);
-    wrap.append(mast,inner);
-    anchor.insertAdjacentElement("afterend",wrap);
-    apply();
-    return wrap;
+    header.append(identity,status,collapse);
+    center.append(header,content);
+    syncContext();syncActiveTab();apply();
+    return center;
   }
   function boot(){
     if(body.classList.contains("raid-template-ready"))return;
@@ -81,9 +110,11 @@
     if(!hero||!tabs||!content)return;
     const strategy=lookup("strategy",cfg),roles=lookup("roles",cfg),players=lookup("players",cfg);
     const position=kind==="halloween"?(doc.querySelector(".h25-alert")||hero):kind==="cresselia"?(doc.querySelector(".cres-warning")||hero):hero;
-    const commands=element("section","raid-template-commandbar");
+    const center=element("section","raid-command-center");
+    center.setAttribute("aria-label","Commandes et navigation du raid");
+    const commands=element("div","raid-template-commandbar");
     commands.setAttribute("aria-label","Stratégie et attribution des joueurs");
-    position.insertAdjacentElement("afterend",commands);
+    position.insertAdjacentElement("afterend",center);
     if(strategy){mark(strategy,"raid-template-strategy");commands.append(strategy);}
     if(roles&&roles!==strategy){mark(roles,"raid-template-rolebar");commands.append(roles);}
     if(players){mark(players,"raid-template-players");}
@@ -92,11 +123,11 @@
       if(oldHeading)mark(oldHeading,"raid-template-old-nav-heading");
     }
     // Navigation visible directement sous les rôles, jamais masquée par les fiches.
-    createDock(tabs,commands);
+    createDock(tabs,commands,center,players,strategy);
     mark(content,"raid-template-content");
     decorate(cfg);
     body.classList.add("raid-template-ready");
-    body.dataset.raidTemplateVersion="5";
+    body.dataset.raidTemplateVersion="7";
     addCards(content);
     if(typeof MutationObserver!=="undefined"){
       let queued=false;
