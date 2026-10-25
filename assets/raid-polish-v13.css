@@ -63,3 +63,17 @@ body.raid-template-ready .raid-template-content .battle-grid .card .poke-row:bef
 @media(prefers-reduced-motion:reduce){
  .site-wrap .raid-v9-den-art .raid-v9-den-photo.raid-v10-den-gif{transition:none!important}
 }
+
+/* Signature demandée exclusivement dans le footer de l'accueil. */
+.site-wrap .atlas-footer .raid-made-by{
+ display:inline-flex;align-items:baseline;gap:5px;
+ flex-wrap:wrap;margin-left:auto;
+ color:#f1ebeb;font:700 11px/1.5 "DM Sans",system-ui,sans-serif;
+ letter-spacing:.01em
+}
+.site-wrap .atlas-footer .raid-made-by:before{
+ content:"";height:6px;width:6px;background:#df342e;border-radius:50%;
+ box-shadow:0 0 8px #d22c2a7a;margin-right:4px
+}
+.site-wrap .atlas-footer .raid-made-by-alias{color:#ff8174;font-weight:650}
+@media(max-width:750px){.site-wrap .atlas-footer .raid-made-by{margin:6px 0 0}}
