@@ -112,8 +112,29 @@ function buildCard({pokemon,index=0,expanded=false,onToggle,copy}){
  b.onclick=()=>copy(b,p);
  card.append(b);return card;
 }
+function prepCard({name,item,sprite,spriteUrl,checks}){
+ const card=el("div","prep-card"),row=el("div","poke-row");
+ let img=sprite;
+ if(!img&&spriteUrl){img=el("img","sprite");img.src=spriteUrl;img.loading="lazy";img.alt="";}
+ if(img)row.append(img);
+ row.append(el("div","poke-text",name+(item?" · "+item:"")));
+ card.append(row);
+ (checks||[]).forEach(c=>{
+  const label=el("label","prep-check"),box=el("input");
+  box.type="checkbox";box.checked=!!c.checked;
+  box.addEventListener("change",()=>c.onChange(box.checked));
+  label.append(box,doc.createTextNode(c.label));card.append(label);
+ });
+ return card;
+}
+function progressCard(id,title){
+ const node=el("div","progress-card"),head=el("div","progress-head"),label=el("span",null,title||"PRÉPARATION"),percent=el("strong");
+ percent.id=id+"-pct";percent.textContent="0%";head.append(label,percent);
+ const track=el("div","progress-track"),fill=el("div");fill.id=id+"-fill";track.append(fill);
+ node.append(head,track);return node;
+}
 function pokemonIntroNote(text){return el("p","build-source-note",text);}
 global.RaidAtlasComponents=Object.freeze({
- checkbox,battleIntro,phaseSelect,actionGrid,battleTurn,phaseNav,feature,buildCard,pokemonIntroNote
+ checkbox,battleIntro,phaseSelect,actionGrid,battleTurn,phaseNav,feature,buildCard,prepCard,progressCard,pokemonIntroNote
 });
 })(window);
