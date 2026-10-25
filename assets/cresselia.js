@@ -1,0 +1,617 @@
+/* Cresselia raid PokeMMO — données citées v2.1, aucune dépendance aux autres guides. */
+const CRESSELIA_DATA={
+  "team": [
+    [
+      {
+        "n": "Hippodocus",
+        "id": 450,
+        "item": "Herbe Blanche",
+        "talent": "Sable Volant",
+        "nature": "Augmente la Déf. Spé. sans baisser la Vitesse",
+        "iv": "PV 31 ; Déf. Spé. 31 ; Vit. 27–31",
+        "ev": "20 Déf. Spé. ; 252 Vit. ; reste Déf.",
+        "attacks": "Séduction",
+        "note": "Séduction au T1 ; K.O. prévu au T2. Le timing est déterminant."
+      },
+      {
+        "n": "Farfaduvet",
+        "id": 547,
+        "item": "Lumargile",
+        "talent": "Libre",
+        "nature": "Libre",
+        "iv": "Non imposés",
+        "ev": "Éviter les EV en Déf. Spé.",
+        "attacks": "Mur Lumière",
+        "note": "Pose Mur Lumière au T3. Éviter la Déf. Spé. pour conserver le ciblage prévu."
+      },
+      {
+        "n": "Darumacho",
+        "id": 555,
+        "item": "Bandeau Choix",
+        "talent": "Sans Limite",
+        "nature": "Nature +Attaque",
+        "iv": "Att. 31",
+        "ev": "252 Att. ; Vitesse finale inférieure à 269 ; reste Déf./Att. Spé.",
+        "attacks": "Boutefeu",
+        "note": "Attaquant T4. Conserver la Vitesse finale sous le seuil indiqué par la source."
+      },
+      {
+        "n": "Gueriaigle",
+        "id": 628,
+        "item": "Baie Pommo",
+        "talent": "Acharné",
+        "nature": "Rigide / Solo",
+        "iv": "Att. 21–31 ; Vit. 3–31 ; PV 2–31 ; Déf. Spé. 3–31",
+        "ev": "6 PV ; 252 Att. ; 252 Vit.",
+        "attacks": "Assurance",
+        "note": "T5. Construit pour atteindre le plafond de dégâts sans objet offensif."
+      },
+      {
+        "n": "Milobellus",
+        "id": 350,
+        "item": "Cape Obscure",
+        "talent": "Battant",
+        "nature": "Discret",
+        "iv": "PV 31 ; Att. Spé. 31 ; Déf. Spé. 31 ; Vit. 0–1",
+        "ev": "6 PV ; 252 Att. Spé. ; 252 Déf. Spé.",
+        "attacks": "Rune Protect · Lance-Boue · Saumure",
+        "note": "Rune Protect au T6 puis Lance-Boue au T7. L'IV Vitesse 0–1 est intentionnel."
+      },
+      {
+        "n": "Pingoléon",
+        "id": 395,
+        "item": "Lunettes Choix",
+        "talent": "Battant",
+        "nature": "Modeste / Doux / Discret",
+        "iv": "PV 31 ; Att. Spé. 31 ; Déf. Spé. 31",
+        "ev": "6 PV ; 252 Att. Spé. ; 252 Déf. Spé.",
+        "attacks": "Saumure",
+        "note": "T8–T10. Variante de répartition polyvalente corrigée : 232 Att. Spé. / 252 Déf. Spé. / 20 Vit. ; comparer avant d'utiliser entre rôles."
+      }
+    ],
+    [
+      {
+        "n": "Dimoret",
+        "id": 461,
+        "item": "Pointe Poison",
+        "talent": "Non imposé",
+        "nature": "Rigide / Solo",
+        "iv": "PV 2–31 ; Déf. Spé. 2–31 ; Att. 31 ; Vit. 31",
+        "ev": "252 Att. ; 252 Vit.",
+        "attacks": "Dégommage",
+        "note": "T1 : lance la Pointe Poison avec Dégommage."
+      },
+      {
+        "n": "Scalproie",
+        "id": 625,
+        "item": "Orbe Vie",
+        "talent": "Acharné",
+        "nature": "Rigide / Solo / Brave",
+        "iv": "PV 31 ; Att. 31 ; Déf. Spé. 31",
+        "ev": "252 Att. ; 252 Déf. Spé.",
+        "attacks": "Coup Bas",
+        "note": "T2–T3. L'un des trois Scalproie du noyau offensif."
+      },
+      {
+        "n": "Sharpedo",
+        "id": 319,
+        "item": "Bandeau Choix",
+        "talent": "Non imposé",
+        "nature": "Rigide / Solo / Mauvais",
+        "iv": "Att. 31 ; Vit. 31",
+        "ev": "252 Att. ; 252 Vit.",
+        "attacks": "Assurance",
+        "note": "T4 : dommage physique en transition."
+      },
+      {
+        "n": "Gueriaigle",
+        "id": 628,
+        "item": "Veste de Combat",
+        "talent": "Acharné",
+        "nature": "Rigide / Solo",
+        "iv": "Att. 21–31 ; Vit. 3–31",
+        "ev": "6 PV ; 252 Att. ; 252 Déf. Spé.",
+        "attacks": "Assurance",
+        "note": "T5. Sa Déf. Spé. oriente le ciblage vers le Gueriaigle de J1 ; ne pas ajouter des EV Vitesse librement."
+      },
+      {
+        "n": "Milobellus",
+        "id": 350,
+        "item": "Cape Obscure",
+        "talent": "Battant",
+        "nature": "Modeste / Doux",
+        "iv": "PV 31 ; Att. Spé. 31 ; Déf. Spé. 31",
+        "ev": "6 PV ; 252 Att. Spé. ; 252 Déf. Spé. (Vitesse à vérifier)",
+        "attacks": "Saumure",
+        "note": "T6–T7. Doit dépasser Tyranocif à −2 en Vitesse ; la source exige de régler cet ordre."
+      },
+      {
+        "n": "Pingoléon",
+        "id": 395,
+        "item": "Lunettes Choix",
+        "talent": "Battant",
+        "nature": "Modeste / Doux",
+        "iv": "PV 31 ; Att. Spé. 31 ; Déf. Spé. 31 ; Vit. 31",
+        "ev": "232 Att. Spé. ; 252 Déf. Spé. ; 20 Vit.",
+        "attacks": "Saumure",
+        "note": "T8–T10. Répartition corrigée confirmée par l'auteur du guide (mars 2026)."
+      }
+    ],
+    [
+      {
+        "n": "Alakazam",
+        "id": 65,
+        "item": "Sans objet",
+        "talent": "Non imposé",
+        "nature": "Ne doit pas augmenter la Déf. Spé.",
+        "iv": "Déf. Spé. 0–30",
+        "ev": "252 Vit. ; reste Att./Déf./Att. Spé.",
+        "attacks": "Rune Protect",
+        "note": "T1 : protection contre les statuts."
+      },
+      {
+        "n": "Scalproie",
+        "id": 625,
+        "item": "Bandeau Choix",
+        "talent": "Acharné",
+        "nature": "Rigide / Solo / Brave",
+        "iv": "PV 31 ; Att. 31 ; Déf. Spé. 31",
+        "ev": "152 PV ; 168 Att. ; 88 Déf. Spé.",
+        "attacks": "Coup Bas",
+        "note": "T2–T3. Répartition reprise telle que publiée ; les EV restants ne sont pas déduits."
+      },
+      {
+        "n": "Nostenfer",
+        "id": 169,
+        "item": "Sans objet",
+        "talent": "Non imposé",
+        "nature": "Libre",
+        "iv": "Non imposés",
+        "ev": "252 Vit. ; reste Att./Déf./Att. Spé.",
+        "attacks": "Bombe Acide",
+        "note": "T4 : baisse la Déf. Spé. du boss pour la suite."
+      },
+      {
+        "n": "Sidérella",
+        "id": 576,
+        "item": "Lunettes Choix",
+        "talent": "Battant",
+        "nature": "Modeste / Doux",
+        "iv": "PV 29–31 ; Déf. Spé. 29–31 ; Att. Spé. 31",
+        "ev": "6 PV ; 252 Att. Spé. ; 252 Déf. Spé.",
+        "attacks": "Ball’Ombre",
+        "note": "T5. Répartition en Déf. Spé. propre au joueur 3."
+      },
+      {
+        "n": "Colhomard",
+        "id": 342,
+        "item": "Pointe Poison",
+        "talent": "Adaptabilité",
+        "nature": "Rigide / Solo / Brave",
+        "iv": "PV 20–31 ; Att. 31 ; Déf. Spé. 20–31",
+        "ev": "6 PV ; 252 Att. ; 252 Déf. Spé.",
+        "attacks": "Dégommage · Assurance",
+        "note": "Dégommage au T6 ; Assurance du T8 au T10."
+      },
+      {
+        "n": "Tyranocif",
+        "id": 248,
+        "item": "Balle Fer",
+        "talent": "Sable Volant",
+        "nature": "Rigide / Solo",
+        "iv": "PV 31 ; Att. 31 ; Déf. Spé. 31 ; Vit. 31",
+        "ev": "6 PV ; 252 Att. ; 252 Déf. Spé.",
+        "attacks": "Séduction · Assurance",
+        "note": "T7 : Séduction permet de contrôler l'Att. Spé. de Cresselia avant le final."
+      }
+    ],
+    [
+      {
+        "n": "Xatu",
+        "id": 178,
+        "item": "Mouchoir Choix",
+        "talent": "Libre",
+        "nature": "Libre",
+        "iv": "Non imposés",
+        "ev": "252 Vit. ; reste Att./Déf./Att. Spé.",
+        "attacks": "Air Veinard",
+        "note": "T1 : protège des coups critiques."
+      },
+      {
+        "n": "Scalproie",
+        "id": 625,
+        "item": "Orbe Vie",
+        "talent": "Acharné",
+        "nature": "Rigide / Solo / Brave",
+        "iv": "PV 31 ; Att. 31 ; Déf. Spé. 31",
+        "ev": "6 PV ; 252 Att. ; 252 Déf. Spé.",
+        "attacks": "Coup Bas · Assurance",
+        "note": "Coup Bas T2–T3 ; Assurance T8–T10 sur le même emplacement d'équipe."
+      },
+      {
+        "n": "Ectoplasma",
+        "id": 94,
+        "item": "Joyau Spectre",
+        "talent": "Corps Maudit",
+        "nature": "Modeste / Doux / Foufou",
+        "iv": "Att. Spé. 31 ; Vit. 31",
+        "ev": "252 Att. Spé. ; 120 Vit. ; reste libre",
+        "attacks": "Châtiment",
+        "note": "T4 : attaque spéciale de transition."
+      },
+      {
+        "n": "Sidérella",
+        "id": 576,
+        "item": "Lunettes Choix",
+        "talent": "Battant",
+        "nature": "Modeste / Doux / Foufou",
+        "iv": "Att. Spé. 31",
+        "ev": "6 PV ; 252 Att. Spé. ; 252 Vit.",
+        "attacks": "Ball’Ombre",
+        "note": "T5 : répartition visant le ciblage spécifique de l'IA sur J4."
+      },
+      {
+        "n": "Lippoutou",
+        "id": 124,
+        "item": "Baie Pommo",
+        "talent": "Non imposé",
+        "nature": "Nature neutre pour la Déf. Spé.",
+        "iv": "À répartir selon rôle (source sans seuil)",
+        "ev": "Répartition libre en Att./Déf./Att. Spé.",
+        "attacks": "Air Veinard",
+        "note": "T6 : renouvelle la protection contre les coups critiques."
+      },
+      {
+        "n": "Crocorible",
+        "id": 553,
+        "item": "Bandeau Choix",
+        "talent": "Non imposé",
+        "nature": "Rigide / Solo",
+        "iv": "PV 31 ; Att. 31 ; Déf. Spé. 31",
+        "ev": "6 PV ; 252 Att. ; 252 Déf. Spé.",
+        "attacks": "Assurance",
+        "note": "T7 : dégâts physiques de transition."
+      }
+    ]
+  ],
+  "turns": [
+    {
+      "hp": "≈ 98 %",
+      "label": "Ouverture et protections",
+      "actions": [
+        [
+          0,
+          "Séduction"
+        ],
+        [
+          0,
+          "Dégommage"
+        ],
+        [
+          0,
+          "Rune Protect"
+        ],
+        [
+          0,
+          "Air Veinard"
+        ]
+      ],
+      "info": "Hippodocus applique Séduction, Dimoret lance la Pointe Poison et les deux protections se mettent en place. Le ciblage est sensible aux statistiques de départ."
+    },
+    {
+      "hp": "≈ 85 %",
+      "label": "Trois Scalproie",
+      "actions": [
+        [
+          0,
+          "K.O. prévu"
+        ],
+        [
+          1,
+          "Coup Bas"
+        ],
+        [
+          1,
+          "Coup Bas"
+        ],
+        [
+          1,
+          "Coup Bas"
+        ]
+      ],
+      "info": "Le K.O. d’Hippodocus doit libérer l'emplacement J1. Les Scalproie J2, J3 et J4 frappent avec Coup Bas."
+    },
+    {
+      "hp": "≈ 72 %",
+      "label": "Mur Lumière et Coups Bas",
+      "actions": [
+        [
+          1,
+          "Mur Lumière"
+        ],
+        [
+          1,
+          "Coup Bas"
+        ],
+        [
+          1,
+          "Coup Bas"
+        ],
+        [
+          1,
+          "Coup Bas"
+        ]
+      ],
+      "info": "Farfaduvet pose Mur Lumière. La mécanique d’alternance physique / spécial devient déterminante après le palier des 75 % : respecter l’ordre réel d’action."
+    },
+    {
+      "hp": "≈ 63 %",
+      "label": "Transition mixte",
+      "actions": [
+        [
+          2,
+          "Boutefeu"
+        ],
+        [
+          2,
+          "Assurance"
+        ],
+        [
+          2,
+          "Bombe Acide"
+        ],
+        [
+          2,
+          "Châtiment"
+        ]
+      ],
+      "info": "Bombe Acide prépare les attaques spéciales. Ne pas changer l’ordre de Vitesse des Pokémon sans recalcul."
+    },
+    {
+      "hp": "≈ 45 %",
+      "label": "Gueriaigle et Sidérella",
+      "actions": [
+        [
+          3,
+          "Assurance"
+        ],
+        [
+          3,
+          "Assurance"
+        ],
+        [
+          3,
+          "Ball’Ombre"
+        ],
+        [
+          3,
+          "Ball’Ombre"
+        ]
+      ],
+      "info": "Les Gueriaigle attaquent physiquement et les Sidérella spécialement. Le réglage des défenses oriente les cibles choisies par Cresselia."
+    },
+    {
+      "hp": "≈ 39 %",
+      "label": "Phase Milobellus",
+      "actions": [
+        [
+          4,
+          "Rune Protect"
+        ],
+        [
+          4,
+          "Saumure"
+        ],
+        [
+          4,
+          "Dégommage"
+        ],
+        [
+          4,
+          "Air Veinard"
+        ]
+      ],
+      "info": "Le premier Milobellus pose Rune Protect, le second utilise Saumure ; Colhomard lance son objet, Lippoutou renforce la protection contre les critiques."
+    },
+    {
+      "hp": "≈ 33 %",
+      "label": "Lance-Boue et Séduction",
+      "actions": [
+        [
+          4,
+          "Lance-Boue"
+        ],
+        [
+          4,
+          "Saumure"
+        ],
+        [
+          5,
+          "Séduction"
+        ],
+        [
+          5,
+          "Assurance"
+        ]
+      ],
+      "info": "Lance-Boue réduit la pression de Tonnerre. Tyranocif intervient pour ramener l’Attaque Spéciale du boss au niveau prévu avant Pingoléon."
+    },
+    {
+      "hp": "≈ 22 %",
+      "label": "Début du final",
+      "actions": [
+        [
+          5,
+          "Saumure"
+        ],
+        [
+          5,
+          "Saumure"
+        ],
+        [
+          4,
+          "Assurance"
+        ],
+        [
+          1,
+          "Assurance"
+        ]
+      ],
+      "info": "Double Saumure avec les deux Pingoléon, complétée par Colhomard et Scalproie. Le réglage corrigé de Pingoléon J2 compte."
+    },
+    {
+      "hp": "≈ 11 %",
+      "label": "Maintien du final",
+      "actions": [
+        [
+          5,
+          "Saumure"
+        ],
+        [
+          5,
+          "Saumure"
+        ],
+        [
+          4,
+          "Assurance"
+        ],
+        [
+          1,
+          "Assurance"
+        ]
+      ],
+      "info": "Même séquence que le tour 8 ; viser le palier d’environ 11 % sans changer l’ordre d’action."
+    },
+    {
+      "hp": "0 % visé",
+      "label": "Dernière poussée",
+      "actions": [
+        [
+          5,
+          "Saumure"
+        ],
+        [
+          5,
+          "Saumure"
+        ],
+        [
+          4,
+          "Assurance"
+        ],
+        [
+          1,
+          "Assurance"
+        ]
+      ],
+      "info": "La rotation publiée prévoit de vaincre Cresselia en dix tours. Selon la variation en jeu, la fin peut exiger une adaptation ; pas de garantie automatique."
+    }
+  ],
+  "mechanics": [
+    [
+      "Lien Miroir · 100 %",
+      "Quand un Pokémon tombe K.O., les Pokémon de la même espèce sur le côté concerné peuvent tomber avec lui. Prévoir les entrées et sorties des équipes."
+    ],
+    [
+      "Plénitude · 80 %",
+      "Cresselia augmente ses statistiques spéciales. Séduction est chronométrée pour contrôler ses dégâts."
+    ],
+    [
+      "Alternance · 75 %",
+      "La mécanique impose une alternance des catégories physiques et spéciales. L’ordre réel des attaques importe autant que les actions affichées par joueur."
+    ],
+    [
+      "Distorsion · 65 %",
+      "L’ordre de Vitesse change : certains réglages apparemment étranges sont volontaires."
+    ],
+    [
+      "Bascule de l’alternance · 50 %",
+      "La règle du type de dégâts alternés change à ce palier. Contrôler les dégâts effectifs avant de poursuivre."
+    ],
+    [
+      "Plénitude · 25 %",
+      "Nouveau renforcement : les défenses, Lance-Boue et Séduction deviennent critiques pour le final."
+    ],
+    [
+      "Plafond des dégâts",
+      "Le guide v2.1 vise le plafond de dégâts (4 % pour les attaques super efficaces du raid 6★). Les objets ne servent pas toujours à augmenter directement les dégâts."
+    ],
+    [
+      "Réinitialisation des baisses de stats",
+      "Selon les correctifs des raids, les baisses de statistiques peuvent disparaître ensemble à l'expiration du premier minuteur (8 actions). Ne pas décaler Séduction."
+    ],
+    [
+      "Ciblage de l’IA",
+      "Les EV de Défense Spéciale et les Vitesses de Gueriaigle et Sidérella sont calibrés pour attirer certaines attaques sur le bon joueur."
+    ],
+    [
+      "Tonnerre / Lance-Boue",
+      "Lance-Boue diminue l’efficacité des attaques Électrik et protège notamment la phase Pingoléon."
+    ],
+    [
+      "Protection et coups critiques",
+      "Rune Protect et Air Veinard ont des fonctions distinctes. Ne pas remplacer ces tours par de simples attaques."
+    ],
+    [
+      "Pokémon additionnels",
+      "Feunard et Fragilady apparaissent dans des guides communautaires du raid. Leurs attaques citées comprennent Tricherie et Ball’Météo."
+    ]
+  ],
+  "sources": [
+    [
+      "The Three Musketeers v2.1 (source communautaire)",
+      "https://forums.pokemmo.com/index.php?/topic/",
+      "Version 2.1 de Cadoiz, RogueMaster (Phoebe), Th3Fastest et OhKaibaBoy, commentaires de correction des EV de Pingoléon."
+    ],
+    [
+      "Crimson Core — transcription 19 septembre 2026",
+      "https://www.crimsoncoremmo.co.uk/guides/cresselia-the-three-musketeers-strat",
+      "Reprise détaillée des 24 fiches et de la rotation en dix tours ; la page précise que le forum source était partiellement inaccessible pendant sa consultation."
+    ],
+    [
+      "MMOBreeder — Cresselia en français",
+      "https://mmobreeder.com/fr/raids/cresselia",
+      "Comparaison entre The Three Musketeers v2.1, Sensei's New Strategy et Latin Combo V2."
+    ],
+    [
+      "CALLMESENSEIX — stratégie 2025",
+      "https://forums.pokemmo.com/index.php?/topic/193398-cresselia-raid-guide/",
+      "Guide communautaire plus ancien avec stratégies et compositions distinctes."
+    ]
+  ]
+};
+
+(function(){
+"use strict";
+const D=CRESSELIA_DATA;
+const $=id=>document.getElementById(id);
+const ST={player:0,tab:"combat",turn:0,all:false};
+const NAMES={combat:"Combat",pokemon:"Pokémon",preparation:"Préparation",mecaniques:"Mécaniques"};
+const img=id=>"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+id+".png";
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function button(label,fn,cls){const b=document.createElement("button");b.type="button";b.textContent=label;if(cls)b.className=cls;b.addEventListener("click",fn);return b;}
+function copy(text,btn){const fallback=()=>{const area=document.createElement("textarea");area.value=text;area.style.position="fixed";area.style.left="-9999px";document.body.append(area);area.select();let ok=false;try{ok=document.execCommand("copy");}finally{area.remove();}if(!ok)throw Error("copie impossible");};const done=()=>{const t=btn.textContent;btn.textContent="✓ Copié !";btn.classList.add("cres-copied");setTimeout(()=>{btn.textContent=t;btn.classList.remove("cres-copied");},1400);};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done).catch(()=>{try{fallback();done();}catch(e){btn.textContent="Copie indisponible";}});}else{try{fallback();done();}catch(e){btn.textContent="Copie indisponible";}}}
+function playerControls(){const a=$("cres-players");a.replaceChildren();for(let i=0;i<4;i++){const b=button("Joueur "+(i+1),()=>{ST.player=i;render();},ST.player===i?"active":"");b.setAttribute("aria-pressed",String(ST.player===i));a.append(b);}}
+function navControls(){const a=$("cres-tabs");a.replaceChildren();for(const [id,name] of Object.entries(NAMES)){const b=button(name,()=>{ST.tab=id;render();},ST.tab===id?"active":"");b.setAttribute("aria-pressed",String(ST.tab===id));a.append(b);}}
+function head(){playerControls();navControls();$("cres-heading").textContent=NAMES[ST.tab];$("cres-full-wrap").hidden=ST.tab!=="combat";$("cres-all").checked=ST.all;}
+function renderCombat(){const a=$("cres-app");a.replaceChildren();const list=ST.all?D.turns.map((t,i)=>[t,i]):[[D.turns[ST.turn],ST.turn]];
+for(const [t,i] of list){const block=document.createElement("section");block.className="cres-turn";
+block.innerHTML='<div class="cres-turnhead"><strong>Tour '+(i+1)+' · '+esc(t.label)+'</strong><small>PV BOSS '+esc(t.hp)+'</small></div><div class="cres-turnbody"><div class="cres-grid">'+t.actions.map(([slot,move],player)=>{const m=D.team[player][slot];return '<article class="cres-action '+(player===ST.player?'focus':'')+'"><img loading="lazy" src="'+img(m.id)+'" alt=""><div><span class="cres-p">JOUEUR '+(player+1)+(player===ST.player?" · VOTRE RÔLE":"")+'</span><b>'+esc(m.n)+'</b><div class="cres-move">'+esc(move)+'</div></div></article>';}).join("")+'</div><p class="cres-explain">'+esc(t.info)+'</p></div>';
+const body=block.querySelector(".cres-turnbody");
+const actionText="TOUR "+(i+1)+" / CRESSELIA 6★ — THE THREE MUSKETEERS v2.1\n"+t.actions.map(([slot,move],j)=>"J"+(j+1)+" · "+D.team[j][slot].n+" → "+move).join("\n")+"\nPV cible : "+t.hp;
+body.append(button("Copier les 4 actions",e=>copy(actionText,e.currentTarget),"cres-copy"));a.append(block);}
+if(!ST.all){const nav=document.createElement("div");nav.className="cres-controls";const prev=button("← Tour précédent",()=>{ST.turn=Math.max(0,ST.turn-1);renderCombat();});const next=button("Tour suivant →",()=>{ST.turn=Math.min(9,ST.turn+1);renderCombat();});prev.disabled=ST.turn===0;next.disabled=ST.turn===9;nav.append(prev,next);a.append(nav);}else{const note=document.createElement("div");note.className="cres-note";note.textContent="Mode vue complète : 10 tours et 40 actions des quatre joueurs. Les pourcentages indiquent des points de contrôle, pas des garanties de résultat.";a.append(note);}}
+function monCopy(m){return m.n+" @ "+m.item+"\nTalent : "+m.talent+"\nNature : "+m.nature+"\nIV : "+m.iv+"\nEV : "+m.ev+"\nAttaques : "+m.attacks+"\nNotes : "+m.note;}
+function renderPokemon(){const a=$("cres-app");a.innerHTML='<div class="cres-note">Composition du joueur '+(ST.player+1)+' : 6 Pokémon. Les IV, EV et natures sont reproduits uniquement lorsqu’ils figurent dans les sources ; un champ non imposé n’est pas un seuil inventé.</div>';
+D.team[ST.player].forEach((m,i)=>{const d=document.createElement("details");d.className="cres-mon";d.innerHTML='<summary><div class="cres-mon-head"><img loading="lazy" src="'+img(m.id)+'" alt=""><div><strong>'+(i+1)+'. '+esc(m.n)+'</strong><span>'+esc(m.item)+' · '+esc(m.attacks)+'</span></div></div></summary><div class="cres-mon-body"><table class="cres-table"><tbody>'+[["Talent",m.talent],["Nature",m.nature],["IV",m.iv],["EV",m.ev],["Attaques",m.attacks],["Notes",m.note]].map(([x,y])=>'<tr><th scope="row">'+esc(x)+'</th><td>'+esc(y)+'</td></tr>').join("")+'</tbody></table></div>';d.open=i===0;d.querySelector(".cres-mon-body").append(button("Copier le build",e=>copy(monCopy(m),e.currentTarget),"cres-copy"));a.append(d);});
+a.append(button("Copier l'équipe complète (6 builds)",e=>copy("CRESSELIA 6★ / THE THREE MUSKETEERS v2.1 / JOUEUR "+(ST.player+1)+"\n\n"+D.team[ST.player].map(monCopy).join("\n\n"),e.currentTarget),"cres-copy"));}
+function renderPrep(){const a=$("cres-app");a.replaceChildren();const intro=document.createElement("div");intro.className="cres-note";intro.textContent="Cresselia se trouve sur l'Île Pleine Lune (Sinnoh), accessible par bateau depuis Joliberges. Raid permanent 6★ à quatre joueurs. Une stratégie adaptée à chaque joueur ; ne pas fusionner avec une ancienne version.";a.append(intro);
+const tasks=["Pokédex OT rempli ; au moins 4 Pokémon OT dans l’équipe","Les 6 Pokémon du joueur "+(ST.player+1)+" sont disponibles et placés dans l’ordre prévu","Aucun objet ou lignée d’évolution dupliqué dans mon équipe","Natures, talents et capacités vérifiés un par un","IV, EV et ordres de Vitesse vérifiés entre les quatre joueurs","Réglages de Déf. Spé. et ciblage IA contrôlés (Gueriaigle / Sidérella)","Lance-Boue, Air Veinard, Rune Protect et Séduction présents où indiqués","Quatre joueurs synchronisés sur les 10 tours et les paliers de PV","Vérifier les dernières corrections du guide source avant de breeder"];
+const wrap=document.createElement("div");wrap.className="cres-source";wrap.innerHTML='<h3>Checklist de préparation</h3><p class="cres-progress" id="cres-progress"></p>';const checks=document.createElement("div");checks.className="cres-checklist";let saved={};try{saved=JSON.parse(localStorage.getItem("raid-atlas-cresselia-check")||"{}")||{};}catch(e){}function count(){wrap.querySelector("#cres-progress").textContent=tasks.filter((_,i)=>saved[ST.player+"-"+i]).length+" / "+tasks.length+" vérifiés";}
+tasks.forEach((t,i)=>{const line=document.createElement("label");line.className="cres-check";const c=document.createElement("input");c.type="checkbox";c.checked=!!saved[ST.player+"-"+i];c.addEventListener("change",()=>{saved[ST.player+"-"+i]=c.checked;try{localStorage.setItem("raid-atlas-cresselia-check",JSON.stringify(saved));}catch(e){}count();});const span=document.createElement("span");span.textContent=t;line.append(c,span);checks.append(line);});wrap.append(checks);a.append(wrap);count();
+const links=document.createElement("section");links.className="cres-source";links.innerHTML='<h3>Sources et versions</h3><p>Guide conseillé pour cette page : The Three Musketeers v2.1, par Cadoiz, RogueMaster (Phoebe), Th3Fastest et OhKaibaBoy. Rotation publiée en mars 2026 et retranscrite en septembre 2026. Les statistiques de popularité par équipe ne sont pas publiées : le qualificatif « le plus utilisé » ne peut pas être garanti.</p>'+D.sources.map(s=>'<p><a href="'+esc(s[1])+'" target="_blank" rel="noopener noreferrer">'+esc(s[0])+'</a><br><small>'+esc(s[2])+'</small></p>').join("")+'<p>Les stratégies Sensei/DoubleDude et Latin Combo sont citées comme alternatives, mais leurs compositions ne sont pas intégrées ici sans audit complet des versions exactes.</p>';a.append(links);
+}
+function renderMechanics(){const a=$("cres-app");a.innerHTML='<div class="cres-note">Cresselia : type Psy · PV 120 / Att. 70 / Déf. 110 / Att. Spé. 75 / Déf. Spé. 120 / Vit. 85 (statistiques de base, différentes de celles du boss de raid). Faiblesses : Insecte, Spectre et Ténèbres ×2. Les règles ci-dessous concernent le raid 6★.</div><div class="cres-ability">'+D.mechanics.map(([name,desc])=>'<article><h3>'+esc(name)+'</h3><p>'+esc(desc)+'</p></article>').join("")+'</div>';}
+function render(){head();if(ST.tab==="combat")renderCombat();else if(ST.tab==="pokemon")renderPokemon();else if(ST.tab==="preparation")renderPrep();else renderMechanics();}
+$("cres-all").addEventListener("change",e=>{ST.all=e.target.checked;renderCombat();});
+render();
+})();
