@@ -144,3 +144,43 @@ body.raid-template-ready .raid-template-footer{border-top:1px solid #43454c!impo
  body.raid-template-ready .raid-template-main .raid-template-action-grid{grid-template-columns:1fr!important}
 }
 @media(prefers-reduced-motion:reduce){body.raid-template-ready *{scroll-behavior:auto!important;transition:none!important}}
+
+
+/* Sélecteurs renforcés pour neutraliser les anciens !important de Heatran :
+   les règles communes gardent la priorité sur les feuilles historiques. */
+body.raid-template-ready .raid-template-hero .raid-template-hero-title{font:900 clamp(59px,8.6vw,115px)/.93 var(--raid-heading)!important;margin:15px 0!important;letter-spacing:-.026em!important}
+body.raid-template-ready .raid-template-hero .raid-template-hero-art{right:clamp(5px,3vw,37px)!important;width:clamp(185px,34%,415px)!important;max-height:104%!important;opacity:1!important}
+body.raid-template-ready .raid-template-hero .raid-template-hero-copy{max-width:69%!important}
+body.raid-template-ready .raid-template-hero .raid-template-kicker{font:700 11px var(--raid-mono)!important;color:#ff9698!important}
+body.raid-template-ready .raid-template-sidebar #players,
+body.raid-template-ready .raid-template-sidebar #cres-players{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important;margin:0!important;width:100%!important}
+body.raid-template-ready .raid-template-sidebar #tabs,
+body.raid-template-ready .raid-template-sidebar #cres-tabs{display:grid!important;grid-template-columns:1fr!important;gap:7px!important;position:static!important;margin:0!important;padding:0!important;width:100%!important;background:transparent!important;border:0!important;box-shadow:none!important}
+body.raid-template-ready .raid-template-sidebar #tabs button,
+body.raid-template-ready .raid-template-sidebar #players button{background:#292a30!important;border:1px solid #4a4c55!important;color:#e7e6e9!important;font:650 12px/1.35 var(--raid-body)!important;border-radius:0!important;box-shadow:none!important;min-height:43px!important;padding:10px 8px!important;text-align:left!important}
+body.raid-template-ready .raid-template-sidebar #players button{text-align:center!important}
+body.raid-template-ready .raid-template-sidebar #tabs button.active,
+body.raid-template-ready .raid-template-sidebar #players button.active{background:#82393d!important;border-color:#ed676a!important;box-shadow:none!important;color:#fff!important}
+body.raid-template-ready #app .raid-template-action-grid .raid-template-card{background:#202126!important;border:1px solid #45464e!important;border-radius:0!important;box-shadow:none!important}
+body.raid-template-ready #app .raid-template-action-grid .raid-template-card.selected{border-color:#e8595c!important;box-shadow:inset 3px 0 #e8595c!important;background:#2a2429!important}
+body.raid-template-ready #app details.raid-template-card{border-radius:0!important;background:#202126!important;border:1px solid #45464e!important}
+body.raid-template-ready #app details.raid-template-card[open]{border-color:#a96162!important}
+@media(max-width:760px){
+ body.raid-template-ready .raid-template-hero .raid-template-hero-title{font-size:clamp(45px,9vw,72px)!important}
+ body.raid-template-ready .raid-template-hero .raid-template-hero-copy{max-width:80%!important}
+ body.raid-template-ready .raid-template-hero .raid-template-hero-art{width:44%!important;right:-25px!important;opacity:.52!important}
+ body.raid-template-ready .raid-template-sidebar #tabs,
+ body.raid-template-ready .raid-template-sidebar #cres-tabs,
+ body.raid-template-ready .raid-template-sidebar #players,
+ body.raid-template-ready .raid-template-sidebar #cres-players{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+ body.raid-template-ready .raid-template-sidebar #tabs button{font-size:11px!important;text-align:center!important;padding:10px 4px!important}
+}
+@media(max-width:540px){
+ body.raid-template-ready .raid-template-hero .raid-template-hero-title{font-size:clamp(42px,11vw,66px)!important}
+ body.raid-template-ready .raid-template-hero .raid-template-hero-copy{max-width:88%!important}
+ body.raid-template-ready .raid-template-hero .raid-template-hero-art{opacity:.37!important}
+}
+@media(max-width:390px){
+ body.raid-template-ready .raid-template-sidebar #tabs,
+ body.raid-template-ready .raid-template-sidebar #cres-tabs{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
