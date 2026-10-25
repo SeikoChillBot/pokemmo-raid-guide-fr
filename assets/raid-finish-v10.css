@@ -205,3 +205,25 @@ body.raid-template-ready .raid-template-content .team-link{display:none!importan
 @media(prefers-reduced-motion:reduce){
   .site-wrap .event-card.main.raid-v10-den-event .raid-v10-den-home{transition:none!important}
 }
+
+/* Les cartes Halloween et leurs Pokémon suggérés partagent la même finition :
+   pas de fond carré noir derrière les images, sans toucher aux cartes elles-mêmes. */
+body.raid-template-ready .raid-template-content .h25-battle-grid .h25-preview{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+body.raid-template-ready .raid-template-content .h25-battle-grid .h25-preview img,
+body.raid-template-ready .raid-template-content .h25-battle-grid img.h25-thumb,
+body.raid-template-ready .raid-template-content .h25-player-card img.h25-thumb{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  outline:0!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  mix-blend-mode:lighten!important;
+  object-fit:contain!important;
+  filter:drop-shadow(0 9px 12px #0009)!important;
+}
