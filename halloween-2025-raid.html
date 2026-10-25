@@ -17,7 +17,7 @@
 <div class="h25-nav" role="tablist" aria-label="Rubriques du guide"><button data-tab="combat" role="tab" aria-selected="true">⚔ Combat</button><button data-tab="pokemon" role="tab" aria-selected="false">◉ Pokémon</button><button data-tab="preparation" role="tab" aria-selected="false">✓ Préparation</button><button data-tab="mecaniques" role="tab" aria-selected="false">ⓘ Mécaniques</button></div>
 <div id="guide-content"></div>
 <div class="h25-next" id="next-raids"></div>
-</main><footer class="atlas-footer"><b>PokeMMO RAID ATLAS</b><span>Source communautaire 2025 · Les stratégies et leurs détails peuvent varier d'une année à l'autre.</span></footer>
+</main><footer class="atlas-footer"><b>PokeMMO RAID ATLAS</b><span>Source communautaire 2025 · Les stratégies et leurs détails peuvent varier d'une année à l'autre.</span><span class="raid-made-by">Créé par Seiko <span class="raid-made-by-alias">(Seikolito en jeu)</span></span></footer>
 </div><script src="assets/halloween-2025-data.js?v=20261025-pumpking-route1"></script><script src="assets/halloween-2025-rosters.js?v=20261025-r2"></script><script>
 const params=new URLSearchParams(location.search);let boss=HALLOWEEN_2025.find(b=>b.id===params.get('boss'))||HALLOWEEN_2025[0];let tab='combat',player=0,turn=0,showAll=false,mode=0;const $=id=>document.getElementById(id);
 $('crumb').textContent=boss.name;$('boss-name').textContent=boss.name;$('boss-summary').textContent=boss.description;$('boss-category').textContent='HALLOWEEN 2025 / '+boss.stars;
