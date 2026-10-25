@@ -1,0 +1,17 @@
+/* Attribution commune aux raids et événements — compact, discret et lisible */
+.raid-source-drawer{box-sizing:border-box;max-width:1200px;width:calc(100% - 32px);margin:26px auto 22px;padding:0 18px;border:1px solid #60484b;border-radius:13px;background:linear-gradient(120deg,#1b191c,#252023);color:#e7dfe0;box-shadow:0 12px 30px #0004}
+.raid-source-drawer .raid-source-heading{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:7px 18px;padding:15px 4px;font:750 13px/1.45 "DM Sans",system-ui,sans-serif;color:#f7efef}
+.raid-source-drawer .raid-source-heading::-webkit-details-marker{display:none}
+.raid-source-drawer .raid-source-heading:before{content:"▸";color:#ea635e;margin-right:2px}
+.raid-source-drawer[open] .raid-source-heading:before{content:"▾"}
+.raid-source-drawer .raid-source-title{flex:1}
+.raid-source-drawer .raid-source-active{color:#f3a49c;font-size:12px;font-weight:650}
+.raid-source-drawer .raid-source-body{border-top:1px solid #594345;padding:14px 5px 19px}
+.raid-source-drawer .raid-source-by{margin:0 0 11px;font-size:13px;line-height:1.6;color:#fff}
+.raid-source-drawer .raid-source-links{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.raid-source-drawer .raid-source-link{display:inline-flex;min-height:37px;align-items:center;padding:8px 12px;border-radius:8px;background:#362529;border:1px solid #805057;color:#ffc6bf;text-decoration:none;font-size:12px;font-weight:700}
+.raid-source-drawer .raid-source-link:hover{background:#5a2f35;color:#fff}
+.raid-source-drawer .raid-source-link:focus-visible,.raid-source-drawer summary:focus-visible{outline:2px solid #ed7168;outline-offset:3px}
+.raid-source-drawer .raid-source-link-note{font-size:11px;color:#bfb6b6}
+.raid-source-drawer .raid-source-note{margin:11px 0 0;color:#bcb2b5;font-size:12px;line-height:1.65}
+@media(max-width:650px){.raid-source-drawer{width:calc(100% - 20px);margin:18px auto 16px;padding:0 11px}.raid-source-drawer .raid-source-heading{gap:4px}.raid-source-drawer .raid-source-active{width:100%;padding-left:16px}.raid-source-drawer .raid-source-link{width:100%;box-sizing:border-box}}
