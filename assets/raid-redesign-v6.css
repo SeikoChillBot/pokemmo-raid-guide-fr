@@ -557,3 +557,69 @@ body.raid-template-ready .raid-template-content .team-link:hover{background:#ac3
  body.raid-template-ready .raid-dock-marker{display:none!important}
  body.raid-template-ready .raid-dock-header{margin-bottom:7px!important;padding-bottom:8px!important}
 }
+
+
+/* Accueil : carrousel permanent vraiment lisible, sans TARGET // NNN. */
+.site-wrap .hero-right{position:relative!important;min-width:0!important}
+.site-wrap .hero-right .hero-outline{font-size:clamp(75px,12vw,170px)!important;color:#ffffff0c!important}
+.site-wrap .hero-right .hero-corner{
+ top:20px!important;right:20px!important;background:#221a20c9!important;
+ border:1px solid #9a5261!important;border-radius:8px!important;
+ color:#f7cbd0!important;padding:9px 12px!important;
+ font:750 10px "IBM Plex Mono",monospace!important;letter-spacing:.09em!important
+}
+.site-wrap .hero-right .hero-pokemon{transition:opacity .25s ease,transform .3s ease!important}
+.site-wrap .hero-right .hero-boss-info{
+ position:absolute!important;z-index:6!important;bottom:20px;left:20px;
+ max-width:calc(100% - 160px);pointer-events:none;
+ background:#161217dd;border:1px solid #90515f;border-radius:11px;
+ padding:10px 13px;box-shadow:0 8px 25px #0009;backdrop-filter:blur(10px)
+}
+.site-wrap .hero-boss-info strong{
+ display:block;color:#fff;font:900 clamp(22px,2.5vw,33px)/1 "Barlow Condensed",Impact,sans-serif;text-transform:uppercase
+}
+.site-wrap .hero-boss-info small{display:block;margin-top:5px;color:#c8bac1;font:600 10px "IBM Plex Mono",monospace}
+.site-wrap .hero-boss-info.is-available small{color:#ff8a95}
+.site-wrap .hero-right .hero-boss-controls{
+ position:absolute!important;z-index:7!important;bottom:23px;right:19px;
+ display:flex;align-items:center;gap:7px;padding:4px;border:1px solid #885462;
+ border-radius:10px;background:#1f171dcf;backdrop-filter:blur(10px)
+}
+.site-wrap .hero-boss-controls button{
+ display:grid;place-items:center;width:35px;height:34px;padding:0;margin:0;
+ color:#fff;background:#4b2a33;border:1px solid #9b5763;border-radius:7px;
+ font:700 20px system-ui;cursor:pointer
+}
+.site-wrap .hero-boss-controls button:hover{background:#b34150}
+.site-wrap .hero-boss-controls button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.site-wrap .hero-boss-count{color:#f5dade;white-space:nowrap;font:650 10px "IBM Plex Mono",monospace}
+/* Le titre et la section actuelle rendent le dock bien visible. */
+body.raid-template-ready .raid-dock-marker{
+ display:inline-flex!important;align-items:center;gap:7px;
+ padding:5px 10px!important;color:#fff!important;background:#632f3b!important;
+ border:1px solid #d16678!important;border-radius:7px!important;
+ font:800 10px "IBM Plex Mono",monospace!important;letter-spacing:.06em!important
+}
+body.raid-template-ready .raid-guide-dock .raid-dock-tabs button.raid-dock-active,
+body.raid-template-ready .raid-guide-dock .raid-dock-tabs button[aria-current="page"]{
+ color:#fff!important;background:linear-gradient(135deg,#f55c6a,#832b3c)!important;
+ border-color:#ffb5bc!important;box-shadow:inset 0 -3px 0 #fff7,0 5px 20px #a5283970!important
+}
+body.raid-template-ready .raid-guide-dock .raid-dock-tabs button.raid-dock-active:after{
+ content:" ●";color:#fff!important;font-size:10px;margin-left:6px
+}
+@media(max-width:800px){
+ .site-wrap .hero-right .hero-boss-info{left:9px!important;bottom:10px!important;max-width:calc(100% - 117px)!important;padding:8px}
+ .site-wrap .hero-right .hero-boss-controls{right:8px!important;bottom:10px!important}
+ .site-wrap .hero-boss-controls button{height:29px;width:29px;font-size:18px}
+ .site-wrap .hero-boss-count{font-size:9px}
+ .site-wrap .hero-right .hero-corner{font-size:9px!important;right:10px!important;top:10px!important}
+}
+@media(max-width:480px){
+ .site-wrap .hero-right .hero-boss-info strong{font-size:20px}
+ .site-wrap .hero-right .hero-boss-controls{gap:3px!important}
+ body.raid-template-ready .raid-dock-marker{font-size:9px!important;padding:4px 7px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .site-wrap .hero-right .hero-pokemon{transition:none!important}
+}
