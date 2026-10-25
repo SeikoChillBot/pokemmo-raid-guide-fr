@@ -584,7 +584,7 @@ const CRESSELIA_DATA={
 "use strict";
 const D=CRESSELIA_DATA;
 const $=id=>document.getElementById(id);
-const ST={player:0,tab:"combat",turn:0,all:false};
+const ST={player:0,tab:"combat",turn:0,all:false,expand:false};
 const NAMES={combat:"Combat",pokemon:"Pokémon",preparation:"Préparation",mecaniques:"Mécaniques"};
 const img=id=>"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+id+".png";
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
@@ -592,25 +592,62 @@ function button(label,fn,cls){const b=document.createElement("button");b.type="b
 function copy(text,btn){const fallback=()=>{const area=document.createElement("textarea");area.value=text;area.style.position="fixed";area.style.left="-9999px";document.body.append(area);area.select();let ok=false;try{ok=document.execCommand("copy");}finally{area.remove();}if(!ok)throw Error("copie impossible");};const done=()=>{const t=btn.textContent;btn.textContent="✓ Copié !";btn.classList.add("cres-copied");setTimeout(()=>{btn.textContent=t;btn.classList.remove("cres-copied");},1400);};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done).catch(()=>{try{fallback();done();}catch(e){btn.textContent="Copie indisponible";}});}else{try{fallback();done();}catch(e){btn.textContent="Copie indisponible";}}}
 function playerControls(){const a=$("cres-players");a.replaceChildren();for(let i=0;i<4;i++){const b=button("P"+(i+1),()=>{ST.player=i;render();},ST.player===i?"active":"");b.setAttribute("aria-label","Joueur "+(i+1));b.setAttribute("aria-pressed",String(ST.player===i));a.append(b);}}
 function navControls(){const a=$("cres-tabs");a.replaceChildren();for(const [id,name] of Object.entries(NAMES)){const b=button(name,()=>{ST.tab=id;render();},ST.tab===id?"active":"");b.setAttribute("aria-pressed",String(ST.tab===id));a.append(b);}}
-function head(){playerControls();navControls();$("cres-heading").textContent=NAMES[ST.tab];$("cres-full-wrap").hidden=ST.tab!=="combat";$("cres-all").checked=ST.all;}
-function renderCombat(){const a=$("cres-app");a.replaceChildren();const list=ST.all?D.turns.map((t,i)=>[t,i]):[[D.turns[ST.turn],ST.turn]];
-for(const [t,i] of list){const block=document.createElement("section");block.className="cres-turn";
-block.innerHTML='<div class="cres-turnhead"><strong>Tour '+(i+1)+' · '+esc(t.label)+'</strong><small>PV BOSS '+esc(t.hp)+'</small></div><div class="cres-turnbody"><div class="cres-grid">'+t.actions.map(([slot,move],player)=>{const m=D.team[player][slot];return '<article class="cres-action '+(player===ST.player?'focus':'')+'"><img loading="lazy" src="'+img(m.id)+'" alt=""><div><span class="cres-p">JOUEUR '+(player+1)+(player===ST.player?" · VOTRE RÔLE":"")+'</span><b>'+esc(m.n)+'</b><div class="cres-move">'+esc(move)+'</div></div></article>';}).join("")+'</div><p class="cres-explain">'+esc(t.info)+'</p></div>';
-const body=block.querySelector(".cres-turnbody");
-const actionText="TOUR "+(i+1)+" / CRESSELIA 6★ — THE THREE MUSKETEERS v2.1\n"+t.actions.map(([slot,move],j)=>"J"+(j+1)+" · "+D.team[j][slot].n+" → "+move).join("\n")+"\nPV cible : "+t.hp;
-body.append(button("Copier les 4 actions",e=>copy(actionText,e.currentTarget),"cres-copy"));a.append(block);}
-if(!ST.all){const nav=document.createElement("div");nav.className="cres-controls";const prev=button("← Tour précédent",()=>{ST.turn=Math.max(0,ST.turn-1);renderCombat();});const next=button("Tour suivant →",()=>{ST.turn=Math.min(9,ST.turn+1);renderCombat();});prev.disabled=ST.turn===0;next.disabled=ST.turn===9;nav.append(prev,next);a.append(nav);}else{const note=document.createElement("div");note.className="cres-note";note.textContent="Mode vue complète : 10 tours et 40 actions des quatre joueurs. Les pourcentages indiquent des points de contrôle, pas des garanties de résultat.";a.append(note);}}
+function head(){playerControls();navControls();}
+function renderCombat(){
+const app=$("cres-app");app.replaceChildren();
+app.append(RaidAtlasComponents.battleIntro("Cresselia"));
+app.append(RaidAtlasComponents.checkbox("Vue complète · afficher les 10 tours",ST.all,checked=>{ST.all=checked;renderCombat()}));
+if(!ST.all)app.append(RaidAtlasComponents.phaseSelect({labels:D.turns.map(t=>t.label),current:ST.turn,onChange:i=>{ST.turn=i;renderCombat()}}));
+const wrap=document.createElement("div");if(ST.all)wrap.className="all-turns";app.append(wrap);
+const list=ST.all?D.turns.map((t,i)=>[t,i]):[[D.turns[ST.turn],ST.turn]];
+for(const [t,i] of list){
+ const panel=document.createElement("section");if(ST.all)panel.className="turn-section";
+ const actions=t.actions.map(([slot,move],j)=>({
+  name:D.team[j][slot].n,move,
+  spriteUrl:img(D.team[j][slot].id)
+ }));
+ const info=document.createElement("section");info.className="raid-tips";
+ const heading=document.createElement("h3");heading.textContent="À retenir — "+t.label;
+ const note=document.createElement("p");note.textContent=t.info;
+ const hp=document.createElement("p");hp.className="raid-alert";hp.textContent="PV du boss visés en fin de tour : "+t.hp+" (valeur indicative).";
+ info.append(heading,note,hp);
+ const actionText="TOUR "+(i+1)+" / CRESSELIA 6★ — THE THREE MUSKETEERS v2.1\\n"+
+ t.actions.map(([slot,move],j)=>"J"+(j+1)+" · "+D.team[j][slot].n+" → "+move).join("\\n")+"\\nPV cible : "+t.hp;
+ RaidAtlasComponents.battleTurn({
+  target:panel,index:i,total:D.turns.length,title:t.label,actions,selected:ST.player,
+  onPokemon:()=>{ST.tab="pokemon";render()},advice:info,copyText:actionText,
+  copy:(button,text)=>copy(text,button)
+ });
+ wrap.append(panel);
+}
+if(!ST.all)app.append(RaidAtlasComponents.phaseNav({current:ST.turn,total:D.turns.length,onChange:i=>{ST.turn=i;renderCombat()}}));
+else{const note=document.createElement("p");note.className="build-source-note";note.textContent="Mode vue complète : 10 tours et 40 actions. Les pourcentages indiquent des repères, pas des garanties.";app.append(note);}
+}
 function monCopy(m){return m.n+" @ "+m.item+"\nTalent : "+m.talent+"\nNature : "+m.nature+"\nIV : "+m.iv+"\nEV : "+m.ev+"\nAttaques : "+m.attacks+"\nNotes : "+m.note;}
-function renderPokemon(){const a=$("cres-app");a.innerHTML='<div class="cres-note">Composition du joueur '+(ST.player+1)+' : 6 Pokémon. Les IV, EV et natures sont reproduits uniquement lorsqu’ils figurent dans les sources ; un champ non imposé n’est pas un seuil inventé.</div>';
-D.team[ST.player].forEach((m,i)=>{const d=document.createElement("details");d.className="cres-mon";d.innerHTML='<summary><div class="cres-mon-head"><img loading="lazy" src="'+img(m.id)+'" alt=""><div><strong>'+(i+1)+'. '+esc(m.n)+'</strong><span>'+esc(m.item)+' · '+esc(m.attacks)+'</span></div></div></summary><div class="cres-mon-body"><table class="cres-table"><tbody>'+[["Talent",m.talent],["Nature",m.nature],["IV",m.iv],["EV",m.ev],["Attaques",m.attacks],["Notes",m.note]].map(([x,y])=>'<tr><th scope="row">'+esc(x)+'</th><td>'+esc(y)+'</td></tr>').join("")+'</tbody></table></div>';d.open=i===0;
-const showcase=document.createElement("div");showcase.className="build-showcase";
-const stats=[["Objet",m.item],["Nature",m.nature],["Talent",m.talent],["EV",m.ev],["IV prioritaires",m.iv]];
-const statsHtml=stats.map(([label,value])=>'<div class="build-fact"><small>'+esc(label)+'</small><strong>'+esc(value)+'</strong></div>').join("");
-const movesHtml=m.attacks.split(/\s*·\s*/).map((move,j)=>'<div class="move-pill"><span class="move-symbol">'+["◆","✦","✧","⬡"][j%4]+'</span><span>'+esc(move)+'</span></div>').join("");
-showcase.innerHTML='<section class="build-specs"><h3>Répartition du Pokémon</h3><div class="build-summary"><div class="build-portrait"><img class="sprite large" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/'+m.id+'.png" alt="'+esc(m.n)+'" loading="lazy"></div><div class="build-facts">'+statsHtml+'</div></div></section><section class="build-moves"><h3>Attaques</h3>'+movesHtml+'</section>';
-const body=d.querySelector(".cres-mon-body");body.insertBefore(showcase,body.querySelector("table"));
-body.append(button("Copier le build",e=>copy(monCopy(m),e.currentTarget),"cres-copy"));a.append(d);});
-a.append(button("Copier l'équipe complète (6 builds)",e=>copy("CRESSELIA 6★ / THE THREE MUSKETEERS v2.1 / JOUEUR "+(ST.player+1)+"\n\n"+D.team[ST.player].map(monCopy).join("\n\n"),e.currentTarget),"cres-copy"));}
+function renderPokemon(){
+const app=$("cres-app");app.replaceChildren();
+app.append(RaidAtlasComponents.feature({player:ST.player,boss:"Cresselia",
+ artwork:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/488.png"}));
+app.append(RaidAtlasComponents.pokemonIntroNote("Composition du joueur "+(ST.player+1)+
+" : six Pokémon. Les valeurs non imposées ne sont pas des seuils inventés : contrôlez les IV, EV et natures documentés par la source."));
+app.append(RaidAtlasComponents.checkbox("Tout déplier · afficher les 6 fiches",ST.expand,checked=>{ST.expand=checked;renderPokemon()}));
+D.team[ST.player].forEach((m,i)=>{
+ const sprite="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+m.id+".png";
+ const art="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"+m.id+".png";
+ const pokemon={name:m.n,item:m.item,nature:m.nature,ability:m.talent,ev:m.ev,iv:m.iv,
+  moves:m.attacks.split(/\\s*[\\/·]\\s*/).filter(Boolean),note:m.note,
+  variant:"Non précisé",spriteUrl:sprite,artworkUrl:art};
+ const card=RaidAtlasComponents.buildCard({
+  pokemon,index:i,expanded:ST.expand||i===0,
+  onToggle:c=>{if(!ST.expand&&c.open)app.querySelectorAll("details.card").forEach(other=>{if(other!==c)other.open=false})},
+  copy:(button)=>copy(monCopy(m),button)
+ });
+ app.append(card);
+});
+app.append(button("Copier l'équipe complète (6 builds)",e=>copy(
+ "CRESSELIA 6★ / THE THREE MUSKETEERS v2.1 / JOUEUR "+(ST.player+1)+"\\n\\n"+
+ D.team[ST.player].map(monCopy).join("\\n\\n"),e.currentTarget),"cres-copy"));
+}
 function renderPrep(){const a=$("cres-app");a.replaceChildren();const intro=document.createElement("div");intro.className="cres-note";intro.textContent="Cresselia se trouve sur l'Île Pleine Lune (Sinnoh), accessible par bateau depuis Joliberges. Raid permanent 6★ à quatre joueurs. Une stratégie adaptée à chaque joueur ; ne pas fusionner avec une ancienne version.";a.append(intro);
 const tasks=["Pokédex OT rempli ; au moins 4 Pokémon OT dans l’équipe","Les 6 Pokémon du joueur "+(ST.player+1)+" sont disponibles et placés dans l’ordre prévu","Aucun objet ou lignée d’évolution dupliqué dans mon équipe","Natures, talents et capacités vérifiés un par un","IV, EV et ordres de Vitesse vérifiés entre les quatre joueurs","Réglages de Déf. Spé. et ciblage IA contrôlés (Gueriaigle / Sidérella)","Lance-Boue, Air Veinard, Rune Protect et Séduction présents où indiqués","Quatre joueurs synchronisés sur les 10 tours et les paliers de PV","Vérifier les dernières corrections du guide source avant de breeder"];
 const wrap=document.createElement("div");wrap.className="cres-source";wrap.innerHTML='<h3>Checklist de préparation</h3><p class="cres-progress" id="cres-progress"></p>';const checks=document.createElement("div");checks.className="cres-checklist";let saved={};try{saved=JSON.parse(localStorage.getItem("raid-atlas-cresselia-check")||"{}")||{};}catch(e){}function count(){wrap.querySelector("#cres-progress").textContent=tasks.filter((_,i)=>saved[ST.player+"-"+i]).length+" / "+tasks.length+" vérifiés";}
@@ -619,6 +656,6 @@ const links=document.createElement("section");links.className="cres-source";link
 }
 function renderMechanics(){const a=$("cres-app");a.innerHTML='<div class="cres-note">Cresselia : type Psy · PV 120 / Att. 70 / Déf. 110 / Att. Spé. 75 / Déf. Spé. 120 / Vit. 85 (statistiques de base, différentes de celles du boss de raid). Faiblesses : Insecte, Spectre et Ténèbres ×2. Les règles ci-dessous concernent le raid 6★.</div><div class="cres-ability">'+D.mechanics.map(([name,desc])=>'<article><h3>'+esc(name)+'</h3><p>'+esc(desc)+'</p></article>').join("")+'</div>';}
 function render(){head();if(ST.tab==="combat")renderCombat();else if(ST.tab==="pokemon")renderPokemon();else if(ST.tab==="preparation")renderPrep();else renderMechanics();}
-$("cres-all").addEventListener("change",e=>{ST.all=e.target.checked;renderCombat();});
+
 render();
 })();
