@@ -648,10 +648,48 @@ app.append(button("Copier l'équipe complète (6 builds)",e=>copy(
  "CRESSELIA 6★ / THE THREE MUSKETEERS v2.1 / JOUEUR "+(ST.player+1)+"\n\n"+
  D.team[ST.player].map(monCopy).join("\n\n"),e.currentTarget),"cres-copy"));
 }
-function renderPrep(){const a=$("cres-app");a.replaceChildren();const intro=document.createElement("div");intro.className="cres-note";intro.textContent="Cresselia se trouve sur l'Île Pleine Lune (Sinnoh), accessible par bateau depuis Joliberges. Raid permanent 6★ à quatre joueurs. Une stratégie adaptée à chaque joueur ; ne pas fusionner avec une ancienne version.";a.append(intro);
+function renderPrep(){
+const a=$("cres-app");a.replaceChildren();
+const intro=document.createElement("div");intro.className="cres-note";
+intro.textContent="Cresselia se trouve sur l'Île Pleine Lune (Sinnoh), accessible par bateau depuis Joliberges. Raid permanent 6★ à quatre joueurs. Une stratégie adaptée à chaque joueur ; ne pas fusionner avec une ancienne version.";
+a.append(intro);
+const progress=RaidAtlasComponents.progressCard("cres-prep","PRÉPARATION");
+a.append(progress);
+const roster=document.createElement("div");roster.className="grid";
+function update(){
+ const inputs=Array.from(a.querySelectorAll(".prep-check input,.cres-checklist input"));
+ const done=inputs.filter(c=>c.checked).length,pct=inputs.length?Math.round(done/inputs.length*100):0;
+ const title=a.querySelector("#cres-prep-pct"),fill=a.querySelector("#cres-prep-fill"),global=a.querySelector("#cres-progress");
+ if(title)title.textContent=pct+"%";if(fill)fill.style.width=pct+"%";
+ if(global)global.textContent=tasks.filter((_,i)=>saved[ST.player+"-"+i]).length+" / "+tasks.length+" vérifiés";
+}
+D.team[ST.player].forEach((m,i)=>{
+ const checks=[["ready","Pokémon prêt"],["item","Objet équipé"],["verified","Fiche vérifiée"]].map(([part,label])=>{
+  const key="raid-atlas-cresselia-build-"+ST.player+"-"+i+"-"+part;
+  let checked=false;try{checked=localStorage.getItem(key)==="1"}catch(e){}
+  return {label,checked,onChange:yes=>{try{localStorage.setItem(key,yes?"1":"0")}catch(e){}update()}};
+ });
+ roster.append(RaidAtlasComponents.prepCard({name:m.n,item:m.item,
+  spriteUrl:img(m.id),checks}));
+});
+a.append(roster);
 const tasks=["Pokédex OT rempli ; au moins 4 Pokémon OT dans l’équipe","Les 6 Pokémon du joueur "+(ST.player+1)+" sont disponibles et placés dans l’ordre prévu","Aucun objet ou lignée d’évolution dupliqué dans mon équipe","Natures, talents et capacités vérifiés un par un","IV, EV et ordres de Vitesse vérifiés entre les quatre joueurs","Réglages de Déf. Spé. et ciblage IA contrôlés (Gueriaigle / Sidérella)","Lance-Boue, Air Veinard, Rune Protect et Séduction présents où indiqués","Quatre joueurs synchronisés sur les 10 tours et les paliers de PV","Vérifier les dernières corrections du guide source avant de breeder"];
-const wrap=document.createElement("div");wrap.className="cres-source";wrap.innerHTML='<h3>Checklist de préparation</h3><p class="cres-progress" id="cres-progress"></p>';const checks=document.createElement("div");checks.className="cres-checklist";let saved={};try{saved=JSON.parse(localStorage.getItem("raid-atlas-cresselia-check")||"{}")||{};}catch(e){}function count(){wrap.querySelector("#cres-progress").textContent=tasks.filter((_,i)=>saved[ST.player+"-"+i]).length+" / "+tasks.length+" vérifiés";}
-tasks.forEach((t,i)=>{const line=document.createElement("label");line.className="cres-check";const c=document.createElement("input");c.type="checkbox";c.checked=!!saved[ST.player+"-"+i];c.addEventListener("change",()=>{saved[ST.player+"-"+i]=c.checked;try{localStorage.setItem("raid-atlas-cresselia-check",JSON.stringify(saved));}catch(e){}count();});const span=document.createElement("span");span.textContent=t;line.append(c,span);checks.append(line);});wrap.append(checks);a.append(wrap);count();
+const wrap=document.createElement("div");wrap.className="cres-source";
+wrap.innerHTML='<h3>Checklist de préparation générale</h3><p class="cres-progress" id="cres-progress"></p>';
+const checklist=document.createElement("div");checklist.className="cres-checklist";
+let saved={};try{saved=JSON.parse(localStorage.getItem("raid-atlas-cresselia-check")||"{}")||{}}catch(e){}
+tasks.forEach((t,i)=>{
+ const line=document.createElement("label");line.className="cres-check prep-check";
+ const box=document.createElement("input");box.type="checkbox";
+ box.checked=!!saved[ST.player+"-"+i];
+ box.addEventListener("change",()=>{
+  saved[ST.player+"-"+i]=box.checked;
+  try{localStorage.setItem("raid-atlas-cresselia-check",JSON.stringify(saved))}catch(e){}
+  update();
+ });
+ const span=document.createElement("span");span.textContent=t;line.append(box,span);checklist.append(line);
+});
+wrap.append(checklist);a.append(wrap);update();
 const links=document.createElement("section");links.className="cres-source";links.innerHTML='<h3>Sources et versions</h3><p>Guide conseillé pour cette page : The Three Musketeers v2.1, par Cadoiz, RogueMaster (Phoebe), Th3Fastest et OhKaibaBoy. Rotation publiée en mars 2026 et retranscrite en septembre 2026. Les statistiques de popularité par équipe ne sont pas publiées : le qualificatif « le plus utilisé » ne peut pas être garanti.</p>'+D.sources.map(s=>'<p><a href="'+esc(s[1])+'" target="_blank" rel="noopener noreferrer">'+esc(s[0])+'</a><br><small>'+esc(s[2])+'</small></p>').join("")+'<p>Les stratégies Sensei/DoubleDude et Latin Combo sont citées comme alternatives, mais leurs compositions ne sont pas intégrées ici sans audit complet des versions exactes.</p>';a.append(links);
 }
 function renderMechanics(){
