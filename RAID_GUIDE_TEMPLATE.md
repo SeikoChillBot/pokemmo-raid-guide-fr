@@ -121,3 +121,34 @@ Validation statique : `assets/raid-components.js`, `assets/cresselia.js`, `asset
 - Accueil `index.html` : suppression des trois mentions de navigation répétées en haut (« Accueil · Événements », « Accueil // Événements » et lien de l'accueil pointant vers la page active). Le lien vers les raids permanents et le bouton d'accès principal restent.
 - V11 CSS chargé en dernier sur les 8 pages publiques FR. V11 JS chargé seulement sur les 3 fiches principales Heatran/Cresselia/Halloween 2025 avec `?v=20261025-v11b`. Aucune modification de composition, rotation, build ou chiffre ; logos et styles V9, nouveaux contrôles de tour V10 et cadre Octillery conservés.
 - Contrôle du code réalisé ; le rendu précis et le chargement du GIF externe en navigateur réel sont encore à vérifier. Le recadrage CSS tient compte des bandes intégrées à l'animation mais ne les retire pas des octets originaux.
+
+
+## V12 FR — correctifs visuels et popup complet (25/10/2026)
+
+Statut : implémentation sur le dépôt français, **en attente de validation visuelle de l’utilisateur** ; aucun report sur le dépôt anglais avant son accord.
+
+- `assets/raid-polish-v12.css`, chargée après V11 sur toutes les huit pages : réduction du zoom du GIF de l’antre, fond plein sans vignette d’accueil, aucune légende sous la bannière, art Pokémon des cartes de combat fondu sans carré noir, navigation précédent/suivant compacte immédiatement après les actions, bouton actif franchement rouge et panneau flottant des builds à six champs. La source exacte du GIF PokeMMO fournie par l’utilisateur est conservée et animée ; recadrage par CSS uniquement, sans téléchargement ni transformation de ses octets.
+- Le bouton redondant « Voir les 6 Pokémon du Px » demeure absent de `assets/raid-components.js`. Les deux boutons originaux « ← Tour précédent » / « Tour suivant → » sont générés dans `RaidAtlasComponents.battleTurn()` après les quatre actions et restent dans la carte grâce à la protection `raid-inline-turn-nav` du script V9. Cette règle s’applique à **tous les raids actuels et futurs utilisant le composant** ; les moteurs Halloween conservent leurs propres contrôles équivalents immédiatement après la grille.
+- `RaidAtlasComponents.decoratePreview(node,p)` enregistre sur la carte les **données réelles exactes du build** (nom, objet tenu, nature, talent, EV, IV, attaques, source, note) dans `data-raid-build`. `actionGrid` accepte dorénavant l’option `action.build` et `buildCard` renseigne automatiquement le build complet ; ce contrat est celui de toutes les **futures fiches**.
+- Heatran : `raidBuildFor(strat,owner,pokemon)` et `raidCloudBuild(owner,pokemon)` relient les cartes de combat aux véritables fiches de chacun des quatre joueurs, pour les stratégies Crimson Core, Beorns/JinxedBoon et Cloud Five. Les éventuels remplacements dont le build est absent ne reçoivent **aucune statistique inventée**.
+- Cresselia : `assets/cresselia.js` passe le build correspondant à chaque action de son équipe, sans fusionner les stratégies Musketeers / Sensei ; les données Latin Combo indisponibles restent indisponibles.
+- Halloween : les propositions de rosters, les fiches complètes et les références historiques renseignent `data-raid-build`, avec leurs avertissements de source. Les tours sans Pokémon vérifié n’affichent pas de fiche fictive.
+- `assets/raid-pokemon-preview-v11.js` est remplacé par un moteur d’aperçu riche V12 (même chemin, URL cache-bustée). Chaque popup comporte **six lignes distinctes systématiques : Objet tenu, Nature, Talent, EV, IV, Attaques (moveset complet)**, plus la source et son éventuelle mise en garde. Quand la donnée est absente, afficher « Non précisé dans la source ». Respect du clavier, Escape, des petits écrans, et pas de popup au toucher.
+- Ne jamais considérer le GIF distant ou le rendu CSS comme vérifiés dans un navigateur tant que les pages publiées n’ont pas été inspectées en conditions réelles. Conserver les mêmes fonds, cartes, logique, onglets et stratégies.
+
+Pour ajouter un boss :
+```js
+RaidAtlasComponents.battleTurn({
+  target, index, total, title,
+  actions: teamsForTurn.map(({ pokemon, move }) => ({
+    name: pokemon.name,
+    move,
+    spriteUrl: pokemon.spriteUrl,
+    build: { name: pokemon.name, item: pokemon.item, nature: pokemon.nature,
+      ability: pokemon.ability, ev: pokemon.ev, iv: pokemon.iv,
+      moves: pokemon.moves, source: pokemon.source }
+  })),
+  selected, onTurnChange, copyText, copy
+});
+```
+Conserver les champs absents vides au lieu de leur inventer une valeur. Le tooltip les marque « Non précisé dans la source ».
