@@ -683,7 +683,7 @@ D.team[ST.player].forEach((m,i)=>{
   spriteUrl:img(m.id),checks}));
 });
 a.append(roster);
-const tasks=["Pokédex OT rempli ; au moins 4 Pokémon OT dans l’équipe","Les 6 Pokémon du joueur "+(ST.player+1)+" sont disponibles et placés dans l’ordre prévu","Aucun objet ou lignée d’évolution dupliqué dans mon équipe","Natures, talents et capacités vérifiés un par un","IV, EV et ordres de Vitesse vérifiés entre les quatre joueurs","Réglages de Déf. Spé. et ciblage IA contrôlés (Gueriaigle / Sidérella)","Lance-Boue, Air Veinard, Rune Protect et Séduction présents où indiqués","Quatre joueurs synchronisés sur les 10 tours et les paliers de PV","Vérifier les dernières corrections du guide source avant de breeder"];
+const tasks=["Pokédex OT rempli ; au moins 4 Pokémon OT dans l’équipe","Les 6 Pokémon du joueur "+(ST.player+1)+" sont disponibles et placés dans l’ordre prévu","Aucun objet ou lignée d’évolution dupliqué dans mon équipe","Natures, talents et capacités vérifiés un par un","IV, EV et ordres de Vitesse vérifiés entre les quatre joueurs","Réglages de Déf. Spé., de Vitesse et de ciblage IA contrôlés selon "+current().title,"Capacités, objets et ordre de vitesse vérifiés sur les fiches de "+current().title,"Quatre joueurs synchronisés sur les "+D.turns.length+" tours et les paliers de PV","Vérifier les dernières corrections du guide source avant de breeder"];
 const wrap=document.createElement("div");wrap.className="cres-source";
 wrap.innerHTML='<h3>Checklist de préparation générale</h3><p class="cres-progress" id="cres-progress"></p>';
 const checklist=document.createElement("div");checklist.className="cres-checklist";
@@ -717,7 +717,7 @@ const intro=document.createElement("section");intro.className="mechanics-intro";
 const heading=document.createElement("h2");heading.textContent="Mécaniques communes et seuils de PV";
 const p=document.createElement("p");
 p.textContent="Cresselia : type Psy · PV 120 / Att. 70 / Déf. 110 / Att. Spé. 75 / Déf. Spé. 120 / Vit. 85 (statistiques de base, différentes du boss de raid). Faiblesses : Insecte, Spectre et Ténèbres ×2. Les règles ci-dessous concernent le raid 6★.";
-intro.append(heading,p);app.append(intro);
+intro.append(heading,p);app.append(intro);sourceNotice(app);
 const grid=document.createElement("div");grid.className="mechanic-grid";
 D.mechanics.forEach(([name,detail])=>{
  const card=document.createElement("article");card.className="raid-mechanic-note";
