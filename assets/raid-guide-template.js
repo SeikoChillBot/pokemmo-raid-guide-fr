@@ -1,108 +1,165 @@
-/* RAID ATLAS — gabarit partagé de toutes les fiches de raid (FR).
-   Pas de données de combat ici. Les moteurs Heatran/Cresselia/Halloween restent autonomes.
-   Pour une nouvelle fiche : data-raid-template="custom" sur body et
-   data-raid-slot="hero|crumb|strategy|players|tabs|content" sur les éléments. */
-(function(){
-"use strict";
-const D=document, body=D.body;
-const PRESETS={
- heatran:{top:".atlas-guide-topline",nav:".atlas-guide-navrow",crumb:".raid-breadcrumb",hero:".hero",layout:"",strategy:".control",controls:".raid-controls",players:"#players",tabs:"#tabs",content:"#app",footer:"footer",roleLabel:"VOTRE RÔLE"},
- cresselia:{top:".mini-bar",nav:".navbar",crumb:".cres-crumb",hero:".cres-hero",layout:".cres-layout",aside:".cres-sidebar",stage:".cres-content",strategy:"",controls:"",players:"#cres-players",tabs:"#cres-tabs",content:"#cres-app",footer:".cres-footer",roleLabel:"VOTRE RÔLE"},
- halloween:{top:".mini-bar",nav:".navbar",crumb:".h25-bread",hero:".h25-hero",layout:"",strategy:"#mode-container",players:"#players-container",tabs:".h25-nav",content:"#guide-content",footer:".atlas-footer",roleLabel:"VOTRE RÔLE"}
-};
-const one=(sel,scope)=>sel?(scope||D).querySelector(sel):null;
-const slot=n=>D.querySelector('[data-raid-slot="'+n+'"]');
-function node(n,cls){const x=D.createElement(n);x.className=cls;return x;}
-function childMark(el,cls){if(el)el.classList.add(cls);}
-function sectionHeading(s){const el=node("div","raid-template-section-label");el.textContent=s;return el;}
-function collectConfig(){
- const preset=body.dataset.raidTemplate||"custom";
- const cfg=Object.assign({},PRESETS[preset]||{});
- const conf=one("#raid-template-config");
- if(conf){try{Object.assign(cfg,JSON.parse(conf.textContent));}catch(e){console.warn("RAID ATLAS template config invalid",e);}}
- return {preset,cfg};
-}
-function select(cfg,k){return slot(k)||one(cfg[k]);}
-function assemble(preset,cfg){
- let layout=select(cfg,"layout"),aside=select(cfg,"aside"),stage=select(cfg,"stage");
- if(!layout){
-   const hero=select(cfg,"hero"),content=select(cfg,"content");
-   if(!hero||!content)return null;
-   layout=node("div","raid-template-layout");
-   (preset==="halloween"?(one(".h25-alert")||hero):hero).insertAdjacentElement("afterend",layout);
-   aside=node("aside","raid-template-sidebar");
-   stage=node("div","raid-template-main");
-   layout.append(aside,stage);
-   // Reposition existing nodes, not copies: preserves event listeners and state.
-   const strategy=select(cfg,"strategy"),controls=select(cfg,"controls");
-   const players=select(cfg,"players"),tabs=select(cfg,"tabs");
-   if(strategy){aside.append(sectionHeading("STRATÉGIE / DIFFICULTÉ"),strategy);}
-   if(controls){aside.append(controls);}
-   else {
-     if(players){aside.append(sectionHeading(cfg.roleLabel||"VOTRE RÔLE"),players);}
-     if(tabs){aside.append(sectionHeading("NAVIGATION"),tabs);}
-   }
-   stage.append(content);
-   // Halloween: maintain navigation between boss guides in main area.
-   if(preset==="halloween"){const next=one("#next-raids");if(next)stage.append(next);}
- } else {
-   aside=aside||layout.firstElementChild;
-   stage=stage||layout.lastElementChild;
-   if(!aside||!stage)return null;
- }
- childMark(layout,"raid-template-layout");
- childMark(aside,"raid-template-sidebar");
- childMark(stage,"raid-template-main");
- layout.dataset.raidTemplateLayout="shared-v1";
- // Make sidebar role / navigation controllable from a single CSS file.
- [select(cfg,"strategy"),select(cfg,"controls"),select(cfg,"players"),select(cfg,"tabs"),select(cfg,"content")].forEach((x,i)=>{
-  if(x)x.classList.add(["raid-template-strategy","raid-template-controls","raid-template-players","raid-template-tabs","raid-template-content"][i]);
- });
- return layout;
-}
-function decorate(cfg){
- [["top","raid-template-topline"],["nav","raid-template-navbar"],["crumb","raid-template-crumb"],["hero","raid-template-hero"],["footer","raid-template-footer"]].forEach(([s,cl])=>childMark(select(cfg,s),cl));
- const h=select(cfg,"hero");
- if(h){
-   const text=h.querySelector(".hero-content,.cres-text,.h25-hero-copy,[data-raid-slot='hero-copy']");
-   const title=h.querySelector("h1");
-   const img=h.querySelector("img");
-   const label=h.querySelector(".eyebrow,.cres-kicker,.h25-eyebrow");
-   childMark(text,"raid-template-hero-copy");
-   childMark(title,"raid-template-hero-title");
-   childMark(img,"raid-template-hero-art");
-   childMark(label,"raid-template-kicker");
- }
-}
-function decorateCards(scope){
- if(!scope)return;
- // Only add semantic classes to existing cards; all design tokens live in shared CSS.
- for(const el of scope.querySelectorAll(".card,.cres-mon,.h25-card,.h25-build,.h25-team-build,.h25-player-card,.cres-action,.h25-stat")){
-  if(!el.classList.contains("raid-template-card"))el.classList.add("raid-template-card");
- }
- for(const el of scope.querySelectorAll(".battle-grid,.cres-grid,.h25-battle-grid,.pump-route-grid")){
-  if(!el.classList.contains("raid-template-action-grid"))el.classList.add("raid-template-action-grid");
- }
- for(const el of scope.querySelectorAll(".build-showcase,.cres-mon-body,.h25-build-body")){
-  if(!el.classList.contains("raid-template-build-body"))el.classList.add("raid-template-build-body");
- }
-}
-function boot(){
- const {preset,cfg}=collectConfig();
- if(body.classList.contains("raid-template-ready"))return;
- const layout=assemble(preset,cfg);
- if(!layout){console.warn("RAID ATLAS: fiche non compatible avec le gabarit partagé",preset);return;}
- decorate(cfg);
- body.classList.add("raid-template-ready");
- body.dataset.raidTemplateVersion="1";
- const stage=select(cfg,"content");
- decorateCards(stage);
- // Existing engines replace cards on tab/turn changes: classify them as they appear.
- if(typeof MutationObserver!=="undefined"&&stage){
-  let scheduled=false;
-  const observer=new MutationObserver(()=>{if(scheduled)return;scheduled=true;Promise.resolve().then(()=>{scheduled=false;decorateCards(stage);});});
-  observer.observe(stage,{childList:true,subtree:true});
- }
-}
-if(D.readyState==="loading")D.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
+/* RAID ATLAS | Modèle d'interface partagé.
+   Chaque moteur reste responsable de ses builds, tours, onglets et événements.
+   Présentation d'origine Heatran restaurée : configuration/roles en haut,
+   navigation seule dans le dock flottant réductible. */
+(() => {
+  "use strict";
+  const doc = document;
+  const body = doc.body;
+  const presets = {
+    heatran: {hero:".hero", strategy:".control", controls:".raid-controls", players:"#players",
+      tabs:"#tabs", content:"#app", top:".atlas-guide-topline", navbar:".atlas-guide-navrow",
+      breadcrumb:".raid-breadcrumb", footer:"footer"},
+    cresselia: {hero:".cres-hero", controls:".cres-sidebar", players:"#cres-players",
+      tabs:"#cres-tabs", content:"#cres-app", top:".mini-bar", navbar:".navbar",
+      breadcrumb:".cres-crumb", footer:".cres-footer"},
+    halloween: {hero:".h25-hero", strategy:"#mode-container", players:"#players-container",
+      tabs:".h25-nav", content:"#guide-content", top:".mini-bar", navbar:".navbar",
+      breadcrumb:".h25-bread", footer:".atlas-footer"}
+  };
+  const q = selector => selector ? doc.querySelector(selector) : null;
+  const slot = name => doc.querySelector('[data-raid-slot="'+name+'"]');
+  const make = (tag, cls) => {
+    const element = doc.createElement(tag);
+    element.className = cls;
+    return element;
+  };
+  const annotate = (element, cls) => { if(element) element.classList.add(cls); };
+  function cardClasses(root) {
+    if(!root) return;
+    const groups = [
+      [".card,.cres-mon,.h25-card,.h25-build,.h25-team-build,.h25-player-card,.cres-action,.h25-stat", "raid-template-card"],
+      [".battle-grid,.cres-grid,.h25-battle-grid,.pump-route-grid", "raid-template-action-grid"],
+      [".build-showcase,.cres-mon-body,.h25-build-body", "raid-template-build-body"]
+    ];
+    for (const [selector, cls] of groups) {
+      for(const el of root.querySelectorAll(selector)) {
+        if(!el.classList.contains(cls)) el.classList.add(cls);
+      }
+    }
+  }
+  function markChrome(config) {
+    for(const [key, cls] of [["top","raid-template-topline"],["navbar","raid-template-navbar"],
+      ["breadcrumb","raid-template-crumb"],["hero","raid-template-hero"],["footer","raid-template-footer"]]){
+      annotate(slot(key) || q(config[key]),cls);
+    }
+    const hero=slot("hero") || q(config.hero);
+    if(hero){
+      annotate(hero.querySelector(".hero-content,.cres-text,.h25-hero-copy,[data-raid-slot='hero-copy']"),"raid-template-hero-copy");
+      annotate(hero.querySelector("h1"),"raid-template-hero-title");
+      annotate(hero.querySelector("img"),"raid-template-hero-art");
+      annotate(hero.querySelector(".eyebrow,.cres-kicker,.h25-eyebrow"),"raid-template-kicker");
+    }
+  }
+  function savedCollapsed() {
+    try { return localStorage.getItem("raid-atlas-dock-reduit")==="1"; }
+    catch(_) { return false; }
+  }
+  function setupDock(tabs) {
+    if(!tabs) return;
+    const dock=make("aside","raid-floating-dock");
+    dock.setAttribute("aria-label","Navigation flottante du raid");
+    const navWrap=make("div","raid-dock-items");
+    tabs.classList.add("raid-dock-tabs");
+    navWrap.append(tabs); // élément source et ses écouteurs conservés
+    const minimize=make("button","raid-dock-toggle");
+    minimize.type="button";
+    let collapsed=savedCollapsed();
+    function paint() {
+      dock.classList.toggle("is-collapsed",collapsed);
+      minimize.textContent=collapsed?"☰  Navigation":"−  Réduire";
+      minimize.setAttribute("aria-expanded",String(!collapsed));
+      minimize.setAttribute("aria-controls","raid-dock-items");
+      minimize.setAttribute("aria-label",collapsed?"Afficher les quatre rubriques du raid":"Réduire la navigation flottante");
+      navWrap.hidden=collapsed;
+    }
+    navWrap.id="raid-dock-items";
+    minimize.addEventListener("click",()=>{
+      collapsed=!collapsed;
+      try { localStorage.setItem("raid-atlas-dock-reduit",collapsed?"1":"0"); } catch(_){}
+      paint();
+    });
+    dock.append(navWrap,minimize);
+    body.append(dock);
+    paint();
+  }
+  function moveControls(preset, config, tabs) {
+    const hero=slot("hero") || q(config.hero);
+    const content=slot("content") || q(config.content);
+    if(!hero||!content||!tabs) return false;
+    const anchor=preset==="halloween" ? q(".h25-alert")||hero : hero;
+    const toolbar=make("section","raid-template-commandbar");
+    toolbar.setAttribute("aria-label","Configuration du raid");
+    anchor.insertAdjacentElement("afterend", toolbar);
+    if(preset==="heatran") {
+      const strategy=q(config.strategy);
+      const controls=q(config.controls);
+      if(strategy){strategy.classList.add("raid-template-strategy");toolbar.append(strategy);}
+      if(controls) {
+        controls.classList.add("raid-template-rolebar");
+        const oldNavHeading=controls.querySelector(".sections-heading");
+        if(oldNavHeading)oldNavHeading.classList.add("raid-template-old-nav-heading");
+        toolbar.append(controls);
+      }
+    } else if(preset==="cresselia"){
+      const sidebar=q(config.controls);
+      const layout=q(".cres-layout");
+      if(sidebar){
+        sidebar.classList.add("raid-template-rolebar");
+        const groups=Array.from(sidebar.children);
+        const oldNavGroup=groups.find(el=>el.contains(tabs));
+        if(oldNavGroup)oldNavGroup.classList.add("raid-template-old-nav-heading");
+        const references=groups.find(el=>el.textContent.includes("AUTRES STRATÉGIES DOCUMENTÉES"));
+        if(references){
+          const fold=make("details","raid-template-references");
+          const summary=make("summary","");
+          summary.textContent="Autres stratégies documentées";
+          fold.append(summary,references);
+          // Garder toutes les sources accessibles, mais hors des contrôles principaux.
+          const outer=layout||content;
+          outer.insertAdjacentElement("afterend",fold);
+        }
+        toolbar.append(sidebar);
+      }
+    } else if(preset==="halloween"){
+      const strategy=q(config.strategy);
+      const players=q(config.players);
+      if(strategy){strategy.classList.add("raid-template-strategy");toolbar.append(strategy);}
+      if(players){players.classList.add("raid-template-rolebar");toolbar.append(players);}
+    } else {
+      const strategy=slot("strategy");
+      const players=slot("players");
+      if(strategy) toolbar.append(strategy);
+      if(players) toolbar.append(players);
+    }
+    const players=slot("players")||q(config.players);
+    annotate(players,"raid-template-players");
+    annotate(content,"raid-template-content");
+    setupDock(tabs);
+    return true;
+  }
+  function boot() {
+    if(body.classList.contains("raid-template-ready")) return;
+    const preset=body.dataset.raidTemplate||"custom";
+    const config={...(presets[preset]||{})};
+    const custom=q("#raid-template-config");
+    if(custom){try{Object.assign(config,JSON.parse(custom.textContent));}catch(e){console.warn("Configuration du modèle invalide",e);}}
+    const tabs=slot("tabs")||q(config.tabs);
+    if(!moveControls(preset,config,tabs)) return;
+    markChrome(config);
+    body.classList.add("raid-template-ready");
+    body.dataset.raidTemplateVersion="3";
+    const content=slot("content")||q(config.content);
+    cardClasses(content);
+    if(content && typeof MutationObserver !== "undefined"){
+      let queued=false;
+      new MutationObserver(()=>{
+        if(queued) return;
+        queued=true;
+        Promise.resolve().then(()=>{queued=false;cardClasses(content);});
+      }).observe(content,{childList:true,subtree:true});
+    }
+  }
+  if(doc.readyState==="loading") doc.addEventListener("DOMContentLoaded",boot,{once:true});
+  else boot();
 })();
