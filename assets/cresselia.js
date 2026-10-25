@@ -635,6 +635,8 @@ function renderPokemon(){
 const app=$("cres-app");app.replaceChildren();
 app.append(RaidAtlasComponents.feature({player:ST.player,boss:"Cresselia",
  artwork:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/488.png"}));
+sourceNotice(app);
+if(!current().complete){const p=document.createElement("p");p.className="raid-latin-unverified";p.textContent="Latin Combo V2 : les six Pokémon de chaque joueur et leurs IV/EV ne sont pas attestés dans les sources disponibles. Consulte la vidéo d’origine ; aucune composition non vérifiée n’est présentée.";app.append(p);sourceLink(app);return;}
 app.append(RaidAtlasComponents.pokemonIntroNote("Composition du joueur "+(ST.player+1)+
 " : six Pokémon. Les valeurs non imposées ne sont pas des seuils inventés : contrôlez les IV, EV et natures documentés par la source."));
 app.append(RaidAtlasComponents.checkbox("Tout déplier · afficher les 6 fiches",ST.expand,checked=>{ST.expand=checked;renderPokemon()}));
@@ -652,14 +654,15 @@ D.team[ST.player].forEach((m,i)=>{
  app.append(card);
 });
 app.append(button("Copier l'équipe complète (6 builds)",e=>copy(
- "CRESSELIA 6★ / THE THREE MUSKETEERS v2.1 / JOUEUR "+(ST.player+1)+"\n\n"+
+ "CRESSELIA 6★ / "+current().title+" / P"+(ST.player+1)+"\n\n"+
  D.team[ST.player].map(monCopy).join("\n\n"),e.currentTarget),"cres-copy"));
 }
 function renderPrep(){
 const a=$("cres-app");a.replaceChildren();
 const intro=document.createElement("div");intro.className="cres-note";
 intro.textContent="Cresselia se trouve sur l'Île Pleine Lune (Sinnoh), accessible par bateau depuis Joliberges. Raid permanent 6★ à quatre joueurs. Une stratégie adaptée à chaque joueur ; ne pas fusionner avec une ancienne version.";
-a.append(intro);
+a.append(intro);sourceNotice(a);
+if(!current().complete){const msg=document.createElement("p");msg.className="raid-latin-unverified";msg.textContent="Latin Combo V2 : les équipes ne sont pas vérifiées. La checklist détaillée sera disponible lorsque les builds originaux seront confirmés.";a.append(msg);sourceLink(a);return;}
 const progress=RaidAtlasComponents.progressCard("cres-prep","PRÉPARATION");
 a.append(progress);
 const roster=document.createElement("div");roster.className="grid";
@@ -672,7 +675,7 @@ function update(){
 }
 D.team[ST.player].forEach((m,i)=>{
  const checks=[["ready","Pokémon prêt"],["item","Objet équipé"],["verified","Fiche vérifiée"]].map(([part,label])=>{
-  const key="raid-atlas-cresselia-build-"+ST.player+"-"+i+"-"+part;
+  const key="raid-atlas-cresselia-"+ST.strategy+"-build-"+ST.player+"-"+i+"-"+part;
   let checked=false;try{checked=localStorage.getItem(key)==="1"}catch(e){}
   return {label,checked,onChange:yes=>{try{localStorage.setItem(key,yes?"1":"0")}catch(e){}update()}};
  });
@@ -684,14 +687,14 @@ const tasks=["Pokédex OT rempli ; au moins 4 Pokémon OT dans l’équipe","Les
 const wrap=document.createElement("div");wrap.className="cres-source";
 wrap.innerHTML='<h3>Checklist de préparation générale</h3><p class="cres-progress" id="cres-progress"></p>';
 const checklist=document.createElement("div");checklist.className="cres-checklist";
-let saved={};try{saved=JSON.parse(localStorage.getItem("raid-atlas-cresselia-check")||"{}")||{}}catch(e){}
+let saved={};try{saved=JSON.parse(localStorage.getItem("raid-atlas-cresselia-"+ST.strategy+"-check")||"{}")||{}}catch(e){}
 tasks.forEach((t,i)=>{
  const line=document.createElement("label");line.className="cres-check prep-check";
  const box=document.createElement("input");box.type="checkbox";
  box.checked=!!saved[ST.player+"-"+i];
  box.addEventListener("change",()=>{
   saved[ST.player+"-"+i]=box.checked;
-  try{localStorage.setItem("raid-atlas-cresselia-check",JSON.stringify(saved))}catch(e){}
+  try{localStorage.setItem("raid-atlas-cresselia-"+ST.strategy+"-check",JSON.stringify(saved))}catch(e){}
   update();
  });
  const span=document.createElement("span");span.textContent=t;line.append(box,span);checklist.append(line);
