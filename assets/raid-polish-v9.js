@@ -79,7 +79,7 @@ function liftNavigation(){
   const root=document.querySelector(selector);if(!root)continue;
   const navs=Array.from(root.querySelectorAll(".phase-nav,.h25-actions"));
   for(const nav of navs){
-   if(nav.classList.contains("raid-v9-placed"))continue;
+   if(nav.classList.contains("raid-v9-placed")||nav.classList.contains("raid-inline-turn-nav"))continue;
    const controls=Array.from(nav.querySelectorAll("button"));
    const back=controls.find(b=>/Précédent|Étape précédente/i.test(b.textContent));
    const next=controls.find(b=>/suivant|suivante/i.test(b.textContent));
