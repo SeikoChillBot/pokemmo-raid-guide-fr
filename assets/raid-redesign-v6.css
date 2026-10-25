@@ -623,3 +623,24 @@ body.raid-template-ready .raid-guide-dock .raid-dock-tabs button.raid-dock-activ
 @media(prefers-reduced-motion:reduce){
  .site-wrap .hero-right .hero-pokemon{transition:none!important}
 }
+
+
+/* Carrousel V6 : transitions, clic vers le guide et retour visuel clavier. */
+.site-wrap .hero-right a.hero-boss-info{
+ pointer-events:auto!important;text-decoration:none!important;cursor:pointer;
+ transition:border-color .2s,background .2s,transform .2s!important
+}
+.site-wrap .hero-right a.hero-boss-info:hover{
+ border-color:#fa7480!important;background:#3a2029f0!important;transform:translateY(-2px)!important
+}
+.site-wrap .hero-right a.hero-boss-info:focus-visible{outline:2px solid #fff!important;outline-offset:3px!important}
+.site-wrap .hero-right .hero-pokemon.hero-cycle-enter{
+ animation:raidBossReveal .62s cubic-bezier(.21,.7,.25,1) both;
+}
+@keyframes raidBossReveal{
+ from{opacity:.18;filter:drop-shadow(0 12px 9px #0008) blur(2px);transform:scale(.94)}
+ to{opacity:1;filter:drop-shadow(0 30px 20px #000b) blur(0);transform:scale(1)}
+}
+@media(prefers-reduced-motion:reduce){
+ .site-wrap .hero-right .hero-pokemon.hero-cycle-enter{animation:none!important}
+}
