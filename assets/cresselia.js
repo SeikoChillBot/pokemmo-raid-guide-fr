@@ -589,7 +589,7 @@ const ST={strategy:"musketeers",player:0,tab:"combat",turn:0,all:false,expand:fa
 function current(){return STRATS[ST.strategy]||STRATS.musketeers;}
 function strategyData(id){const row=STRATS[id]||STRATS.musketeers;return {...row,mechanics:CRESSELIA_DATA.mechanics,sources:row.sources||[[row.title,row.source,row.brief||"Guide source"]]};}
 function sourceNotice(target){const row=current();if(ST.strategy==="musketeers")return;const box=document.createElement("aside");box.className="raid-source-notice";box.textContent=row.warning||row.brief||"";target.append(box);}
-function sourceLink(target){const a=document.createElement("a");a.className="raid-source-link";a.href=current().source;a.target="_blank";a.rel="noopener noreferrer";a.textContent=ST.strategy==="latin"?"Voir la vidéo originale Latin Combo V2":"Consulter le guide original Sensei";target.append(a);}
+function sourceLink(target){ /* Liens regroupés dans le panneau de crédits en bas de page. */ }
 function selectStrategy(id){ST.strategy=id;D=strategyData(id);ST.turn=0;ST.tab="combat";ST.all=false;ST.expand=false;render();}
 const NAMES={combat:"Combat",pokemon:"Pokémon",preparation:"Préparation",mecaniques:"Mécaniques"};
 const img=id=>"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+id+".png";
@@ -702,16 +702,7 @@ tasks.forEach((t,i)=>{
  const span=document.createElement("span");span.textContent=t;line.append(box,span);checklist.append(line);
 });
 wrap.append(checklist);a.append(wrap);update();
-const links=document.createElement("section");links.className="cres-source";
-const section=document.createElement("h3");section.textContent="Sources et versions";
-const description=document.createElement("p");description.textContent="Stratégie sélectionnée : "+current().title+". Les données ne sont pas fusionnées avec les autres stratégies et aucun EV/IV manquant n’est inventé.";
-links.append(section,description);
-for(const entry of D.sources||[]){
- const p=document.createElement("p"),a=document.createElement("a"),sub=document.createElement("small");
- a.href=entry[1]||"#";a.textContent=entry[0]||"Guide source";a.target="_blank";a.rel="noopener noreferrer";
- sub.textContent=entry[2]||"";p.append(a,document.createElement("br"),sub);links.append(p);
-}
-a.append(links);
+
 }
 function renderMechanics(){
 const app=$("cres-app");app.replaceChildren();
