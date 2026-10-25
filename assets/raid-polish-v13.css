@@ -1,0 +1,65 @@
+/* RAID ATLAS — V13 validation française, correctifs visuels ciblés.
+   L'anglais doit recevoir ce même fichier après validation. */
+:root{--raid-den-focus:50% 50%}
+/* Antre : retrouver un cadrage carré complet et lisible, pas un gros plan.
+   On supprime les zooms historiques de V10/V11/V12. */
+.site-wrap .raid-v9-den-art .raid-v9-den-photo.raid-v10-den-gif{
+  width:min(100%,310px)!important;height:auto!important;aspect-ratio:1/1!important;
+  min-height:0!important;max-height:310px!important;overflow:hidden!important;
+  background-color:#302821!important;
+  background-image:linear-gradient(0deg,#160f1025,transparent 39%),var(--raid-den-gif)!important;
+  background-size:100% 100%,auto 130%!important;
+  background-position:center center,50% 50%!important;
+  background-repeat:no-repeat!important;
+  border:1px solid #b44137!important;border-radius:16px!important;
+  box-shadow:0 18px 39px #0009,0 0 0 1px #fa6e5047!important;
+  image-rendering:pixelated!important;
+  transform:none!important
+}
+.site-wrap .raid-v9-den-art .raid-v9-den-photo.raid-v10-den-gif:after{
+  background:none!important;
+  box-shadow:inset 0 0 20px #16111147!important;
+  border-color:#8b3c34!important
+}
+.site-wrap .raid-v9-den-art :is(.raid-v9-den-caption,.raid-v9-den-source){display:none!important}
+/* Accueil : préserver la grande carte fondue déjà approuvée. */
+.site-wrap .event-card.main.raid-v10-den-event .raid-v10-den-home{
+  border:0!important;box-shadow:none!important;
+  background-size:auto 172%!important;background-position:center center!important
+}
+/* Les cartes d'action utilisent UNIQUEMENT l'illustration en transparence,
+   et non un rectangle opaque autour du sprite. */
+body.raid-template-ready .raid-template-content :is(.battle-grid,.raid-template-action-grid,.cres-grid,.h25-battle-grid,.pump-route-grid)
+ :is(.card,.cres-action,.h25-card,.h25-player-card) .poke-row,
+body.raid-template-ready .raid-template-content :is(.battle-grid,.cres-grid,.h25-battle-grid)
+ :is(.card,.cres-action,.h25-card,.h25-player-card) :is(.sprite,.sprite-wrap,.poke-icon,.poke-image,.h25-preview){
+  background:transparent!important;background-color:transparent!important;
+  background-image:none!important;
+  border-color:transparent!important;
+  outline:0!important;box-shadow:none!important
+}
+body.raid-template-ready .raid-template-content :is(.battle-grid,.raid-template-action-grid,.cres-grid,.h25-battle-grid,.pump-route-grid) img,
+body.raid-template-ready .raid-template-content :is(.battle-grid,.raid-template-action-grid,.cres-grid,.h25-battle-grid,.pump-route-grid) img.raid-artwork-hd{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border:0!important;outline:none!important;box-shadow:none!important;
+  object-fit:contain!important;
+  image-rendering:auto!important;
+  mix-blend-mode:screen!important;
+  -webkit-mask-image:radial-gradient(ellipse 82% 86% at center,#000 42%,#000e 62%,transparent 100%)!important;
+  mask-image:radial-gradient(ellipse 82% 86% at center,#000 42%,#000e 62%,transparent 100%)!important;
+  filter:drop-shadow(0 9px 11px #0009)!important
+}
+/* Ne pas étendre le masque aux illustrations décoratives des fiches complètes. */
+body.raid-template-ready .raid-template-content .battle-grid .card .poke-row:before{
+  background:radial-gradient(ellipse,#c3312721,transparent 76%)!important
+}
+@media(max-width:650px){
+ .site-wrap .raid-v9-den-art .raid-v9-den-photo.raid-v10-den-gif{
+  width:min(77vw,288px)!important;background-size:100% 100%,auto 130%!important
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ .site-wrap .raid-v9-den-art .raid-v9-den-photo.raid-v10-den-gif{transition:none!important}
+}
