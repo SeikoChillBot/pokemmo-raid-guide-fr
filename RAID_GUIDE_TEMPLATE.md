@@ -56,3 +56,16 @@ Réalisée par analyse statique et simulation DOM :
 - liens et noms explicites du carrousel, disparition de « TARGET // 485 ».
 
 Limite : **le rendu navigateur réel sur GitHub Pages et le comportement en jeu ne sont pas vérifiés ici**. Le vrai test doit couvrir desktop, fenêtres côte à côte, petits écrans, « Vue complète », copie, navigation, sélection et bascule de stratégie. Aucune modification du dépôt anglais ni retrait des pages/stratégies existantes.
+
+
+## Cresselia : sélecteur à trois stratégies (25 octobre 2026)
+
+Dans `cresselia.html`, `#cres-strategy` reprend le modèle de sélecteur de Heatran et permet de choisir :
+
+1. `musketeers` : The Three Musketeers v2.1, équipes et rotation historiques strictement inchangées, dix tours.
+2. `sensei` : Sensei / DoubleDude (New Strategy), 4 × 6 fiches et treize tours / 52 actions, relevés du [guide source](https://forums.pokemmo.com/index.php?/topic/193398-cresselia-raid-guide/). Contradiction Tyranitar/Crocorible en P4 signalée. Les champs non précisés restent marqués « non imposés / non publiés » ; les corrections/évolutions des auteurs doivent être revérifiées avant élevage.
+3. `latin` : Latin Combo V2, référence communautaire de douze tours. [Comparateur MMOBreeder](https://mmobreeder.com/fr/raids/cresselia) et [vidéo Latin Combo par PAXPO](https://www.youtube.com/watch?v=AvmnNLs-CWw). Les 24 builds et les 48 actions n'ont pas de transcription primaire indépendante suffisamment vérifiée. L'onglet conserve les composants communs, la source et un avertissement explicite au lieu d'afficher des informations fictives.
+
+Les nouveaux jeux de données se trouvent dans `assets/cresselia-alternatives.js`. Le moteur `assets/cresselia.js` choisit les données en fonction de `#cres-strategy`, remet l'état du tour à zéro au changement, puis utilise les composants communs `RaidAtlasComponents` pour Combat, Pokémon et Préparation. Les checklists sont enregistrées séparément par stratégie. Le bandeau affiche le nombre de tours et le statut de disponibilité des builds correspondant au choix actif. L'onglet Mécaniques conserve les mécaniques communes du boss.
+
+La version précédente The Three Musketeers reste la valeur par défaut et son objet `CRESSELIA_DATA` demeure immuable. Ne jamais transformer Latin Combo en tutoriel build complet sans accès aux compositions/rotations authentiques.
