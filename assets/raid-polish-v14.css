@@ -41,15 +41,15 @@ body.raid-template-ready .raid-template-content .battle-grid .card:hover img.rai
   transform:scale(1.05)!important;
   filter:drop-shadow(0 12px 12px #0009)!important;
 }
-/* The den is slightly right of center in the untrimmed GIF: shift the picture
-   left in its frame without increasing the V13 zoom or cutting stairs off. */
+/* The den is slightly right of center in the untrimmed GIF: shift the picture just 1.5% left
+   in its frame without increasing the V13 zoom or cutting stairs off. */
 .site-wrap .raid-v9-den-art .raid-v9-den-photo.raid-v10-den-gif{
-  background-position:center center,56% 50%!important;
+  background-position:center center,51.5% 50%!important;
   background-size:100% 100%,auto 130%!important;
 }
 @media(max-width:650px){
   .site-wrap .raid-v9-den-art .raid-v9-den-photo.raid-v10-den-gif{
-    background-position:center center,56% 50%!important;
+    background-position:center center,51.5% 50%!important;
     background-size:100% 100%,auto 130%!important;
   }
 }
