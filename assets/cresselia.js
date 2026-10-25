@@ -582,9 +582,15 @@ const CRESSELIA_DATA={
 
 (function(){
 "use strict";
-const D=CRESSELIA_DATA;
+let D=CRESSELIA_DATA;
+const STRATS={musketeers:{...CRESSELIA_DATA,id:'musketeers',title:'The Three Musketeers v2.1',complete:true},...window.CresseliaAlternatives};
 const $=id=>document.getElementById(id);
-const ST={player:0,tab:"combat",turn:0,all:false,expand:false};
+const ST={strategy:"musketeers",player:0,tab:"combat",turn:0,all:false,expand:false};
+function current(){return STRATS[ST.strategy]||STRATS.musketeers;}
+function strategyData(id){const row=STRATS[id]||STRATS.musketeers;return {...row,mechanics:CRESSELIA_DATA.mechanics,sources:row.sources||[[row.title,row.source,row.brief||"Guide source"]]};}
+function sourceNotice(target){const row=current();if(ST.strategy==="musketeers")return;const box=document.createElement("aside");box.className="raid-source-notice";box.textContent=row.warning||row.brief||"";target.append(box);}
+function sourceLink(target){const a=document.createElement("a");a.className="raid-source-link";a.href=current().source;a.target="_blank";a.rel="noopener noreferrer";a.textContent=ST.strategy==="latin"?"Voir la vidéo originale Latin Combo V2":"Consulter le guide original Sensei";target.append(a);}
+function selectStrategy(id){ST.strategy=id;D=strategyData(id);ST.turn=0;ST.tab="combat";ST.all=false;ST.expand=false;render();}
 const NAMES={combat:"Combat",pokemon:"Pokémon",preparation:"Préparation",mecaniques:"Mécaniques"};
 const img=id=>"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+id+".png";
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
@@ -592,7 +598,7 @@ function button(label,fn,cls){const b=document.createElement("button");b.type="b
 function copy(text,btn){const fallback=()=>{const area=document.createElement("textarea");area.value=text;area.style.position="fixed";area.style.left="-9999px";document.body.append(area);area.select();let ok=false;try{ok=document.execCommand("copy");}finally{area.remove();}if(!ok)throw Error("copie impossible");};const done=()=>{const t=btn.textContent;btn.textContent="✓ Copié !";btn.classList.add("cres-copied");setTimeout(()=>{btn.textContent=t;btn.classList.remove("cres-copied");},1400);};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done).catch(()=>{try{fallback();done();}catch(e){btn.textContent="Copie indisponible";}});}else{try{fallback();done();}catch(e){btn.textContent="Copie indisponible";}}}
 function playerControls(){const a=$("cres-players");a.replaceChildren();for(let i=0;i<4;i++){const b=button("P"+(i+1),()=>{ST.player=i;render();},ST.player===i?"active":"");b.setAttribute("aria-label","Joueur "+(i+1));b.setAttribute("aria-pressed",String(ST.player===i));a.append(b);}}
 function navControls(){const a=$("cres-tabs");a.replaceChildren();for(const [id,name] of Object.entries(NAMES)){const b=button(name,()=>{ST.tab=id;render();},ST.tab===id?"active":"");b.setAttribute("aria-pressed",String(ST.tab===id));a.append(b);}}
-function head(){playerControls();navControls();}
+function head(){playerControls();navControls();const status=$('cres-strategy-status');if(status){status.textContent=ST.strategy==='sensei'?'13 tours · 24 Pokémon':ST.strategy==='latin'?'12 tours vidéo · builds non vérifiés':'10 tours · 24 Pokémon';}}
 function renderCombat(){
 const app=$("cres-app");app.replaceChildren();
 app.append(RaidAtlasComponents.battleIntro("Cresselia"));
