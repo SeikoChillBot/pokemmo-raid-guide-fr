@@ -23,10 +23,30 @@ function phaseSelect({labels,current,onChange}){
  option.value=String(i);option.selected=i===current;sel.append(option);});
  sel.addEventListener("change",()=>onChange(Number(sel.value)));box.append(lab,sel);return box;
 }
+/* Métadonnées exactes pour les aperçus V12 (sans inventer de builds).
+   Data conservées sur la carte utilisée par le moteur et accessibles aux
+   futures fiches via action.build ou pokemon du composant buildCard. */
+function decoratePreview(node,p){
+ if(!p||!node)return node;
+ const detail={
+   name:p.name||p.n||"",
+   item:p.item||"",
+   nature:p.nature||"",
+   ability:p.ability||p.talent||"",
+   ev:p.ev||"",
+   iv:p.iv||"",
+   moves:Array.isArray(p.moves)?p.moves:(p.attacks||p.moves||"").split(/\\s*[\/·]\\s*/).filter(Boolean),
+   source:p.source||"",
+   note:p.note||""
+ };
+ node.dataset.raidBuild=JSON.stringify(detail);
+ return node;
+}
 function actionGrid(actions,selected){
  const grid=el("div","battle-grid");
  actions.forEach((a,i)=>{
   const card=el("div","card"+(i===selected?" selected":""));
+  if(a.build)decoratePreview(card,a.build);
   card.append(el("small",null,"P"+(i+1)+(i===selected?" · VOTRE ACTION":"")));
   const line=el("div","poke-row"),info=el("div","poke-text"),name=el("div","poke-name",a.name),move=el("div","move",a.move);
   info.append(name,move);
@@ -80,6 +100,7 @@ function feature({player,boss,artwork}){
 }
 function buildCard({pokemon,index=0,expanded=false,onToggle,copy}){
  const p=pokemon,card=el("details","card");
+ decoratePreview(card,p);
  card.open=expanded;
  if(onToggle)card.addEventListener("toggle",()=>onToggle(card));
  const summary=el("summary"),row=el("span","poke-row"),info=el("span","poke-text");
@@ -117,8 +138,9 @@ function buildCard({pokemon,index=0,expanded=false,onToggle,copy}){
  b.onclick=()=>copy(b,p);
  card.append(b);return card;
 }
-function prepCard({name,item,sprite,spriteUrl,checks}){
+function prepCard({name,item,sprite,spriteUrl,checks,build}){
  const card=el("div","prep-card"),row=el("div","poke-row");
+ if(build)decoratePreview(card,build);
  let img=sprite;
  if(!img&&spriteUrl){img=el("img","sprite");img.src=spriteUrl;img.loading="lazy";img.alt="";}
  if(img)row.append(img);
@@ -140,6 +162,6 @@ function progressCard(id,title){
 }
 function pokemonIntroNote(text){return el("p","build-source-note",text);}
 global.RaidAtlasComponents=Object.freeze({
- checkbox,battleIntro,phaseSelect,actionGrid,battleTurn,phaseNav,feature,buildCard,prepCard,progressCard,pokemonIntroNote
+ checkbox,battleIntro,phaseSelect,actionGrid,battleTurn,phaseNav,feature,buildCard,prepCard,progressCard,pokemonIntroNote,decoratePreview
 });
 })(window);
