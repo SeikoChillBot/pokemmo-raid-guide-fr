@@ -162,3 +162,26 @@ Conserver les champs absents vides au lieu de leur inventer une valeur. Le toolt
 - Footer : signature « Créé par Seiko (Seikolito en jeu) » sur les 8 pages.
 - Après validation temporaire de la VF par l'utilisateur, les mêmes finitions CSS, traitements d'artworks et signatures sont portés sur `SeikoChillBot/pokemmo-raid-guide`, avec textes et données de jeu en anglais.
 - Tests statiques sur deux dépôts : 16 pages/16 avec style V14 et signature, 12 scripts partagés valides, 24/24 builds et 10/10 tours Musketeers, 24/24 builds et 13/13 tours Sensei, Latin Combo 12 tours vidéo non vérifiés, Halloween 9/9 boss et 228/228 positions. Pas de validation graphique navigateur réelle.
+
+## V15 — crédits de stratégie obligatoires, au bas de chaque nouveau guide
+
+- Tous les raids et événements utilisent `assets/raid-strategy-sources-v15.css` et `assets/raid-strategy-sources-v15.js` dans les deux dépôts.
+- Panneau déroulant discret juste avant le footer, affichant uniquement les auteurs, les liens et les réserves liés à la stratégie active. Ne jamais présenter une liste de sources commune à plusieurs stratégies ; ne pas redistribuer les liens dans Combat / Pokémon / Préparation / Mécaniques.
+- Les pages existantes sont reconnues par `heatran.html`, `cresselia.html`, `halloween.html`, `halloween-2025.html`, `halloween-2025-raid.html`. Pour une future page, définir avant le script :
+
+```js
+window.RAID_ATLAS_SOURCE_CONFIG = {
+  selector: '#strategy',
+  strategies: {
+    example: {
+      name: 'Example strategy', by: 'Real source author(s)',
+      links: [{label: 'Original guide', href: 'https://verified.example/path'}],
+      note: 'Source limitations and version'
+    }
+  }
+};
+```
+
+- Ne pas inventer d'URL, d'auteur, d'EV/IV, de moveset ou de tour manquant. Donner explicitement le statut « source originale non vérifiée » si nécessaire (Cloud Five v0.74). Conserver les crédits des créateurs du guide distincts de la signature du **website** Seiko.
+- La VF est la référence fonctionnelle et visuelle : reporter intégralement les évolutions approuvées en EN avec terminologie Pokémon anglaise officielle. Vérifier les liens, sélection des sources, mobile et déploiement réel après mise à jour.
+- Mémoire technique maintenue dans `SeikoChillBot/GPT-DevSecret-Memory-/projects/POKEMMO_RAID_ATLAS.md`.
