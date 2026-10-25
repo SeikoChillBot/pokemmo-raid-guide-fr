@@ -39,7 +39,7 @@ const S=[
   p("Whimsicott","Fake Tears","","","Prankster","",""),
   p("Blissey","Psywave / Seismic Toss / Light Screen / Captivate","Covert Cloak","Calm","","216 PV / 40 Déf. / 252 Déf. Spé.","PV 31 / Déf. Spé. 31 / Vit. 31"),
   p("Milotic","Brine / Light Screen","Iron Ball","Modest","Competitive","252 Att. Spé. / 252 Déf. Spé.","PV 31 / Att. Spé. 31 / Déf. Spé. 31 / Vit. 31"),
-  p("Empoleon","","Assault Vest","Calm","Competitive","252 Att. Spé. / 252 Déf. Spé.","PV 31 / Att. Spé. 31 / Déf. Spé. 31 / Vit. 31","Table source : aucune attaque imposée sur P1, attention à ne pas la déduire des autres Pingoléon.")],
+  p("Empoleon","Brine","Assault Vest","Calm","Competitive","252 Att. Spé. / 252 Déf. Spé.","PV 31 / Att. Spé. 31 / Déf. Spé. 31 / Vit. 31","Table des builds : aucune attaque indiquée. Rotation T13 : Saumure ; conflit de présentation entre tableau et rotation à confirmer dans le guide d’origine.")],
  [p("Weavile","Fling","Poison Barb","Adamant","","252 Att. / 252 Vit.","Att. 31"),
   p("Bisharp","Sucker Punch","Choice Band","+Attaque","Defiant","252 Att.","Att. 31"),
   p("Hydreigon","Assurance","Dark Gem","Adamant","","252 Att. / 252 Vit.","Att. 31 / Vit. 31"),
