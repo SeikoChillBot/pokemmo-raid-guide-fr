@@ -53,3 +53,16 @@ Cloudflare KV est un stockage réparti à cohérence éventuelle : une modificat
 ## Évolutions possibles
 
 L'URL `/adminDev/` a une structure extensible pour d'autres outils privés : suivi des corrections, annonces, liste des raids à documenter. Ne rien reporter sur le dépôt anglais tant que l'utilisateur n'a pas validé la version française.
+
+## Diagnostic rapide — envoi bloqué (25/10/2026)
+
+Ouvrir directement `https://pokemmo-raids-fr.pages.dev/api/suggestions` dans un navigateur, sans clé ni formulaire :
+
+- Réponse JSON **401** « Accès administrateur refusé » : la Function et ses deux paramètres sont disponibles ; tester ensuite un envoi public depuis la page d'accueil.
+- Réponse JSON **503** « Stockage ou clé administrateur non configuré » : vérifier le binding KV `SUGGESTIONS_KV` et le secret `ADMIN_SUGGESTIONS_KEY` **dans l'environnement Production**, puis redéployer.
+- **404**, HTML à la place du JSON, ou erreur de méthode : les Pages Functions ne sont pas servies à cette URL ; vérifier le mode de déploiement Cloudflare et le répertoire `functions/`.
+- Impossible d'ouvrir l'URL : vérifier domaine/projet/déploiement ; ne pas interpréter cela comme une erreur de formulaire JavaScript.
+
+Depuis l'accueil : code **400** = validation, **429** = limite 60 secondes par IP, **503** = configuration ou stockage indisponible. Le JavaScript affiche désormais le code HTTP et distingue les réponses HTML d'une API JSON, version cache `20261025-sug2`. Le traitement anti-spam n'est enregistré qu'après la sauvegarde réussie de la suggestion (commits `3300e02`, `86c596d`, `389ef55`).
+
+Ces modifications GitHub ne remplacent ni la configuration Cloudflare ni un test réel en production. Ne jamais partager la clé secrète dans le chat ou une capture.
