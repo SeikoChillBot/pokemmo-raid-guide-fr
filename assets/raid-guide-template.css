@@ -184,3 +184,32 @@ body.raid-template-ready #app details.raid-template-card[open]{border-color:#a96
  body.raid-template-ready .raid-template-sidebar #tabs,
  body.raid-template-ready .raid-template-sidebar #cres-tabs{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
+
+
+/* Composant de build réutilisable, employé par Heatran et Cresselia. */
+body.raid-template-ready .raid-template-main .build-showcase{display:grid!important;grid-template-columns:minmax(0,1.2fr) minmax(195px,1fr)!important;gap:13px!important;padding:15px!important;margin:0!important}
+body.raid-template-ready .raid-template-main .build-specs,
+body.raid-template-ready .raid-template-main .build-moves{min-width:0;background:#202126!important;border:1px solid #44464d!important;border-radius:0!important;padding:15px!important}
+body.raid-template-ready .raid-template-main .build-showcase h3{font:900 24px var(--raid-heading)!important;text-transform:uppercase!important;margin:0 0 13px!important;color:#fff!important}
+body.raid-template-ready .raid-template-main .build-summary{display:flex;align-items:center;gap:14px;min-width:0}
+body.raid-template-ready .raid-template-main .build-portrait{flex:0 0 110px;width:110px;height:119px;display:grid;place-items:center;border:1px solid #414149!important;border-radius:0!important;background:#18191d!important}
+body.raid-template-ready .raid-template-main .build-portrait img{width:105px!important;height:105px!important;object-fit:contain!important;image-rendering:auto!important}
+body.raid-template-ready .raid-template-main .build-facts{flex:1;min-width:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+body.raid-template-ready .raid-template-main .build-fact{min-width:0;padding:10px;min-height:57px;background:#292a30!important;border:1px solid #45464d!important;border-radius:0!important;overflow-wrap:anywhere}
+body.raid-template-ready .raid-template-main .build-fact small{display:block;font:650 10px var(--raid-mono)!important;color:#aaabb4!important}
+body.raid-template-ready .raid-template-main .build-fact strong{display:block;margin-top:6px;font:650 12px/1.45 var(--raid-body)!important;color:#f2f0f3!important}
+body.raid-template-ready .raid-template-main .move-pill{display:flex;gap:10px;align-items:center;margin:7px 0;padding:9px;background:#2a2b31!important;border:1px solid #45464d!important;border-radius:0!important;color:#eee!important;font:600 12px var(--raid-body)!important}
+body.raid-template-ready .raid-template-main .move-symbol{width:27px;height:27px;flex:0 0 27px;display:grid;place-items:center;background:#49282d!important;color:#ffa4a5!important;border-radius:0!important;font-size:16px}
+body.raid-template-ready .raid-template-main .cres-mon-body{padding:0 16px 16px!important}
+body.raid-template-ready .raid-template-main .cres-mon-body .build-showcase{padding:14px 0!important}
+body.raid-template-ready .raid-template-main .cres-mon .cres-table{border-top:1px solid #44464d}
+@media(max-width:1040px){
+ body.raid-template-ready .raid-template-main .build-showcase{grid-template-columns:1fr!important}
+}
+@media(max-width:540px){
+ body.raid-template-ready .raid-template-main .build-summary{align-items:flex-start}
+ body.raid-template-ready .raid-template-main .build-portrait{width:80px!important;height:85px!important;flex-basis:80px!important}
+ body.raid-template-ready .raid-template-main .build-portrait img{width:78px!important;height:78px!important}
+ body.raid-template-ready .raid-template-main .build-facts{grid-template-columns:1fr}
+ body.raid-template-ready .raid-template-main .build-specs,body.raid-template-ready .raid-template-main .build-moves{padding:11px!important}
+}
