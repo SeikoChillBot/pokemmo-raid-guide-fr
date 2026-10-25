@@ -37,7 +37,7 @@ function show(){
  status.textContent=boss.state;
  badge.classList.toggle("is-available",boss.state==="Guide disponible");
  badge.setAttribute("data-href",boss.href);
- if(number){number.textContent=String(boss.id).padStart(3,"0");number.setAttribute("aria-hidden","true");}
+ if(number){number.textContent="RAID";number.setAttribute("aria-hidden","true");}
  count.textContent=(index+1)+" / "+order.length;
 }
 function go(step){index=(index+step+order.length)%order.length;show();reset();}
