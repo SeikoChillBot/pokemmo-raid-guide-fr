@@ -1,59 +1,58 @@
-# RAID ATLAS FR — gabarit générique des fiches et design V5
+# RAID ATLAS FR — gabarit canonique V6
 
 Mise à jour : 25 octobre 2026.
 
-## Décision de présentation
+## Contrat d'interface : Heatran est la référence
 
-La fiche Heatran est la référence canonique pour **toutes** les fiches de raid. Les interfaces Cresselia et Halloween réutilisent les mêmes règles de mise en page.
+La fiche Heatran est le modèle réel, pas seulement une inspiration visuelle. Pour les raids permanents, réutiliser les **mêmes fonctions HTML/DOM** ; ne pas fabriquer un moteur de présentation unique par boss.
 
-Structure standard :
-
-1. Bandeau du boss avec illustration, résumé et indicateurs.
-2. Sous le bandeau, **Stratégie** à gauche et **Votre rôle** à droite, exactement dans le même composant CSS `raid-template-commandbar` (sur une colonne quand la fenêtre est étroite).
-3. Dock `raid-guide-dock` **visible, en haut du contenu**, avec titre **NAVIGATION DU RAID** et les onglets d'origine Combat, Pokémon, Préparation, Mécaniques ; `position:sticky` pendant le défilement, dans le flux de la page, pas de positionnement fixe au bas de l'écran. Il n'occulte pas les cartes de combat en bas comme l'ancien dock.
-4. Contenu combat/Pokémon/préparation/mécaniques sur toute la largeur.
-5. Références et footer préservés.
-
-Écran étroit : les deux contrôles passent l'un sous l'autre à largeur inférieure à 880 px ; les boutons P1/P2/P3/P4 utilisent `grid-template-columns:repeat(4,minmax(0,1fr))` et `min-width:0`, avec repli en deux colonnes si inférieur à 365 px. Cresselia affiche maintenant **P1/P2/P3/P4** (libellés ARIA « Joueur N »), comme Heatran. Le dock est réduit volontairement via bouton, jamais réduit par défaut.
-
-## Sources de vérité
+Les composantes canoniques du site français sont :
 
 | Fichier | Rôle |
 | --- | --- |
-| `assets/raid-redesign-v5.css` | **Design global V5**, chargé en dernier sur les huit pages de production : palette bleu nuit/cyan/corail, bannières, boutons, cartes, navigation, responsive, effets |
-| `assets/raid-guide-template.js` | Seul montage des commandes et de la navigation pour tous les boss ; déplace les vrais onglets sans changer leurs écouteurs d'événements |
-| `assets/raid-guide-template.css` | Ancien gabarit historique conservé, actuellement surchargé par le redesign V5 ; ne pas réutiliser sa disposition en barre latérale |
-| `assets/raid-site-polish.css` | Première passe visuelle historique conservée, actuellement surchargée par V5 |
-| `assets/raid-atlas.css`, `assets/cresselia.css`, `assets/heatran-*.css` | CSS historiques spécifiques, utiles pour les détails non remplacés |
-| `assets/cresselia.js` et scripts Heatran / Halloween | **Données et logique du raid**, distinctes du template visuel |
+| `assets/raid-components.js` | **Source de vérité des vrais composants HTML :** introduction de combat, Vue complète, sélecteur de phase, panneau de phase, cartes P1/P2/P3/P4, « Copier ce tour », navigation précédent/suivant, bandeau Pokémon, fiche complète du build, cartes de préparation, progression |
+| `assets/raid-guide-components-v6.css` | Styles canoniques de ces composants pour Heatran et Cresselia, y compris le responsive |
+| `assets/raid-guide-template.js` | Cadre de toutes les fiches : bannière, blocs Stratégie/Votre rôle sous la bannière, dock sticky contenant les quatre onglets, affichage explicite de la **section active** |
+| `assets/raid-redesign-v6.css` | Couleurs, typographies, accents, composition des pages du site, dock et carrousel |
+| `assets/raid-home-carousel.js` | Rotation aléatoire des boss permanents sur l'accueil : Heatran, Cresselia, Meloetta, Cobaltium, Terrakium, Viridium ; noms et statuts explicites |
+| `heatran.html` | Données/rotations et variantes Crimson Core, Beorns/JinxedBoon, Cloud Five |
+| `assets/cresselia.js` | Données « The Three Musketeers v2.1 » (24 Pokémon, 10 tours, 12 mécaniques), logique de sélection et de stockage |
+| `halloween-2025-raid.html` | Moteur historique d'archives Halloween 2025, contenu exclusif français et modèles de navigation partagés |
 
-Ne pas repartir d'une barre latérale gauche : cette proposition a été explicitement rejetée par l'utilisateur. Ne pas revenir au dock flottant fixé au bas de l'écran : l'utilisateur le jugeait discret et gênant pour la visibilité des fiches.
+Les anciens CSS (`raid-redesign-v5.css`, `raid-site-polish.css`, `heatran-theme.css`, `cresselia.css`) restent présents pour compatibilité, mais les règles V6 sont chargées **en dernier**. Les versions de cache des pages de production sont `20261025-v6d`.
 
-## Pages de production couvertes
+## Présentation obligatoire
 
-- `index.html` : nouvelle section `raid-quick-access` avec accès directs aux deux raids disponibles et Halloween 2025.
-- `permanent.html` : six raids permanents (Heatran/Cresselia disponibles, quatre à venir).
-- `halloween.html`, `halloween-2025.html`, `halloween-2025-raid.html` : pages et guides Halloween, uniquement en français.
-- `coming-soon.html`.
-- `heatran.html`, `cresselia.html`.
+1. Couleurs : **noir, rouge, gris, blanc** et nuances proches, sans bleu ni cyan.
+2. Sous la bannière : « STRATÉGIE » et « VOTRE RÔLE », avec quatre boutons **P1, P2, P3, P4**. Sur écran étroit, ces sections s'empilent plutôt que de déborder.
+3. Dock « NAVIGATION DU RAID » visible, **sticky dans le flux** sous les commandes, réductible et ouvert par défaut ; il présente Combat, Pokémon, Préparation, Mécaniques et le libellé **SECTION ACTIVE · …**, ainsi qu'un bouton rouge clairement sélectionné.
+4. Combat : `RaidAtlasComponents.battleIntro` → `checkbox("Vue complète · afficher les N tours")` → `phaseSelect` → `battleTurn` (bouton **Copier ce tour** en haut à droite, quatre cartes P1–P4, note de raid et lien « Voir les 6 Pokémon du Pn ») → `phaseNav`.
+5. Pokémon : `feature` → `pokemonIntroNote` si nécessaire → `checkbox("Tout déplier")` → six `buildCard` utilisant les mêmes titres, grille EV/IV, talents, objets, attaques et bouton Copier le build.
+6. Préparation : `progressCard` puis `prepCard` pour chaque Pokémon ; conserver les checklists historiques supplémentaires des sources.
+7. Mécaniques : `mechanics-intro`, `mechanic-grid`, `raid-mechanic-note`.
 
-`design-lab.html` : laboratoire/maquette historique laissée intacte. Dépôt anglais : intact.
+La séparation est stricte : composants communs pour l'interface, données et règles distinctes par boss. Modifier ces composants pour un changement de présentation commun à tous les futurs raids.
 
-## Intégrer un prochain raid
+## Retour utilisateur à l'origine de V6
 
-Copier la **structure des contrôles** Heatran : `.control`, `.raid-controls` avec titre `.section-heading`, `#players` ou ID du guide, et un `nav` à quatre onglets.
+L'utilisateur a envoyé des captures montrant :
+- Cresselia différente de Heatran (anciens panels « Voir tous les tours », « Copier les 4 actions » et cartes spécifiques), tandis que la disposition Heatran doit être reproduite **exactement** ;
+- boutons de joueur textuels trop longs, remplacés par P1–P4 ;
+- Cloud Five pas identique à Crimson Core ou Beorns/JinxedBoon ;
+- palette bleue explicitement rejetée au profit de noir/rouge/blanc/gris ;
+- accueil « TARGET // 485 » incompréhensible ;
+- besoin de boss en vedette tournants sur l'accueil ;
+- absence de retour assez visible sur l'onglet actif.
 
-Définir `data-raid-template="custom"` dans `body` et les slots `data-raid-slot="hero|strategy|roles|players|tabs|content"`, ou ajouter une configuration dans `assets/raid-guide-template.js`. Le script commun déplace les vrais nœuds au bon endroit au chargement. Les scripts du boss alimentent les onglets, les rôles, les tours, les données et les checklists.
-
-Le nouveau CSS global doit être chargé **après** tous les CSS historiques. Le script du gabarit doit se charger **après** celui du boss.
+Réponse technique V6 : Heatran ET Cresselia passent par `raid-components.js`; Cloud Five passe également par les mêmes composants (combat, Pokémon, préparation, mécaniques). Navigation active et carrousel créés dans leurs scripts communs.
 
 ## Validation
 
-Validations effectuées dans la conversation du 25/10 :
-- syntaxe des scripts de raid et du montage partagé ;
-- scripts de combat inline Heatran et Halloween conservés à l'identique ;
-- quatre équipes de six Pokémon et dix tours Cresselia ;
-- montage DOM simulé Heatran/Cresselia/Halloween : placement des commandes, conservation des onglets et réduction/réouverture ;
-- équilibrage des accolades CSS et présence des nouvelles feuilles sur les huit pages.
+Réalisée par analyse statique et simulation DOM :
+- composants JS valides et objets de composants construits sans erreur ;
+- tableaux de données Heatran `base`, `video`, `cloudTeams`, `cloudTurns`, `cloudRemaining`, `cloudNotes` et `rotations` inchangés ;
+- objet de données Cresselia identique à la version antérieure (4 × 6 Pokémon, 10 × 4 actions, 12 mécaniques) ;
+- feuille V6 chargée sur huit pages FR, cache versionné ;
+- liens et noms explicites du carrousel, disparition de « TARGET // 485 ».
 
-À valider encore à l'écran (GitHub Pages) : rendu ordinateur/mobile réel, scroll sticky, clavier, copies et cases cochées. Les changements GitHub peuvent nécessiter la publication GitHub Pages de la dernière révision et le rafraîchissement de la page, ce qui n'a pas été vérifié ici.
+Limite : **le rendu navigateur réel sur GitHub Pages et le comportement en jeu ne sont pas vérifiés ici**. Le vrai test doit couvrir desktop, fenêtres côte à côte, petits écrans, « Vue complète », copie, navigation, sélection et bascule de stratégie. Aucune modification du dépôt anglais ni retrait des pages/stratégies existantes.
