@@ -1,0 +1,207 @@
+/* RAID ATLAS FR · V11 — finition visuelle, animations mesurées, 2026-10-25.
+ * Ce fichier ne change aucun positionnement de combat ni aucune stratégie.
+ * À charger après V10 pour corriger les décorations et la photo d'antre.
+ */
+:root{--raid-v11-red:#ed3028;--raid-v11-red-light:#ff6f60;--raid-v11-black:#131214}
+
+/* Antre de raid : le GIF d'origine contient des bandes noires intégrées.
+ * Le zoom à l'intérieur du masque les élimine sans figer l'animation.
+ * Pas de vignette encadrée ni de légende sous la bannière. */
+.site-wrap .raid-v9-den-art .raid-v9-den-caption,
+.site-wrap .raid-v9-den-art .raid-v9-den-source{display:none!important}
+.site-wrap .atlas-list-art.raid-v9-den-art{
+ align-items:center!important;justify-content:center!important;
+ overflow:hidden!important;
+}
+.site-wrap .raid-v9-den-photo.raid-v10-den-gif{
+ width:clamp(220px,33vw,365px)!important;
+ height:clamp(220px,33vw,365px)!important;
+ max-width:100%!important;max-height:none!important;
+ aspect-ratio:1/1!important;
+ border:1px solid #9b3930!important;
+ background-color:#2e211f!important;
+ background-image:linear-gradient(0deg,#180f0f3d,transparent 35%),var(--raid-den-gif)!important;
+ background-size:100% 100%,auto 232%!important;
+ background-position:center,50% 52%!important;
+ background-repeat:no-repeat!important;
+ image-rendering:pixelated!important;
+ box-shadow:0 24px 52px #000b,0 0 35px #b729222b!important;
+ border-radius:18px!important;
+}
+.site-wrap .raid-v9-den-photo.raid-v10-den-gif:after{
+ content:"";position:absolute;inset:0;pointer-events:none;
+ border-radius:inherit;border:1px solid #f05a4d70;
+ box-shadow:inset 0 0 28px #100f1299
+}
+/* Sur l'accueil, le GIF est une véritable toile de fond de la carte.
+ * L'antre reste centré derrière le titre, sans carré ni contour autonome. */
+.site-wrap .event-card.main.raid-v10-den-event{
+ background:#1a1515!important;isolation:isolate!important;overflow:hidden!important;
+}
+.site-wrap .event-card.main.raid-v10-den-event .raid-v10-den-home{
+ position:absolute!important;
+ inset:0!important;top:0!important;left:0!important;right:0!important;bottom:0!important;
+ width:100%!important;height:100%!important;
+ max-width:none!important;max-height:none!important;aspect-ratio:auto!important;
+ margin:0!important;padding:0!important;
+ transform:none!important;
+ background-color:#241b19!important;
+ background-image:var(--raid-den-gif)!important;
+ background-size:auto 265%!important;
+ background-position:center 51%!important;
+ background-repeat:no-repeat!important;
+ border:0!important;outline:0!important;border-radius:0!important;
+ box-shadow:none!important;filter:none!important;
+ opacity:.88!important;
+ z-index:0!important;pointer-events:none!important
+}
+.site-wrap .event-card.main.raid-v10-den-event:hover .raid-v10-den-home{
+ transform:scale(1.032)!important;
+ filter:none!important;
+ opacity:1!important
+}
+.site-wrap .event-card.main.raid-v10-den-event::before{
+ content:"";position:absolute;inset:0;z-index:1!important;
+ background:radial-gradient(ellipse at 75% 48%,transparent 25%,#18111326 60%,#120f10c9 100%)!important;
+ pointer-events:none
+}
+.site-wrap .event-card.main.raid-v10-den-event::after{
+ content:"";position:absolute;inset:0;z-index:2!important;
+ background:linear-gradient(90deg,#130f11ee 0%,#160f12cc 34%,#140f1266 58%,#160e112c 100%)!important;
+ pointer-events:none
+}
+.site-wrap .event-card.main.raid-v10-den-event .event-info{
+ position:relative!important;z-index:3!important;
+ max-width:76%!important;
+ text-shadow:0 3px 16px #000d!important
+}
+.site-wrap .event-card.main.raid-v10-den-event .event-foot{
+ position:relative!important;z-index:4!important
+}
+
+/* Un onglet actif saute réellement aux yeux :
+ * fond rouge entier + trait blanc inférieur, sans déplacer le widget. */
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button{
+ position:relative!important;
+ min-height:37px!important;height:37px!important;max-height:37px!important;
+ border:1px solid #5d4a4a!important;
+ background:linear-gradient(130deg,#282526,#1d1c1f)!important;
+ color:#e6dedf!important;
+ box-shadow:inset 0 1px #ffffff0b!important;
+ border-radius:8px!important;
+ font-weight:750!important;
+ transition:background-color .18s ease,filter .18s ease,border-color .18s ease!important
+}
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button.active,
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button.raid-v9-tab-current,
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button.raid-dock-active,
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button[aria-current="page"]{
+ background:linear-gradient(112deg,#f04435,#ad201e)!important;
+ color:#fff!important;
+ border:1px solid #ff9a82!important;
+ box-shadow:inset 0 -4px 0 #ffe4d6,0 0 0 1px #d5312c,0 0 28px #de302e7a!important;
+ font-weight:900!important;text-shadow:0 1px 5px #36060987!important
+}
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button.active:before,
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button.raid-v9-tab-current:before,
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button.raid-dock-active:before{
+ content:""!important;
+ width:4px!important;height:55%!important;top:50%!important;
+ left:4px!important;border-radius:4px!important;
+ background:#fff!important;
+ box-shadow:0 0 10px #fff!important;
+ transform:translateY(-50%)!important;
+ position:absolute!important
+}
+body.raid-template-ready .raid-command-center .raid-dock-marker{
+ background:linear-gradient(130deg,#a72420,#60201c)!important;
+ border:1px solid #f25a4c!important;
+ color:#fff!important;
+ box-shadow:0 0 19px #cb262636,inset 3px 0 0 #fff5f0!important;
+ font-weight:900!important
+}
+body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button:not(.active):not(.raid-v9-tab-current):not(.raid-dock-active):not([aria-current="page"]):hover{
+ background:#472828!important;border-color:#ca4238!important;filter:brightness(1.12)!important
+}
+/* Relief vivant (faible amplitude) sur les cartes et en-têtes,
+ * aucun changement de dimensions ni de position. */
+@keyframes raid-v11-breathe{
+ 0%,100%{opacity:.23;transform:translate3d(0,0,0) scale(1)}
+ 50%{opacity:.4;transform:translate3d(1.2%,.5%,0) scale(1.025)}
+}
+@keyframes raid-v11-appear{
+ from{opacity:0;transform:translate3d(0,7px,0) scale(.98)}
+ to{opacity:1;transform:translate3d(0,0,0) scale(1)}
+}
+body.raid-template-ready .raid-template-hero,
+.site-wrap .hero{
+ isolation:isolate
+}
+body.raid-template-ready .raid-template-hero:after,
+.site-wrap .hero:after{
+ pointer-events:none!important;
+ animation:raid-v11-breathe 16s ease-in-out infinite!important
+}
+body.raid-template-ready .raid-template-content .battle-grid .card{
+ transition:border-color .18s,box-shadow .18s,transform .18s!important
+}
+body.raid-template-ready .raid-template-content .battle-grid .card:hover{
+ transform:translateY(-3px)!important;
+ border-color:#c64d40!important;
+ box-shadow:0 16px 40px #000b,0 0 28px #bf29271e!important;
+}
+/* Tooltip détaché de la carte : n'intercepte jamais la souris. */
+.raid-v11-pokemon-preview{
+ display:block;
+ position:fixed;left:0;top:0;z-index:9999;
+ width:min(315px,calc(100vw - 26px));
+ box-sizing:border-box;
+ padding:14px;
+ border:1px solid #d24c43;
+ border-radius:13px;
+ background:linear-gradient(145deg,#2d2223f9,#161518f9 65%,#26191af9);
+ box-shadow:0 22px 56px #000d,0 0 0 1px #ffffff0d inset,0 0 32px #b82c2925;
+ color:#f8f5f5;
+ pointer-events:none;
+ -webkit-backdrop-filter:blur(20px);
+ backdrop-filter:blur(20px);
+ animation:raid-v11-appear .18s ease-out both;
+ opacity:1
+}
+.raid-v11-pokemon-preview[hidden]{display:none!important}
+.raid-v11-preview-head{display:flex;align-items:center;gap:12px;padding-bottom:9px;border-bottom:1px solid #573938}
+.raid-v11-preview-photo{
+ width:76px;height:76px;flex:0 0 76px;
+ display:grid;place-items:center;
+ background:radial-gradient(circle,#8e2a2759 0%,transparent 72%);
+ border-radius:12px
+}
+.raid-v11-preview-photo img{width:75px;height:75px;object-fit:contain;image-rendering:auto;filter:drop-shadow(0 9px 8px #000a)}
+.raid-v11-preview-eyebrow{display:block;color:#ff756b;font:800 9px/1.3 "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase}
+.raid-v11-preview-name{display:block;font:900 25px/1.05 "Barlow Condensed",Impact,sans-serif;color:#fff;margin-top:4px}
+.raid-v11-preview-details{display:grid;gap:6px;margin-top:10px}
+.raid-v11-preview-line{display:flex;justify-content:space-between;gap:13px;align-items:baseline;font:600 11px/1.4 "DM Sans",system-ui}
+.raid-v11-preview-line span{flex:none;color:#c7b8ba}
+.raid-v11-preview-line strong{font-weight:750;color:#fff;text-align:right;overflow-wrap:anywhere}
+.raid-v11-preview-note{border-left:2px solid #ed4137;padding-left:9px;color:#f1cac6;font:500 11px/1.45 "DM Sans",system-ui;margin-top:10px}
+.raid-v11-preview-footer{font:600 10px/1.3 "DM Sans",system-ui;color:#dcb9b8;margin-top:10px;opacity:.9}
+@media(hover:none),(pointer:coarse){
+ .raid-v11-pokemon-preview{display:none!important}
+}
+@media(max-width:650px){
+ .site-wrap .raid-v9-den-photo.raid-v10-den-gif{
+  width:min(78vw,315px)!important;height:min(78vw,315px)!important
+ }
+ .site-wrap .event-card.main.raid-v10-den-event .raid-v10-den-home{
+  background-size:auto 250%!important;background-position:50% 51%!important
+ }
+ body.raid-template-ready .raid-command-center .raid-guide-dock .raid-dock-tabs button{
+  height:36px!important;min-height:36px!important;max-height:36px!important
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ body.raid-template-ready .raid-template-hero:after,
+ .site-wrap .hero:after{animation:none!important}
+ .raid-v11-pokemon-preview{animation:none!important}
+ body.raid-template-ready .raid-template-content .battle-grid .card:hover{transform:none!important}
+}
