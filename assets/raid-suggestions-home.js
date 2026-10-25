@@ -43,18 +43,29 @@
        mode:"cors",
        cache:"no-store"
      });
-     let data={};
-     try { data=await result.json(); } catch (_) {}
+     const responseType = result.headers.get("content-type") || "";
+     if (!responseType.toLowerCase().includes("application/json")) {
+       throw new Error(
+         "L'API Suggestions n'est pas disponible sur cet hébergement (HTTP " +
+         result.status + "). Vérifie le déploiement Cloudflare Pages Functions."
+       );
+     }
+     let data = {};
+     try { data = await result.json(); } catch (_) {
+       throw new Error("Réponse invalide de l'API Suggestions (HTTP " + result.status + ").");
+     }
      if (!result.ok || !data.ok) throw new Error(
-       data.error || "La boîte à suggestions est indisponible pour le moment."
+       (data.error || "La boîte à suggestions est indisponible pour le moment.") +
+       " (HTTP " + result.status + ")"
      );
      form.reset();
      feedback.dataset.kind = "success";
      feedback.textContent = "Merci ! Ta suggestion a été enregistrée et sera examinée.";
    } catch (error) {
      feedback.dataset.kind = "error";
-     feedback.textContent = error.message ||
-       "Impossible de transmettre la suggestion. Réessaie ultérieurement.";
+     feedback.textContent = error instanceof TypeError
+       ? "Connexion à l'API Cloudflare impossible. Vérifie que /api/suggestions est bien déployée et accessible."
+       : (error.message || "Impossible de transmettre la suggestion. Réessaie ultérieurement.");
    } finally {
      submit.disabled = false;
      submit.textContent = old;
