@@ -15,7 +15,7 @@ function headers(request) {
   };
   if (ORIGINS.has(origin)) {
     h["Access-Control-Allow-Origin"] = origin;
-    h["Access-Control-Allow-Methods"] = "PATCH, OPTIONS";
+    h["Access-Control-Allow-Methods"] = "PATCH, DELETE, OPTIONS";
     h["Access-Control-Allow-Headers"] = "Content-Type, X-Admin-Key";
     h["Access-Control-Max-Age"] = "600";
   }
@@ -71,4 +71,37 @@ export async function onRequestPatch({ request, env, params }) {
   item.updatedAt=new Date().toISOString();
   await env.SUGGESTIONS_KV.put(key,JSON.stringify(item));
   return response(request,{ok:true,item});
+}
+
+/** Permanently remove a treated suggestion. Pending suggestions cannot be deleted. */
+export async function onRequestDelete({ request, env, params }) {
+  if (!allowed(request)) return response(request, { error: "Origine non autorisée." }, 403);
+  if (!env.SUGGESTIONS_KV || typeof env.ADMIN_SUGGESTIONS_KEY !== "string" ||
+      env.ADMIN_SUGGESTIONS_KEY.length < 24)
+    return response(request, { error: "Accès administrateur non configuré." }, 503);
+  const provided = request.headers.get("X-Admin-Key");
+  if (!provided) return response(request, { error: "Authentification requise." }, 401);
+  const enc = new TextEncoder();
+  const [a, b] = await Promise.all([
+    crypto.subtle.digest("SHA-256", enc.encode(provided)),
+    crypto.subtle.digest("SHA-256", enc.encode(env.ADMIN_SUGGESTIONS_KEY))
+  ]);
+  const left = new Uint8Array(a), right = new Uint8Array(b);
+  let diff = 0;
+  for (let i = 0; i < left.length; i++) diff |= left[i] ^ right[i];
+  if (diff !== 0) return response(request, { error: "Accès administrateur refusé." }, 401);
+  const id = params.id;
+  if (typeof id !== "string" || !/^\\d{13}-[a-f0-9-]{36}$/.test(id))
+    return response(request, { error: "Identifiant invalide." }, 400);
+  const key = "suggestion:" + id;
+  try {
+    const item = await env.SUGGESTIONS_KV.get(key, { type: "json" });
+    if (!item) return response(request, { error: "Suggestion introuvable." }, 404);
+    if (item.status !== "treated") return response(request,
+      { error: "Seules les suggestions traitées peuvent être supprimées." }, 409);
+    await env.SUGGESTIONS_KV.delete(key);
+    return response(request, { ok: true, id }, 200);
+  } catch (_) {
+    return response(request, { error: "Suppression momentanément indisponible." }, 503);
+  }
 }
