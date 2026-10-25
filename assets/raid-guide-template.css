@@ -244,3 +244,42 @@ body.raid-template-ready #guide-content{width:100%;min-width:0}
 }
 @media(prefers-reduced-motion:reduce){body.raid-template-ready *{scroll-behavior:auto!important;transition:none!important}}
 @media print{body.raid-template-ready .raid-floating-dock{display:none!important}}
+
+
+/* Priorité explicite sur les styles historiques avec #tabs de Heatran.
+   Le dock doit rester réellement arrondi, interactif et cohérent sur chaque raid. */
+body.raid-template-ready.atlas-heatran .raid-floating-dock #tabs button,
+body.raid-template-ready.cres-page .raid-floating-dock #cres-tabs button,
+body.raid-template-ready[data-raid-template="halloween"] .raid-floating-dock .h25-nav button{
+ border:1px solid transparent!important;border-radius:11px!important;
+ background:transparent!important;box-shadow:none!important;color:#c6bec7!important;
+ font:700 11px/1.3 var(--raid-sans)!important;min-height:44px!important;
+ padding:8px 9px!important;margin:0!important;white-space:normal!important;
+ text-align:center!important
+}
+body.raid-template-ready.atlas-heatran .raid-floating-dock #tabs button.active,
+body.raid-template-ready.cres-page .raid-floating-dock #cres-tabs button.active,
+body.raid-template-ready[data-raid-template="halloween"] .raid-floating-dock .h25-nav button[aria-selected="true"]{
+ background:linear-gradient(135deg,#aa4a54,#81333c)!important;
+ border-color:#d96d7b!important;color:#fff!important;
+ box-shadow:0 4px 15px #6b222866!important
+}
+body.raid-template-ready.atlas-heatran .raid-template-content#app .battle-grid .card{
+ border-radius:var(--raid-radius)!important;
+ border:1px solid #484550!important;
+ background:linear-gradient(145deg,#25242b,#1a1b22)!important;
+ box-shadow:0 8px 25px #0003!important
+}
+body.raid-template-ready.atlas-heatran .raid-template-content#app .battle-grid .card.selected{
+ border-color:#e57982!important;background:linear-gradient(145deg,#38272f,#222028)!important;
+ box-shadow:inset 3px 0 0 #f47e88,0 9px 23px #0004!important
+}
+body.raid-template-ready.atlas-heatran .raid-template-content#app details.card{
+ border-radius:var(--raid-radius)!important;
+ border-color:#484550!important;background:#202128!important
+}
+@media(max-width:560px){
+ body.raid-template-ready.atlas-heatran .raid-floating-dock #tabs button,
+ body.raid-template-ready.cres-page .raid-floating-dock #cres-tabs button,
+ body.raid-template-ready[data-raid-template="halloween"] .raid-floating-dock .h25-nav button{padding:8px 3px!important;font-size:10px!important}
+}
