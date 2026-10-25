@@ -42,7 +42,7 @@ function copyButton(label,copyText,copy){
  const button=el("button","copy-turn-action",label||"Copier ce tour");button.type="button";
  button.addEventListener("click",()=>copy(button,copyText));return button;
 }
-function battleTurn({target,index,total,title,actions,selected,preflight,banner,notes,advice,onPokemon,copyText,copy}){
+function battleTurn({target,index,total,title,actions,selected,preflight,banner,notes,advice,onPokemon,onTurnChange,copyText,copy}){
  const panel=target||el("section","turn-section");
  panel.classList.add("turn-panel");panel.append(el("div","section-kicker","Phase "+(index+1)+" sur "+total));
  panel.append(el("h2",null,title));
@@ -50,16 +50,21 @@ function battleTurn({target,index,total,title,actions,selected,preflight,banner,
  if(banner)panel.append(el("p","raid-conditional-banner",banner));
  const copyEl=copyButton("Copier ce tour",copyText,copy);
  panel.append(copyEl,actionGrid(actions,selected));
- if(onPokemon){
-  const jump=el("button","team-link","Voir les 6 Pokémon du P"+(selected+1)+" →");
-  jump.type="button";jump.addEventListener("click",onPokemon);panel.append(jump);
+ // Shared raid rule: turn controls replace the redundant "View 6 Pokémon"
+ // button, which is already available in the permanent Pokémon tab.
+ // Place them immediately after the actions, not at the end of the guide.
+ if(typeof onTurnChange==="function"){
+  const nav=phaseNav({current:index,total,onChange:onTurnChange});
+  nav.classList.add("raid-inline-turn-nav");
+  nav.setAttribute("aria-label","Passer au tour précédent ou suivant");
+  panel.append(nav);
  }
  if(notes)panel.append(notes);
  if(advice)panel.append(advice);
  return panel;
 }
 function phaseNav({current,total,onChange}){
- const row=el("div","phase-nav"),back=el("button",null,"← Précédent"),next=el("button",null,"Phase suivante →");
+ const row=el("div","phase-nav raid-inline-turn-nav"),back=el("button",null,"← Tour précédent"),next=el("button",null,"Tour suivant →");
  back.type=next.type="button";
  back.disabled=current<=0;next.disabled=current>=total-1;
  back.onclick=()=>onChange(current-1);next.onclick=()=>onChange(current+1);
