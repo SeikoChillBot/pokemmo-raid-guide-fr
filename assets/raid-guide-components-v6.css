@@ -278,3 +278,29 @@ body.raid-template-ready .raid-template-content .grid:has(.prep-card){display:gr
  body.raid-template-ready .raid-template-content .battle-grid{grid-template-columns:1fr!important}
  body.raid-template-ready .raid-template-content .battle-grid .poke-row{flex-direction:row!important;align-items:center!important}
 }
+
+
+/* Variantes de stratégies : mêmes panneaux et avertissements que pour les autres raids. */
+body.raid-template-ready .raid-template-content .raid-source-notice,
+body.raid-template-ready .raid-template-content .raid-latin-unverified{
+ margin:0 0 15px!important;padding:17px 20px!important;
+ border:1px solid #8d5660!important;border-left:4px solid #f35b69!important;
+ border-radius:11px!important;background:linear-gradient(125deg,#32242a,#1f1a20)!important;
+ color:#ebdfe3!important;font:500 13px/1.65 "DM Sans",system-ui!important
+}
+body.raid-template-ready .raid-template-content .raid-latin-unverified h2{
+ font:900 30px/1.04 "Barlow Condensed",Impact,sans-serif!important;
+ color:#fff!important;text-transform:uppercase!important;margin:0 0 12px!important
+}
+body.raid-template-ready .raid-template-content .raid-source-link{
+ display:inline-flex!important;align-items:center!important;gap:8px!important;
+ margin:6px 0 18px!important;padding:12px 17px!important;
+ border:1px solid #b96070!important;border-radius:9px!important;
+ background:#432830!important;color:#fff!important;
+ text-decoration:none!important;font:700 12px "DM Sans",system-ui!important
+}
+body.raid-template-ready .raid-template-content .raid-source-link:hover{background:#a34553!important}
+body.raid-template-ready .raid-template-commandbar #cres-strategy-status{
+ display:block!important;padding-top:2px!important;font:600 11px "DM Sans",system-ui!important;
+ color:#bfaeb6!important
+}
