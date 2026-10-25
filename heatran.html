@@ -141,6 +141,27 @@ function renderMechanics(app,strat){
  }
  app.append(grid)
 }
+/* Métadonnées d'aperçu reliées à la fiche du joueur et à la stratégie courante. */
+function raidBuildFor(strat,owner,raw){
+ const label=String(raw||"").split(" / ")[0].trim();
+ const roster=strat==="core"?base:video;
+ const slot=(roster[owner]||[]).findIndex(p=>p[0]===label);
+ if(slot<0)return null; // Remplacement conditionnel non documenté : ne pas inventer.
+ const p=roster[owner][slot],alts=strat==="core"?abilities:videoAbilities,ivs=strat==="core"?ivCore:ivVideo;
+ return {name:fr(p[0]),item:fr(p[1]),nature:fr(p[2]),
+  ability:fr(alts[owner]?.[slot]||"Non précisé"),ev:fr(p[3]),
+  iv:fr(ivs[owner]?.[slot]||"Non précisé"),
+  moves:p[4].split(" / ").map(fr),
+  source:strat==="core"?"Crimson Core":"Beorns / JinxedBoon"};
+}
+function raidCloudBuild(owner,raw){
+ const label=String(raw||"").split(" / ")[0].trim();
+ const pk=(cloudTeams[owner]||[]).find(p=>p[0]===label);
+ if(!pk)return null;
+ return {name:fr(pk[0]),item:fr(pk[1]),nature:fr(pk[2]),iv:fr(pk[3]),
+  ev:"Statistiques finales : "+fr(pk[4]),ability:fr(pk[6]),
+  moves:pk[5].split(" / ").map(fr),source:"Cloud Five v0.74"};
+}
 function cloudRender(){let app=$('app');app.replaceChildren();buttons($('tabs'),[['⚔ Combat','battle'],['◉ Pokémon','pokemon'],['✓ Préparation','checklist'],['ⓘ Mécaniques','mechanics']],tab,v=>{tab=v;render()});$('players').hidden=tab==='mechanics';buttons($('players'),[0,1,2,3].map(i=>['P'+(i+1),i]),player,v=>{player=v;render()});$('focus').textContent='Cloud Five v0.74 · Joueur '+(player+1);const cloudCaution='Stratégie Cloud Five v0.74 · The Council / Cadoiz. Guide source encore en cours de finalisation : attention aux RNG, au timing des K.O. et aux remplacements en test.';if(tab==='battle'){
  app.append(RaidAtlasComponents.battleIntro('Heatran'));
  app.append(viewCheckbox('Vue complète · afficher les 11 tours',fullView,v=>{fullView=v;localStorage.setItem('pokemmo-fr-full-view',v?'1':'0');render()}));
@@ -153,7 +174,7 @@ function cloudRender(){let app=$('app');app.replaceChildren();buttons($('tabs'),
   const help=document.createElement('p');help.textContent=cloudNotes[n];notes.append(h,help);
   const phase=document.createElement('section');if(fullView)phase.className='turn-section';
   RaidAtlasComponents.battleTurn({target:phase,index:n,total:cloudTurns.length,title:'Heatran : '+cloudRemaining[n]+' PV restants estimés',
-   actions:cloudTurns[n].map(([poke,move])=>({name:fr(poke),move:fr(move),sprite:poke==='—'?null:sprite(poke)})),
+   actions:cloudTurns[n].map(([poke,move],owner)=>({name:fr(poke),move:fr(move),sprite:poke==='—'?null:sprite(poke),build:raidCloudBuild(owner,poke)})),
    selected:player,advice:notes,
    preflight:n===0?(()=>{const panel=document.createElement('section');panel.className='raid-preflight';panel.textContent=cloudCaution;return panel})():null,
    onTurnChange:fullView?null:i=>{turn=i;render()},
@@ -198,10 +219,10 @@ function cloudRender(){let app=$('app');app.replaceChildren();buttons($('tabs'),
  card.append(label,note);grid.append(card)
  });app.append(grid)
 }}function render(){saveUI();let strat=sel.value;if(strat==='cloud'){cloudRender();return}let team=strat==='core'?base:video;buttons($('tabs'),[['⚔ Combat','battle'],['◉ Pokémon','pokemon'],['✓ Préparation','checklist'],['ⓘ Mécaniques','mechanics']],tab,v=>{tab=v;render()});$('players').hidden=tab==='mechanics';buttons($('players'),[0,1,2,3].map(i=>['P'+(i+1),i]),player,v=>{player=v;render()});$('players').hidden=tab==='mechanics';$('focus').textContent=tab==='battle'?'Joueur '+(player+1)+' · mis en évidence dans la rotation':tab==='pokemon'?'Joueur '+(player+1)+' · 6 fiches Pokémon':tab==='checklist'?'Joueur '+(player+1)+' · progression de préparation':'';let app=$('app');app.innerHTML='';if(tab==='battle'){app.append(RaidAtlasComponents.battleIntro('Heatran'));let r=rotations[strat];app.append(viewCheckbox('Vue complète · afficher les 6 tours',fullView,v=>{fullView=v;localStorage.setItem('pokemmo-fr-full-view',v?'1':'0');render()}));let allWrap=document.createElement('div');if(fullView)allWrap.className='all-turns';app.append(allWrap);let ctl=document.createElement('div');ctl.className='phase-control';let label=document.createElement('label');label.textContent='PHASE DU COMBAT';label.htmlFor='phase';let pick=document.createElement('select');pick.id='phase';r.forEach((_,i)=>{let o=document.createElement('option');o.value=i;o.textContent=(i+1)+' / 6 · '+fr(phaseNames[strat][i]);o.selected=i===turn;pick.append(o)});pick.onchange=()=>{turn=Number(pick.value);render()};ctl.append(label,pick);if(!fullView)app.append(ctl);const conditionalActions={
- core:{4:["Si la pluie a disparu : Danse Pluie. Sinon : Hydrocanon.",null,null,null],5:["Avec Voltali (P1), utiliser Croco Larme avant que Heatran passe sous 25 % de PV, si possible.",null,null,null]},
+ core:{4:["Si la pluie a disparu : Danse Pluie. Sinon : Hydrocanon.",null,null,null],5:["P1 : utiliser Croco Larme avec Voltali, idéalement avant que Heatran passe sous 25 % de PV.",null,null,null]},
  video:{4:["Entrée après le K.O. de Staross.", "Faire entrer Tarpaud si la pluie est absente.", "Libégon vivant : Telluriforce. Après son K.O. : Tarpaud si absence de pluie.", "Libégon vivant : Telluriforce. Après son K.O. : Tarpaud si absence de pluie."],5:["Faire entrer Voltali après le K.O. de Hyporoi ; viser environ 30 % de PV.", "Faire entrer Hyporoi après le K.O. de Tarpaud.", "Sans pluie : Tarpaud/Crachin + Ball’Météo. Avec pluie : Hyporoi/Saumure.", "Sans pluie : Tarpaud/Crachin + Ball’Météo. Avec pluie : Hyporoi/Saumure."]}
  };const renderTurn=(phase,target)=>{const acts=r[phase].map(([poke,move],i)=>({
- name:fr(poke),move:fr(move),sprite:sprite(poke.split(' / ')[0]),note:conditionalActions[strat]?.[phase]?.[i]||''
+ name:fr(poke),move:fr(move),sprite:sprite(poke.split(' / ')[0]),build:raidBuildFor(strat,i,poke),note:conditionalActions[strat]?.[phase]?.[i]||''
 }));
 const warning=strat==='video'&&phase>=4?'Phase indicative : adapter les actions aux Pokémon présents, à la météo et aux K.O.':'';
 RaidAtlasComponents.battleTurn({
