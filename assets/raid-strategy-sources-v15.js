@@ -72,11 +72,19 @@
      links.push(u(tr("Référence de mécanique ou de préparation "+(i+1),"Mechanics or preparation reference "+(i+1)),href));
    for(const item of (boss.enrichment?.guideVideos||[]))
      if(item.url)links.push(u(item.name,item.url,item.description||""));
+   const selectedMode=(typeof mode==="number" && Number.isInteger(mode))?mode:0;
+   if(boss.id==="pumpking"){
+     const easy=(typeof PUMPKING_EASY_ROADMAP!=="undefined")?PUMPKING_EASY_ROADMAP:null;
+     const hard=(typeof PUMPKING_HYDREIGON_ROADMAP!=="undefined")?PUMPKING_HYDREIGON_ROADMAP:null;
+     const route=selectedMode===0?easy:hard;
+     if(route?.source)links.push(u(tr("Source de la route sélectionnée","Selected route source"),route.source));
+     if(route?.sourceSupplement)links.push(u(tr("Référence complémentaire de cette route","Additional reference for this route"),route.sourceSupplement));
+   }
    const unique=links.filter((x,i)=>validLink(x.href)&&links.findIndex(y=>y.href===x.href)===i);
-   const mode = boss.id==="darkrai" ? tr(" (4★ / 5★ : variantes distinctes)"," (4★ / 5★: distinct variants)") :
-     boss.id==="pumpking" ? tr(" (facile / difficile)"," (easy / hard)") : "";
+   const modeName = (boss.id==="darkrai" || boss.id==="pumpking") && boss.variants?.[selectedMode]?.name ?
+     " · "+boss.variants[selectedMode].name : "";
    return {
-     name:boss.name+mode,
+     name:boss.name+modeName,
      by:tr("Sources communautaires 2025 ; document de rotation caav lorsqu'indiqué","2025 community sources; caav rotation document where specified"),
      note:tr("Archives 2025 potentiellement obsolètes pour 2026. Les rosters proposés ou les détails non vérifiés ne sont pas présentés comme officiels.","2025 archives may be outdated for 2026. Proposed rosters or unverified details are not presented as official."),
      links:unique
@@ -123,5 +131,8 @@
    content.append(make("p","raid-source-note",src.note||""));
  }
  if(selector)selector.addEventListener("change",render);
+ if(path==="halloween-2025-raid.html")document.addEventListener("click",event=>{
+   if(event.target.closest?.("#mode-container button"))Promise.resolve().then(render);
+ });
  render();
 })();
