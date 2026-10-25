@@ -82,15 +82,15 @@ export async function onRequestPost({ request, env }) {
   if (nickname.length > 40)
     return reply(request, { error: "Le pseudo est trop long (40 caractères maximum)." }, 400);
   const ip = request.headers.get("CF-Connecting-IP");
+  let throttleKey = null;
   if (ip) {
     const buffer = await crypto.subtle.digest("SHA-256",
       enc.encode(env.ADMIN_SUGGESTIONS_KEY + ":" + ip));
     const fragment = Array.from(new Uint8Array(buffer)).slice(0, 12)
       .map(v => v.toString(16).padStart(2, "0")).join("");
-    const throttleKey = "cooldown:" + fragment;
+    throttleKey = "cooldown:" + fragment;
     if (await env.SUGGESTIONS_KV.get(throttleKey))
       return reply(request, { error: "Merci de patienter une minute avant une autre suggestion." }, 429);
-    await env.SUGGESTIONS_KV.put(throttleKey, "1", { expirationTtl: 60 });
   }
   const id = String(Date.now()) + "-" + crypto.randomUUID();
   const now = new Date().toISOString();
@@ -100,6 +100,13 @@ export async function onRequestPost({ request, env }) {
     await env.SUGGESTIONS_KV.put("suggestion:" + id, JSON.stringify(item));
   } catch (_) {
     return reply(request, { error: "Enregistrement indisponible, réessaie plus tard." }, 503);
+  }
+  // Le délai anti-spam commence uniquement après l'enregistrement réussi.
+  // Une erreur de suivi anti-spam ne doit jamais masquer une suggestion sauvegardée.
+  if (throttleKey) {
+    try {
+      await env.SUGGESTIONS_KV.put(throttleKey, "1", { expirationTtl: 60 });
+    } catch (_) { /* suggestion déjà enregistrée */ }
   }
   return reply(request, { ok: true, id }, 201);
 }
