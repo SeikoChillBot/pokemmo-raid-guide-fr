@@ -94,7 +94,7 @@ export async function onRequestPost({ request, env }) {
   }
   const id = String(Date.now()) + "-" + crypto.randomUUID();
   const now = new Date().toISOString();
-  const item = { id, category, nickname, message, status: "pending",
+  const item = { id, category, nickname, message, locale: "fr", status: "pending",
     createdAt: now, updatedAt: now };
   try {
     await env.SUGGESTIONS_KV.put("suggestion:" + id, JSON.stringify(item));
