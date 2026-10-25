@@ -64,15 +64,15 @@
    const id=new URLSearchParams(location.search).get("boss");
    const boss=list.find(x=>x.id===id)||list[0];
    if(!boss) return null;
+   const selectedMode=(typeof mode==="number" && Number.isInteger(mode))?mode:0;
    const links=[];
    if(boss.source)links.push(u(tr("Guide d'événement PokeMMO 2025 (forum)","PokeMMO 2025 event guide (forum)"),boss.source));
    if(boss.guide)links.push(u(tr("Fiche complémentaire du boss","Supplemental boss reference"),boss.guide));
-   if(boss.video2025)links.push(u(tr("Vidéo 2025 de cette rencontre","2025 encounter video"),boss.video2025));
+   if(boss.video2025 && (boss.id!=="pumpking" || selectedMode>0))links.push(u(tr("Vidéo 2025 de cette rencontre","2025 encounter video"),boss.video2025));
    for(const [i,href] of (boss.enrichment?.sources||[]).entries())
      links.push(u(tr("Référence de mécanique ou de préparation "+(i+1),"Mechanics or preparation reference "+(i+1)),href));
-   for(const item of (boss.enrichment?.guideVideos||[]))
+   for(const item of (boss.id==="pumpking" && selectedMode===0 ? [] : (boss.enrichment?.guideVideos||[])))
      if(item.url)links.push(u(item.name,item.url,item.description||""));
-   const selectedMode=(typeof mode==="number" && Number.isInteger(mode))?mode:0;
    if(boss.id==="pumpking"){
      const easy=(typeof PUMPKING_EASY_ROADMAP!=="undefined")?PUMPKING_EASY_ROADMAP:null;
      const hard=(typeof PUMPKING_HYDREIGON_ROADMAP!=="undefined")?PUMPKING_HYDREIGON_ROADMAP:null;
