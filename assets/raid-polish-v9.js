@@ -4,25 +4,25 @@
  */
 (()=>{
 "use strict";
-const logo="https://cdn2.steamgriddb.com/logo/a4823190143dd9941628849473b10d41.png";
+// Icône vectorielle autonome : Poké Ball noire et blanche, sans plaque ni texte.
+const pokeballSvg='<svg class="raid-v9-pokeball" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" focusable="false" aria-hidden="true">'+
+ '<circle cx="32" cy="32" r="28.5" fill="#f5f5f4" stroke="#f8f8f8" stroke-width="2.7"/>'+
+ '<path d="M3.5 32 A28.5 28.5 0 0 1 60.5 32 Z" fill="#121315"/>'+
+ '<path d="M4.5 32 H59.5" stroke="#111214" stroke-width="7.5"/>'+
+ '<circle cx="32" cy="32" r="10.5" fill="#121315" stroke="#f7f7f7" stroke-width="2.5"/>'+
+ '<circle cx="32" cy="32" r="5.3" fill="#fafafa"/>'+
+ '</svg>';
 function brand(){
  document.querySelectorAll("a.identity, a.atlas-guide-brand").forEach(anchor=>{
    if(anchor.dataset.raidBrandV9==="1")return;
    anchor.dataset.raidBrandV9="1";
    const mark=anchor.querySelector(".mark,.atlas-guide-mark");
    if(mark){
-     const image=document.createElement("img");
-     image.className="raid-v9-brand-img";
-     image.src=logo;
-     image.alt="";
-     image.loading="eager";
-     image.decoding="async";
-     image.addEventListener("error",()=>{
-       image.replaceWith(Object.assign(document.createElement("span"),{
-         className:"raid-v9-brand-fallback",textContent:"●"
-       }));
-     },{once:true});
-     mark.replaceWith(image);
+     const icon=document.createElement("span");
+     icon.className="raid-v9-brand-icon";
+     icon.setAttribute("aria-hidden","true");
+     icon.innerHTML=pokeballSvg;
+     mark.replaceWith(icon);
    }
    const title=anchor.querySelector(".identity-text,.atlas-guide-brand-copy");
    if(title){
