@@ -1,72 +1,65 @@
-# Modèle unique des fiches de raid — RAID ATLAS FR
+# RAID ATLAS FR — modèle commun des fiches de raid (design v3)
 
-Date : 25 octobre 2026
+Mise à jour : 25 octobre 2026.
 
-## Principe obligatoire
+## Règle de conception
 
-Chaque guide de raid français utilise désormais le même **gabarit d'interface** :
+La présentation préférée par l'utilisateur est celle de **Heatran avant l'ajout d'une barre latérale**. Ne pas réintroduire une colonne gauche avec les rôles/onglets sans demande explicite.
 
-- `assets/raid-guide-template.js` : structure commune, détection des emplacements et rattachement des contrôles (barre supérieure, fil d'Ariane, bannière, sélecteur de stratégie, rôles/joueurs, onglets et zone principale). Les nœuds existants sont déplacés **sans les recréer**, afin de conserver les événements et états internes.
-- `assets/raid-guide-template.css` : **source unique de présentation générale** (largeur, position gauche des contrôles, colonnes, responsive, titres, habillage des fiches Pokémon, cartes de combat et boutons). À charger **après** les anciennes feuilles de style.
-- **Chaque boss conserve ses propres données et règles de combat**. Ne pas déplacer EV, IV, tours, mécaniques ni choix de stratégie vers le composant global.
+- La bannière du boss reste en haut.
+- Les options de stratégie/difficulté et de choix du joueur sont regroupées **horizontalement sous la bannière**, sur la largeur du guide.
+- Le contenu Combat / Pokémon / Préparation / Mécaniques est affiché **sur toute la largeur**.
+- **Seules ces quatre rubriques** figurent dans un **dock flottant discret** au bas de l'écran, commun à tous les raids et réductible grâce au bouton « Réduire ». L'utilisateur peut rouvrir le dock (« Navigation »).
+- Le site réserve une marge basse pour la lecture et la fin des fiches. Responsive sur mobile, navigation clavier et préférence de mouvements réduits.
 
-Fiches raccordées :
-- `heatran.html` : moteur original conservé, contrôles `#strategy`, `#players`, `#tabs` déplacés dans la colonne latérale ;
-- `cresselia.html` : données v2.1 et moteur propres conservés, disposition et couleurs harmonisées ;
-- `halloween-2025-raid.html` : moteur d'archives 2025, modes/équipes/tours par boss conservés ; la navigation `#next-raids` reste dans la zone principale.
+## Sources de vérité du design
 
-## Modifier globalement la présentation
+| Fichier | Rôle |
+|---|---|
+| `assets/raid-site-polish.css` | Améliorations transversales accueil, catégories, archives, cartes, boutons, responsive |
+| `assets/raid-guide-template.css` | Style commun à **toutes les fiches de raids** : bannière, options, joueur, dock, blocs combat, fiches Pokémon |
+| `assets/raid-guide-template.js` | Montage partagé des contrôles du boss et du dock ; déplace les **nœuds existants** sans remplacer leurs scripts |
+| `assets/heatran-*.css`, `assets/cresselia.css`, CSS Halloween inline | Héritage/identité spécifique ; éviter de modifier pour une évolution commune |
+| `heatran.html`, `cresselia.html`, `halloween-2025-raid.html` | Pages sources contenant les moteurs propres à chaque raid |
 
-Modifier **uniquement** `assets/raid-guide-template.css` pour les changements communs :
+Ne jamais mettre les EV, IV, natures, capacités ou rotations dans la couche de design. Leur logique reste dans les scripts du raid.
 
-- Placement à gauche : `.raid-template-layout`, `.raid-template-sidebar`, `.raid-template-main`.
-- Largeur de la colonne : `--raid-side-width`.
-- Espacement : `--raid-layout-gap`.
-- Bandeau de boss : `.raid-template-hero`.
-- Emplacement joueurs : `.raid-template-players`.
-- Navigation entre onglets : `.raid-template-tabs`.
-- Cartes communes (combats, builds, statistiques) : `.raid-template-card`, `.raid-template-action-grid`, `.raid-template-build-body`.
-- Apparence sur téléphone : blocs `@media` du même fichier.
+## Configuration actuelle
 
-La dernière section du CSS renforce volontairement la priorité sur les anciens styles `!important` de Heatran. **Si la charte change, modifier ou remplacer ces règles en même temps**, sans rajouter de CSS individuel.
+Le script commun reconnaît :
 
-`assets/raid-guide-template.js` peut servir à changer la **structure DOM** de toutes les fiches en une fois (par exemple : déplacer le menu de la gauche vers le haut). Ne jamais recopier séparément le menu dans chaque page.
+- `data-raid-template="heatran"` — `.control`, `.raid-controls`, `#players`, `#tabs`, `#app`.
+- `data-raid-template="cresselia"` — `.cres-sidebar`, `#cres-players`, `#cres-tabs`, `#cres-app`. Les liens vers stratégies alternatives sont conservés dans un panneau déroulant sous le guide.
+- `data-raid-template="halloween"` — `#mode-container`, `#players-container`, `.h25-nav`, `#guide-content`. Les modes Pumpking/Darkrai, les checklists et les rotations restent inchangés.
+- `data-raid-template="custom"` — pour les futures fiches, fournir `data-raid-slot="hero"`, `data-raid-slot="strategy"`, `data-raid-slot="players"`, `data-raid-slot="tabs"`, `data-raid-slot="content"`, et éventuellement `top/nav/breadcrumb/footer`.
 
-## Ajouter un nouveau guide sans copier-coller Heatran
+Le script partagé doit être chargé **après** le moteur de page ; la CSS du modèle doit être chargée après les CSS spécifiques. Cela conserve les boutons d'origine, leurs événements, leurs sélections, et leurs clés de stockage.
 
-Le gabarit utilise `data-raid-template="custom"` sur `body` et les emplacements suivants :
+## Modifier tous les guides d'un coup
 
-```html
-<body data-raid-template="custom">
-  <div data-raid-slot="top">RAID ATLAS</div>
-  <header data-raid-slot="nav">...</header>
-  <nav data-raid-slot="crumb">...</nav>
-  <header data-raid-slot="hero"><div class="hero-content"><h1>Nom du boss</h1><p>Description</p></div><img src="..." alt=""></header>
-  <div data-raid-slot="strategy">Sélection facultative</div>
-  <div data-raid-slot="players">Boutons de rôles</div>
-  <div data-raid-slot="tabs">Boutons Combat, Pokémon, Préparation, Mécaniques</div>
-  <main data-raid-slot="content"></main>
-  <footer data-raid-slot="footer"></footer>
-  <!-- Charger les données et le moteur du boss, puis le modèle -->
-  <script src="assets/raid-guide-template.js"></script>
-</body>
-```
+- Changer la barre de navigation : dans `raid-guide-template.css` travailler sur `.raid-floating-dock`, `.raid-dock-tabs`, `.raid-dock-toggle`.
+- Changer la position/présentation des rôles : dans `raid-guide-template.css`, modifier `.raid-template-commandbar`.
+- Changer la présentation des fiches : blocs `.raid-template-content`, `.raid-template-card`, `.build-showcase`, `.build-fact`, `.move-pill`.
+- Changer les cartes accueil et index : `raid-site-polish.css`.
 
-Ajouter dans le `<head>`, **après les CSS propres au boss** :
+Éviter de réécrire indépendamment les HTML ou moteurs de raid pour une modification esthétique globale.
 
-```html
-<link rel="stylesheet" href="assets/raid-guide-template.css">
-```
+## Périmètre
 
-Le script regroupe automatiquement les emplacements dans le panneau latéral et la zone centrale. Les quatre onglets et les joueurs doivent être pilotés par le moteur du boss, **pas par des valeurs codées en dur dans le gabarit**. Les données d'Halloween restent une archive française, elles ne doivent jamais être copiées en anglais sans demande expresse.
+Le thème global est relié aux huit pages françaises actives : `index.html`, `permanent.html`, `coming-soon.html`, `halloween.html`, `halloween-2025.html`, `heatran.html`, `cresselia.html`, `halloween-2025-raid.html`.
 
-## Tests avant de déclarer un nouveau guide terminé
+La page `design-lab.html` est une **maquette archivée**, conservée intacte. Le dépôt anglais est également inchangé. L'archive Halloween 2025 reste exclusive au français.
 
-1. Vérifier que l'en-tête, le fil d'Ariane, la bannière, les rôles et la navigation sont identiquement disposés.
-2. Vérifier le changement de joueur, d'onglet, de stratégie, de tour et de mode sans perte de contenu.
-3. Vérifier que les fiches, EV, IV, objets et attaques sont inchangés (comparaison avant/après).
-4. Vérifier le rendu sur PC/tablette/mobile et le comportement avec largeur réduite.
-5. Vérifier les boutons Copier, les checklists et la persistance locale.
-6. Déployer les pages HTML concernées et `assets/raid-guide-template.js` / `.css` sur Cloudflare ; invalider le cache des assets lorsque nécessaire.
+## Validation et déploiement
 
-Les modifications GitHub ne constituent pas un déploiement Cloudflare ni un test du navigateur réel.
+Tests statiques effectués :
+- syntaxe JS du gabarit et des moteurs ;
+- données Cresselia : 4 joueurs × 6 Pokémon, 10 tours × 4 actions ;
+- comparaison des scripts de combat inline Heatran, Cresselia et Halloween : inchangés ;
+- simulation DOM des trois variantes : barre supérieure, boutons originaux, dock et réduction/restauration ;
+- équilibrage des accolades CSS ;
+- présence des feuilles partagées sur les huit pages.
+
+À vérifier encore **dans un vrai navigateur**, ordinateur et mobile : alignement réel, collision éventuelle entre styles hérités, fonctionnement des boutons, scroll, footer, raccourcis clavier et rendu adaptatif.
+
+L'utilisateur doit mettre à jour les huit pages HTML actives ainsi que les nouveaux fichiers du dossier `assets/` sur Cloudflare. Une mise à jour GitHub seule ne met pas automatiquement Cloudflare à jour.
