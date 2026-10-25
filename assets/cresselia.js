@@ -602,7 +602,9 @@ function head(){playerControls();navControls();const status=$('cres-strategy-sta
 function renderCombat(){
 const app=$("cres-app");app.replaceChildren();
 app.append(RaidAtlasComponents.battleIntro("Cresselia"));
-app.append(RaidAtlasComponents.checkbox("Vue complète · afficher les 10 tours",ST.all,checked=>{ST.all=checked;renderCombat()}));
+sourceNotice(app);
+if(!D.turns.length){const box=document.createElement("section");box.className="raid-latin-unverified";const h=document.createElement("h2");h.textContent="Latin Combo V2 · 12 tours en vidéo";const p=document.createElement("p");p.textContent="La stratégie vidéo existe, mais les 24 fiches et les actions des 12 tours ne sont pas documentées avec suffisamment de précision pour être affichées sans risque d’erreur. Elles ne sont pas inventées.";box.append(h,p);app.append(box);sourceLink(app);return;}
+app.append(RaidAtlasComponents.checkbox("Vue complète · afficher les "+D.turns.length+" tours",ST.all,checked=>{ST.all=checked;renderCombat()}));
 if(!ST.all)app.append(RaidAtlasComponents.phaseSelect({labels:D.turns.map(t=>t.label),current:ST.turn,onChange:i=>{ST.turn=i;renderCombat()}}));
 const wrap=document.createElement("div");if(ST.all)wrap.className="all-turns";app.append(wrap);
 const list=ST.all?D.turns.map((t,i)=>[t,i]):[[D.turns[ST.turn],ST.turn]];
@@ -615,10 +617,9 @@ for(const [t,i] of list){
  const info=document.createElement("section");info.className="raid-tips";
  const heading=document.createElement("h3");heading.textContent="À retenir — "+t.label;
  const note=document.createElement("p");note.textContent=t.info;
- const hp=document.createElement("p");hp.className="raid-alert";hp.textContent="PV du boss visés en fin de tour : "+t.hp+" (valeur indicative).";
- info.append(heading,note,hp);
- const actionText="TOUR "+(i+1)+" / CRESSELIA 6★ — THE THREE MUSKETEERS v2.1\n"+
- t.actions.map(([slot,move],j)=>"J"+(j+1)+" · "+D.team[j][slot].n+" → "+move).join("\n")+"\nPV cible : "+t.hp;
+ info.append(heading,note);if(t.hp){const hp=document.createElement("p");hp.className="raid-alert";hp.textContent="PV du boss visés en fin de tour : "+t.hp+" (valeur indicative).";info.append(hp);}
+ const actionText="TOUR "+(i+1)+" / CRESSELIA 6★ — "+current().title+"\n"+
+ t.actions.map(([slot,move],j)=>"P"+(j+1)+" · "+D.team[j][slot].n+" → "+move).join("\n")+"\nPV cible : "+t.hp;
  RaidAtlasComponents.battleTurn({
   target:panel,index:i,total:D.turns.length,title:t.label,actions,selected:ST.player,
   onPokemon:()=>{ST.tab="pokemon";render()},advice:info,copyText:actionText,
@@ -627,7 +628,7 @@ for(const [t,i] of list){
  wrap.append(panel);
 }
 if(!ST.all)app.append(RaidAtlasComponents.phaseNav({current:ST.turn,total:D.turns.length,onChange:i=>{ST.turn=i;renderCombat()}}));
-else{const note=document.createElement("p");note.className="build-source-note";note.textContent="Mode vue complète : 10 tours et 40 actions. Les pourcentages indiquent des repères, pas des garanties.";app.append(note);}
+else{const note=document.createElement("p");note.className="build-source-note";note.textContent="Mode vue complète : "+D.turns.length+" tours et "+D.turns.length*4+" actions. Les pourcentages indiquent des repères, pas des garanties.";app.append(note);}
 }
 function monCopy(m){return m.n+" @ "+m.item+"\nTalent : "+m.talent+"\nNature : "+m.nature+"\nIV : "+m.iv+"\nEV : "+m.ev+"\nAttaques : "+m.attacks+"\nNotes : "+m.note;}
 function renderPokemon(){
