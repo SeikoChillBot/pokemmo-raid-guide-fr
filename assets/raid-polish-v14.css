@@ -58,3 +58,23 @@ body.raid-template-ready .raid-template-content .battle-grid .card:hover img.rai
     transition:none!important;transform:none!important
   }
 }
+
+/* Shared credit across all guides, while keeping existing source citations. */
+footer .raid-made-by{
+  display:inline-flex!important;
+  align-items:baseline!important;
+  flex-wrap:wrap!important;
+  gap:5px!important;
+  margin-left:12px!important;
+  padding:3px 0!important;
+  color:#f2e9e9!important;
+  font:700 11px/1.5 "DM Sans",system-ui,sans-serif!important;
+  letter-spacing:.01em!important;
+}
+footer .raid-made-by-alias{
+  color:#ff8174!important;
+  font-weight:650!important;
+}
+@media(max-width:750px){
+ footer .raid-made-by{display:flex!important;margin:9px 0 0!important}
+}
