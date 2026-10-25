@@ -152,3 +152,13 @@ RaidAtlasComponents.battleTurn({
 });
 ```
 Conserver les champs absents vides au lieu de leur inventer une valeur. Le tooltip les marque « Non précisé dans la source ».
+
+
+## V14 — validation et report EN (25 octobre 2026)
+
+- `assets/raid-components.js` applique l'artwork officiel transparent directement dans `actionGrid`, classe `.raid-action-art`, suppression du fond carré avec une règle de composant canonique pour tous les raids présents et futurs.
+- `assets/raid-premium-v8.js` traite également les actions Halloween et toute action générée dynamiquement.
+- `assets/raid-polish-v14.css` est chargé en dernier sur les 8 pages, nettoie les fonds d'images, puis recentre très légèrement l'antre animé sur `permanent.html` sans changer l'échelle. Le cadrage exact à utiliser est celui de ce CSS final (position horizontale 51,5 %).
+- Footer : signature « Créé par Seiko (Seikolito en jeu) » sur les 8 pages.
+- Après validation temporaire de la VF par l'utilisateur, les mêmes finitions CSS, traitements d'artworks et signatures sont portés sur `SeikoChillBot/pokemmo-raid-guide`, avec textes et données de jeu en anglais.
+- Tests statiques sur deux dépôts : 16 pages/16 avec style V14 et signature, 12 scripts partagés valides, 24/24 builds et 10/10 tours Musketeers, 24/24 builds et 13/13 tours Sensei, Latin Combo 12 tours vidéo non vérifiés, Halloween 9/9 boss et 228/228 positions. Pas de validation graphique navigateur réelle.
