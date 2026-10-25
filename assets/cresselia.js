@@ -700,7 +700,16 @@ tasks.forEach((t,i)=>{
  const span=document.createElement("span");span.textContent=t;line.append(box,span);checklist.append(line);
 });
 wrap.append(checklist);a.append(wrap);update();
-const links=document.createElement("section");links.className="cres-source";links.innerHTML='<h3>Sources et versions</h3><p>Guide conseillé pour cette page : The Three Musketeers v2.1, par Cadoiz, RogueMaster (Phoebe), Th3Fastest et OhKaibaBoy. Rotation publiée en mars 2026 et retranscrite en septembre 2026. Les statistiques de popularité par équipe ne sont pas publiées : le qualificatif « le plus utilisé » ne peut pas être garanti.</p>'+D.sources.map(s=>'<p><a href="'+esc(s[1])+'" target="_blank" rel="noopener noreferrer">'+esc(s[0])+'</a><br><small>'+esc(s[2])+'</small></p>').join("")+'<p>Les stratégies Sensei/DoubleDude et Latin Combo sont citées comme alternatives, mais leurs compositions ne sont pas intégrées ici sans audit complet des versions exactes.</p>';a.append(links);
+const links=document.createElement("section");links.className="cres-source";
+const section=document.createElement("h3");section.textContent="Sources et versions";
+const description=document.createElement("p");description.textContent="Stratégie sélectionnée : "+current().title+". Les données ne sont pas fusionnées avec les autres stratégies et aucun EV/IV manquant n’est inventé.";
+links.append(section,description);
+for(const entry of D.sources||[]){
+ const p=document.createElement("p"),a=document.createElement("a"),sub=document.createElement("small");
+ a.href=entry[1]||"#";a.textContent=entry[0]||"Guide source";a.target="_blank";a.rel="noopener noreferrer";
+ sub.textContent=entry[2]||"";p.append(a,document.createElement("br"),sub);links.append(p);
+}
+a.append(links);
 }
 function renderMechanics(){
 const app=$("cres-app");app.replaceChildren();
@@ -719,5 +728,7 @@ D.mechanics.forEach(([name,detail])=>{
 }
 function render(){head();if(ST.tab==="combat")renderCombat();else if(ST.tab==="pokemon")renderPokemon();else if(ST.tab==="preparation")renderPrep();else renderMechanics();}
 
+const picker=$("cres-strategy");if(picker)picker.addEventListener("change",()=>selectStrategy(picker.value));
+D=strategyData(ST.strategy);
 render();
 })();
