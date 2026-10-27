@@ -111,6 +111,7 @@
  const footer=document.querySelector("footer");if(!footer)return;
  const details=make("details","raid-extra-references raid-source-drawer");
  details.id="raid-strategy-sources";
+ details.open=true;
  const summary=make("summary","raid-source-heading");
  summary.append(make("span","raid-source-title",tr("Sources et crédits de la stratégie","Strategy sources and credits")));
  const active=make("span","raid-source-active");
@@ -118,11 +119,29 @@
  details.append(summary);
  const content=make("div","raid-source-body");
  details.append(content);
+
  footer.parentNode.insertBefore(details,footer);
+ const attribution=make("aside","raid-author-attribution");
+ attribution.setAttribute("aria-label",tr("Crédits des stratégies","Strategy credits"));
+ attribution.style.cssText="margin:16px auto 24px;padding:14px 18px;max-width:1160px;border:1px solid rgba(255,255,255,.22);border-left:4px solid #e0444c;border-radius:8px;background:rgba(20,21,25,.92);color:#f4f4f4;font:inherit;line-height:1.55";
+ const attributionHeading=make("div","raid-author-attribution-heading",tr("CRÉDITS DES STRATÉGIES COMMUNAUTAIRES","COMMUNITY STRATEGY CREDITS"));
+ attributionHeading.style.cssText="font-weight:800;letter-spacing:.04em;margin-bottom:5px";
+ const attributionNames=make("p","raid-author-attribution-names");
+ attributionNames.style.margin="4px 0";
+ const attributionPurpose=make("p","raid-author-attribution-purpose",tr("RAID ATLAS centralise, traduit et compare des stratégies communautaires. Les stratégies appartiennent à leurs auteurs respectifs ; Seiko a créé le site, pas les stratégies.","RAID ATLAS collects, translates and compares community strategies. Strategies belong to their respective authors; Seiko created the website, not the strategies."));
+ attributionPurpose.style.cssText="margin:6px 0;font-size:.92em;color:#d5d5d5";
+ const attributionLink=make("a","raid-author-attribution-link",tr("Voir les auteurs et les sources originales ↓","View original authors and sources ↓"));
+ attributionLink.href="#raid-strategy-sources";
+ attributionLink.style.cssText="color:#ff9da5;text-decoration:underline;font-weight:600";
+ attribution.append(attributionHeading,attributionNames,attributionPurpose,attributionLink);
+ const main=document.querySelector("main");
+ if(main)main.insertBefore(attribution,main.firstChild);
+ else footer.parentNode.insertBefore(attribution,details);
  function render(){
    const src=typeof shown()==="string"?data[shown()]:shown();
    if(!src)return;
    active.textContent=src.name;
+   attributionNames.textContent=tr("Stratégie : ","Strategy: ")+src.name+" — "+tr("Auteurs / contributeurs : ","Authors / contributors: ")+src.by;
    content.replaceChildren();
    content.append(make("p","raid-source-by",tr("Auteurs / contributeurs : ","Authors / contributors: ")+src.by));
    const links=make("div","raid-source-links");
