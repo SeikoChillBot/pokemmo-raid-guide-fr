@@ -28,9 +28,9 @@
    },
    cloud:{
      name:"Cloud Five v0.74",
-     by:tr("Cadoiz (cocréateur déclaré ; autres auteurs à confirmer)","Cadoiz (self-identified co-creator; other authors unconfirmed)"),
-     note:tr("Version de travail v0.74 : les remplacements, tours et conditions variables peuvent être encore expérimentaux. Aucun lien original direct vérifié n'est disponible ; l'attribution est conservée sans inventer d'URL.","Working version v0.74: replacements, turn timings and situational decisions may still be experimental. No independently verified direct original URL is available; contributor credit is retained without fabricating a link."),
-     links:[]
+     by:tr("Cadoiz (créateur principal) ; Alde et Groenthijs (theorycraft et tests) ; RogueMaster (Phoebe), Th3_Fastest et autres (tests)","Cadoiz (main creator); Alde and Groenthijs (theorycraft and testing); RogueMaster (Phoebe), Th3_Fastest and others (testing)"),
+     note:tr("Source : Cloud Five v0.74, rubrique Credits and History, page 21. Stratégie diffusée par The Council. Certaines mécaniques et variantes restent en test.","Source: Cloud Five v0.74, Credits and History, page 21. Published by The Council. Some mechanics and variants remain under testing."),
+     links:[{label:"Cloud Five — original strategy document",href:"https://docs.google.com/document/d/1FCZxveUusrDXNs1IoU7bOykB8Qy3cAE52h0jT5lwOkw/"}]
    }
  };
  const cresselia = {
