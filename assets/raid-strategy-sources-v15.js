@@ -16,19 +16,19 @@
  const heatran = {
    core: {
      name:"Crimson Core",
-     by:"Crimson Core",
+     by:tr("Crimson Core (éditeur du guide ; auteur individuel non confirmé)","Crimson Core (guide publisher; individual creator unconfirmed)"),
      note:tr("Guide original Crimson Core. Les recommandations IV citées à titre complémentaire depuis Beorns ne sont pas des exigences de Crimson Core.","Original Crimson Core guide. Supplemental Beorns IV recommendations are not Crimson Core requirements."),
      links:[u(tr("Guide de raid Crimson Core","Crimson Core raid guide"),"https://www.crimsoncoremmo.co.uk/guides/crimson-core-guides-heatran-raid-octillery-strat")]
    },
    video: {
      name:"Beorns / JinxedBoon",
-     by:"Beorns / JinxedBoon",
+     by:tr("Beorns (crédit communautaire ; coauteurs non confirmés)","Beorns (community attribution; collaborators unconfirmed)"),
      note:tr("La rotation affichée correspond à la variante vidéo. Le document contient aussi une variante mise à jour, distincte : ne pas mélanger les deux.","The displayed rotation follows the video variant. The source document also contains a separate updated version; do not mix their rotations."),
      links:[u(tr("Document de stratégie Beorns / JinxedBoon","Beorns / JinxedBoon source document"),"https://docs.google.com/document/d/1iZ0YhbEQntdbdRrBzSGR3PLiYkZSc0P962_3N_dnc_E/mobilebasic")]
    },
    cloud:{
      name:"Cloud Five v0.74",
-     by:"Cadoiz (créateur confirmé dans un échange direct ; coauteurs à confirmer)",
+     by:tr("Cadoiz (cocréateur déclaré ; autres auteurs à confirmer)","Cadoiz (self-identified co-creator; other authors unconfirmed)"),
      note:tr("Version de travail v0.74 : les remplacements, tours et conditions variables peuvent être encore expérimentaux. Aucun lien original direct vérifié n'est disponible ; l'attribution est conservée sans inventer d'URL.","Working version v0.74: replacements, turn timings and situational decisions may still be experimental. No independently verified direct original URL is available; contributor credit is retained without fabricating a link."),
      links:[]
    }
@@ -45,7 +45,7 @@
    },
    sensei:{
      name:"Sensei / DoubleDude — New Strategy",
-     by:"CALLMESENSEIX / Sensei / DoubleDude",
+     by:tr("CALLMESENSEIX (auteur du guide ; créateurs de toutes les variantes non confirmés)","CALLMESENSEIX (guide author; creators of all variants unconfirmed)"),
      note:tr("Guide de forum : certaines colonnes de la version « New Strategy » sont ambiguës ; vérifier les équipes et les tours dans la source.","Community forum guide: some columns in the New Strategy section are ambiguous; confirm builds and turns against the source."),
      links:[u(tr("Stratégie originale Sensei / DoubleDude","Original Sensei / DoubleDude strategy"),"https://forums.pokemmo.com/index.php?/topic/193398-cresselia-raid-guide/")]
    },
