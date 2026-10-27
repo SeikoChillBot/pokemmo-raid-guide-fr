@@ -28,7 +28,7 @@
    },
    cloud:{
      name:"Cloud Five v0.74",
-     by:"The Council / Cadoiz",
+     by:"Cadoiz (créateur confirmé dans un échange direct ; coauteurs à confirmer)",
      note:tr("Version de travail v0.74 : les remplacements, tours et conditions variables peuvent être encore expérimentaux. Aucun lien original direct vérifié n'est disponible ; l'attribution est conservée sans inventer d'URL.","Working version v0.74: replacements, turn timings and situational decisions may still be experimental. No independently verified direct original URL is available; contributor credit is retained without fabricating a link."),
      links:[]
    }
@@ -85,7 +85,7 @@
      " · "+boss.variants[selectedMode].name : "";
    return {
      name:boss.name+modeName,
-     by:tr("Sources communautaires 2025 ; document de rotation caav lorsqu'indiqué","2025 community sources; caav rotation document where specified"),
+     by:tr("Auteur original non confirmé pour ce boss ; références communautaires indiquées ci-dessous","Original strategy author unconfirmed for this boss; community references below"),
      note:tr("Archives 2025 potentiellement obsolètes pour 2026. Les rosters proposés ou les détails non vérifiés ne sont pas présentés comme officiels.","2025 archives may be outdated for 2026. Proposed rosters or unverified details are not presented as official."),
      links:unique
    };
